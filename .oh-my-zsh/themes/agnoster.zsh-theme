@@ -204,7 +204,13 @@ prompt_hg() {
 
 # Dir: current working directory
 prompt_dir() {
-  prompt_segment blue $CURRENT_FG '%~'
+	if [[ $(hostnamectl hostname) -eq "arch" ]]; then
+		prompt_segment blue $CURRENT_FG '%~'
+	elif [[ $(hostnamectl hostname) -eq "netcup-RS" ]]; then
+		prompt_segment red $CURRENT_FG '%~'
+	else
+		prompt_segment green $CURRENT_FG '%~'
+	fi
 }
 
 # Virtualenv: current working virtualenv
