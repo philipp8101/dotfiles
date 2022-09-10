@@ -1,0 +1,6 @@
+[submodule ".oh-my-zsh/custom/plugins/fzf-zsh-plugin"]
+	path = .oh-my-zsh/custom/plugins/fzf-zsh-plugin
+	url = ./.oh-my-zsh/custom/plugins/fzf-zsh-plugin
+[submodule ".oh-my-zsh/custom/plugins/command-time"]
+	path = .oh-my-zsh/custom/plugins/command-time
+	url = ./.oh-my-zsh/custom/plugins/command-time
