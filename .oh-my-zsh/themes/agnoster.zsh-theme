@@ -86,10 +86,27 @@ prompt_end() {
 ### Prompt components
 # Each component will draw itself, and hide itself if no information needs to be shown
 
+prompt_pre() {
+	prompt_segment black default
+}
+
 # Context: user@hostname (who am I and where am I)
-prompt_context() {
+prompt_user() {
   if [[ "$USERNAME" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
-    prompt_segment black default "%(!.%{%F{yellow}%}.)%n@%m"
+    prompt_segment black default "%(!.%{%F{yellow}%}.)%n"
+  fi
+}
+prompt_host() {
+  if [[ "$USERNAME" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
+	if [[ $(hostnamectl hostname) == "arch" ]]; then
+    prompt_segment blue black "%(!.%{%F{yellow}%}.)%m"
+	elif [[ $(hostnamectl hostname) == "netcup-RS" ]]; then
+    prompt_segment red black "%(!.%{%F{yellow}%}.)%m"
+	elif [[ $(hostnamectl hostname) == "surface" ]]; then
+    prompt_segment green black "%(!.%{%F{yellow}%}.)%m"
+	else
+    prompt_segment black default "%(!.%{%F{yellow}%}.)%m"
+	fi
   fi
 }
 
@@ -204,13 +221,7 @@ prompt_hg() {
 
 # Dir: current working directory
 prompt_dir() {
-	if [[ $(hostnamectl hostname) == "arch" ]]; then
 		prompt_segment blue $CURRENT_FG '%~'
-	elif [[ $(hostnamectl hostname) == "netcup-RS" ]]; then
-		prompt_segment red $CURRENT_FG '%~'
-	else
-		prompt_segment green $CURRENT_FG '%~'
-	fi
 }
 
 # Virtualenv: current working virtualenv
@@ -252,7 +263,8 @@ build_prompt() {
   RETVAL=$?
   prompt_virtualenv
   prompt_aws
-  prompt_context
+	prompt_host
+  prompt_user
   prompt_dir
   prompt_git
   prompt_bzr
