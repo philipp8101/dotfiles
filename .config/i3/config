@@ -93,10 +93,10 @@ bindsym $mod+Return exec "alacritty"
 bindsym $mod+Shift+Return exec "~/.scripts/i3/next_empty_workspace.py ; alacritty"
 
 # screenshot
-bindsym $mod+Shift+less exec flameshot gui
+bindsym $mod+Shift+minus exec flameshot gui
 
 # kill focused window
-bindsym $mod+q kill
+bindsym $mod+comma kill
 bindsym --release button2 kill
 
 # global options 
@@ -178,8 +178,8 @@ for_window [class="Alacritty"] border pixel 3
 
 # insert new containers to mark
 for_window [window_type="normal"] move container to mark insert
-bindsym $mod+p move container to mark insert
-bindsym $mod+Control+p mark --toggle insert
+#bindsym $mod+p move container to mark insert
+#bindsym $mod+Control+p mark --toggle insert
 
 # assign workspace to monitor
 workspace "14:D" output HDMI-0
@@ -208,8 +208,8 @@ exec_always --no-startup-id ~/.config/polybar/launch.sh
 exec setxkbmap -option caps:none
 
 # start rofi
-bindsym $mod+g exec rofi -show drun -theme transparent
-bindsym $mod+Shift+g exec "~/.scripts/i3/next_empty_workspace.py ; rofi -show drun -theme transparent"
+bindsym $mod+i exec rofi -show drun -theme transparent
+bindsym $mod+Shift+i exec "~/.scripts/i3/next_empty_workspace.py ; rofi -show drun -theme transparent"
 #bindsym $mod+x exec rofi -show window -theme transparent
 
 # start rofi file-browser
@@ -232,47 +232,47 @@ exec ~/.scripts/i3/unmark-on-workspace-switch.py
 
 # change focus
 bindsym $mod+a focus left
-bindsym $mod+s focus down
-bindsym $mod+d focus up
-bindsym $mod+f focus right
+bindsym $mod+o focus down
+bindsym $mod+e focus up
+bindsym $mod+u focus right
 #bindsym $alt+Tab focus prev
 
 # move focused window
 bindsym $mod+Shift+a move left
-bindsym $mod+Shift+s move down
-bindsym $mod+Shift+d move up
-bindsym $mod+Shift+f move right
+bindsym $mod+Shift+o move down
+bindsym $mod+Shift+e move up
+bindsym $mod+Shift+u move right
 
 # resize
 bindsym $mod+Control+a resize shrink width 5 px or 5 ppt
-bindsym $mod+Control+s resize shrink height 5 px or 5 ppt
-bindsym $mod+Control+d resize grow height 5 px or 5 ppt
-bindsym $mod+Control+f resize grow width 5 px or 5 ppt
+bindsym $mod+Control+o resize shrink height 5 px or 5 ppt
+bindsym $mod+Control+e resize grow height 5 px or 5 ppt
+bindsym $mod+Control+u resize grow width 5 px or 5 ppt
 
 # enter fullscreen mode for the focused container
-bindsym $mod+t fullscreen toggle
+bindsym $mod+z fullscreen toggle
 #bindsym $mod+Shift+f fullscreen toggle global
 
 # sticky mode
 #bindsym $mod+p sticky toggle
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+r layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+p layout stacking
+bindsym $mod+l layout tabbed
+bindsym $mod+period layout toggle split
 
-bindsym $mod+b split h
-bindsym $mod+v split v
+bindsym $mod+x split h
+bindsym $mod+k split v
 
 # auto layout script
 #exec .scripts/i3/auto-workspace-layout.py
 # toggle tiling / floating
-bindsym $mod+Shift+c floating toggle
+bindsym $mod+Shift+j floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+c focus mode_toggle
+bindsym $mod+j focus mode_toggle
 
 # focus the parent container
-bindsym $mod+less focus parent
+bindsym $mod+minus focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
@@ -432,25 +432,25 @@ bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # move to next and prev on output
-bindsym $mod+$alt+Shift+h move container to workspace prev_on_output
-bindsym $mod+$alt+Shift+l move container to workspace next_on_output
+#bindsym $mod+$alt+Shift+h move container to workspace prev_on_output
+#bindsym $mod+$alt+Shift+l move container to workspace next_on_output
 
 # move workspace to monitor binds
-bindsym	$mod+Control+y move workspace to output left
-bindsym $mod+Control+x move workspace to output right
+bindsym	$mod+Control+less move workspace to output left
+bindsym $mod+Control+q move workspace to output right
 
 # swap workspace on ouputs
 #bindsym $mod+Control+Shift+y exec ~/.scripts/i3/swap-output.py left
 #bindsym $mod+Control+Shift+x exec ~/.scripts/i3/swap-output.py right
 
 # reload the configuration file
-bindsym $mod+Control+c reload
+bindsym $mod+Control+j reload
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i2)
-bindsym $mod+Shift+r restart
+bindsym $mod+Shift+p restart
 
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec rofi -show power-menu -modi power-menu:~/Downloads/rofi-power-menu/rofi-power-menu -theme transparent 
+bindsym $mod+Shift+l exec rofi -show power-menu -modi power-menu:~/Downloads/rofi-power-menu/rofi-power-menu -theme transparent 
 	# qdbus org.kde.ksmserver /KSMServer logout 1 0 0
 
 bindsym $mod+m mode "transparency"
@@ -489,11 +489,11 @@ bindsym $mod+F5 exec "bash -c bg-gen.sh && feh --no-fehbg --bg-fill  /home/phili
 exec --no-startup-id "redshift-gtk -t 6500K:4500K -l 51:12"
 
 # swap to next and prev workspace
-bindsym $mod+y workspace prev_on_output
-bindsym $mod+x workspace next_on_output
+bindsym $mod+less workspace prev_on_output
+bindsym $mod+q workspace next_on_output
 
-bindsym $mod+Shift+y exec ~/.scripts/i3/move_to_next_workspace.py
-bindsym $mod+Shift+x exec ~/.scripts/i3/move_and_switch_to_next_workspace.py
+bindsym $mod+Shift+less exec ~/.scripts/i3/move_to_next_workspace.py
+bindsym $mod+Shift+q exec ~/.scripts/i3/move_and_switch_to_next_workspace.py
 
 # define window colors
 set $bg-color 	         #485061
