@@ -93,7 +93,7 @@ bindsym $mod+Return exec "alacritty"
 bindsym $mod+Shift+Return exec "~/.scripts/i3/next_empty_workspace.py ; alacritty"
 
 # screenshot
-bindsym $mod+Shift+minus exec flameshot gui
+bindsym $mod+Shift+less exec flameshot gui
 
 # kill focused window
 bindsym $mod+comma kill
@@ -199,7 +199,7 @@ assign [instance="lutris"] $wsT
 #exec "i3-msg workspace $wsG, append_layout .config/i3/layout/gimp.json"
 
 # start picom
-exec_always --no-startup-id picom --backend xrender --xrender-sync-fence
+exec_always --no-startup-id ~/.scripts/run-picom.sh
 
 # start polybar
 exec_always --no-startup-id ~/.config/polybar/launch.sh 
@@ -257,8 +257,8 @@ bindsym $mod+z fullscreen toggle
 #bindsym $mod+p sticky toggle
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+p layout stacking
-bindsym $mod+l layout tabbed
-bindsym $mod+period layout toggle split
+bindsym $mod+period layout tabbed
+bindsym $mod+l layout toggle split
 
 bindsym $mod+x split h
 bindsym $mod+k split v
@@ -272,7 +272,7 @@ bindsym $mod+Shift+j floating toggle
 bindsym $mod+j focus mode_toggle
 
 # focus the parent container
-bindsym $mod+minus focus parent
+bindsym $mod+less focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
@@ -436,7 +436,7 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 #bindsym $mod+$alt+Shift+l move container to workspace next_on_output
 
 # move workspace to monitor binds
-bindsym	$mod+Control+less move workspace to output left
+bindsym	$mod+Control+minus move workspace to output left
 bindsym $mod+Control+q move workspace to output right
 
 # swap workspace on ouputs
@@ -489,10 +489,10 @@ bindsym $mod+F5 exec "bash -c bg-gen.sh && feh --no-fehbg --bg-fill  /home/phili
 exec --no-startup-id "redshift-gtk -t 6500K:4500K -l 51:12"
 
 # swap to next and prev workspace
-bindsym $mod+less workspace prev_on_output
+bindsym $mod+minus workspace prev_on_output
 bindsym $mod+q workspace next_on_output
 
-bindsym $mod+Shift+less exec ~/.scripts/i3/move_to_next_workspace.py
+bindsym $mod+Shift+minus exec ~/.scripts/i3/move_to_next_workspace.py
 bindsym $mod+Shift+q exec ~/.scripts/i3/move_and_switch_to_next_workspace.py
 
 # define window colors
