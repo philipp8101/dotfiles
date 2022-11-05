@@ -1,0 +1,9 @@
+[credential]
+	helper = store
+[core]
+	editor = vim
+[user]
+	email = philipp8101@gmail.com
+	name = Philipp Conrad
+[alias]
+	graph = log --all --decorate --oneline --graph
