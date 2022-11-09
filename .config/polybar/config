@@ -489,12 +489,12 @@ label-foreground = ${colors.foreground}
 # You can copy-paste your options for each possible action, which is more
 # trouble-free but repetitive, or apply only the relevant ones (for example
 # --sink-blacklist is only needed for next-sink).
-exec = pactl.sh
-click-right = pactl.sh --rclick
-click-left = pactl.sh --lclick
-click-middle = pactl.sh --mclick
-scroll-up = pactl.sh --scroll-up
-scroll-down = pactl.sh --scroll-down
+exec = ~/.config/polybar/polybar-scripts/pactl.sh
+click-right = ~/.config/polybar/polybar-scripts/pactl.sh --rclick
+click-left = ~/.config/polybar/polybar-scripts/pactl.sh --lclick
+click-middle = ~/.config/polybar/polybar-scripts/pactl.sh --mclick
+scroll-up = ~/.config/polybar/polybar-scripts/pactl.sh --scroll-up
+scroll-down = ~/.config/polybar/polybar-scripts/pactl.sh --scroll-down
 
 [module/ws-move-left]
 type = custom/script
