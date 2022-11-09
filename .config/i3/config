@@ -61,39 +61,15 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 
 exec --no-startup-id sleep 2; pactl set-sink-volume alsa_output.usb-SteelSeries_SteelSeries_Arctis_9_000000000000-00.stereo-game 56%
 
-# cadence autostart
-#exec gtk-launch cadence-session-start
-# set pointer speed
-exec_always set-sense.sh
-
-
-# start polkit manager ( gui sudo prompts )
-exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1 &
-
-# clipboard manager
-exec --no-startup-id klipper
-
-# kdeconnect tray
-exec --no-startup-id kdeconnect-indicator
-
 # nextcloud sync client
 exec --no-startup-id nextcloud
-
-# unlock kwallet (needed for chomium keys)
-# https://wiki.archlinux.org/title/KDE_Wallet#Unlocking_KWallet_automatically_in_a_window_manager
-exec --no-startup-id /usr/lib/pam_kwallet_init
-
-# easyeffects daemon
-# disable mic noise canceling done in wireplumber .config/pipewire/pipewire.conf
-# https://github.com/werman/noise-suppression-for-voice
-#exec --no-startup-id easyeffects --gapplication-service &
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a applications
-bindsym $mod+Return exec "alacritty"
-bindsym $mod+Shift+Return exec "~/.scripts/i3/next_empty_workspace.py ; alacritty"
+bindsym $mod+Return exec "gnome-terminal"
+bindsym $mod+Shift+Return exec "~/.scripts/i3/next_empty_workspace.py ; gnome-terminal"
 bindsym $mod+c exec "cutefish-calculator" 
 
 # screenshot
@@ -541,46 +517,3 @@ client.background        $text-color
 #client.focused          $acolor $acolor $txtacolor $indcolor $acolor
 #client.focused_inactive $bgicolor $bgicolor $txtacolor $indcolor $bgicolor
 #client.unfocused        $bgucolor $bgucolor $txtucolor $indcolor $bgucolor
-
-#border_radius 5
-# gaps setup
-#default_border pixel 3
-gaps inner 5
-gaps outer 5
-
-bindsym $mod+Control+t mode gaps
-mode gaps {
-	# change focus
-	bindsym $mod+h focus left
-	bindsym $mod+j focus down
-	bindsym $mod+k focus up
-	bindsym $mod+l focus right
-
-	bindsym Escape mode default
-	bindsym $mod+t mode default
-
-	# change gaps
-	bindsym h gaps inner current minus 5
-	bindsym l gaps inner current plus 5
-	bindsym j gaps outer current minus 5
-	bindsym k gaps outer current plus 5
-	bindsym u gaps vertical current minus 5
-	bindsym i gaps vertical current plus 5
-	bindsym z gaps horizontal current minus 5
-	bindsym o gaps horizontal current plus 5
-	bindsym a gaps left current minus 5
-	bindsym s gaps bottom current minus 5
-	bindsym d gaps top current minus 5
-	bindsym f gaps right current minus 5
-	bindsym q gaps left current plus 5
-	bindsym w gaps bottom current plus 5
-	bindsym e gaps top current plus 5
-	bindsym r gaps right current plus 5
-
-	# toggle border style
-	bindsym b border toggle
-	bindsym n border none
-	# restore defaults
-	bindsym c gaps inner current set 5 ; gaps outer current set 5 ; border pixel 3
-	bindsym x gaps inner current set 0; gaps outer current set 0
-}
