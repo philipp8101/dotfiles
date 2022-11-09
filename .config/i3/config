@@ -453,7 +453,7 @@ bindsym $mod+Control+j reload
 bindsym $mod+Shift+p restart
 
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+l exec rofi -show power-menu -modi power-menu:~/Downloads/rofi-power-menu/rofi-power-menu -theme transparent 
+bindsym $mod+Shift+l exec rofi -show power-menu -modi power-menu:~/.config/rofi/rofi-power-menu -theme transparent 
 	# qdbus org.kde.ksmserver /KSMServer logout 1 0 0
 
 bindsym $mod+m mode "transparency"
