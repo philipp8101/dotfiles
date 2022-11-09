@@ -68,8 +68,8 @@ exec --no-startup-id nextcloud
 floating_modifier $mod
 
 # start a applications
-bindsym $mod+Return exec "gnome-terminal"
-bindsym $mod+Shift+Return exec "~/.scripts/i3/next_empty_workspace.py ; gnome-terminal"
+bindsym $mod+Return exec "gnome-terminal -- zsh"
+bindsym $mod+Shift+Return exec "~/.scripts/i3/next_empty_workspace.py ; gnome-terminal -- zsh"
 bindsym $mod+c exec "cutefish-calculator" 
 
 # screenshot
