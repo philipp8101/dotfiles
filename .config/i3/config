@@ -482,11 +482,8 @@ bindcode 152 exec .scripts/playerswap.sh prev
 bindcode 180 exec .scripts/playerswap.sh next
 
 #set background 
-#exec_always --no-startup-id feh --no-fehbg --bg-fill  /home/philipp/Pictures/landscape1 --bg-fill  /home/philipp/Pictures/landscape2 --bg-fill /home/philipp/Pictures/portrait1 
-exec_always --no-startup-id feh --no-fehbg --bg-fill  /tank/home/Pictures/wallpaper-aenamiart/landscape/artstation_1313574_3981916_At\ Last.jpg --bg-fill  /tank/home/Pictures/wallpaper-aenamiart/landscape/artstation_1617756_5108322_I\'m\ Here.jpg --bg-fill /tank/home/Pictures/wallpaper-aenamiart/portrait/artstation_9597853_35905662_Rain.jpg 
-#exec_always --no-startup-id feh --no-fehbg --bg-fill /usr/share/wallpapers/MilkyWay/contents/images/5120x2880.png
-#exec_always --no-startup-id feh --no-fehbg --bg-fill /home/philipp/Pictures/the_neon_shallows_by_leikoi_ddm6tx0_no_watermark.png
-bindsym $mod+F5 exec "bash -c bg-gen.sh && feh --no-fehbg --bg-fill  /home/philipp/Pictures/landscape1 --bg-fill  /home/philipp/Pictures/landscape2 --bg-fill /home/philipp/Pictures/portrait1" 
+#exec_always --no-startup-id ~/.scripts/set-bg.sh
+bindsym $mod+F5 exec "bash -c ~/.scripts/bg-gen.sh && ~/.scripts/set-bg.sh"
 
 # start redshift (nightmode)
 exec --no-startup-id "redshift-gtk -t 6500K:4500K -l 51:12"
