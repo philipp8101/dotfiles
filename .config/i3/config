@@ -482,7 +482,7 @@ bindcode 152 exec .scripts/playerswap.sh prev
 bindcode 180 exec .scripts/playerswap.sh next
 
 #set background 
-#exec_always --no-startup-id ~/.scripts/set-bg.sh
+exec_always --no-startup-id ~/.scripts/set-bg.sh
 bindsym $mod+F5 exec "bash -c ~/.scripts/bg-gen.sh && ~/.scripts/set-bg.sh"
 
 # start redshift (nightmode)
