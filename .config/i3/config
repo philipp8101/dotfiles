@@ -267,7 +267,7 @@ bindsym $mod+x split h
 bindsym $mod+k split v
 
 # auto layout script
-#exec .scripts/i3/auto-workspace-layout.py
+#exec ~/.scripts/i3/auto-workspace-layout.py
 # toggle tiling / floating
 bindsym $mod+Shift+j floating toggle
 
@@ -474,12 +474,12 @@ mode "transparency" {
 }
 
 # media controls
-bindcode 172 exec .scripts/playercall.sh play-pause
-bindcode 174 exec .scripts/playercall.sh stop
-bindcode 173 exec .scripts/playercall.sh previous
-bindcode 171 exec .scripts/playercall.sh next
-bindcode 152 exec .scripts/playerswap.sh prev
-bindcode 180 exec .scripts/playerswap.sh next
+bindcode 172 exec ~/.scripts/playercall.sh play-pause
+bindcode 174 exec ~/.scripts/playercall.sh stop
+bindcode 173 exec ~/.scripts/playercall.sh previous
+bindcode 171 exec ~/.scripts/playercall.sh next
+bindcode 152 exec ~/.scripts/playerswap.sh prev
+bindcode 180 exec ~/.scripts/playerswap.sh next
 
 #set background 
 exec_always --no-startup-id ~/.scripts/set-bg.sh
