@@ -299,8 +299,8 @@ label = %date% %time%
 
 [module/date-script]
 type = custom/script
-exec = .config/polybar/polybar-scripts/date.sh
-click-left = .config/polybar/polybar-scripts/date.sh --popup
+exec = ~/.config/polybar/polybar-scripts/date.sh
+click-left = ~/.config/polybar/polybar-scripts/date.sh --popup
 interval = 5
 
 [module/pulseaudio]
@@ -465,12 +465,12 @@ interval = 3
 
 [module/updates]
 type = custom/script
-exec = .config/polybar/polybar-scripts/pacman-updates.sh
+exec = ~/.config/polybar/polybar-scripts/pacman-updates.sh
 interval = 30
 
 [module/disk]
 type = custom/script
-exec = .config/polybar/polybar-scripts/disk-usage.sh
+exec = ~/.config/polybar/polybar-scripts/disk-usage.sh
 interval = 5
 
 [module/seperator]
