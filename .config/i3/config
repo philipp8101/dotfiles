@@ -94,6 +94,7 @@ floating_modifier $mod
 # start a applications
 bindsym $mod+Return exec "alacritty"
 bindsym $mod+Shift+Return exec "~/.scripts/i3/next_empty_workspace.py ; alacritty"
+bindsym $mod+c exec "cutefish-calculator" 
 
 # screenshot
 bindsym $mod+Shift+less exec flameshot gui
@@ -175,7 +176,7 @@ for_window [instance="origin.exe"] floating enable;
 for_window [class="Steam" title="Friends List"] resize set width 15 ppt;
 for_window [class="Steam" title="Steam Guard"] floating enable;
 for_window [class="Steam" title="Steam - News"] floating enable;
-for_window [instance="com.github.subhadeepjasu.pebbles" ] floating enable, resize set width 727 px, resize set height 562 px;
+for_window [instance="cutefish-calculator" ] floating enable;
 for_window [class="firefox"] border pixel 3 
 for_window [class="Alacritty"] border pixel 3
 
