@@ -59,7 +59,7 @@ font-3 = Symbols Nerd Font:style=2048-em;3
 font-4 = Font Awesome 6 Free Regular:style=Regular
 
 modules-left = ws-move-left i3 ws-add ws-move-right 
-modules-right = headset-battery pulseaudio-control date-script
+modules-right = rgb headset-battery pulseaudio-control date-script
 ;modules-right = spotify spotify-prev spotify-play-pause spotify-next vpn-expressvpn-status pulseaudio-control date-script
 
 tray-position = none
@@ -462,6 +462,11 @@ type = custom/script
 exec = ~/.config/polybar/polybar-scripts/vpn-expressvpn-status/vpn-expressvpn-status.sh
 click-left = ~/.config/polybar/polybar-scripts/vpn-expressvpn-status/vpn-expressvpn-status.sh --toggle &
 interval = 3
+
+[module/rgb]
+type = custom/script
+exec = ~/.config/polybar/polybar-scripts/rgb.sh
+click-left = "~/.config/polybar/polybar-scripts/rgb.sh --toggle" 
 
 [module/updates]
 type = custom/script
