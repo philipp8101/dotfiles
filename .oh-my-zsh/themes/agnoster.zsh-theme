@@ -98,15 +98,19 @@ prompt_user() {
 }
 prompt_host() {
   if [[ "$USERNAME" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
-	if [[ $(hostnamectl hostname) == "arch" ]]; then
-    prompt_segment blue black "%(!.%{%F{yellow}%}.)%m"
-	elif [[ $(hostnamectl hostname) == "netcup-RS" ]]; then
-    prompt_segment red black "%(!.%{%F{yellow}%}.)%m"
-	elif [[ $(hostnamectl hostname) == "surface" ]]; then
-    prompt_segment green black "%(!.%{%F{yellow}%}.)%m"
-	else
-    prompt_segment black default "%(!.%{%F{yellow}%}.)%m"
-	fi
+		if [[ $(ps --no-headers -o comm 1) == "systemd" ]]; then
+			if [[ $(hostnamectl hostname) == "arch" ]]; then
+				prompt_segment blue black "%(!.%{%F{yellow}%}.)%m"
+			elif [[ $(hostnamectl hostname) == "netcup-RS" ]]; then
+				prompt_segment red black "%(!.%{%F{yellow}%}.)%m"
+			elif [[ $(hostnamectl hostname) == "surface" ]]; then
+				prompt_segment green black "%(!.%{%F{yellow}%}.)%m"
+			else
+				prompt_segment black default "%(!.%{%F{yellow}%}.)%m"
+			fi
+		else
+			prompt_segment black default "%(!.%{%F{yellow}%}.)%m"
+		fi
   fi
 }
 
