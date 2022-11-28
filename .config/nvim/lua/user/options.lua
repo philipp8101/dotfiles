@@ -9,4 +9,4 @@ vim.opt.hlsearch = true
 vim.opt.mouse = "a"
 vim.opt.smartcase = true
 vim.opt.undofile = true
-vim.opt.undodir = "~/.cache/nvimundo"
+vim.opt.undodir = "/home/philipp/.cache/nvimundo"
