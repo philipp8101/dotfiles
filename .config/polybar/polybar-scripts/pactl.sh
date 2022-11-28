@@ -9,7 +9,7 @@ then
 			pulseaudio-control togmute
 		;;
 		"--mclick" )
-			pulseaudio-control --sink-blacklist "alsa_output.pci-0000_01_00.1.hdmi-stereo-extra2" --sink-blacklist "alsa_output.pci-0000_01_00.1.hdmi-stereo" --sink-blacklist "alsa_output.pci-0000_00_1f.3.iec958-stereo" --sink-blacklist "alsa_output.pci-0000_01_00.1.hdmi-stereo" next-sink
+			pulseaudio-control --node-blacklist "alsa_output.pci-0000_01_00.1.hdmi-stereo-extra2" --node-blacklist "alsa_output.pci-0000_01_00.1.hdmi-stereo" --node-blacklist "alsa_output.pci-0000_00_1f.3.iec958-stereo" --node-blacklist "alsa_output.pci-0000_01_00.1.hdmi-stereo" next-node
 		;;
 		"--scroll-up" )
 			pulseaudio-control --volume-max 130 up
