@@ -79,7 +79,7 @@ setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history 
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(fzf-zsh-plugin zsh-interactive-cd command-time)
+plugins=(fzf-zsh-plugin zsh-interactive-cd command-time zsh-fzf-history-search)
 
 source $ZSH/oh-my-zsh.sh
 
