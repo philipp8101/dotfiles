@@ -4,3 +4,9 @@
 [submodule ".oh-my-zsh/custom/plugins/command-time"]
 	path = .oh-my-zsh/custom/plugins/command-time
 	url = https://github.com/popstas/zsh-command-time
+[submodule "/tank/home/.oh-my-zsh/custom/plugins/zsh-fzf-history-search"]
+	path = /tank/home/.oh-my-zsh/custom/plugins/zsh-fzf-history-search
+	url = https://github.com/joshskidmore/zsh-fzf-history-search
+[submodule ".oh-my-zsh/custom/plugins/zsh-fzf-history-search"]
+	path = .oh-my-zsh/custom/plugins/zsh-fzf-history-search
+	url = https://github.com/joshskidmore/zsh-fzf-history-search
