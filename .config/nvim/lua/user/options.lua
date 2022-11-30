@@ -1,5 +1,5 @@
 vim.g.airline_powerline_fonts = 1
-vim.cmd([[colorscheme habamax]])
+vim.cmd([[colorscheme darkplus]])
 vim.opt.relativenumber = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
