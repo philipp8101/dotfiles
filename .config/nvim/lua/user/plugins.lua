@@ -300,11 +300,20 @@ return packer.startup(function(use)
 					get_config = nil,
 				},
 			})
-			
 		end
 	}
 
 	use { 'mrjones2014/legendary.nvim' }
+
+	use {
+		"jiaoshijie/undotree",
+		config = function()
+			require('undotree').setup()
+		end,
+		requires = {
+			"nvim-lua/plenary.nvim",
+		},
+	}
 
 	use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
 
