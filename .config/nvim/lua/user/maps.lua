@@ -1,10 +1,9 @@
 -- from https://github.com/LunarVim/Neovim-from-scratch/blob/02-keymaps/lua/user/keymaps.lua
 local opts = { noremap = true, silent = true }
 local legendaryPresent, _ = pcall(require, 'legendary')
-local lspPresent, _ = pcall(require, 'lsp')
 
 KeymapTable = {}
-local function keymap(mode, key, map, opt, desc, isLsp)
+local function keymap(mode, key, map, opt, desc)
 	if not legendaryPresent then
 		vim.api.nvim_set_keymap(mode, key, map, opt)
 	else
