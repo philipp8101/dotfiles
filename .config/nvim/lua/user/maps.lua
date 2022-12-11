@@ -19,8 +19,8 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 keymap("n", "<C-p>", "<C-]>", opts, "follow link eg. help pages")
-keymap("n", "<C-d>", "<C-d> zz", opts, "move a half-page down and center the cursor")
-keymap("n", "<C-u>", "<C-u> zz", opts, "move a half-page up and center the cursor")
+keymap("n", "<C-d>", "<C-d>zz", opts, "move a half-page down and center the cursor")
+keymap("n", "<C-u>", "<C-u>zz", opts, "move a half-page up and center the cursor")
 
 keymap("n", "<leader>l", ":lua require(\"harpoon.ui\").toggle_quick_menu() <CR>", opts, "open harpoon menu")
 keymap("n", "<leader>d", ":lua require(\"harpoon.mark\").add_file() <CR>", opts, "add current file to harpoon list")
@@ -44,8 +44,17 @@ keymap("n", "<leader>g", ":Telescope live_grep <CR>", opts, "search project with
 
 -- toggleterm.nvim bindings
 keymap("n", "<leader>c", ":ToggleTerm direction=float <CR>", opts, "open a floating terminal")
-keymap("t", "<C-d>", "<C-\\><C-n>:ToggleTerm direction=float <CR>", opts, "close a floating terminal")
+keymap("t", "<Esc><Esc>", "<C-\\><C-n>:ToggleTerm direction=float <CR>", opts, "close a floating terminal")
 
 if legendaryPresent then
 	require('legendary').setup({ keymaps = KeymapTable, commands = {}, funcs = {}, autocmds = {} })
 end
+
+local Terminal  = require('toggleterm.terminal').Terminal
+local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
+
+function _lazygit_toggle()
+  lazygit:toggle()
+end
+
+vim.api.nvim_set_keymap("n", "<leader>z", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
