@@ -317,6 +317,16 @@ return packer.startup(function(use)
 
 	use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
 
+    use({
+        "kylechui/nvim-surround",
+        tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+        config = function()
+            require("nvim-surround").setup({
+                -- Configuration here, or leave empty to use defaults
+            })
+        end
+    })
+
 	-- Colorschemes
 	use "folke/tokyonight.nvim"
 	use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
