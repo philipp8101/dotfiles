@@ -24,10 +24,10 @@ keymap("n", "<C-u>", "<C-u>zz", opts, "move a half-page up and center the cursor
 
 keymap("n", "<leader>l", ":lua require(\"harpoon.ui\").toggle_quick_menu() <CR>", opts, "open harpoon menu")
 keymap("n", "<leader>d", ":lua require(\"harpoon.mark\").add_file() <CR>", opts, "add current file to harpoon list")
-keymap("n", "<leader>h", ":lua require(\"harpoon.ui\").nav_file(1) <CR>", opts, "Navigate to the first pinned file with harpoon")
-keymap("n", "<leader>t", ":lua require(\"harpoon.ui\").nav_file(2) <CR>", opts, "Navigate to the second pinned file with harpoon")
-keymap("n", "<leader>n", ":lua require(\"harpoon.ui\").nav_file(3) <CR>", opts, "Navigate to the third pinned file with harpoon")
-keymap("n", "<leader>s", ":lua require(\"harpoon.ui\").nav_file(4) <CR>", opts, "Navigate to the fourth pinned file with harpoon")
+keymap("n", "<leader>h", ":lua require(\"harpoon.ui\").nav_file(1) <CR>zz", opts, "Navigate to the first pinned file with harpoon")
+keymap("n", "<leader>t", ":lua require(\"harpoon.ui\").nav_file(2) <CR>zz", opts, "Navigate to the second pinned file with harpoon")
+keymap("n", "<leader>n", ":lua require(\"harpoon.ui\").nav_file(3) <CR>zz", opts, "Navigate to the third pinned file with harpoon")
+keymap("n", "<leader>s", ":lua require(\"harpoon.ui\").nav_file(4) <CR>zz", opts, "Navigate to the fourth pinned file with harpoon")
 keymap("n", "<leader>e", ":Ex <CR>", opts, "Open File Browser (netrw)")
 keymap("n", "<leader>u", ":lua require('undotree').toggle() <CR>", opts, "Open undotree")
 
@@ -43,18 +43,17 @@ keymap("n", "<leader>f", ":Telescope find_files <CR>", opts, "open file search w
 keymap("n", "<leader>g", ":Telescope live_grep <CR>", opts, "search project with Telescope(ripgrep)")
 
 -- toggleterm.nvim bindings
-keymap("n", "<leader>c", ":ToggleTerm direction=float <CR>", opts, "open a floating terminal")
-keymap("t", "<Esc><Esc>", "<C-\\><C-n>:ToggleTerm direction=float <CR>", opts, "close a floating terminal")
+keymap("n", "<leader>c", ":lua User_term_toggle()<CR>", opts, "open a floating terminal")
+keymap("t", "<Esc><Esc>", "<C-\\><C-n>:lua User_term_toggle()<CR>", opts, "close a floating terminal")
 
 if legendaryPresent then
 	require('legendary').setup({ keymaps = KeymapTable, commands = {}, funcs = {}, autocmds = {} })
 end
 
 local Terminal  = require('toggleterm.terminal').Terminal
-local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
+local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float", float_opts = { border = "single", width = 1000, height = 1000} })
+local term = Terminal:new({direction = "float" })
+function User_lazygit_toggle() lazygit:toggle() end
+function User_term_toggle() term:toggle() end
 
-function _lazygit_toggle()
-  lazygit:toggle()
-end
-
-vim.api.nvim_set_keymap("n", "<leader>z", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<leader>z", "<cmd>lua User_lazygit_toggle()<CR>", {noremap = true, silent = true})
