@@ -176,7 +176,7 @@ return packer.startup(function(use)
         config = function() require("nvim-surround").setup({ }) end
     }
 
-    use { 'mfussenegger/nvim-dap' }
+    -- use { 'mfussenegger/nvim-dap' }
 
     -- Colorschemes
     use "folke/tokyonight.nvim"
