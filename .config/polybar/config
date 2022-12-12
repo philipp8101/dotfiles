@@ -28,7 +28,7 @@ secondary = #e60053
 blue = #0a81f5
 alert = #bd2c40
 
-[bar/main]
+[bar/primary]
 monitor = ${env:MONITOR:}
 width = 100%
 height = 27
@@ -83,17 +83,22 @@ cursor-scroll = ns-resize
 
 enable-ipc = true
 
-[bar/left]
-inherit = bar/main
+[bar/auxilary]
+inherit = bar/primary
 monitor = ${env:MONITOR}
 tray-position = none
 modules-right = date-script
 
-[bar/right]
-inherit = bar/main
+[bar/secondary]
+inherit = bar/primary
 monitor = ${env:MONITOR}
 tray-position = right
 modules-right = cpu memory updates disk date-script
+
+[bar/single]
+inherit = bar/primary
+monitor = ${env:MONITOR}
+tray-position = right
 
 [module/xwindow]
 type = internal/xwindow
