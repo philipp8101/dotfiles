@@ -110,6 +110,7 @@ export EDITOR="nvim"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias git-dot="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+alias lazygit-dot="lazygit --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
 # fix autocompletion not working for new executables 
 # see: https://bbs.archlinux.org/viewtopic.php?id=215485
