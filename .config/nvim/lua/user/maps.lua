@@ -22,6 +22,10 @@ keymap("n", "<C-p>", "<C-]>", opts, "follow link eg. help pages")
 keymap("n", "<C-d>", "<C-d>zz", opts, "move a half-page down and center the cursor")
 keymap("n", "<C-u>", "<C-u>zz", opts, "move a half-page up and center the cursor")
 
+keymap("n", "n", "nzz", opts, "move a half-page up and center the cursor")
+keymap("n", "N", "Nzz", opts, "move a half-page up and center the cursor")
+vim.keymap.set('c', '<CR>', function() return vim.fn.getcmdtype() == '/' and '<CR>zzzv' or '<CR>' end, { expr = true })
+
 keymap("n", "<leader>l", ":lua require(\"harpoon.ui\").toggle_quick_menu() <CR>", opts, "open harpoon menu")
 keymap("n", "<leader>d", ":lua require(\"harpoon.mark\").add_file() <CR>", opts, "add current file to harpoon list")
 keymap("n", "<leader>h", ":lua require(\"harpoon.ui\").nav_file(1) <CR>zz", opts, "Navigate to the first pinned file with harpoon")
