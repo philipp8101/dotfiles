@@ -98,11 +98,11 @@ prompt_user() {
 }
 prompt_host() {
   if [[ "$USERNAME" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
-	if [[ $(hostnamectl hostname) == "arch" ]]; then
+	if [[ $(hostnamectl|grep -Po "(?<=Static hostname: )\w+") == "arch" ]]; then
     prompt_segment blue black "%(!.%{%F{yellow}%}.)%m"
-	elif [[ $(hostnamectl hostname) == "netcup-RS" ]]; then
+	elif [[ $(hostnamectl|grep -Po "(?<=Static hostname: )\w+") == "netcup-RS" ]]; then
     prompt_segment red black "%(!.%{%F{yellow}%}.)%m"
-	elif [[ $(hostnamectl hostname) == "surface" ]]; then
+	elif [[ $(hostnamectl|grep -Po "(?<=Static hostname: )\w+") == "surface" ]]; then
     prompt_segment green black "%(!.%{%F{yellow}%}.)%m"
 	else
     prompt_segment black default "%(!.%{%F{yellow}%}.)%m"
