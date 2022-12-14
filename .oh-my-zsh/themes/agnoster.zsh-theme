@@ -108,6 +108,7 @@ prompt_host() {
       else
         prompt_segment black default "%(!.%{%F{yellow}%}.)%m"
       fi
+    fi
   fi
 }
 
