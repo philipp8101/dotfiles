@@ -177,9 +177,9 @@ return packer.startup(function(use)
     }
 
     -- use { 'mfussenegger/nvim-dap' }
+    use({ 'rose-pine/neovim', as = 'rose-pine' })
 
     -- Colorschemes
-    use "folke/tokyonight.nvim"
     use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
     use 'vim-airline/vim-airline'
     use 'vim-airline/vim-airline-themes'

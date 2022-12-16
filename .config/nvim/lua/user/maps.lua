@@ -26,8 +26,8 @@ keymap("n", "n", "nzz", opts, "move a half-page up and center the cursor")
 keymap("n", "N", "Nzz", opts, "move a half-page up and center the cursor")
 vim.keymap.set('c', '<CR>', function() return vim.fn.getcmdtype() == '/' and '<CR>zzzv' or '<CR>' end, { expr = true })
 
-keymap("n", "<leader>l", ":lua require(\"harpoon.ui\").toggle_quick_menu() <CR>", opts, "open harpoon menu")
-keymap("n", "<leader>d", ":lua require(\"harpoon.mark\").add_file() <CR>", opts, "add current file to harpoon list")
+keymap("n", "<leader>L", ":lua require(\"harpoon.ui\").toggle_quick_menu() <CR>", opts, "open harpoon menu")
+keymap("n", "<leader>l", ":lua require(\"harpoon.mark\").add_file() <CR>", opts, "add current file to harpoon list")
 keymap("n", "<leader>h", ":lua require(\"harpoon.ui\").nav_file(1) <CR>zz", opts, "Navigate to the first pinned file with harpoon")
 keymap("n", "<leader>t", ":lua require(\"harpoon.ui\").nav_file(2) <CR>zz", opts, "Navigate to the second pinned file with harpoon")
 keymap("n", "<leader>n", ":lua require(\"harpoon.ui\").nav_file(3) <CR>zz", opts, "Navigate to the third pinned file with harpoon")
@@ -49,6 +49,15 @@ keymap("n", "<leader>g", ":Telescope live_grep <CR>", opts, "search project with
 -- toggleterm.nvim bindings
 keymap("n", "<leader>c", ":lua User_term_toggle()<CR>", opts, "open a floating terminal")
 keymap("t", "<Esc><Esc>", "<C-\\><C-n>:lua User_term_toggle()<CR>", opts, "close a floating terminal")
+
+keymap("n", "<leader>y", "\"+y", opts, "yank to system clipboard")
+keymap("v", "<leader>y", "\"+y", opts, "yank to system clipboard")
+
+keymap("n", "<leader>d", "\"_d", opts, "delete to void register")
+keymap("v", "<leader>d", "\"_d", opts, "delete to void register")
+
+keymap("n", "<leader>o", ":%s/\\<<C-r><C-w>\\>//gI<Left><Left><Left>", opts, "substitute current word")
+
 
 if legendaryPresent then
 	require('legendary').setup({ keymaps = KeymapTable, commands = {}, funcs = {}, autocmds = {} })

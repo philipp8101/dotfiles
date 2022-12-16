@@ -1,5 +1,7 @@
 vim.g.airline_powerline_fonts = 1
-vim.cmd([[colorscheme darkplus]])
+vim.cmd.colorscheme("rose-pine")
+vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 vim.opt.relativenumber = true
 vim.opt.number = true
 vim.opt.tabstop = 4
@@ -10,7 +12,8 @@ vim.opt.showcmd = true
 vim.opt.hlsearch = true
 vim.opt.mouse = "a"
 vim.opt.smartcase = true
+vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
-vim.opt.cursorline = true
 vim.opt.undofile = true
-vim.cmd([[set undodir=$HOME/.cache/nvimundo]])
+vim.opt.undodir = os.getenv("HOME") .. "/.cache/nvimundo"
+vim.opt.termguicolors = true
