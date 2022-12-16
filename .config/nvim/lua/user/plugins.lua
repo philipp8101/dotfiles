@@ -178,6 +178,13 @@ return packer.startup(function(use)
 
     -- use { 'mfussenegger/nvim-dap' }
     use({ 'rose-pine/neovim', as = 'rose-pine' })
+    use({  "folke/zen-mode.nvim" })
+    use {
+        'lewis6991/gitsigns.nvim',
+        config = function()
+            require('gitsigns').setup()
+        end
+    }
 
     -- Colorschemes
     use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
