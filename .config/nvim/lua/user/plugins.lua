@@ -186,6 +186,8 @@ return packer.startup(function(use)
         end
     }
 
+    use('f-person/git-blame.nvim')
+
     -- Colorschemes
     use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
     use 'vim-airline/vim-airline'
