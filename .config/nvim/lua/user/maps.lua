@@ -57,6 +57,7 @@ keymap("n", "<leader>d", "\"_d", opts, "delete to void register")
 keymap("v", "<leader>d", "\"_d", opts, "delete to void register")
 
 keymap("n", "<leader>o", ":%s/\\<<C-r><C-w>\\>//gI<Left><Left><Left>", opts, "substitute current word")
+keymap("n", "<leader>p", ":lua require'telescope'.extensions.projects.projects{}<CR>", opts, "browse projects")
 
 
 if legendaryPresent then
