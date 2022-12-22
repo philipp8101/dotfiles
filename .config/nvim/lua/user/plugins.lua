@@ -214,7 +214,25 @@ return packer.startup(function(use)
     use "tamago324/nlsp-settings.nvim" -- language server settings defined in json for
 
     -- Telescope
-    use "nvim-telescope/telescope.nvim"
+    use { "nvim-telescope/telescope.nvim", 
+        config = function()
+            require('telescope').setup{
+                defaults = {
+                    vimgrep_arguments = {
+                        'rg',
+                        '--color=never',
+                        '--no-heading',
+                        '--with-filename',
+                        '--line-number',
+                        '--column',
+                        '--smart-case',
+                        '--ignore-file',
+                        '.gitignore'
+                    },
+                }
+            } 
+    end
+    }
 
     --harpoon
     use "ThePrimeagen/harpoon"
