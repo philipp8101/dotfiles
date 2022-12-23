@@ -1,3 +1,4 @@
+remove Lock = Caps_Lock
 keycode   8 =
 keycode   9 = Caps_Lock NoSymbol Caps_Lock
 keycode  10 = 1 exclam 1 exclam onesuperior exclamdown onesuperior
@@ -242,7 +243,3 @@ keycode 248 =
 keycode 249 = XF86Next_VMode NoSymbol XF86Next_VMode
 keycode 250 = XF86Prev_VMode NoSymbol XF86Prev_VMode
 keycode 251 = XF86MonBrightnessCycle NoSymbol XF86MonBrightnessCycle
-keycode 252 = XF86BrightnessAuto NoSymbol XF86BrightnessAuto
-keycode 253 = XF86DisplayOff NoSymbol XF86DisplayOff
-keycode 254 = XF86WWAN NoSymbol XF86WWAN
-keycode 255 = XF86RFKill NoSymbol XF86RFKill
