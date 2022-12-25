@@ -47,8 +47,6 @@ keymap("n", "<leader>f", ":Telescope find_files <CR>", opts, "open file search w
 keymap("n", "<leader>g", ":Telescope live_grep <CR>", opts, "search project with Telescope(ripgrep)")
 
 -- toggleterm.nvim bindings
-keymap("n", "<leader>c", ":lua User_term_toggle()<CR>", opts, "open a floating terminal")
-keymap("t", "<Esc><Esc>", "<C-\\><C-n>:lua User_term_toggle()<CR>", opts, "close a floating terminal")
 
 keymap("n", "<leader>y", "\"+y", opts, "yank to system clipboard")
 keymap("v", "<leader>y", "\"+y", opts, "yank to system clipboard")
@@ -67,7 +65,10 @@ end
 local Terminal  = require('toggleterm.terminal').Terminal
 local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float", float_opts = { border = "single", width = 1000, height = 1000} })
 local term = Terminal:new({direction = "float" })
-function User_lazygit_toggle() lazygit:toggle() end
-function User_term_toggle() term:toggle() end
+function User_lazygit_open() lazygit:open() end
+function User_term_open() term:open() end
+function User_term_close_all() term:close() lazygit:close() end
 
-vim.api.nvim_set_keymap("n", "<leader>z", "<cmd>lua User_lazygit_toggle()<CR>", {noremap = true, silent = true})
+keymap("t", "<Esc><Esc>", "<C-\\><C-n>:lua User_term_close_all()<CR>", opts, "close a floating terminal")
+keymap("n", "<leader>c", ":lua User_term_open()<CR>", opts, "open a floating terminal")
+vim.api.nvim_set_keymap("n", "<leader>z", "<cmd>lua User_lazygit_open()<CR>", {noremap = true, silent = true})
