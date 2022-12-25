@@ -53,6 +53,14 @@ keymap("x", "<C-l>", ":m'>+ <CR>gv=gv", opts, "move the visually selected lines 
 
 keymap("n", "<leader>f", ":Telescope find_files <CR>", opts, "open file search with Telescope")
 keymap("n", "<leader>g", ":Telescope live_grep <CR>", opts, "search project with Telescope(ripgrep)")
+keymap("n", "<leader>Tg", ":Telescope git_files <CR>", opts, "search git files")
+keymap("n", "<leader>Tb", ":Telescope git_branches <CR>", opts, "search git branches")
+keymap("n", "<leader>Tr", ":Telescope lsp_references <CR>", opts, "search lsp refrences")
+keymap("n", "<leader>Ty", ":Telescope registers <CR>", opts, "search registers")
+keymap("n", "<leader>T:", ":Telescope command_history <CR>", opts, "search command history")
+keymap("n", "<leader>Tf", ":Telescope buffers <CR>", opts, "search open buffers")
+keymap("n", "<leader>Tm", ":Telescope keymaps <CR>", opts, "search keymaps")
+keymap("n", "<leader>Tc", ":Telescope commands <CR>", opts, "search all commands")
 
 -- toggleterm.nvim bindings
 keymap("n", "<leader>c", ":lua User_term_toggle()<CR>", opts, "open a floating terminal")
@@ -61,8 +69,8 @@ keymap("t", "<Esc><Esc>", "<C-\\><C-n>:lua User_term_toggle()<CR>", opts, "close
 keymap("n", "<leader>y", "\"+y", opts, "yank to system clipboard")
 keymap("v", "<leader>y", "\"+y", opts, "yank to system clipboard")
 
-keymap("n", "<leader>d", "\"_d", opts, "delete to void register")
-keymap("v", "<leader>d", "\"_d", opts, "delete to void register")
+-- keymap("n", "<leader>d", "\"_d", opts, "delete to void register")
+-- keymap("v", "<leader>d", "\"_d", opts, "delete to void register")
 
 keymap("n", "<leader>o", ":%s/\\<<C-r><C-w>\\>//gI<Left><Left><Left>", opts, "substitute current word")
 keymap("n", "<leader>p", ":lua require'telescope'.extensions.projects.projects{}<CR>", opts, "browse projects")
