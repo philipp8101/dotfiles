@@ -1,8 +1,41 @@
 local dap = require('dap')
+dap.set_log_level('TRACE')
+
+dap.adapters.cppdbg = {
+  id = 'cppdbg',
+  type = 'executable',
+  command = os.getenv('HOME') .. '/.local/bin/lldb-code/debugAdapters/bin/OpenDebugAD7',
+}
+
+local dap = require('dap')
+dap.configurations.cpp = {
+  {
+    name = "Launch file",
+    type = "cppdbg",
+    request = "launch",
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    cwd = '${workspaceFolder}',
+    stopAtEntry = true,
+  },
+  {
+    name = 'Attach to gdbserver :1234',
+    type = 'cppdbg',
+    request = 'launch',
+    MIMode = 'gdb',
+    miDebuggerServerAddress = 'localhost:1234',
+    miDebuggerPath = '/usr/bin/gdb',
+    cwd = '${workspaceFolder}',
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+  },
+}
 
 dap.adapters.lldb = {
     type = 'executable',
-    command = '/usr/bin/lldb',
+    command = '/usr/bin/lldb-mi',
     name = 'lldb'
 }
 dap.adapters.python = {
@@ -11,7 +44,7 @@ dap.adapters.python = {
   args = { '-m', 'debugpy.adapter' };
 }
 
-dap.configurations.cpp = {
+--[[ dap.configurations.cpp = {
     {
         name = 'Launch',
         type = 'lldb',
@@ -26,6 +59,7 @@ dap.configurations.cpp = {
 }
 dap.configurations.c = dap.configurations.cpp
 dap.configurations.rust = dap.configurations.cpp
+]]
 dap.configurations.python = {
   {
     -- The first three options are required by nvim-dap

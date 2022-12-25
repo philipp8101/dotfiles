@@ -35,6 +35,14 @@ keymap("n", "<leader>s", ":lua require(\"harpoon.ui\").nav_file(4) <CR>zz", opts
 keymap("n", "<leader>e", ":Ex <CR>", opts, "Open File Browser (netrw)")
 keymap("n", "<leader>u", ":lua require('undotree').toggle() <CR>", opts, "Open undotree")
 
+keymap("n", "<leader>dd", ":lua require('dapui').toggle() <CR>", opts, "open debugger ui")
+keymap("n", "<leader>do", ":DapStepOver <CR>", opts, "debugger step over")
+keymap("n", "<leader>di", ":DapStepInto <CR>", opts, "debugger step into")
+keymap("n", "<leader>du", ":DapStepOut <CR>", opts, "debugger step out")
+keymap("n", "<leader>dt", ":DapToggleBreakpoint <CR>", opts, "debugger toggle breakpoint")
+keymap("n", "<leader>dc", ":DapContinue <CR>", opts, "debugger continue")
+keymap("n", "<leader>ds", ":DapTerminate <CR> <bar> lua require('dapui').close() <CR>", opts, "debugger stop")
+
 keymap("n", "gs", ":TSJSplit <CR>", opts, "split a block of code, such as arrays or arguments, in multiple lines" )
 keymap("n", "gj", ":TSJJoin <CR>", opts, "consolidate a block of code, such as arrays or arguments, into a single line")
 

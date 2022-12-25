@@ -176,7 +176,6 @@ return packer.startup(function(use)
         config = function() require("nvim-surround").setup({ }) end
     }
 
-    -- use { 'mfussenegger/nvim-dap' }
     use({ 'rose-pine/neovim', as = 'rose-pine' })
     use({  "folke/zen-mode.nvim" })
     use {
@@ -187,6 +186,14 @@ return packer.startup(function(use)
     }
 
     use('f-person/git-blame.nvim')
+
+    use { 'mfussenegger/nvim-dap' }
+    use { "rcarriga/nvim-dap-ui",
+        requires = {"mfussenegger/nvim-dap"},
+        config = function()
+            require("dapui").setup()
+        end
+    }
 
     -- Colorschemes
     use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
