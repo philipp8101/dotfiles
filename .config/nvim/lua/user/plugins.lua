@@ -195,6 +195,8 @@ return packer.startup(function(use)
         end
     }
 
+    use "tpope/vim-dispatch"
+
     -- Colorschemes
     use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
     use 'vim-airline/vim-airline'
@@ -220,8 +222,25 @@ return packer.startup(function(use)
     use "williamboman/nvim-lsp-installer" -- simple to use language server installer
     use "tamago324/nlsp-settings.nvim" -- language server settings defined in json for
 
+    use { 'mfussenegger/nvim-jdtls',
+        config = function()
+            vim.api.nvim_create_autocmd({"FileType"}, {
+                pattern = { "*.java" },
+                callback = function ()
+                    require('jdtls').start_or_attach({
+                        cmd = {'/usr/bin/jdtls'},
+                        root_dir = vim.fs.dirname(vim.fs.find({'.gradlew', '.git', 'mvnw'}, { upward = true })[1]),
+                        settings = { java = { project = { referencedLibraries = {
+                            '/home/philipp/.m2/repository/org/projectlombok/lombok/1.18.24/lombok-1.18.24.jar',
+                        } } } }
+                    })
+                end
+            })
+        end
+    }
+
     -- Telescope
-    use { "nvim-telescope/telescope.nvim", 
+    use { "nvim-telescope/telescope.nvim",
         config = function()
             require('telescope').setup{
                 defaults = {
@@ -237,7 +256,7 @@ return packer.startup(function(use)
                         '.gitignore'
                     },
                 }
-            } 
+            }
     end
     }
 
