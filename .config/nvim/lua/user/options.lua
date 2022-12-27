@@ -18,3 +18,4 @@ vim.opt.undofile = true
 vim.opt.undodir = os.getenv("HOME") .. "/.cache/nvimundo"
 vim.opt.termguicolors = true
 vim.g.gitblame_enabled = 0
+vim.opt.nrformats:append({ "alpha" })
