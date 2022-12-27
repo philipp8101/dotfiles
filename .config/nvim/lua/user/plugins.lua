@@ -52,7 +52,7 @@ return packer.startup(function(use)
             require('treesj').setup({
                 use_default_keymaps = false,-- (<space>m - toggle, <space>j - join, <space>s - split)
                 check_syntax_error = true,
-                max_join_length = 120,
+                max_join_length = 500,
                 cursor_behavior = 'hold',
                 notify = true,
                 langs = {--[[ configuration for languages ]]},
