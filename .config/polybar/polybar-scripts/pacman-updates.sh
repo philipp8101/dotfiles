@@ -16,4 +16,4 @@ update=$(checkupdates | wc -l)
 	#update=$update" updates"
 #fi
 total=$(expr $( expr $update \* 100 ) / $(pacman -Q |wc -l))
-echo $update" %{F#808080}"$total"% %{F-} in "$(~/.scripts/timeElapsed.sh $ago)
+echo $update"  %{F#6e738d}in "$(~/.scripts/timeElapsed.sh $ago)"%{F-}"
