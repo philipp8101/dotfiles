@@ -1,7 +1,7 @@
 [credential]
 	helper = store
 [core]
-	editor = vim
+	editor = nvim
 [user]
 	email = philipp8101@gmail.com
 	name = Philipp Conrad
