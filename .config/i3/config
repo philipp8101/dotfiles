@@ -510,22 +510,34 @@ set $urgent-bg-color     #E53935
 #client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color $bg-color
 #client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          $bg-color
 
-set $bg-color #222222ee
-set $bg-focused #666666ee
-set $inactive-bg-color #222222cc
-set $unfocused-bg-color #22222299
+# # ========= old theme
+# set $bg-color #222222ee
+# set $bg-focused #666666ee
+# set $inactive-bg-color #222222cc
+# set $unfocused-bg-color #22222299
+# set $text-color #ffffff
+# set $unfocused-text #888888
+# set $urgent-color #2f343a
+# set $unfocused-urgent #900000ee
 
-#set $bg-color #05597f
-#set $inactive-bg-color #15485E
-#set $unfocused-bg-color #1A4253
-set $text-color #ffffff
-set $unfocused-text #888888
+# ========= catpuccino
+#peach
+set $bg-focused #494d64
+#mantle
+set $inactive-bg-color #1e2030
+#crust
+set $unfocused-bg-color #24273a
+set $text-color $text
+set $unfocused-text $text
+set $urgent-color #2f343a
+set $unfocused-urgent #900000ee
+
 #class                   border               backgr.              text             indicator            child_border
 client.focused           $bg-focused          $bg-focused          $text-color      #666666ee            $bg-focused
 client.focused_inactive  $inactive-bg-color   $inactive-bg-color   $unfocused-text  $inactive-bg-color   $inactive-bg-color
 client.unfocused         $unfocused-bg-color  $unfocused-bg-color  $unfocused-text  $unfocused-bg-color  $unfocused-bg-color
-client.urgent            #2f343a              #900000ee            $text-color      #900000ee            #900000ee
-client.placeholder       #000000              #0c0c0c              $text-color      #000000              #0c0c0c
+client.urgent            $urgent-color        $unfocused-urgent    $text-color      $unfocused-urgent    $unfocused-urgent
+client.placeholder       #000000              #000000              $text-color      #000000              #000000
 client.background        $text-color                                                                     
 
 #set $acolor #d64161
