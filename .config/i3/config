@@ -262,7 +262,7 @@ bindsym $mod+z fullscreen toggle
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+p layout stacking
 bindsym $mod+period layout tabbed
-bindsym $mod+l layout toggle split
+bindcode $mod+51 layout toggle split
 
 bindsym $mod+x split h
 bindsym $mod+k split v
@@ -454,7 +454,7 @@ bindsym $mod+Control+j reload
 bindsym $mod+Shift+p restart
 
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+l exec rofi -show power-menu -modi power-menu:~/.config/rofi/rofi-power-menu -theme transparent 
+bindcode $mod+Shift+51 exec rofi -show power-menu -modi power-menu:~/.config/rofi/rofi-power-menu -theme transparent 
 	# qdbus org.kde.ksmserver /KSMServer logout 1 0 0
 
 bindsym $mod+m mode "transparency"
