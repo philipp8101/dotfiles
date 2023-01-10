@@ -181,7 +181,38 @@ return packer.startup(function(use)
     use {
         'lewis6991/gitsigns.nvim',
         config = function()
-            require('gitsigns').setup()
+            require('gitsigns').setup({
+                current_line_blame = true,
+                current_line_blame_opts = {
+                    delay = 0
+                },
+                on_attach = function(bufnr)
+                    local gs = package.loaded.gitsigns
+                    local opts = { noremap = true, silent = true }
+                    -- Navigation
+                    vim.keymap.set('n', ']c', function()
+                        if vim.wo.diff then return ']c' end
+                        vim.schedule(function() gs.next_hunk() end)
+                        return '<Ignore>'
+                    end, {expr=true})
+                    vim.keymap.set('n', '[c', function()
+                        if vim.wo.diff then return '[c' end
+                        vim.schedule(function() gs.prev_hunk() end)
+                        return '<Ignore>'
+                    end, {expr=true})
+                    vim.keymap.set({'n', 'v'}, '<leader>as', ':Gitsigns stage_hunk<CR>')
+                    vim.keymap.set({'n', 'v'}, '<leader>ar', ':Gitsigns reset_hunk<CR>', opts)
+                    vim.keymap.set('n', '<leader>aS', gs.stage_buffer, opts)
+                    vim.keymap.set('n', '<leader>au', gs.undo_stage_hunk, opts)
+                    vim.keymap.set('n', '<leader>aR', gs.reset_buffer, opts)
+                    vim.keymap.set('n', '<leader>ap', gs.preview_hunk, opts)
+                    vim.keymap.set('n', '<leader>ab', function() gs.blame_line{full=true} end, opts)
+                    vim.keymap.set('n', '<leader>al', gs.toggle_current_line_blame, opts)
+                    vim.keymap.set('n', '<leader>ad', gs.diffthis, opts)
+                    vim.keymap.set('n', '<leader>aD', function() gs.diffthis('~') end, opts)
+                    vim.keymap.set('n', '<leader>ax', gs.toggle_deleted, opts)
+                end
+            })
         end
     }
 
