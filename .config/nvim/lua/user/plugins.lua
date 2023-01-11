@@ -245,8 +245,13 @@ return packer.startup(function(use)
     use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
     use 'vim-airline/vim-airline'
     use 'vim-airline/vim-airline-themes'
-    use "EdenEast/nightfox.nvim"
-    --[[ use({ 'xiyaowong/nvim-transparent'}) ]]
+    use { "EdenEast/nightfox.nvim", config = function ()
+        require('nightfox').setup({ options = { transparent = true } })
+    end }
+    use { "catppuccin/nvim", as = "catppuccin", config = function ()
+        require("catppuccin").setup({ transparent_background = true })
+    end }
+    use 'nvim-tree/nvim-web-devicons' -- icons
 
 
     -- cmp plugins
