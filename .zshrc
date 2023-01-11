@@ -120,14 +120,15 @@ zstyle ':completion:*' rehash true
 # fix pearl warning message (when running fzf (ctrl+r))
 export LC_ALL=en_US.UTF-8
 
+export ZSH_EXEC=$(which zsh)
 # if tmux exists and not already in tmux session
 if command -v tmux &> /dev/null && [[ -z "${TMUX}" ]] ; then
     # if session with group 0 exists
     if tmux ls | grep "group 0" -q ; then
         # attach to session 0 and spawn new window; close terminal after exiting tmux
-        tmux new-session -t0 \; new-window && exit
+        tmux -f ~/.config/tmux/tmux.conf new-session -t0 \; new-window && exit
     else
         # if session 0 does not exist create it
-        tmux new-session -t0 && exit
+        tmux -f ~/.config/tmux/tmux.conf new-session -t0 && exit
     fi
 fi
