@@ -71,7 +71,21 @@ keymap("v", "<leader>y", "\"+y", opts, "yank to system clipboard")
 
 keymap("n", "<leader>o", ":%s/\\<<C-r><C-w>\\>//gI<Left><Left><Left>", opts, "substitute current word")
 keymap("n", "<leader>p", ":lua require'telescope'.extensions.projects.projects{}<CR>", opts, "browse projects")
+keymap("n", "<leader>S", ":lua SwitchHeader()", opts, "switch between cpp header and main")
 
+function SwitchHeader()
+    local file = vim.api.nvim_buf_get_name(0)
+    local lookup = {}
+    lookup["cpp"] = "hpp"
+    lookup["hpp"] = "cpp"
+    lookup["c"] = "h"
+    lookup["h"] = "c"
+    local type = string.match(file, "%a+$")
+    local fileToOpen , _ =string.gsub(file, "%a+$", lookup[type])
+    if (lookup[type] ~= nil) then
+        vim.cmd(":e "..fileToOpen)
+    end
+end
 
 if legendaryPresent then
 	require('legendary').setup({ keymaps = KeymapTable, commands = {}, funcs = {}, autocmds = {} })
