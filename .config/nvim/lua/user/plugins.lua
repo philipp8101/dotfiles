@@ -327,6 +327,55 @@ return packer.startup(function(use)
     }
     use "p00f/nvim-ts-rainbow"
     use "nvim-treesitter/playground"
+    use { 'nvim-treesitter/nvim-treesitter-textobjects', config = function ()
+        require'nvim-treesitter.configs'.setup({
+            textobjects = {
+                select = {
+                    enable = true,
+                    lookahead = true,
+                    keymaps = {
+                        ["af"] = "@function.outer",
+                        ["if"] = "@function.inner",
+                        ["aa"] = "@parameter.outer",
+                        ["ia"] = "@parameter.inner",
+                        ["ac"] = "@class.outer",
+                        ["ic"] = "@class.inner",
+                        ["x"] = "@comment.outer"
+                    },
+                    include_surrounding_whitespace = true,
+                },
+                swap = {
+                    enable = true,
+                    swap_next = {
+                        ["<leader>wa"] = "@parameter.inner",
+                    },
+                    swap_previous = {
+                        ["<leader>Wa"] = "@parameter.inner",
+                    },
+                },
+                move = {
+                    enable = true,
+                    set_jumps = true,
+                    goto_next_start = {
+                        ["]f"] = "@function.outer",
+                        ["]a"] = "@parameter.inner",
+                    },
+                    goto_next_end = {
+                        ["]F"] = "@function.outer",
+                        ["]A"] = "@parameter.inner",
+                    },
+                    goto_previous_start = {
+                        ["[f"] = "@function.outer",
+                        ["[a"] = "@parameter.inner",
+                    },
+                    goto_previous_end = {
+                        ["[F"] = "@function.outer",
+                        ["[A"] = "@parameter.inner",
+                    },
+                },
+            }
+        })
+    end }
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
