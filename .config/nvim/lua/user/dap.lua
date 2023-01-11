@@ -7,7 +7,6 @@ dap.adapters.cppdbg = {
   command = os.getenv('HOME') .. '/.local/bin/lldb-code/debugAdapters/bin/OpenDebugAD7',
 }
 
-local dap = require('dap')
 dap.configurations.cpp = {
   {
     name = "Launch file",
