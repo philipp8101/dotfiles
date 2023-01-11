@@ -19,4 +19,7 @@ vim.opt.undodir = os.getenv("HOME") .. "/.cache/nvimundo"
 vim.opt.termguicolors = true
 vim.g.gitblame_enabled = 0
 vim.opt.nrformats:append({ "alpha" })
-vim.opt.formatoptions:remove({ 'c','r','o' })
+-- autocmd need because ftplugins reset formatoptions on every filetype
+vim.api.nvim_create_autocmd({"FileType"},{pattern = {"*"}, callback = function ()
+    vim.opt.formatoptions:remove({ 'c','r','o' })
+end})
