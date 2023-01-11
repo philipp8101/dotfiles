@@ -216,6 +216,12 @@ return packer.startup(function(use)
         end
     }
 
+    use { 'echasnovski/mini.pairs',
+        config = function()
+            require("mini.pairs").setup()
+        end
+    }
+
     use {
         "folke/which-key.nvim",
         config = function()
