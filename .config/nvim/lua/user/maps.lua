@@ -73,6 +73,9 @@ keymap("n", "<leader>o", ":%s/\\<<C-r><C-w>\\>//gI<Left><Left><Left>", opts, "su
 keymap("n", "<leader>p", ":lua require'telescope'.extensions.projects.projects{}<CR>", opts, "browse projects")
 keymap("n", "<leader>S", ":lua SwitchHeader()", opts, "switch between cpp header and main")
 
+keymap("n", "gn", ":bn<CR>", opts, "go to next buffer")
+keymap("n", "gp", ":bp<CR>", opts, "go to previous buffer")
+
 function SwitchHeader()
     local file = vim.api.nvim_buf_get_name(0)
     local lookup = {}
