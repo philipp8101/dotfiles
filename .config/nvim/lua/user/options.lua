@@ -1,4 +1,5 @@
 vim.g.airline_powerline_fonts = 1
+vim.cmd([[let g:airline#extensions#tabline#enabled = 1]])
 vim.cmd.colorscheme("carbonfox")
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
