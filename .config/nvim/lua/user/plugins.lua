@@ -253,6 +253,11 @@ return packer.startup(function(use)
     end }
     use 'nvim-tree/nvim-web-devicons' -- icons
 
+    use { "lukas-reineke/indent-blankline.nvim",
+        config = function ()
+            require("indent_blankline").setup({})
+        end
+    }
 
     -- cmp plugins
     use "hrsh7th/nvim-cmp" -- The completion plugin
