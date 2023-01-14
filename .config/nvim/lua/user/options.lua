@@ -24,3 +24,5 @@ vim.opt.nrformats:append({ "alpha" })
 vim.api.nvim_create_autocmd({"FileType"},{pattern = {"*"}, callback = function ()
     vim.opt.formatoptions:remove({ 'c','r','o' })
 end})
+vim.opt.linebreak = true
+vim.opt.breakindent = true
