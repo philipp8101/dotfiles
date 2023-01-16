@@ -188,7 +188,6 @@ return packer.startup(function(use)
                 },
                 on_attach = function(bufnr)
                     local gs = package.loaded.gitsigns
-                    local opts = { noremap = true, silent = true }
                     -- Navigation
                     vim.keymap.set('n', ']c', function()
                         if vim.wo.diff then return ']c' end
@@ -200,17 +199,17 @@ return packer.startup(function(use)
                         vim.schedule(function() gs.prev_hunk() end)
                         return '<Ignore>'
                     end, {expr=true})
-                    vim.keymap.set({'n', 'v'}, '<leader>as', ':Gitsigns stage_hunk<CR>')
-                    vim.keymap.set({'n', 'v'}, '<leader>ar', ':Gitsigns reset_hunk<CR>', opts)
-                    vim.keymap.set('n', '<leader>aS', gs.stage_buffer, opts)
-                    vim.keymap.set('n', '<leader>au', gs.undo_stage_hunk, opts)
-                    vim.keymap.set('n', '<leader>aR', gs.reset_buffer, opts)
-                    vim.keymap.set('n', '<leader>ap', gs.preview_hunk, opts)
-                    vim.keymap.set('n', '<leader>ab', function() gs.blame_line{full=true} end, opts)
-                    vim.keymap.set('n', '<leader>al', gs.toggle_current_line_blame, opts)
-                    vim.keymap.set('n', '<leader>ad', gs.diffthis, opts)
-                    vim.keymap.set('n', '<leader>aD', function() gs.diffthis('~') end, opts)
-                    vim.keymap.set('n', '<leader>ax', gs.toggle_deleted, opts)
+                    vim.keymap.set({'n', 'v'}, '<leader>as', ':Gitsigns stage_hunk<CR>', { noremap = true, silent = true, desc = "Gitsigns stage hunk" })
+                    vim.keymap.set({'n', 'v'}, '<leader>ar', ':Gitsigns reset_hunk<CR>', { noremap = true, silent = true, desc = "Gitsigns reset hunk" })
+                    vim.keymap.set('n', '<leader>aS', gs.stage_buffer, { noremap = true, silent = true, desc = "Gitsigns stage buffer"})
+                    vim.keymap.set('n', '<leader>au', gs.undo_stage_hunk, { noremap = true, silent = true, desc = "Gitsigns undo stage hunk" })
+                    vim.keymap.set('n', '<leader>aR', gs.reset_buffer, { noremap = true, silent = true, desc = "Gitsigns reset buffer" })
+                    vim.keymap.set('n', '<leader>ap', gs.preview_hunk, { noremap = true, silent = true, desc = "Gitsigns preview hunk" })
+                    vim.keymap.set('n', '<leader>ab', function() gs.blame_line{full=true} end, { noremap = true, silent = true, desc = "Gitsigns blame line" })
+                    vim.keymap.set('n', '<leader>al', gs.toggle_current_line_blame, { noremap = true, silent = true, desc = "Gitsigns toggle line blame" })
+                    vim.keymap.set('n', '<leader>ad', gs.diffthis, { noremap = true, silent = true, desc = "Gitsigns diffthis" })
+                    vim.keymap.set('n', '<leader>aD', function() gs.diffthis('~') end, { noremap = true, silent = true, desc = "Gitsigns diffthis ~" })
+                    vim.keymap.set('n', '<leader>ax', gs.toggle_deleted, { noremap = true, silent = true, desc = "Gitsigns toggle deleted" })
                 end
             })
         end
