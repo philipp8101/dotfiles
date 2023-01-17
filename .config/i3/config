@@ -212,8 +212,8 @@ exec_always --no-startup-id ~/.config/polybar/launch.sh
 exec setxkbmap -option caps:none
 
 # start rofi
-bindsym $mod+i exec rofi -show drun -theme transparent
-bindsym $mod+Shift+i exec "~/.scripts/i3/next_empty_workspace.py ; rofi -show drun -theme transparent"
+bindsym $mod+i exec rofi -show drun -theme round
+bindsym $mod+Shift+i exec "~/.scripts/i3/next_empty_workspace.py ; rofi -show drun -theme round"
 #bindsym $mod+x exec rofi -show window -theme transparent
 
 # start rofi file-browser
@@ -454,7 +454,7 @@ bindsym $mod+Control+j reload
 bindsym $mod+Shift+p restart
 
 # exit i3 (logs you out of your X session)
-bindcode $mod+Shift+51 exec rofi -show power-menu -modi power-menu:~/.config/rofi/rofi-power-menu -theme transparent 
+bindcode $mod+Shift+51 exec rofi -show power-menu -modi power-menu:~/.config/rofi/rofi-power-menu -theme round 
 	# qdbus org.kde.ksmserver /KSMServer logout 1 0 0
 
 bindsym $mod+m mode "transparency"
