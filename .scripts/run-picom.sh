@@ -1,2 +1,2 @@
 #!/bin/bash
-picom --backend xrender --xrender-sync-fence
+picom --backend glx
