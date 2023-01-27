@@ -186,6 +186,7 @@ return packer.startup(function(use)
                 current_line_blame_opts = {
                     delay = 0
                 },
+                current_line_blame_formatter = '<author>, <abbrev_sha>, <author_time:%Y-%m-%d> - <summary>',
                 on_attach = function(bufnr)
                     local gs = package.loaded.gitsigns
                     -- Navigation
