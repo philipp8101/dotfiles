@@ -96,7 +96,7 @@
 # # restart i3 inplace (preserves your layout/session, can be used to upgrade i2)
 # bindsym $mod+Shift+p restart
 #
-# bindcode $mod+Shift+51 exec rofi -show power-menu -modi power-menu:~/.config/rofi/rofi-power-menu -theme round 
+ # bindcode $mod+Shift+51 exec rofi -show power-menu -modi power-menu:~/.config/rofi/rofi-power-menu -theme round 
 #
 # # swap to next and prev workspace
 # bindsym $mod+minus workspace prev_on_output
@@ -116,6 +116,7 @@ bindsym $mod+q kill
 bindsym --release button2 kill
 bindsym $mod+g exec rofi -show drun -theme round
 bindsym $mod+Shift+g exec "~/.scripts/i3/next_empty_workspace.py ; rofi -show drun -theme round"
+bindsym $mod+Shift+r exec rofi -show power-menu -modi power-menu:~/.config/rofi/rofi-power-menu -theme round 
 bindsym $mod+a focus left
 bindsym $mod+s focus down
 bindsym $mod+h focus up
@@ -131,6 +132,7 @@ bindsym $mod+Control+t resize grow width 5 px or 5 ppt
 bindsym $mod+b fullscreen toggle
 bindsym $mod+w layout stacking
 bindsym $mod+d layout tabbed
+bindsym $mod+r layout toggle split
 bindsym $mod+v split h
 bindsym $mod+c split v
 bindsym $mod+Shift+m floating toggle
