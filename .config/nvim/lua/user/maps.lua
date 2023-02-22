@@ -28,11 +28,11 @@ vim.keymap.set('c', '<CR>', function() return vim.fn.getcmdtype() == '/' and '<C
 
 keymap("n", "<leader>L", ":lua require(\"harpoon.ui\").toggle_quick_menu() <CR>", opts, "open harpoon menu")
 keymap("n", "<leader>l", ":lua require(\"harpoon.mark\").add_file() <CR>", opts, "add current file to harpoon list")
-keymap("n", "<leader>h", ":lua require(\"harpoon.ui\").nav_file(1) <CR>zz", opts, "Navigate to the first pinned file with harpoon")
-keymap("n", "<leader>t", ":lua require(\"harpoon.ui\").nav_file(2) <CR>zz", opts, "Navigate to the second pinned file with harpoon")
-keymap("n", "<leader>n", ":lua require(\"harpoon.ui\").nav_file(3) <CR>zz", opts, "Navigate to the third pinned file with harpoon")
-keymap("n", "<leader>s", ":lua require(\"harpoon.ui\").nav_file(4) <CR>zz", opts, "Navigate to the fourth pinned file with harpoon")
-keymap("n", "<leader>e", ":Ex <CR>", opts, "Open File Browser (netrw)")
+keymap("n", "<leader>n", ":lua require(\"harpoon.ui\").nav_file(1) <CR>zz", opts, "Navigate to the first pinned file with harpoon")
+keymap("n", "<leader>e", ":lua require(\"harpoon.ui\").nav_file(2) <CR>zz", opts, "Navigate to the second pinned file with harpoon")
+keymap("n", "<leader>o", ":lua require(\"harpoon.ui\").nav_file(3) <CR>zz", opts, "Navigate to the third pinned file with harpoon")
+keymap("n", "<leader>i", ":lua require(\"harpoon.ui\").nav_file(4) <CR>zz", opts, "Navigate to the fourth pinned file with harpoon")
+keymap("n", "<leader>x", ":Ex <CR>", opts, "Open File Browser (netrw)")
 keymap("n", "<leader>u", ":lua require('undotree').toggle() <CR>", opts, "Open undotree")
 
 keymap("n", "<leader>dd", ":lua require('dapui').toggle() <CR>", opts, "open debugger ui")
@@ -46,10 +46,10 @@ keymap("n", "<leader>ds", ":DapTerminate <CR> <bar> lua require('dapui').close()
 keymap("n", "gs", ":TSJSplit <CR>", opts, "split a block of code, such as arrays or arguments, in multiple lines" )
 keymap("n", "gj", ":TSJJoin <CR>", opts, "consolidate a block of code, such as arrays or arguments, into a single line")
 
-keymap("n", "<C-h>", ":m-2 <CR>", opts, "move the current line up")
-keymap("n", "<C-l>", ":m+1 <CR>", opts, "move the current line down")
-keymap("x", "<C-h>", ":m-2 <CR>gv=gv", opts, "move the visually selected lines up")
-keymap("x", "<C-l>", ":m'>+ <CR>gv=gv", opts, "move the visually selected lines down")
+keymap("n", "<C-o>", ":m-2 <CR>", opts, "move the current line up")
+keymap("n", "<C-e>", ":m+1 <CR>", opts, "move the current line down")
+keymap("x", "<C-o>", ":m-2 <CR>gv=gv", opts, "move the visually selected lines up")
+keymap("x", "<C-e>", ":m'>+ <CR>gv=gv", opts, "move the visually selected lines down")
 
 keymap("n", "<leader>f", ":Telescope find_files <CR>", opts, "open file search with Telescope")
 keymap("n", "<leader>g", ":Telescope live_grep <CR>", opts, "search project with Telescope(ripgrep)")
@@ -57,22 +57,15 @@ keymap("n", "<leader>F", ":Telescope git_files <CR>", opts, "search git files")
 keymap("n", "<leader>b", ":Telescope git_branches <CR>", opts, "search git branches")
 keymap("n", "<leader>B", ":Telescope git_commits <CR>", opts, "search git branches")
 
--- toggleterm.nvim bindings
-keymap("t", "<Esc><Esc>", "<C-\\><C-n>:lua User_term_close_all()<CR>", opts, "close a floating terminal")
-keymap("n", "<leader>c", "<cmd>lua User_term_open()<CR>", opts, "open a floating terminal")
-keymap("n", "<leader>z", "<cmd>lua User_lazygit_open()<CR>", opts, "open lazygit")
-
-
 keymap("n", "<leader>y", "\"+y", opts, "yank to system clipboard")
 keymap("v", "<leader>y", "\"+y", opts, "yank to system clipboard")
+keymap("n", "<leader>p", "\"+p", opts, "paste to system clipboard")
+keymap("v", "<leader>p", "\"+p", opts, "paste to system clipboard")
 
--- keymap("n", "<leader>d", "\"_d", opts, "delete to void register")
--- keymap("v", "<leader>d", "\"_d", opts, "delete to void register")
-
-keymap("n", "<leader>o", ":%s/\\<<C-r><C-w>\\>//gI<Left><Left><Left>", opts, "substitute current word")
-keymap("n", "<leader>p", ":lua require'telescope'.extensions.projects.projects{}<CR>", opts, "browse projects")
+keymap("n", "<leader>P", ":lua require'telescope'.extensions.projects.projects{}<CR>", opts, "browse projects")
 keymap("n", "<leader>S", ":lua SwitchHeader()", opts, "switch between cpp header and main")
 
+keymap("n", "gb", ":ene<CR>", opts, "open new buffer")
 keymap("n", "gn", ":bn<CR>", opts, "go to next buffer")
 keymap("n", "gp", ":bp<CR>", opts, "go to previous buffer")
 
