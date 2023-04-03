@@ -45,8 +45,7 @@ return packer.startup(function(use)
     use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
     use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
 
-    use({
-        'Wansmer/treesj',
+    use({ 'Wansmer/treesj',
         requires = { 'nvim-treesitter' },
         config = function()
             require('treesj').setup({
@@ -60,15 +59,14 @@ return packer.startup(function(use)
         end,
     })
 
-    use {
-        'numToStr/Comment.nvim',
+    use {'numToStr/Comment.nvim',
         config = function()
             require('Comment').setup({
                 padding = true,
                 sticky = true,
                 ignore = nil,
-                toggler = { line = 'gcc', block = 'gbc' },
-                opleader = { line = 'gc', block = 'gb' },
+                toggler = { line = 'gkk', block = 'gbk' },
+                opleader = { line = 'gk', block = 'gb' },
                 extra = { above = 'gcO', below = 'gco', eol = 'gcA' },
                 mappings = { basic = true, extra = true },
                 pre_hook = nil,
@@ -77,7 +75,7 @@ return packer.startup(function(use)
         end
     }
 
-    use { 'ethanholz/nvim-lastplace',
+    use {'ethanholz/nvim-lastplace',
         config = function()
             require'nvim-lastplace'.setup({
                 lastplace_ignore_buftype = {"quickfix", "nofile", "help"},
@@ -86,12 +84,6 @@ return packer.startup(function(use)
             })
         end
     }
-
-    use {"akinsho/toggleterm.nvim",
-        tag = '*',
-        config = function()
-            require("toggleterm").setup()
-    end}
 
     use {'stevearc/dressing.nvim',
         config = function()
@@ -162,8 +154,6 @@ return packer.startup(function(use)
         end
     }
 
-    use { 'mrjones2014/legendary.nvim' }
-
     use { "jiaoshijie/undotree",
         config = function() require('undotree').setup() end,
         requires = { "nvim-lua/plenary.nvim" },
@@ -176,10 +166,7 @@ return packer.startup(function(use)
         config = function() require("nvim-surround").setup({ }) end
     }
 
-    use({ 'rose-pine/neovim', as = 'rose-pine' })
-    use({  "folke/zen-mode.nvim" })
-    use {
-        'lewis6991/gitsigns.nvim',
+    use {'lewis6991/gitsigns.nvim',
         config = function()
             require('gitsigns').setup({
                 current_line_blame = true,
@@ -216,19 +203,14 @@ return packer.startup(function(use)
         end
     }
 
-    use { 'echasnovski/mini.pairs',
+    use {'echasnovski/mini.pairs',
         config = function()
             require("mini.pairs").setup()
         end
     }
 
-    use {
-        "folke/which-key.nvim",
-        config = function()
-            require("which-key").setup {
-
-            }
-        end
+    use {"folke/which-key.nvim",
+        config = function() require("which-key").setup { } end
     }
 
     use { 'mfussenegger/nvim-dap' }
@@ -239,7 +221,8 @@ return packer.startup(function(use)
         end
     }
 
-    use "tpope/vim-dispatch"
+    use { "tpope/vim-dispatch" }
+    use { "tpope/vim-fugitive" }
 
     -- Colorschemes
     use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out

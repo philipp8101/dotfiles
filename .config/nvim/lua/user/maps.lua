@@ -46,16 +46,18 @@ keymap("n", "<leader>ds", ":DapTerminate <CR> <bar> lua require('dapui').close()
 keymap("n", "gs", ":TSJSplit <CR>", opts, "split a block of code, such as arrays or arguments, in multiple lines" )
 keymap("n", "gj", ":TSJJoin <CR>", opts, "consolidate a block of code, such as arrays or arguments, into a single line")
 
-keymap("n", "<C-o>", ":m-2 <CR>", opts, "move the current line up")
-keymap("n", "<C-e>", ":m+1 <CR>", opts, "move the current line down")
-keymap("x", "<C-o>", ":m-2 <CR>gv=gv", opts, "move the visually selected lines up")
-keymap("x", "<C-e>", ":m'>+ <CR>gv=gv", opts, "move the visually selected lines down")
+keymap("n", "<C-k>", ":m-2 <CR>", opts, "move the current line up")
+keymap("n", "<C-j>", ":m+1 <CR>", opts, "move the current line down")
+keymap("x", "<C-k>", ":m-2 <CR>gv=gv", opts, "move the visually selected lines up")
+keymap("x", "<C-j>", ":m'>+ <CR>gv=gv", opts, "move the visually selected lines down")
 
 keymap("n", "<leader>f", ":Telescope find_files <CR>", opts, "open file search with Telescope")
 keymap("n", "<leader>g", ":Telescope live_grep <CR>", opts, "search project with Telescope(ripgrep)")
 keymap("n", "<leader>F", ":Telescope git_files <CR>", opts, "search git files")
 keymap("n", "<leader>b", ":Telescope git_branches <CR>", opts, "search git branches")
 keymap("n", "<leader>B", ":Telescope git_commits <CR>", opts, "search git branches")
+
+keymap("n", "<leader>t", ":Git", opts, "open fugitive")
 
 keymap("n", "<leader>y", "\"+y", opts, "yank to system clipboard")
 keymap("v", "<leader>y", "\"+y", opts, "yank to system clipboard")
@@ -82,14 +84,3 @@ function SwitchHeader()
         vim.cmd(":e "..fileToOpen)
     end
 end
-
-if legendaryPresent then
-	require('legendary').setup({ keymaps = KeymapTable, commands = {}, funcs = {}, autocmds = {} })
-end
-
-local Terminal  = require('toggleterm.terminal').Terminal
-local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float", float_opts = { border = "single", width = 1000, height = 1000} })
-local term = Terminal:new({direction = "float" })
-function User_lazygit_open() lazygit:open() end
-function User_term_open() term:open() end
-function User_term_close_all() term:close() lazygit:close() end
