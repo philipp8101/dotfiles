@@ -199,6 +199,9 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
+bindsym XF86AudioNext exec --no-startup-id playerctl next
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
 exec --no-startup-id sleep 2; pactl set-sink-volume alsa_output.usb-SteelSeries_SteelSeries_Arctis_9_000000000000-00.stereo-game 56%
 
@@ -326,10 +329,10 @@ assign [instance="^riot"] $wsL
 assign [title="^League"] $wsL
 assign [class="discord"] $wsD
 assign [class="Steam"] $wsS
+assign [title="Steam"] $wsS
 assign [instance="upc.exe"] $wsU
 assign [instance="anno*"] $wsU
 assign [instance="origin.exe"] $wsO
-for_window [class="Spotify"] move to workspace $wsP
 assign [instance="lutris"] $wsT
 #assign [instance="^gimp*"] $wsG
 #exec "i3-msg workspace $wsG, append_layout .config/i3/layout/gimp.json"
@@ -347,7 +350,7 @@ exec setxkbmap -option caps:none
 # start rofi file-browser
 #bindsym $mod+c exec rofi -show file-browser
 #bindsym $mod+c exec rofi -show file-browser -file-browser-open-multi-key kb-accept-alt
-#bindsym $mod+x exec rofi -show calc -modi calc -no-show-match -no-sort
+bindsym $mod+e exec rofi -show calc -modi calc -no-show-match -no-sort
 
 # auto rename workspace script NOT WORKING
 #exec_always "~/.config/i3/i3scripts/autoname_workspaces.py &"
@@ -545,13 +548,13 @@ mode "transparency" {
 	bindsym $mod+m mode "default"
 }
 
-# media controls
-bindcode 172 exec ~/.scripts/playercall.sh play-pause
-bindcode 174 exec ~/.scripts/playercall.sh stop
-bindcode 173 exec ~/.scripts/playercall.sh previous
-bindcode 171 exec ~/.scripts/playercall.sh next
-bindcode 152 exec ~/.scripts/playerswap.sh prev
-bindcode 180 exec ~/.scripts/playerswap.sh next
+# # media controls
+# bindcode 172 exec ~/.scripts/playercall.sh play-pause
+# bindcode 174 exec ~/.scripts/playercall.sh stop
+# bindcode 173 exec ~/.scripts/playercall.sh previous
+# bindcode 171 exec ~/.scripts/playercall.sh next
+# bindcode 152 exec ~/.scripts/playerswap.sh prev
+# bindcode 180 exec ~/.scripts/playerswap.sh next
 
 #set background 
 exec_always --no-startup-id ~/.scripts/bg-gen.sh ~/Pictures/wallpaper-aenamiart/
