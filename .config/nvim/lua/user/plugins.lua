@@ -224,6 +224,16 @@ return packer.startup(function(use)
     use { "tpope/vim-dispatch" }
     use { "tpope/vim-fugitive" }
 
+    use { "SmiteshP/nvim-navbuddy",
+        requires = {
+            "neovim/nvim-lspconfig",
+            "SmiteshP/nvim-navic",
+            "MunifTanjim/nui.nvim",
+        },
+        config = function ()
+            require("nvim-navbuddy").setup({ lsp = { auto_attach = true } })
+        end
+    }
     -- Colorschemes
     use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
     use 'vim-airline/vim-airline'
