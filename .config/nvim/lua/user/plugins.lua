@@ -231,12 +231,7 @@ return packer.startup(function(use)
             "MunifTanjim/nui.nvim",
         },
         config = function ()
-            require("nvim-navbuddy").setup()
-            require("lspconfig").clangd.setup {
-                on_attach = function(client, bufnr)
-                    require("nvim-navbuddy").attach(client, bufnr)
-                end
-            }
+            require("nvim-navbuddy").setup({ lsp = { auto_attach = true } })
         end
     }
     -- Colorschemes
