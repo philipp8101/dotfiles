@@ -234,6 +234,14 @@ return packer.startup(function(use)
             require("nvim-navbuddy").setup({ lsp = { auto_attach = true } })
         end
     }
+
+    use({
+        "iamcco/markdown-preview.nvim",
+        run = "cd app && npm install",
+        setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
+        ft = { "markdown" },
+    })
+
     -- Colorschemes
     use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
     use 'vim-airline/vim-airline'
