@@ -72,6 +72,26 @@ keymap("n", "gb", ":ene<CR>", opts, "open new buffer")
 keymap("n", "gn", ":bn<CR>", opts, "go to next buffer")
 keymap("n", "gp", ":bp<CR>", opts, "go to previous buffer")
 
+vim.api.nvim_create_autocmd("LspAttach", {
+    group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+    callback = function(ev)
+        local opts = { noremap = true, silent = true, buffer = ev.buf }
+        vim.keymap.set("n", "<leader>rD", "<cmd>lua vim.lsp.buf.declaration()<CR>zz", opts)
+        vim.keymap.set("n", "<leader>rd", "<cmd>lua vim.lsp.buf.definition()<CR>zz", opts)
+        vim.keymap.set("n", "<leader>rk", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+        vim.keymap.set("n", "<leader>ri", "<cmd>lua vim.lsp.buf.implementation()<CR>zz", opts)
+        vim.keymap.set("n", "<leader>rK", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
+        vim.keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+        vim.keymap.set("n", "<leader>rr", ":Telescope lsp_references <CR>", opts)
+        vim.keymap.set("n", "<leader>ra", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+        vim.keymap.set("n", "<leader>ri", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+        vim.keymap.set("n", "<leader>rq", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
+        vim.keymap.set("n", "<leader>rh", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
+        -- vim.keymap.set("n", "gl", '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>', opts)
+        vim.keymap.set("n", "<leader>rl", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
+    end,
+})
+
 function SwitchHeader()
     local file = vim.api.nvim_buf_get_name(0)
     local lookup = {}
