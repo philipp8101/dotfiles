@@ -194,6 +194,15 @@ require("lazy").setup({
         opts = {}
     },
 
+
+    { "jay-babu/mason-nvim-dap.nvim",
+        dependencies = {
+            "mfussenegger/nvim-dap",
+            "williamboman/mason.nvim",
+        },
+        opts = {}
+    },
+
     { "mfussenegger/nvim-dap" },
     { "rcarriga/nvim-dap-ui",
         dependencies = {"mfussenegger/nvim-dap"},
@@ -261,7 +270,7 @@ require("lazy").setup({
             delete_check_events = "TextChanged,InsertLeave"
         }
     }, --snippet engine
-	
+
     { "rafamadriz/friendly-snippets" }, -- a bunch of snippets to use
     { "neovim/nvim-lspconfig",
         lazy = true,
@@ -367,8 +376,9 @@ require("lazy").setup({
         end,
         lazy = true,
     },
-    -- LSP
-    -- { "williamboman/nvim-lsp-installer" }, -- simple to use language server installer
+    { "folke/neodev.nvim",
+        opts = {}
+    },
 
     { "mfussenegger/nvim-jdtls",
         init = function()
