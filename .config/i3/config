@@ -312,8 +312,27 @@ for_window [class="Steam" title="Friends List"] resize set width 15 ppt;
 for_window [class="Steam" title="Steam Guard"] floating enable;
 for_window [class="Steam" title="Steam - News"] floating enable;
 for_window [instance="cutefish-calculator" ] floating enable;
-for_window [class="firefox"] border pixel 3 
-for_window [class="Alacritty"] border pixel 3
+for_window [class="firefox"] border pixel 3;
+for_window [instance="Places" class="firefox"] floating enable;
+for_window [class="Alacritty"] border pixel 3;
+
+# command criteria
+# all - matches all windows
+# class - second part of WM_CLASS
+# instance - frist part of WM_CLASS
+# window_role - WM_WINDOW_ROLE
+# window_type - _NET_WM_WINDOW_TYPE
+# machine - WM_CLIENT_MACHINE
+# id - xwininfo window_id
+# title - _NET_WM_NAME or WM_NAME
+# urgent - "latest" or "oldest" matches urgent windows
+# workspace - matches workspace name
+# con_mark - matches containers mark name
+# con_id - internal i3 id accessible via i3ips
+# floating - matches floating windows
+# floating_from - "auto" (windows automatically opened as floating) or "user" (windows that were made floating dy user)
+# tiling - match tiled windows
+# tiling_from - same as floating_from
 
 # insert new containers to mark
 for_window [window_type="normal"] move container to mark insert
