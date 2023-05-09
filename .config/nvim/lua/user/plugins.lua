@@ -395,8 +395,6 @@ require("lazy").setup({
             vim.g.haskell_enable_typeroles = 1        -- to enable highlighting of type roles
             vim.g.haskell_enable_static_pointers = 1  -- to enable highlighting of `static`
             vim.g.haskell_backpack = 1                -- to enable highlighting of backpack keywords
-            vim.g.haskell_indent_case = 2
-            vim.g.haskell_indent_let = 2
         end
     },
 
