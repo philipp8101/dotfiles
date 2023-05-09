@@ -1,5 +1,6 @@
 vim.g.airline_powerline_fonts = 1
 vim.cmd([[let g:airline#extensions#tabline#enabled = 1]])
+vim.cmd([[let g:netrw_liststyle = 3]])
 
 -- colors need to be here too, otherwise indent markers break
 vim.cmd.colorscheme("carbonfox")
