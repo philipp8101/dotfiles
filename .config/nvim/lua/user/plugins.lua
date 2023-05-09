@@ -398,22 +398,7 @@ require("lazy").setup({
         end
     },
 
-    { "mfussenegger/nvim-jdtls",
-        init = function()
-            vim.api.nvim_create_autocmd({"FileType"}, {
-                pattern = { "*.java" },
-                callback = function ()
-                    require("jdtls").start_or_attach({
-                        cmd = {"/usr/bin/jdtls"},
-                        root_dir = vim.fs.dirname(vim.fs.find({".gradlew", ".git", "mvnw"}, { upward = true })[1]),
-                        settings = { java = { project = { referencedLibraries = {
-                            "/home/philipp/.m2/repository/org/projectlombok/lombok/1.18.24/lombok-1.18.24.jar",
-                        } } } }
-                    })
-                end
-            })
-        end
-    },
+    { "mfussenegger/nvim-jdtls" },
 
     -- Telescope
     { "nvim-telescope/telescope.nvim",
