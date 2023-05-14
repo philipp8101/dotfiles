@@ -52,13 +52,7 @@ keymap("x", "<C-k>", ":m-2 <CR>gv=gv", opts, "move the visually selected lines u
 keymap("x", "<C-j>", ":m'>+ <CR>gv=gv", opts, "move the visually selected lines down")
 
 local ripgrep_available = os.execute("which rg >/dev/null 2>&1")
-vim.keymap.set("n", "<leader>f", function ()
-    if(ripgrep_available) then
-        vim.cmd([[:Telescope find_files find_command=rg,--ignore,--hidden,--files,--ignore-file,.gitignore]])
-    else
-        vim.cmd([[:Telescope find_files <CR>]])
-    end
-end , opts, "open file search with Telescope")
+vim.keymap.set("n", "<leader>f", ":Telescope find_files <CR>", opts, "open file search with Telescope")
 keymap("n", "<leader>g", ":Telescope live_grep <CR>", opts, "search project with Telescope(ripgrep)")
 keymap("n", "<leader>F", ":Telescope git_files <CR>", opts, "search git files")
 keymap("n", "<leader>b", ":Telescope git_branches <CR>", opts, "search git branches")
@@ -75,7 +69,7 @@ keymap("v", "<leader>p", "\"+p", opts, "paste to system clipboard")
 keymap("n", "<leader>P", ":lua require'telescope'.extensions.projects.projects{}<CR>", opts, "browse projects")
 keymap("n", "<leader>S", ":lua SwitchHeader()", opts, "switch between cpp header and main")
 
-keymap("n", "gb", ":ene<CR>", opts, "open new buffer")
+keymap("n", "<C-n>", ":ene<CR>", opts, "open new buffer")
 keymap("n", "gn", ":bn<CR>", opts, "go to next buffer")
 keymap("n", "gp", ":bp<CR>", opts, "go to previous buffer")
 
