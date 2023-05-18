@@ -123,12 +123,12 @@ export LC_ALL=en_US.UTF-8
 export ZSH_EXEC=$(which zsh)
 # if tmux exists and not already in tmux session
 if command -v tmux &> /dev/null && [[ -z "${TMUX}" ]] ; then
-    # if session with group 0 exists
-    if tmux ls | grep "group 0" -q ; then
+    # if session with group 0 that is unattached does not exist
+    if first_unattached=$(tmux ls | grep "group 0" | grep -v "attached" -m 1 | grep "[0-9]*-[0-9]*" -o) ; then
         # attach to session 0 and spawn new window; close terminal after exiting tmux
-        tmux -f ~/.config/tmux/tmux.conf new-session -t0 \; new-window && exit
+        tmux -f ~/.config/tmux/tmux.conf attach -t"$first_unattached" \; new-window && exit
     else
         # if session 0 does not exist create it
-        tmux -f ~/.config/tmux/tmux.conf new-session -t0 && exit
+        tmux -f ~/.config/tmux/tmux.conf new-session -t0 \; new-window && exit
     fi
 fi
