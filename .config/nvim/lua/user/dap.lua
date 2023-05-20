@@ -88,6 +88,11 @@ dap.configurations.python = {
   },
 }
 
+dap.adapters.haskell = {
+  type = 'executable';
+  command = 'haskell-debug-adapter';
+  args = {'--hackage-version=0.0.33.0'};
+}
 dap.configurations.haskell = {
   {
     type = 'haskell',
@@ -101,12 +106,9 @@ dap.configurations.haskell = {
     ghciEnv = vim.empty_dict(),
     ghciPrompt = "λ: ",
     -- Adjust the prompt to the prompt you see when you invoke the stack ghci command below 
-    ghciInitialPrompt = "λ: ",
-    ghciCmd= "stack ghci --test --no-load --no-build --main-is TARGET --ghci-options -fprint-evld-with-show",
+    ghciInitialPrompt = "ghci> ",
+    ghciCmd= "stack ghci --test --no-load --no-build --main-is TARGET --ghci-options -fprint-evld-with-show +RTS -xm4G -RTS",
   },
 }
-dap.adapters.haskell = {
-  type = 'executable';
-  command = 'haskell-debug-adapter';
-  args = {'--hackage-version=0.0.33.0'};
-}
+dap.repl.commands = { "dap-repl" }
+

@@ -44,7 +44,7 @@ require("lazy").setup({
         opts = {
             use_default_keymaps = false,-- (<space>m - toggle, <space>j - join, <space>s - split)
             check_syntax_error = true,
-            max_join_length = 500,
+            max_join_length = 5000,
             cursor_behavior = "hold",
             notify = true,
             langs = {--[[ configuration for languages ]]},
@@ -413,6 +413,8 @@ require("lazy").setup({
     },
 
     { "mrcjkb/haskell-tools.nvim",
+        lazy = false,
+        opts = {},
         dependencies = {
              'nvim-lua/plenary.nvim',
              'nvim-telescope/telescope.nvim',
