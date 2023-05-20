@@ -376,6 +376,38 @@ require("lazy").setup({
         end,
         lazy = true,
     },
+
+    {
+        "jose-elias-alvarez/null-ls.nvim",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        config = function ()
+            local null_ls = require("null-ls")
+            null_ls.setup({
+                debug = true,
+                sources = {
+                    null_ls.builtins.formatting.stylua,
+                    null_ls.builtins.diagnostics.eslint_d,
+                    -- null_ls.builtins.diagnostics.shellcheck,
+                },
+            })
+        end,
+        lazy = false,
+    },
+
+    {
+        "jay-babu/mason-null-ls.nvim",
+        event = { "BufReadPre", "BufNewFile" },
+        dependencies = {
+            "williamboman/mason.nvim",
+            "jose-elias-alvarez/null-ls.nvim",
+        },
+        opts = {
+            ensure_installed = {},
+            automatic_setup = true,
+            handlers = {},
+        },
+    },
+
     { "folke/neodev.nvim",
         opts = {}
     },
