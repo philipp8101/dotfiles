@@ -16,7 +16,7 @@ tmux_running=$(pgrep tmux)
 
 # if already open in other terminal, focus that terminal
 
-~/.scripts/i3/navigate-to-window.py "$selected_name" && exit 0
+~/.scripts/i3/navigate-to-window.py "$selected_name:" "Alacritty" && exit 0
 
 if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
     tmux new-session -s $selected_name -c $selected
