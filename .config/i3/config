@@ -138,7 +138,7 @@ bindsym $mod+c split v
 bindsym $mod+Shift+m floating toggle
 bindsym $mod+m focus mode_toggle
 bindsym $mod+less focus parent
-bindsym $mod+Tab workspace back_and_forth
+bindsym $mod+Tab exec ~/.scripts/i3/focus-last-workspace-on-output.py
 bindsym	$mod+Control+z move workspace to output left
 bindsym $mod+Control+x move workspace to output right
 bindsym $mod+Control+m reload
@@ -147,6 +147,8 @@ bindsym $mod+z workspace prev_on_output
 bindsym $mod+x workspace next_on_output
 bindsym $mod+Shift+z exec ~/.scripts/i3/move_to_next_workspace.py
 bindsym $mod+Shift+x exec ~/.scripts/i3/move_and_switch_to_next_workspace.py
+bindsym $mod+$alt+a move container to workspace prev_on_output
+bindsym $mod+$alt+t move container to workspace next_on_output
 
 ##########################
 
@@ -375,27 +377,14 @@ bindsym $mod+e exec rofi -show calc -modi calc -no-show-match -no-sort
 #exec_always "~/.config/i3/i3scripts/autoname_workspaces.py &"
 
 # pyhton i3ipc
-# - unmark insert on workspace switch
-exec ~/.scripts/i3/unmark-on-workspace-switch.py
+exec ~/.scripts/i3/event-listener.py
+
 #exec_always autotiling
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-
-
-
-
-
-
-
-# auto layout script
-#exec ~/.scripts/i3/auto-workspace-layout.py
-
-
-
-
 
 # workspace with mode selection
 mode ws {
