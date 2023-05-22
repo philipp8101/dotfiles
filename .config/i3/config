@@ -149,6 +149,10 @@ bindsym $mod+Shift+z exec ~/.scripts/i3/move_to_next_workspace.py
 bindsym $mod+Shift+x exec ~/.scripts/i3/move_and_switch_to_next_workspace.py
 bindsym $mod+$alt+a move container to workspace prev_on_output
 bindsym $mod+$alt+t move container to workspace next_on_output
+# custom rofi scripts, provide i3 commands separated by ´-´ in the mode variable
+bindsym $mod+n exec mode=workspace rofi -show "go to workspace" -modes "go to workspace:~/.scripts/i3/rofi-menu.py" -theme round
+bindsym $mod+e exec mode="move container to workspace" rofi -show "move container to workspace" -modes "move container to workspace:~/.scripts/i3/rofi-menu.py" -theme round
+bindsym $mod+o exec mode="move container to workspace - workspace" rofi -show "move container and go to workspace" -modes "move container and go to workspace:~/.scripts/i3/rofi-menu.py" -theme round
 
 ##########################
 
@@ -371,7 +375,7 @@ exec setxkbmap -option caps:none
 # start rofi file-browser
 #bindsym $mod+c exec rofi -show file-browser
 #bindsym $mod+c exec rofi -show file-browser -file-browser-open-multi-key kb-accept-alt
-bindsym $mod+e exec rofi -show calc -modi calc -no-show-match -no-sort
+bindsym $mod+u exec rofi -show calc -modi calc -no-show-match -no-sort
 
 # auto rename workspace script NOT WORKING
 #exec_always "~/.config/i3/i3scripts/autoname_workspaces.py &"
