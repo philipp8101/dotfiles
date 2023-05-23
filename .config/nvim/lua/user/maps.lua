@@ -32,7 +32,7 @@ keymap("n", "<leader>n", ":lua require(\"harpoon.ui\").nav_file(1) <CR>zz", opts
 keymap("n", "<leader>e", ":lua require(\"harpoon.ui\").nav_file(2) <CR>zz", opts, "Navigate to the second pinned file with harpoon")
 keymap("n", "<leader>o", ":lua require(\"harpoon.ui\").nav_file(3) <CR>zz", opts, "Navigate to the third pinned file with harpoon")
 keymap("n", "<leader>i", ":lua require(\"harpoon.ui\").nav_file(4) <CR>zz", opts, "Navigate to the fourth pinned file with harpoon")
-keymap("n", "<leader>x", ":Ex <CR>", opts, "Open File Browser (netrw)")
+keymap("n", "<leader>x", ":Neotree <CR>", opts, "Open File Browser")
 keymap("n", "<leader>u", ":lua require('undotree').toggle() <CR>", opts, "Open undotree")
 
 keymap("n", "<leader>dd", ":lua require('dapui').toggle() <CR>", opts, "open debugger ui")

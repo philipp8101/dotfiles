@@ -39,6 +39,29 @@ require("lazy").setup({
     { "nvim-lua/popup.nvim" }, -- An implementation of the Popup API from vim in Neovim
     { "nvim-lua/plenary.nvim" }, -- Useful lua functions used ny lots of plugins
 
+    { "nvim-neo-tree/neo-tree.nvim",
+        dependencies = { "MunifTanjim/nui.nvim" },
+        lazy = false,
+        opts = {
+            window = {
+                mappings = {
+                    ["n"] = "close_node",
+                    ["e"] = "none",
+                    ["o"] = "none",
+                    ["i"] = "open",
+                }
+            },
+            event_handlers = {
+                {
+                    event = "file_opened",
+                    handler = function(file_path)
+                        require("neo-tree").close_all()
+                    end,
+                }
+            }
+        },
+    },
+
     { "Wansmer/treesj",
         dependencies = { "nvim-treesitter" },
         opts = {
