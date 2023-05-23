@@ -15,7 +15,7 @@
 
 # # start a applications
 # bindsym $mod+Return exec "alacritty"
-# bindsym $mod+Shift+Return exec "~/.scripts/i3/next_empty_workspace.py ; alacritty"
+# bindsym $mod+Shift+Return exec "~/.config/i3/scripts/next_empty_workspace.py ; alacritty"
 # bindsym $mod+c exec "cutefish-calculator" 
 #
 # # screenshot
@@ -27,7 +27,7 @@
 #
 # # start rofi
 # bindsym $mod+i exec rofi -show drun -theme round
-# bindsym $mod+Shift+i exec "~/.scripts/i3/next_empty_workspace.py ; rofi -show drun -theme round"
+# bindsym $mod+Shift+i exec "~/.config/i3/scripts/next_empty_workspace.py ; rofi -show drun -theme round"
 # #bindsym $mod+x exec rofi -show window -theme transparent
 #
 # # change focus
@@ -87,8 +87,8 @@
 # bindsym $mod+Control+q move workspace to output right
 #
 # # swap workspace on ouputs
-# #bindsym $mod+Control+Shift+y exec ~/.scripts/i3/swap-output.py left
-# #bindsym $mod+Control+Shift+x exec ~/.scripts/i3/swap-output.py right
+# #bindsym $mod+Control+Shift+y exec ~/.config/i3/scripts/swap-output.py left
+# #bindsym $mod+Control+Shift+x exec ~/.config/i3/scripts/swap-output.py right
 #
 # # reload the configuration file
 # bindsym $mod+Control+j reload
@@ -102,20 +102,20 @@
 # bindsym $mod+minus workspace prev_on_output
 # bindsym $mod+q workspace next_on_output
 #
-# bindsym $mod+Shift+minus exec ~/.scripts/i3/move_to_next_workspace.py
-# bindsym $mod+Shift+q exec ~/.scripts/i3/move_and_switch_to_next_workspace.py
+# bindsym $mod+Shift+minus exec ~/.config/i3/scripts/move_to_next_workspace.py
+# bindsym $mod+Shift+q exec ~/.config/i3/scripts/move_and_switch_to_next_workspace.py
 #
 #-------------------------
 
 # Workman
 
 bindsym $mod+Return exec "alacritty"
-bindsym $mod+Shift+Return exec "~/.scripts/i3/next_empty_workspace.py ; alacritty"
+bindsym $mod+Shift+Return exec "~/.config/i3/scripts/next_empty_workspace.py ; alacritty"
 bindsym $mod+Shift+less exec flameshot gui
 bindsym $mod+q kill
 bindsym --release button2 kill
 bindsym $mod+g exec rofi -show drun -theme round
-bindsym $mod+Shift+g exec "~/.scripts/i3/next_empty_workspace.py ; rofi -show drun -theme round"
+bindsym $mod+Shift+g exec "~/.config/i3/scripts/next_empty_workspace.py ; rofi -show drun -theme round"
 bindsym $mod+Shift+r exec rofi -show power-menu -modi power-menu:~/.config/rofi/rofi-power-menu -theme round 
 bindsym $mod+a focus left
 bindsym $mod+s focus down
@@ -138,21 +138,21 @@ bindsym $mod+c split v
 bindsym $mod+Shift+m floating toggle
 bindsym $mod+m focus mode_toggle
 bindsym $mod+less focus parent
-bindsym $mod+Tab exec ~/.scripts/i3/focus-last-workspace-on-output.py
+bindsym $mod+Tab exec ~/.config/i3/scripts/focus-last-workspace-on-output.py
 bindsym	$mod+Control+z move workspace to output left
 bindsym $mod+Control+x move workspace to output right
 bindsym $mod+Control+m reload
 bindsym $mod+Shift+w restart
 bindsym $mod+z workspace prev_on_output
 bindsym $mod+x workspace next_on_output
-bindsym $mod+Shift+z exec ~/.scripts/i3/move_to_next_workspace.py
-bindsym $mod+Shift+x exec ~/.scripts/i3/move_and_switch_to_next_workspace.py
+bindsym $mod+Shift+z exec ~/.config/i3/scripts/move_to_next_workspace.py
+bindsym $mod+Shift+x exec ~/.config/i3/scripts/move_and_switch_to_next_workspace.py
 bindsym $mod+$alt+a move container to workspace prev_on_output
 bindsym $mod+$alt+t move container to workspace next_on_output
 # custom rofi scripts, provide i3 commands separated by ´-´ in the mode variable
-bindsym $mod+n exec mode=workspace rofi -show "go to workspace" -modes "go to workspace:~/.scripts/i3/rofi-menu.py" -theme round
-bindsym $mod+e exec mode="move container to workspace" rofi -show "move container to workspace" -modes "move container to workspace:~/.scripts/i3/rofi-menu.py" -theme round
-bindsym $mod+o exec mode="move container to workspace - workspace" rofi -show "move container and go to workspace" -modes "move container and go to workspace:~/.scripts/i3/rofi-menu.py" -theme round
+bindsym $mod+n exec mode=workspace rofi -show "go to workspace" -modes "go to workspace:~/.config/i3/scripts/rofi-menu.py" -theme round
+bindsym $mod+e exec mode="move container to workspace" rofi -show "move container to workspace" -modes "move container to workspace:~/.config/i3/scripts/rofi-menu.py" -theme round
+bindsym $mod+o exec mode="move container to workspace - workspace" rofi -show "move container and go to workspace" -modes "move container and go to workspace:~/.config/i3/scripts/rofi-menu.py" -theme round
 
 ##########################
 
@@ -381,7 +381,7 @@ bindsym $mod+u exec rofi -show calc -modi calc -no-show-match -no-sort
 #exec_always "~/.config/i3/i3scripts/autoname_workspaces.py &"
 
 # pyhton i3ipc
-exec ~/.scripts/i3/event-listener.py
+exec ~/.config/i3/scripts/event-listener.py
 
 #exec_always autotiling
 
