@@ -235,13 +235,25 @@ require("lazy").setup({
     { "tpope/vim-dispatch" },
     { "tpope/vim-fugitive" },
 
-    { "SmiteshP/nvim-navbuddy",
-        dependencies = {
-            "neovim/nvim-lspconfig",
-            "SmiteshP/nvim-navic",
-            "MunifTanjim/nui.nvim",
-        },
-        opts = { lsp = { auto_attach = true } }
+    {
+        "SmiteshP/nvim-navbuddy",
+        lazy = false,
+        dependencies = { "neovim/nvim-lspconfig", "SmiteshP/nvim-navic", "MunifTanjim/nui.nvim", },
+        config = function()
+            local navbuddy = require("nvim-navbuddy")
+            local actions = require("nvim-navbuddy.actions")
+            navbuddy.setup({
+                mappings = {
+                    ["n"] = actions.parent(),           -- Move to left panel
+                    ["e"] = actions.next_sibling(),     -- down
+                    ["o"] = actions.previous_sibling(), -- up
+                    ["i"] = actions.children(),         -- Move to right panel
+                },
+                lsp = {
+                    auto_attach = true,
+                },
+            })
+        end,
     },
 
     { "iamcco/markdown-preview.nvim",
