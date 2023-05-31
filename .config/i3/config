@@ -154,6 +154,9 @@ bindsym $mod+$alt+t move container to workspace next_on_output
 bindsym $mod+n exec mode=workspace rofi -show "go to workspace" -modes "go to workspace:~/.config/i3/scripts/rofi-menu.py" -theme round
 bindsym $mod+e exec mode="move container to workspace" rofi -show "move container to workspace" -modes "move container to workspace:~/.config/i3/scripts/rofi-menu.py" -theme round
 bindsym $mod+o exec mode="move container to workspace - workspace" rofi -show "move container and go to workspace" -modes "move container and go to workspace:~/.config/i3/scripts/rofi-menu.py" -theme round
+bindsym $mod+Shift+n exec i3-input -F "workspace %s" -P "go to workspace: "
+bindsym $mod+Shift+e exec i3-input -F "move container to workspace %s" -P "move container to workspace: "
+bindsym $mod+Shift+o exec i3-input -F "move container to workspace %s ; workspace %s" -P "move container and go to workspace: "
 
 ##########################
 
