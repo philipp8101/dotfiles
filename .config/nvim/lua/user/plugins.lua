@@ -448,7 +448,8 @@ require("lazy").setup({
                 debug = true,
                 sources = {
                     null_ls.builtins.formatting.stylua,
-                    null_ls.builtins.diagnostics.eslint_d,
+                    null_ls.builtins.formatting.prettier,
+                    null_ls.builtins.code_actions.refactoring,
                     -- null_ls.builtins.diagnostics.shellcheck,
                 },
             })
@@ -457,8 +458,35 @@ require("lazy").setup({
     },
 
     {
+        "adalessa/laravel.nvim",
+        dependencies = {
+            "nvim-telescope/telescope.nvim",
+            "tpope/vim-dotenv",
+            "MunifTanjim/nui.nvim",
+        },
+        cmd = { "Sail", "Artisan", "Composer", "Npm", "Yarn", "Laravel" },
+        keys = {
+            { "<leader>ka", ":Laravel artisan<cr>" },
+            { "<leader>kr", ":Laravel routes<cr>" },
+            {
+                "<leader>kt",
+                function()
+                    require("laravel.tinker").send_to_tinker()
+                end,
+                mode = "v",
+                desc = "Laravel Application Routes",
+            },
+        },
+        event = { "VeryLazy" },
+        config = function()
+            require("laravel").setup()
+            require("telescope").load_extension "laravel"
+        end,
+    },
+
+    {
         "jay-babu/mason-null-ls.nvim",
-        event = { "BufReadPre", "BufNewFile" },
+        lazy = false,
         dependencies = {
             "williamboman/mason.nvim",
             "jose-elias-alvarez/null-ls.nvim",

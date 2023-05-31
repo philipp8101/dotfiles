@@ -42,6 +42,7 @@ keymap("n", "<leader>du", ":DapStepOut <CR>", opts, "debugger step out")
 keymap("n", "<leader>dt", ":DapToggleBreakpoint <CR>", opts, "debugger toggle breakpoint")
 keymap("n", "<leader>dc", ":DapContinue <CR>", opts, "debugger continue")
 keymap("n", "<leader>ds", ":DapTerminate <CR> <bar> lua require('dapui').close() <CR>", opts, "debugger stop")
+keymap("n", "<leader>de",":lua require('dapui').eval() <CR>", opts, "debugger stop")
 
 keymap("n", "gs", ":TSJSplit <CR>", opts, "split a block of code, such as arrays or arguments, in multiple lines" )
 keymap("n", "gj", ":TSJJoin <CR>", opts, "consolidate a block of code, such as arrays or arguments, into a single line")
@@ -57,8 +58,10 @@ keymap("n", "<leader>g", ":Telescope live_grep <CR>", opts, "search project with
 keymap("n", "<leader>F", ":Telescope git_files <CR>", opts, "search git files")
 keymap("n", "<leader>b", ":Telescope git_branches <CR>", opts, "search git branches")
 keymap("n", "<leader>B", ":Telescope git_commits <CR>", opts, "search git branches")
+keymap("n", "<leader>N", ":Telescope buffers <CR>", opts, "search git branches")
 
 keymap("n", "<leader>t", ":Gedit: <CR>", opts, "open fugitive")
+keymap("n", "<leader>ac", ":Git commit <CR>", opts, "open fugitive")
 keymap("n", "<leader>h", ":Navbuddy <CR>", opts, "open Navbuddy")
 keymap("n", "<leader>H", ":Trouble <CR>", opts, "open Trouble")
 
