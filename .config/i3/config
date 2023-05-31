@@ -112,6 +112,7 @@
 bindsym $mod+Return exec "alacritty"
 bindsym $mod+Shift+Return exec "~/.config/i3/scripts/next_empty_workspace.py ; alacritty"
 bindsym $mod+Shift+less exec flameshot gui
+bindsym $mod+Control+less exec flameshot gui --raw | tesseract stdin stdout -l eng | xclip -in -selection clipboard
 bindsym $mod+q kill
 bindsym --release button2 kill
 bindsym $mod+g exec rofi -show drun -theme round
