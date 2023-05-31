@@ -60,6 +60,7 @@ keymap("n", "<leader>B", ":Telescope git_commits <CR>", opts, "search git branch
 
 keymap("n", "<leader>t", ":Gedit: <CR>", opts, "open fugitive")
 keymap("n", "<leader>h", ":Navbuddy <CR>", opts, "open Navbuddy")
+keymap("n", "<leader>H", ":Trouble <CR>", opts, "open Trouble")
 
 keymap("n", "<leader>y", "\"+y", opts, "yank to system clipboard")
 keymap("v", "<leader>y", "\"+y", opts, "yank to system clipboard")
