@@ -216,7 +216,8 @@ require("lazy").setup({
                         vim.schedule(function() gs.prev_hunk() end)
                         return "<Ignore>"
                     end, {expr=true})
-                    vim.keymap.set({"n", "v"}, "<leader>as", gs.stage_hunk, {desc = "stage hunk"})
+                    vim.keymap.set("n", "<leader>as", gs.stage_hunk, {desc = "stage hunk"})
+                    vim.keymap.set("v", "<leader>as", ":Gitsigns stage_hunk <CR>", {desc = "stage hunk"})
                     vim.keymap.set({"n", "v"}, "<leader>ar", gs.reset_hunk, {desc = "reset hunk"})
                     vim.keymap.set("n", "<leader>aS", gs.stage_buffer, {desc = "stage buffer"})
                     vim.keymap.set("n", "<leader>au", gs.undo_stage_hunk, {desc = "undo stage hunk"})
