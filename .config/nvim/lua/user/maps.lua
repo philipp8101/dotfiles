@@ -70,9 +70,6 @@ keymap("v", "<leader>y", "\"+y", opts, "yank to system clipboard")
 keymap("n", "<leader>p", "\"+p", opts, "paste to system clipboard")
 keymap("v", "<leader>p", "\"+p", opts, "paste to system clipboard")
 
-keymap("n", "<leader>P", ":lua require'telescope'.extensions.projects.projects{}<CR>", opts, "browse projects")
-keymap("n", "<leader>S", ":lua SwitchHeader()", opts, "switch between cpp header and main")
-
 keymap("n", "<C-n>", ":ene<CR>", opts, "open new buffer")
 keymap("n", "gn", ":bn<CR>", opts, "go to next buffer")
 keymap("n", "gp", ":bp<CR>", opts, "go to previous buffer")
@@ -97,17 +94,3 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.keymap.set("n", "<leader>rf", '<cmd>lua vim.lsp.buf.format({ filter = function(client) return client.name == "null-ls" end})<CR>', opts)
     end,
 })
-
-function SwitchHeader()
-    local file = vim.api.nvim_buf_get_name(0)
-    local lookup = {}
-    lookup["cpp"] = "hpp"
-    lookup["hpp"] = "cpp"
-    lookup["c"] = "h"
-    lookup["h"] = "c"
-    local type = string.match(file, "%a+$")
-    local fileToOpen , _ =string.gsub(file, "%a+$", lookup[type])
-    if (lookup[type] ~= nil) then
-        vim.cmd(":e "..fileToOpen)
-    end
-end
