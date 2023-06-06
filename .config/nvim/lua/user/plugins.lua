@@ -49,6 +49,8 @@ require("lazy").setup({
                     ["e"] = "none",
                     ["o"] = "none",
                     ["i"] = "open",
+                    ["<leader>as"] = "git_add_file",
+                    ["<leader>au"] = "git_unstage_file",
                 }
             },
             event_handlers = {
