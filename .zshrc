@@ -1,5 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 export PATH=$PATH:$HOME/.scripts/:$GOPATH/bin/:$HOME/.local/bin/
+export XDG_CONFIG_HOME=$HOME/.config
 export XKB_CONFIG_ROOT=$XDG_CONFIG_HOME/xkb
 
 # Path to your oh-my-zsh installation.
