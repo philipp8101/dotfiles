@@ -2,7 +2,11 @@
 export PATH=$PATH:$HOME/.scripts/:$GOPATH/bin/:$HOME/.local/bin/
 export XDG_CONFIG_HOME=$HOME/.config
 export XKB_CONFIG_ROOT=$XDG_CONFIG_HOME/xkb
-eval $(ssh-agent) > /dev/null
+
+export SSH_AUTH_SOCK=~/.ssh/ssh-agent.sock
+if [ ! -e $SSH_AUTH_SOCK ]; then
+  ssh-agent -a "$SSH_AUTH_SOCK" >/dev/null
+fi
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
