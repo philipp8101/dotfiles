@@ -548,8 +548,6 @@ require("lazy").setup({
                     "--line-number",
                     "--column",
                     "--smart-case",
-                    "--ignore-file",
-                    ".gitignore"
                 },
             }
         }
