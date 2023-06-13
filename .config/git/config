@@ -7,3 +7,6 @@
 	name = Philipp Conrad
 [alias]
 	graph = log --all --decorate --oneline --graph
+    nb = "!f() { git checkout -b \"$1\"; }; f"
+[push]
+	autoSetupRemote = true
