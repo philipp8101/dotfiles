@@ -4,7 +4,11 @@
     "position": "top", 
     "modules-left": ["wlr/workspaces"],
     "modules-center": ["clock"],
-    "modules-right": ["network", "pulseaudio", "battery"],
+    "modules-right": ["cpu", "memory", "network", "pulseaudio", "battery", "tray"],
+    "tray": {
+    "icon-size": 21,
+    "spacing": 10
+    },
     // Modules configuration
 	"sway/workspaces": {
 		"disable-scroll": true,
@@ -47,9 +51,19 @@
         	"format-icons": ["", "", "", "", ""],
             "tooltip-format": "{time}"
 	},
+    "cpu": {
+        "interval": 1,
+        "format": "{}%",
+        "max-length": 10
+    },
+    "memory": {
+        "interval": 1,
+        "format": "{}%",
+        "max-length": 10
+    },
 	"network": {
         "format-wifi": "<span size='13000' foreground='#F2CECF'> </span>{essid}",
-        "format-ethernet": "<span size='13000' foreground='#F2CECF'>󰤭</span> Disconnected",
+        "format-ethernet": "<span size='13000' foreground='#F2CECF'>󱊪 </span>{ipaddr}",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "<span size='13000' foreground='#F2CECF'> </span>Disconnected",
 		"tooltip-format-wifi": "Signal Strenght: {signalStrength}%",
