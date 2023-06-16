@@ -43,6 +43,7 @@ require("lazy").setup({
         dependencies = { "MunifTanjim/nui.nvim" },
         lazy = false,
         opts = {
+            popup_border_style = "rounded",
             window = {
                 mappings = {
                     ["n"] = "close_node",
