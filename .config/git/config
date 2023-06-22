@@ -2,6 +2,7 @@
 	helper = store
 [core]
 	editor = nvim
+	pager = less -F
 [user]
 	email = philipp8101@gmail.com
 	name = Philipp Conrad
