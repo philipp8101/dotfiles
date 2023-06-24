@@ -129,7 +129,7 @@ export LC_ALL=en_US.UTF-8
 
 export ZSH_EXEC=$(which zsh)
 # if tmux exists and not already in tmux session
-if command -v tmux &> /dev/null && [[ -z "${TMUX}" ]] ; then
+if command -v tmux &> /dev/null && [[ -z "${TMUX}" ]] && [[ -z "${SSH_CONNECTION}" ]]; then
     # if session with group 0 that is unattached does not exist
     if first_unattached=$(tmux ls | grep "group 0" | grep -v "attached" -m 1 | grep "[0-9]*-[0-9]*" -o) ; then
         # attach to session 0 and spawn new window; close terminal after exiting tmux
