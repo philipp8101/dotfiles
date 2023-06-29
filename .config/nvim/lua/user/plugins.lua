@@ -318,6 +318,7 @@ require("lazy").setup({
     },
 
     { "nvim-tree/nvim-web-devicons" }, -- icons
+    { "norcalli/nvim-colorizer.lua" },
 
     { "lukas-reineke/indent-blankline.nvim",
         opts = {
