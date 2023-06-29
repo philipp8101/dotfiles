@@ -65,7 +65,7 @@ keymap("n", "<leader>ac", ":Git commit <CR>", opts, "open fugitive")
 keymap("n", "<leader>h", ":Navbuddy <CR>", opts, "open Navbuddy")
 keymap("n", "<leader>H", ":Trouble <CR>", opts, "open Trouble")
 keymap("n", "<leader>s", "<Plug>(leap-forward-to)", opts, "leap forwards")
-keymap("n", "<leader>s", "<Plug>(leap-backward-to)", opts, "leap backwards")
+keymap("n", "<leader>S", "<Plug>(leap-backward-to)", opts, "leap backwards")
 
 keymap("n", "<leader>y", "\"+y", opts, "yank to system clipboard")
 keymap("v", "<leader>y", "\"+y", opts, "yank to system clipboard")
