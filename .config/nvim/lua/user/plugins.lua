@@ -330,6 +330,34 @@ require("lazy").setup({
         }
     },
 
+    {
+        'nvim-neotest/neotest',
+        dependencies = {
+            'theutz/neotest-pest',
+        },
+        config = function()
+            require('neotest').setup({
+                adapters = {
+                    require('neotest-pest')({
+                        pest_cmd = function()
+                            return "./run-test.sh"
+                        end
+                    }),
+                }
+            })
+        end
+    },
+
+    {
+        "andythigpen/nvim-coverage",
+        dependencies = "nvim-lua/plenary.nvim",
+        -- Optional: needed for PHP when using the cobertura parser
+        -- rocks = { 'lua-xmlreader' },
+        config = function()
+            require("coverage").setup()
+        end,
+    },
+
     -- cmp plugins
     { "hrsh7th/nvim-cmp" }, -- The completion plugin
     { "hrsh7th/cmp-buffer" }, -- buffer completions
