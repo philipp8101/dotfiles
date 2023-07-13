@@ -266,6 +266,7 @@ require("lazy").setup({
     { "tpope/vim-dispatch" },
     { "tpope/vim-repeat" },
     { "tpope/vim-fugitive" },
+    { "tpope/vim-rhubarb" },
     { "ggandor/leap.nvim" },
     {
         "SmiteshP/nvim-navbuddy",
