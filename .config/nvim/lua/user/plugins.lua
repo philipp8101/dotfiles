@@ -297,9 +297,9 @@ require("lazy").setup({
     },
 
     { "iamcco/markdown-preview.nvim",
-	    build = "cd app && npm install",
-	    config = function() vim.g.mkdp_filetypes = { "markdown" } end,
-	    ft = "markdown",
+        build = "cd app && npm install",
+        config = function() vim.g.mkdp_filetypes = { "markdown" } end,
+        ft = "markdown",
     },
 
     -- Colorschemes
@@ -368,7 +368,7 @@ require("lazy").setup({
 
     -- snippets
     { "L3MON4D3/LuaSnip",
-    	opts = {
+        opts = {
             history = true,
             region_check_events = "InsertEnter",
             delete_check_events = "TextChanged,InsertLeave"
