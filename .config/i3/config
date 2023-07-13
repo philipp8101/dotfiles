@@ -380,6 +380,7 @@ exec setxkbmap -option caps:none
 #bindsym $mod+c exec rofi -show file-browser
 #bindsym $mod+c exec rofi -show file-browser -file-browser-open-multi-key kb-accept-alt
 bindsym $mod+u exec rofi -show calc -modi calc -no-show-match -no-sort
+bindsym $mod+p exec rofi -show time -modi time:~/.config/rofi/rofi-scripts/time.py -theme round
 
 # auto rename workspace script NOT WORKING
 #exec_always "~/.config/i3/i3scripts/autoname_workspaces.py &"
