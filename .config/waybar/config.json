@@ -4,14 +4,14 @@
     "position": "top", 
     "modules-left": ["wlr/workspaces"],
     "modules-center": ["clock"],
-    "modules-right": ["cpu", "memory", "network", "pulseaudio", "battery", "tray"],
+    "modules-right": ["cpu", "memory", "network", "pulseaudio", "backlight", "battery", "tray"],
     "tray": {
     "icon-size": 21,
     "spacing": 10
     },
     // Modules configuration
 	"sway/workspaces": {
-		"disable-scroll": true,
+        "on-click": "activate",
 		"all-outputs": true,
 		"format": "{icon}",
 	 	"persistent_workspaces": {
@@ -82,4 +82,9 @@
             "default": ["", ""]
         },
     },
+    "backlight": {
+    "device": "intel_backlight",
+    "format": "{icon} {percent}%",
+    "format-icons": ["", ""]
+}
 }

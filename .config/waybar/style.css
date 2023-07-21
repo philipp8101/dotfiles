@@ -33,7 +33,7 @@ tooltip {
     color: #DADAE8;
 }
 
-#workspaces button.focused {
+#workspaces button.active {
     color: #A4B9EF;
 }
 
@@ -47,7 +47,7 @@ tooltip {
 	color: #A4B9EF;
 }
 
-#tray, #network, #cpu, #memory, #battery, #pulseaudio, #workspaces, #mpd  {
+#tray, #network, #cpu, #memory, #battery, #pulseaudio, #workspaces, #mpd, #backlight  {
 	padding-left: 8px;
 	padding-right: 8px;
     background: #332E41;
