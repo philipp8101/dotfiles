@@ -5,6 +5,7 @@ export XKB_CONFIG_ROOT=$XDG_CONFIG_HOME/xkb
 
 export SSH_AUTH_SOCK=~/.ssh/ssh-agent.sock
 if [ ! -e $SSH_AUTH_SOCK ]; then
+  rm "$SSH_AUTH_SOCK"
   ssh-agent -a "$SSH_AUTH_SOCK" >/dev/null
 fi
 
