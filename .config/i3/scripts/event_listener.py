@@ -1,5 +1,6 @@
-#!/usr/bin/env python3
+#!/usr/bin/python
 
+import signal
 from i3ipc import Connection, Event
 i3 = Connection()
 
@@ -18,6 +19,17 @@ def find_screeen_of_worksapce(target):
             result = i.find_by_id(target.id) 
             if result:
                 return i.name
+
+
+def signal_handler(signal, frame):
+    print(f"Received signal: {signal}")
+
+for sig in signal.Signals:
+    try:
+        signal.signal(sig, signal_handler)
+        print(f"Signal handler set for {sig.name}")
+    except Exception as e:
+        print(f"Skipping signal {sig.name} (not supported)")
 
 
 i3.main()
