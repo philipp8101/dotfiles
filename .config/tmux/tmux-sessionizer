@@ -25,7 +25,7 @@ fi
 
 if ! tmux has-session -t=$selected_name 2> /dev/null; then
     # new-session [options] [shell-command]   shell-command will not execute in the shell, but REPLACE the shell
-    tmux new-session -ds $selected_name -c "$selected" "nvim; $SHELL" \; new-window -t $selected_name -c "$selected"
+    tmux new-session -ds $selected_name -c "$selected"
     selected_name="$selected_name:1"
 fi
 tmux switch-client -t $selected_name
