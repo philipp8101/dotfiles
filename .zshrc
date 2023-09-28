@@ -4,9 +4,13 @@ export XDG_CONFIG_HOME=$HOME/.config
 export XKB_CONFIG_ROOT=$XDG_CONFIG_HOME/xkb
 
 export SSH_AUTH_SOCK=~/.ssh/ssh-agent.sock
+if [ -e $SSH_AUTH_SOCK ]; then
+  if [ ! $(pgrep ssh-agent) ]; then
+    rm "$SSH_AUTH_SOCK"
+  fi
+fi
 if [ ! -e $SSH_AUTH_SOCK ]; then
-  rm "$SSH_AUTH_SOCK"
-  ssh-agent -a "$SSH_AUTH_SOCK" >/dev/null && disown
+  ssh-agent -a "$SSH_AUTH_SOCK" >/dev/null
 fi
 
 # Path to your oh-my-zsh installation.
