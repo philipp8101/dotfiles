@@ -366,6 +366,21 @@ require("lazy").setup({
     { "saadparwaiz1/cmp_luasnip" }, -- snippet completions
     { "hrsh7th/cmp-nvim-lsp" },
 
+    -- db browser
+    { "tpope/vim-dadbod" },
+    { "kristijanhusak/vim-dadbod-ui" },
+    {
+        "kristijanhusak/vim-dadbod-completion",
+        config = function()
+            vim.api.nvim_create_autocmd({"FileType"}, {
+                pattern={"sql","mysql","plsql"},
+                callback = function()
+                    require('cmp').setup.buffer({ sources = {{ name = 'vim-dadbod-completion' }} })
+                end,
+            })
+        end
+    },
+
     -- snippets
     { "L3MON4D3/LuaSnip",
         opts = {
