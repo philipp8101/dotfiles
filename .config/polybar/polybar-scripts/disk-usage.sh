@@ -21,8 +21,8 @@
 #out=$(expr \( $counter + 1 \) % 3)
 #echo $out > $file
 #echo "%{F#6e738d}/%{F-}: $root %{F#6e738d}/data%{F-}: $data %{F#6e738d}/games%{F-}: $games"
-a=$(zpool status |awk '{if($1 ~ /tank/){print $2}}')
-b=$(zpool iostat | awk '{if($1 ~ /tank/){print "%{F#6e738d}free:%{F-}" $3 }}') #" %{F#6e738d}read:%{F-}" $6 " %{F#6e738d}write:%{F-}" $7 }}')
+a=$(sudo zpool status |awk '{if($1 ~ /tank/){print $2}}')
+b=$(sudo zpool iostat | awk '{if($1 ~ /tank/){print "%{F#6e738d}free:%{F-}" $3 }}') #" %{F#6e738d}read:%{F-}" $6 " %{F#6e738d}write:%{F-}" $7 }}')
 if [[ $a -eq "ONLINE" ]] ; then
 	echo -n "%{F#6e738d}status:%{F-}"$a $b;
 else
