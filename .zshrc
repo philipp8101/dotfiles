@@ -141,6 +141,6 @@ if command -v tmux &> /dev/null && [[ -z "${TMUX}" ]] && [[ -z "${SSH_CONNECTION
         tmux -f ~/.config/tmux/tmux.conf attach -t"$first_unattached" \; new-window && exit
     else
         # if session 0 does not exist create it
-        tmux -f ~/.config/tmux/tmux.conf new-session -t0 \; new-window && exit
+        tmux -f ~/.config/tmux/tmux.conf new-session -t0 && exit
     fi
 fi
