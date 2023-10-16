@@ -77,6 +77,9 @@ keymap("n", "gn", ":bn<CR>", opts, "go to next buffer")
 keymap("n", "gp", ":bp<CR>", opts, "go to previous buffer")
 keymap("n", "<esc>", ":noh<CR>", opts)
 
+keymap("n", "<C-l>", "<cmd>lnext<CR>", opts)
+keymap("n", "<C-h>", "<cmd>lprev<CR>", opts)
+
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("UserLspConfig", {}),
     callback = function(ev)

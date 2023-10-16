@@ -581,10 +581,12 @@ require("lazy").setup({
 
     {
         "psiska/telescope-hoogle.nvim",
+        ft = "haskell",
         config = function()
             require("telescope").load_extension("hoogle")
         end,
     },
+    { "Civitasv/cmake-tools.nvim" },
 
     { "mfussenegger/nvim-jdtls" },
 

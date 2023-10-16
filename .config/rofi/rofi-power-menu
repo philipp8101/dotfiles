@@ -45,7 +45,7 @@ declare -A actions
 actions[lockscreen]="/home/philipp/.scripts/lockscreen.sh"
 #actions[switchuser]="???"
 actions[logout]="loginctl terminate-session ${XDG_SESSION_ID-}"
-actions[suspend]="systemctl suspend"
+actions[suspend]="systemctl hybrid-sleep"
 actions[hibernate]="systemctl hibernate"
 actions[reboot]="systemctl reboot"
 actions[shutdown]="systemctl poweroff"

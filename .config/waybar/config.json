@@ -12,10 +12,11 @@
     // Modules configuration
 	"wlr/workspaces": {
         "on-click": "activate",
-		"all-outputs": false,
+        "on-scroll-up": "hyprctl dispatch workspace m-1",
+        "on-scroll-down": "hyprctl dispatch workspace m+1"
      },
 	"clock": {
-		"format": "<span foreground='#C6AAE8'> </span>{:%a %d %H:%M}",
+		"format": "<span foreground='#C6AAE8'> </span>{KW%V :%a %d %H:%M}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
 	},
 	"battery": {
@@ -29,7 +30,7 @@
 		    "format-charging": "<span size='13000' foreground='#B1E3AD'> </span>{capacity}%",
 		    "format-plugged": "<span size='13000' foreground='#B1E3AD'> </span>{capacity}%",
 		    "format-alt": "<span size='13000' foreground='#B1E3AD'>{icon}</span> {time}",
-		    "format-full": "<span size='13000' foreground='#B1E3AD'> </span>{capacity}%",
+		    "format-full": "<span size='13000' foreground='#B1E3AD'> </span>{capacity}%",
         	"format-icons": ["", "", "", "", ""],
             "tooltip-format": "{time}"
 	},
