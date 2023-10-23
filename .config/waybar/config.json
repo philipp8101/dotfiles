@@ -16,7 +16,7 @@
         "on-scroll-down": "hyprctl dispatch workspace m+1"
      },
 	"clock": {
-		"format": "<span foreground='#C6AAE8'> </span>{KW%V :%a %d %H:%M}",
+		"format": "<span foreground='#C6AAE8'> </span>{:KW%V %a %d %H:%M}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
 	},
 	"battery": {
