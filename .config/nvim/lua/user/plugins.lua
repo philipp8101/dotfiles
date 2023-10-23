@@ -127,7 +127,6 @@ require("lazy").setup({
                 prompt_align = "left",
                 insert_only = true,
                 start_in_insert = true,
-                anchor = "SW",
                 border = "rounded",
                 relative = "cursor",
                 prefer_width = 40,
@@ -166,7 +165,6 @@ require("lazy").setup({
                     min_height = 10,
                 },
                 builtin = {
-                    anchor = "NW",
                     border = "rounded",
                     relative = "editor",
                     buf_options = {},
@@ -323,12 +321,7 @@ require("lazy").setup({
     { "nvim-tree/nvim-web-devicons" }, -- icons
     { "norcalli/nvim-colorizer.lua" },
 
-    { "lukas-reineke/indent-blankline.nvim",
-        opts = {
-            show_current_context = true,
-            show_current_context_start = true,
-        }
-    },
+    { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
 
     {
         'nvim-neotest/neotest',
@@ -559,14 +552,6 @@ require("lazy").setup({
         opts = {}
     },
 
-    { "mrcjkb/haskell-tools.nvim",
-        lazy = false,
-        opts = {},
-        dependencies = {
-             'nvim-lua/plenary.nvim',
-             'nvim-telescope/telescope.nvim',
-         },
-    },
     { "neovimhaskell/haskell-vim",
         config = function()
             vim.g.haskell_enable_quantification = 1   -- to enable highlighting of `forall`
