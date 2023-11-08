@@ -6,7 +6,7 @@ export XDG_CONFIG_HOME=$HOME/.config
 
 export SSH_AUTH_SOCK=~/.ssh/ssh-agent.sock
 if [ -e $SSH_AUTH_SOCK ]; then
-  if [ ! $(pgrep ssh-agent) ]; then
+  if [[ ! $(pgrep ssh-agent) ]]; then
     rm "$SSH_AUTH_SOCK"
   fi
 fi
