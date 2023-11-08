@@ -160,6 +160,8 @@ bindsym $mod+Shift+o exec i3-input -F "move container to workspace %s ; workspac
 bindsym $mod+l exec mosquitto_pub -h 192.168.0.8 -t "desk/control-height" -u mosquitto -P Y3Gnwwo= -m "p1"
 bindsym $mod+comma exec mosquitto_pub -h 192.168.0.8 -t "desk/control-height" -u mosquitto -P Y3Gnwwo= -m "p2"
 bindsym $mod+period exec mosquitto_pub -h 192.168.0.8 -t "desk/control-height" -u mosquitto -P Y3Gnwwo= -m "p3"
+bindsym $mod+k gaps horizontal current set 5
+bindsym $mod+Shift+k gaps horizontal current set 250
 
 ##########################
 
@@ -362,7 +364,9 @@ assign [instance="^riot"] $wsL
 assign [title="^League"] $wsL
 assign [class="discord"] $wsD
 assign [class="Steam"] $wsS
+assign [class="steam"] $wsS
 assign [title="Steam"] $wsS
+assign [title="steam"] $wsS
 assign [instance="upc.exe"] $wsU
 assign [instance="anno*"] $wsU
 assign [instance="origin.exe"] $wsO
