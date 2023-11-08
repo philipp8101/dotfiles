@@ -97,6 +97,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.keymap.set("n", "<leader>rh", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
         -- vim.keymap.set("n", "gl", '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>', opts)
         vim.keymap.set("n", "<leader>rl", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
-        vim.keymap.set("n", "<leader>rf", '<cmd>lua vim.lsp.buf.format({ filter = function(client) return client.name == "null-ls" end})<CR>', opts)
+        vim.keymap.set("n", "<leader>rf", '<cmd>lua vim.lsp.buf.format()<CR>', opts)
     end,
 })
