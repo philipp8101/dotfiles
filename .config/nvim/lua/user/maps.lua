@@ -18,7 +18,6 @@ vim.api.nvim_set_keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-keymap("n", "<C-p>", "<C-]>", opts, "follow link eg. help pages")
 keymap("n", "<C-d>", "<C-d>zz", opts, "move a half-page down and center the cursor")
 keymap("n", "<C-u>", "<C-u>zz", opts, "move a half-page up and center the cursor")
 
@@ -78,8 +77,12 @@ keymap("n", "gn", ":bn<CR>", opts, "go to next buffer")
 keymap("n", "gp", ":bp<CR>", opts, "go to previous buffer")
 keymap("n", "<esc>", ":noh<CR>", opts)
 
-keymap("n", "<C-l>", "<cmd>lnext<CR>", opts)
-keymap("n", "<C-h>", "<cmd>lprev<CR>", opts)
+keymap("n", "<C-q>", "<cmd>lclose<CR><cmd>cclose<CR>", opts)
+keymap("n", "<C-f>", "<cmd>lnext<CR>", opts)
+keymap("n", "<C-l>", "<cmd>lprev<CR>", opts)
+-- vim.api.nvim_del_keymap("n", "<C-p>")
+-- keymap("n", "<C-p>", "<cmd>cnext<CR>", opts)
+-- keymap("n", "<C-.>", "<cmd>cprev<CR>", opts)
 
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("UserLspConfig", {}),
