@@ -11,7 +11,7 @@ if [[ -z $selected ]]; then
 fi
 
 selected_name=$(basename "$selected" | tr . _)
-selected_name=${selected_name::15}
+selected_name=${selected_name}
 tmux_running=$(pgrep tmux)
 
 # if already open in other terminal, focus that terminal
