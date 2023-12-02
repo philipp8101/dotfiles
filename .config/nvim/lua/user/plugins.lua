@@ -580,7 +580,10 @@ require("lazy").setup({
         opts = {
             defaults = {
                 file_ignore_patterns = {
-                    "node_modules",
+                    -- some characters must be escaped in lua with %
+                    "node%_modules",
+                    ".git",
+                    "dist%-newstyle",
                 },
                 vimgrep_arguments = {
                     "rg",
