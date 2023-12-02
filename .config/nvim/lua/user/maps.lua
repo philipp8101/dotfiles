@@ -52,7 +52,7 @@ keymap("x", "<C-k>", ":m-2 <CR>gv=gv", opts, "move the visually selected lines u
 keymap("x", "<C-j>", ":m'>+ <CR>gv=gv", opts, "move the visually selected lines down")
 
 local ripgrep_available = os.execute("which rg >/dev/null 2>&1")
-vim.keymap.set("n", "<leader>f", ":Telescope find_files <CR>", opts, "open file search with Telescope")
+vim.keymap.set("n", "<leader>f", ":Telescope find_files hidden=true <CR>", opts, "open file search with Telescope")
 keymap("n", "<leader>g", ":Telescope live_grep <CR>", opts, "search project with Telescope(ripgrep)")
 keymap("n", "<leader>F", ":Telescope git_files <CR>", opts, "search git files")
 keymap("n", "<leader>b", ":Telescope git_branches <CR>", opts, "search git branches")
