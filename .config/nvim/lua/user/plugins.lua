@@ -412,7 +412,6 @@ require("lazy").setup({
         dependencies = "mason.nvim",
     },
     { "tamago324/nlsp-settings.nvim", cmd = "LspSettings", lazy = true },
-    { "jose-elias-alvarez/null-ls.nvim", lazy = true },
     { "williamboman/mason.nvim",
         opts = {
             {
@@ -490,21 +489,25 @@ require("lazy").setup({
     },
 
     {
-        "jose-elias-alvarez/null-ls.nvim",
-        dependencies = { "nvim-lua/plenary.nvim" },
+        "mfussenegger/nvim-lint",
         config = function ()
-            local null_ls = require("null-ls")
-            null_ls.setup({
-                debug = true,
-                sources = {
-                    null_ls.builtins.formatting.stylua,
-                    null_ls.builtins.formatting.prettier,
-                    null_ls.builtins.code_actions.refactoring,
-                    -- null_ls.builtins.diagnostics.shellcheck,
-                },
+            require('lint').linters_by_ft = {
+                php = {'tlint'},
+                blade = {'tlint'},
+            }
+            vim.api.nvim_create_autocmd({ "BufRead" }, {
+                pattern = {"*.php"},
+                callback = function()
+                    require("lint").try_lint()
+                end,
+            })
+            vim.api.nvim_create_autocmd({ "BufWrite" }, {
+                pattern = {"*.php"},
+                callback = function()
+                    require("lint").try_lint()
+                end,
             })
         end,
-        lazy = false,
     },
 
     {
@@ -532,20 +535,6 @@ require("lazy").setup({
             require("laravel").setup()
             require("telescope").load_extension "laravel"
         end,
-    },
-
-    {
-        "jay-babu/mason-null-ls.nvim",
-        lazy = false,
-        dependencies = {
-            "williamboman/mason.nvim",
-            "jose-elias-alvarez/null-ls.nvim",
-        },
-        opts = {
-            ensure_installed = {},
-            automatic_setup = true,
-            handlers = {},
-        },
     },
 
     { "folke/neodev.nvim",

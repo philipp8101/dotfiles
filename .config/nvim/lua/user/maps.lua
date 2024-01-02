@@ -57,7 +57,7 @@ keymap("n", "<leader>g", ":Telescope live_grep <CR>", opts, "search project with
 keymap("n", "<leader>F", ":Telescope git_files <CR>", opts, "search git files")
 keymap("n", "<leader>b", ":Telescope git_branches <CR>", opts, "search git branches")
 keymap("n", "<leader>B", ":Telescope git_commits <CR>", opts, "search git branches")
-keymap("n", "<leader>N", ":Telescope buffers <CR>", opts, "search git branches")
+keymap("n", "<leader>G", ":Telescope buffers <CR>", opts, "search open buffers")
 
 keymap("n", "<leader>t", ":Gedit: <CR>", opts, "open fugitive")
 keymap("n", "<leader>T", ":GlLog <CR>", opts, "open fugitive")
