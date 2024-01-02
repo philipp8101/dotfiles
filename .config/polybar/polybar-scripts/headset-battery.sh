@@ -1,8 +1,8 @@
 #!/bin/bash
 b=$(timeout 1m headsetcontrol -cb 2> /dev/null)
 m=$(timeout 1m headsetcontrol -cm 2> /dev/null)
-timeout 1m headsetcontrol -cb 2>&1 | grep -qP '[a-zA-Z]+' && exit 1
-timeout 1m headsetcontrol -cm 2>&1 | grep -qP '[a-zA-Z]+' && exit 1
+timeout 1m headsetcontrol -cb 2>&1 | grep -qP '[a-zA-Z]+' && exit 0
+timeout 1m headsetcontrol -cm 2>&1 | grep -qP '[a-zA-Z]+' && exit 0
 if [[ $b -ge 75 ]] ; then
 	echo -n " "$b"% "
 elif [[ $b -ge 50 ]] ; then
