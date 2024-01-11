@@ -41,7 +41,8 @@ require("lazy").setup({
 
     { "nvim-neo-tree/neo-tree.nvim",
         dependencies = { "MunifTanjim/nui.nvim" },
-        lazy = false,
+        lazy = true,
+        cmd = "Neotree",
         opts = {
             popup_border_style = "rounded",
             window = {
@@ -68,7 +69,8 @@ require("lazy").setup({
     {
         "windwp/nvim-ts-autotag",
         dependencies = { "nvim-treesitter/nvim-treesitter" },
-        lazy = false,
+        lazy = true,
+        ft = { "astro", "glimmer", "handlebars", "html", "javascript", "jsx", "markdown", "php", "rescript", "svelte", "tsx", "typescript", "vue", "xml" },
         config = function ()
             require'nvim-treesitter.configs'.setup {
                 autotag = {
@@ -82,11 +84,15 @@ require("lazy").setup({
     {
         "folke/trouble.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
+        lazy = true,
+        cmd = { "Trouble", "TroubleClose", "TroubleToggle", "TroubleRefresh" },
         opts = {},
     },
 
     { "Wansmer/treesj",
         dependencies = { "nvim-treesitter" },
+        lazy = true,
+        cmd = { "TSJJoin", "TSJSplit" },
         opts = {
             use_default_keymaps = false,-- (<space>m - toggle, <space>j - join, <space>s - split)
             check_syntax_error = true,
@@ -98,6 +104,9 @@ require("lazy").setup({
     },
 
     { "numToStr/Comment.nvim",
+        lazy = false,
+        keys = { "gkk", "gbk", "gk", "gb", "gcO", "gco", "gcA" },
+        -- doesn't account for combinations like vgkk
         opts = {
             padding = true,
             sticky = true,
@@ -186,15 +195,23 @@ require("lazy").setup({
 
     { "jiaoshijie/undotree",
         dependencies = { "nvim-lua/plenary.nvim" },
-        opts = {}
+        lazy = false,
+        keys = "<leader>u",
+        -- cant reopen undotree after opening once
+        opts = {},
     },
 
     { "sindrets/diffview.nvim",
-        dependencies = "nvim-lua/plenary.nvim"
+        dependencies = "nvim-lua/plenary.nvim",
+        lazy = true,
+        cmd = { "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles", "DiffviewRefresh", "DiffviewFileHistory" },
+        cmd = {},
     },
 
     { "kylechui/nvim-surround",
-        opts = {}
+        lazy = true,
+        keys = {"ys", "ds", "cs"},
+        opts = {},
     },
 
     { "lewis6991/gitsigns.nvim",
@@ -251,6 +268,8 @@ require("lazy").setup({
     { "mfussenegger/nvim-dap" },
     {
         "rcarriga/nvim-dap-ui",
+        lazy = true,
+        keys = "<leader>d",
         dependencies = {
             "mfussenegger/nvim-dap",
             {
@@ -269,8 +288,9 @@ require("lazy").setup({
     { "ggandor/leap.nvim" },
     {
         "SmiteshP/nvim-navbuddy",
-        lazy = false,
         dependencies = { "neovim/nvim-lspconfig", "SmiteshP/nvim-navic", "MunifTanjim/nui.nvim", },
+        lazy = true,
+        cmd = "Navbuddy",
         config = function()
             local navbuddy = require("nvim-navbuddy")
             local actions = require("nvim-navbuddy.actions")
@@ -288,20 +308,15 @@ require("lazy").setup({
         end,
     },
 
-    {
-        'windwp/nvim-autopairs',
-        opts = {},
-        lazy = false,
-    },
-
     { "iamcco/markdown-preview.nvim",
+        lazy = true,
+        cmd = { "MarkdownPreview", "MarkdownPreviewStop", "MarkdownPreviewToggle" },
         build = "cd app && npm install",
         config = function() vim.g.mkdp_filetypes = { "markdown" } end,
-        ft = "markdown",
     },
 
     -- Colorschemes
-    { "lunarvim/colorschemes" }, -- A bunch of colorschemes you can try out
+    -- { "lunarvim/colorschemes" }, -- A bunch of colorschemes you can try out
     { "vim-airline/vim-airline",
         lazy = false,
         dependencies = {
@@ -313,29 +328,44 @@ require("lazy").setup({
         opts = { options = { transparent = true } }
     },
 
-    { "catppuccin/nvim",
-        name = "catppuccin",
-        opts = { transparent_background = true }
-    },
+    -- { "catppuccin/nvim",
+    --     name = "catppuccin",
+    --     opts = { transparent_background = true }
+    -- },
 
     { "nvim-tree/nvim-web-devicons" }, -- icons
-    { "norcalli/nvim-colorizer.lua" },
+    {
+        "norcalli/nvim-colorizer.lua",
+        config = function()
+            vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
+                pattern = {"*"},
+                callback = function(_)
+                    require("colorizer").setup()
+                end
+            })
+        end,
+    },
 
-    { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
+    {
+        "lukas-reineke/indent-blankline.nvim",
+        main = "ibl",
+        opts = {},
+    },
 
     {
         'nvim-neotest/neotest',
+        lazy = true,
         dependencies = {
             'theutz/neotest-pest',
         },
         config = function()
             require('neotest').setup({
                 adapters = {
-                    require('neotest-pest')({
-                        pest_cmd = function()
-                            return "./run-test.sh"
-                        end
-                    }),
+                    -- require('neotest-pest')({
+                    --     pest_cmd = function()
+                    --         return "./run-test.sh"
+                    --     end
+                    -- }),
                 }
             })
         end
@@ -344,6 +374,8 @@ require("lazy").setup({
     {
         "andythigpen/nvim-coverage",
         dependencies = "nvim-lua/plenary.nvim",
+        lazy = true,
+        ft = "php",
         -- Optional: needed for PHP when using the cobertura parser
         -- rocks = { 'lua-xmlreader' },
         config = function()
@@ -361,7 +393,16 @@ require("lazy").setup({
 
     -- db browser
     { "tpope/vim-dadbod" },
-    { "kristijanhusak/vim-dadbod-ui" },
+    {
+        "kristijanhusak/vim-dadbod-ui",
+        lazy = true,
+        cmd = {
+            'DBUI',
+            'DBUIToggle',
+            'DBUIAddConnection',
+            'DBUIFindBuffer',
+        },
+    },
     {
         "kristijanhusak/vim-dadbod-completion",
         config = function()
@@ -385,11 +426,9 @@ require("lazy").setup({
 
     { "rafamadriz/friendly-snippets" }, -- a bunch of snippets to use
     { "neovim/nvim-lspconfig",
-        lazy = true,
         dependencies = { "mason-lspconfig.nvim", "nlsp-settings.nvim" },
     },
     { "williamboman/mason-lspconfig.nvim",
-        cmd = { "LspInstall", "LspUninstall" },
         config = function()
             require("mason-lspconfig").setup({
                 ensure_installed = {},
@@ -408,7 +447,6 @@ require("lazy").setup({
             local settings = require "mason-lspconfig.settings"
             settings.current.automatic_installation = false
         end,
-        lazy = true,
         dependencies = "mason.nvim",
     },
     { "tamago324/nlsp-settings.nvim", cmd = "LspSettings", lazy = true },
@@ -490,6 +528,8 @@ require("lazy").setup({
 
     {
         "mfussenegger/nvim-lint",
+        lazy = true,
+        ft = { "php", "blade" },
         config = function ()
             require('lint').linters_by_ft = {
                 php = {'tlint'},
@@ -517,6 +557,7 @@ require("lazy").setup({
             "tpope/vim-dotenv",
             "MunifTanjim/nui.nvim",
         },
+        lazy = true,
         cmd = { "Sail", "Artisan", "Composer", "Npm", "Yarn", "Laravel" },
         keys = {
             { "<leader>ka", ":Laravel artisan<cr>" },
@@ -537,11 +578,15 @@ require("lazy").setup({
         end,
     },
 
-    { "folke/neodev.nvim",
-        opts = {}
+    {
+        "folke/neodev.nvim",
+        opts = {},
     },
 
-    { "neovimhaskell/haskell-vim",
+    {
+        "neovimhaskell/haskell-vim",
+        lazy = true,
+        ft = "haskell",
         config = function()
             vim.g.haskell_enable_quantification = 1   -- to enable highlighting of `forall`
             vim.g.haskell_enable_recursivedo = 1      -- to enable highlighting of `mdo` and `rec`
@@ -555,17 +600,29 @@ require("lazy").setup({
 
     {
         "psiska/telescope-hoogle.nvim",
+        lazy = true,
         ft = "haskell",
         config = function()
             require("telescope").load_extension("hoogle")
         end,
     },
-    { "Civitasv/cmake-tools.nvim" },
+    {
+        "Civitasv/cmake-tools.nvim",
+        dependencies = { "plenary" },
+        lazy = true,
+        ft = { "cpp", "c" },
+    },
 
-    { "mfussenegger/nvim-jdtls" },
+    {
+        "mfussenegger/nvim-jdtls",
+        lazy = true,
+        ft = "java",
+    },
 
-    -- Telescope
-    { "nvim-telescope/telescope.nvim",
+    { 
+        "nvim-telescope/telescope.nvim",
+        lazy = true,
+        cmd = "Telescope",
         opts = {
             defaults = {
                 file_ignore_patterns = {
@@ -600,14 +657,17 @@ require("lazy").setup({
         }
     },
 
-    { "ahmedkhalf/project.nvim",
+    {
+        "ahmedkhalf/project.nvim",
         opts = {},
         config = function()
             require("telescope").load_extension("projects")
         end
     },
 
-    { "ThePrimeagen/harpoon" },
+    {
+        "ThePrimeagen/harpoon",
+    },
 
     {
         "nvim-treesitter/playground",
@@ -636,7 +696,6 @@ require("lazy").setup({
     },
 
     { "nvim-treesitter/nvim-treesitter",
-        version = false, -- last release is way too old and doesn't work on Windows
         build = ":TSUpdate",
         event = { "BufReadPost", "BufNewFile" },
         dependencies = {
