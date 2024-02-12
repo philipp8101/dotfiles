@@ -379,7 +379,7 @@ xkb_symbols "workman" {
 
     key <AD01> {  [   q,  Q   ] };
     key <AD02> {  [   d,  D, quotedbl, quotedbl   ] };
-    key <AD03> {  [   r,  R, quotedbl, quotedbl   ] };
+    key <AD03> {  [   r,  R, tilde, tilde   ] };
     key <AD04> {  [   w,  W, asciicircum, asciicircum   ] };
     key <AD05> {  [   b,  B, less, less  ] };
     key <AD06> {  [   j,  J, greater, greater   ] };
