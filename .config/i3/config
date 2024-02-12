@@ -5,43 +5,10 @@ include $XDG_CONFIG_HOME/i3/rules.config
 set $mod Mod4
 set $alt Mod1
 set $caps Mod3
-# set ws vars
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
-set $wsA "11:A"
-set $wsB "12:B"
-set $wsC "13:C"
-set $wsD "14:D"
-set $wsE "15:E"
-set $wsF "16:F"
-set $wsG "17:G"
-set $wsH "18:H"
-set $wsI "19:I"
-set $wsJ "20:J"
-set $wsK "21:K"
-set $wsL "22:L"
-set $wsM "23:M"
-set $wsN "24:N"
-set $wsO "25:O"
-set $wsP "26:P"
-set $wsQ "27:Q"
-set $wsR "28:R"
-set $wsS "29:󰓓"
-set $wsT "30:T"
-set $wsU "31:U"
-set $wsV "32:V"
-set $wsW "33:W"
-set $wsX "34:X"
-set $wsY "35:Y"
-set $wsZ "36:Z"
+# set $wsA "11:A"
+set $ws_steam 6
+set $ws_game 7
+set $ws_comm 8
 
 #font pango:Inconsolata style=Regular 6
 font pango:Source Code Pro style=Bold 8
@@ -81,64 +48,64 @@ exec --no-startup-id ~/.config/i3/scripts/event_listener
 #set background 
 exec_always --no-startup-id ~/.scripts/bg-gen.sh ~/Pictures/wallpaper-aenamiart/
 exec_always --no-startup-id ~/.scripts/set-bg.sh
-bindsym $mod+F5 exec "bash -c ~/.scripts/bg-gen.sh && ~/.scripts/set-bg.sh"
+bindsym $mod+F5 exec "bash -c '~/.scripts/bg-gen.sh ~/Pictures/wallpaper-aenamiart/ && ~/.scripts/set-bg.sh'"
 # start redshift (nightmode)
 exec --no-startup-id "redshift-gtk -t 6500K:4500K -l 51:12"
 
 
 bindsym $mod+Return exec "alacritty"
 bindsym $mod+Shift+Return exec "~/.config/i3/scripts/next_empty_workspace ; alacritty"
-bindsym $mod+Shift+less exec flameshot gui
-bindsym $mod+Control+less exec flameshot gui --raw | tesseract stdin stdout -l eng | xclip -in -selection clipboard
+bindsym $mod+z exec flameshot gui
+bindsym $mod+Shift+z exec flameshot gui --raw | tesseract stdin stdout -l eng | xclip -in -selection clipboard
 bindsym $mod+q kill
 bindsym --release button2 kill
 bindsym $mod+g exec rofi -show drun -theme round
 bindsym $mod+Shift+g exec "~/.config/i3/scripts/next_empty_workspace ; rofi -show drun -theme round"
-bindsym $mod+Shift+r exec rofi -show power-menu -modi power-menu:~/.config/rofi/rofi-power-menu -theme round 
-bindsym $mod+a focus left
-bindsym $mod+s focus down
-bindsym $mod+h focus up
-bindsym $mod+t focus right
-bindsym $mod+Shift+a move left
-bindsym $mod+Shift+s move down
-bindsym $mod+Shift+h move up
-bindsym $mod+Shift+t move right
-bindsym $mod+Control+a resize shrink width 5 px or 5 ppt
-bindsym $mod+Control+s resize shrink height 5 px or 5 ppt
-bindsym $mod+Control+h resize grow height 5 px or 5 ppt
-bindsym $mod+Control+t resize grow width 5 px or 5 ppt
+bindsym $mod+v exec rofi -show power-menu -modi power-menu:~/.config/rofi/rofi-power-menu -theme round 
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+bindsym $mod+Control+Left resize shrink width 5 px or 5 ppt
+bindsym $mod+Control+Down resize shrink height 5 px or 5 ppt
+bindsym $mod+Control+Up resize grow height 5 px or 5 ppt
+bindsym $mod+Control+Right resize grow width 5 px or 5 ppt
 bindsym $mod+b fullscreen toggle
 bindsym $mod+w layout stacking
 bindsym $mod+d layout tabbed
 bindsym $mod+r layout toggle split
-bindsym $mod+v split h
-bindsym $mod+c split v
-bindsym $mod+Shift+m floating toggle
-bindsym $mod+m focus mode_toggle
-bindsym $mod+less focus parent
+bindsym $mod+x floating toggle
+bindsym $mod+Shift+x focus mode_toggle
+bindsym $mod+p focus parent
 bindsym $mod+Tab exec ~/.config/i3/scripts/focus_last_workspace_on_output
-bindsym	$mod+Control+z move workspace to output left
-bindsym $mod+Control+x move workspace to output right
+bindsym	$mod+m move workspace to output left
+bindsym $mod+c move workspace to output right
 bindsym $mod+Control+m reload
-bindsym $mod+Shift+w restart
-bindsym $mod+z workspace prev_on_output
-bindsym $mod+x workspace next_on_output
-bindsym $mod+Shift+z exec ~/.config/i3/scripts/move_to_next_workspace
-bindsym $mod+Shift+x exec ~/.config/i3/scripts/move_and_switch_to_next_workspace
-bindsym $mod+$alt+a move container to workspace prev_on_output
-bindsym $mod+$alt+t move container to workspace next_on_output
+bindsym $mod+Control+r restart
+# bindsym $mod+z workspace prev_on_output
+# bindsym $mod+x workspace next_on_output
+# bindsym $mod+Shift+z exec ~/.config/i3/scripts/move_to_next_workspace
+# bindsym $mod+Shift+x exec ~/.config/i3/scripts/move_and_switch_to_next_workspace
+# bindsym $mod+$alt+a move container to workspace prev_on_output
+# bindsym $mod+$alt+t move container to workspace next_on_output
 # custom rofi scripts, provide i3 commands separated by ´-´ in the mode variable
-bindsym $mod+n exec mode=workspace rofi -show "go to workspace" -modes "go to workspace:~/.config/i3/scripts/rofi_menu" -theme round
-bindsym $mod+e exec mode="move container to workspace" rofi -show "move container to workspace" -modes "move container to workspace:~/.config/i3/scripts/rofi_menu" -theme round
-bindsym $mod+o exec mode="move container to workspace - workspace" rofi -show "move container and go to workspace" -modes "move container and go to workspace:~/.config/i3/scripts/rofi_menu" -theme round
-bindsym $mod+Shift+n exec i3-input -F "workspace %s" -P "go to workspace: "
-bindsym $mod+Shift+e exec i3-input -F "move container to workspace %s" -P "move container to workspace: "
-bindsym $mod+Shift+o exec i3-input -F "move container to workspace %s ; workspace %s" -P "move container and go to workspace: "
-bindsym $mod+l exec mosquitto_pub -h 192.168.0.8 -t "desk/control-height" -u mosquitto -P Y3Gnwwo= -m "p1"
-bindsym $mod+comma exec mosquitto_pub -h 192.168.0.8 -t "desk/control-height" -u mosquitto -P Y3Gnwwo= -m "p2"
-bindsym $mod+period exec mosquitto_pub -h 192.168.0.8 -t "desk/control-height" -u mosquitto -P Y3Gnwwo= -m "p3"
-bindsym $mod+k gaps horizontal current set 5
-bindsym $mod+Shift+k gaps horizontal current set 250
+bindsym $mod+f exec mode=workspace rofi -show "go to workspace" -modes "go to workspace:~/.config/i3/scripts/rofi_menu" -theme round
+# bindsym $mod+e exec mode="move container to workspace" rofi -show "move container to workspace" -modes "move container to workspace:~/.config/i3/scripts/rofi_menu" -theme round
+# bindsym $mod+o exec mode="move container to workspace - workspace" rofi -show "move container and go to workspace" -modes "move container and go to workspace:~/.config/i3/scripts/rofi_menu" -theme round
+# bindsym $mod+Shift+n exec i3-input -F "workspace %s" -P "go to workspace: "
+# bindsym $mod+Shift+e exec i3-input -F "move container to workspace %s" -P "move container to workspace: "
+# bindsym $mod+Shift+o exec i3-input -F "move container to workspace %s ; workspace %s" -P "move container and go to workspace: "
+bindsym $mod+k exec mosquitto_pub -h 192.168.0.5 -t "desk/control-height" -u mosquitto -P Y3Gnwwo= -m "down"
+bindsym $mod+l exec mosquitto_pub -h 192.168.0.5 -t "desk/control-height" -u mosquitto -P Y3Gnwwo= -m "up"
+bindsym $mod+comma exec mosquitto_pub -h 192.168.0.5 -t "desk/control-height" -u mosquitto -P Y3Gnwwo= -m "p1"
+bindsym $mod+period exec mosquitto_pub -h 192.168.0.5 -t "desk/control-height" -u mosquitto -P Y3Gnwwo= -m "p2"
+bindsym $mod+dash exec mosquitto_pub -h 192.168.0.5 -t "desk/control-height" -u mosquitto -P Y3Gnwwo= -m "p3"
+bindsym $mod+y gaps horizontal current set 5
+bindsym $mod+Shift+y gaps horizontal current set 250
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -151,32 +118,53 @@ bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
 bindsym $mod+u exec rofi -show calc -modi calc -no-show-match -no-sort -theme round-message
-bindsym $mod+p exec rofi -show time -modi time:~/.config/rofi/rofi-scripts/time.py -theme round
+# bindsym $mod+p exec rofi -show time -modi time:~/.config/rofi/rofi-scripts/time.py -theme round
 
 # switch to workspace
-bindsym $mod+1 workspace $ws1
-bindsym $mod+2 workspace $ws2
-bindsym $mod+3 workspace $ws3
-bindsym $mod+4 workspace $ws4
-bindsym $mod+5 workspace $ws5
-bindsym $mod+6 workspace $ws6
-bindsym $mod+7 workspace $ws7
-bindsym $mod+8 workspace $ws8
-bindsym $mod+9 workspace $ws9
-bindsym $mod+0 workspace $ws10
+bindsym $mod+t workspace 1
+bindsym $mod+h workspace 2
+bindsym $mod+s workspace 3
+bindsym $mod+a workspace 4
+bindsym $mod+n workspace 5
+bindsym $mod+e workspace 6
+bindsym $mod+o workspace 7
+bindsym $mod+i workspace 8
+
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+10 workspace 10
+
 
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace number $ws1
-bindsym $mod+Shift+2 move container to workspace number $ws2
-bindsym $mod+Shift+3 move container to workspace number $ws3
-bindsym $mod+Shift+4 move container to workspace number $ws4
-bindsym $mod+Shift+5 move container to workspace number $ws5
-bindsym $mod+Shift+6 move container to workspace number $ws6
-bindsym $mod+Shift+7 move container to workspace number $ws7
-bindsym $mod+Shift+8 move container to workspace number $ws8
-bindsym $mod+Shift+9 move container to workspace number $ws9
-bindsym $mod+Shift+0 move container to workspace number $ws10
+bindsym $mod+Shift+t move container to workspace number 1
+bindsym $mod+Shift+h move container to workspace number 2
+bindsym $mod+Shift+s move container to workspace number 3
+bindsym $mod+Shift+a move container to workspace number 4
+bindsym $mod+Shift+n move container to workspace number 5
+bindsym $mod+Shift+e move container to workspace number 6
+bindsym $mod+Shift+o move container to workspace number 7
+bindsym $mod+Shift+i move container to workspace number 8
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+10 move container to workspace number 10
 
 # # media controls
 # bindcode 172 exec ~/.scripts/playercall.sh play-pause
