@@ -205,7 +205,6 @@ require("lazy").setup({
         dependencies = "nvim-lua/plenary.nvim",
         lazy = true,
         cmd = { "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles", "DiffviewRefresh", "DiffviewFileHistory" },
-        cmd = {},
     },
 
     { "kylechui/nvim-surround",
