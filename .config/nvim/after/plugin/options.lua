@@ -59,3 +59,4 @@ function _G.ensure_treesitter_language_installed()
   end
 end
 vim.cmd[[autocmd FileType * :lua ensure_treesitter_language_installed()]]
+vim.cmd[[runtime! ftplugin/man.vim]] -- enable :Man command for manpages
