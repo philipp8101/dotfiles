@@ -608,7 +608,7 @@ require("lazy").setup({
     },
     {
         "Civitasv/cmake-tools.nvim",
-        dependencies = { "plenary" },
+        dependencies = { "nvim-lua/plenary.nvim" },
         lazy = true,
         ft = { "cpp", "c" },
     },
