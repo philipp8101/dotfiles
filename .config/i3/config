@@ -79,7 +79,7 @@ bindsym $mod+w layout stacking
 bindsym $mod+d layout tabbed
 bindsym $mod+r layout toggle split
 bindsym $mod+x floating toggle
-bindsym $mod+Shift+x focus mode_toggle
+bindsym $mod+space focus mode_toggle
 bindsym $mod+p focus parent
 bindsym $mod+Tab exec ~/.config/i3/scripts/focus_last_workspace_on_output
 bindsym	$mod+m move workspace to output left
@@ -103,9 +103,9 @@ bindsym $mod+k exec mosquitto_pub -h 192.168.0.5 -t "desk/control-height" -u mos
 bindsym $mod+l exec mosquitto_pub -h 192.168.0.5 -t "desk/control-height" -u mosquitto -P Y3Gnwwo= -m "up"
 bindsym $mod+comma exec mosquitto_pub -h 192.168.0.5 -t "desk/control-height" -u mosquitto -P Y3Gnwwo= -m "p1"
 bindsym $mod+period exec mosquitto_pub -h 192.168.0.5 -t "desk/control-height" -u mosquitto -P Y3Gnwwo= -m "p2"
-bindsym $mod+dash exec mosquitto_pub -h 192.168.0.5 -t "desk/control-height" -u mosquitto -P Y3Gnwwo= -m "p3"
+bindsym $mod+minus exec mosquitto_pub -h 192.168.0.5 -t "desk/control-height" -u mosquitto -P Y3Gnwwo= -m "p3"
 bindsym $mod+y gaps horizontal current set 5
-bindsym $mod+Shift+y gaps horizontal current set 250
+bindsym $mod+Shift+y gaps horizontal current set 350
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
