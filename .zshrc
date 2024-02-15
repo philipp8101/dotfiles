@@ -145,3 +145,7 @@ export ZSH_EXEC=$(which zsh)
 #         tmux -f ~/.config/tmux/tmux.conf new-session -t0 && exit
 #     fi
 # fi
+
+if command -v zoxide &> /dev/null; then
+  eval "$(zoxide init zsh --cmd=cd)"
+fi
