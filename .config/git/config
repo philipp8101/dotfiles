@@ -2,7 +2,7 @@
 	helper = store
 [core]
 	editor = nvim
-	pager = delta
+	pager = ~/.scripts/git-pager.sh
 [user]
 	email = philipp8101@gmail.com
 	name = Philipp Conrad
@@ -21,7 +21,7 @@
 [delta]
 	line-numbers = true
 [interactive]
-	diffFilter = delta --color-only
+	diffFilter = ~/.scripts/git-pager.sh --color-only
 [merge]
 	conflictstyle = diff3
 [diff]
