@@ -149,6 +149,3 @@ export ZSH_EXEC=$(which zsh)
 if command -v zoxide &> /dev/null; then
   eval "$(zoxide init zsh --cmd=cd)"
 fi
-if command -v delta &> /dev/null; then
-  alias delta="less -F"
-fi
