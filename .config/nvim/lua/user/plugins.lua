@@ -69,8 +69,12 @@ require("lazy").setup({
     {
         "nvim-neorg/neorg",
         build = ":Neorg sync-parsers",
-        lazy = false, -- specify lazy = false because some lazy.nvim distributions set lazy = true by default
-        dependencies = { "nvim-lua/plenary.nvim" },
+        lazy = true,
+        cmd = "Neorg",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "jbyuki/nabla.nvim",
+        },
         opts = {
             load = {
                 ["core.defaults"] = {}, -- Loads default behaviour
@@ -85,6 +89,38 @@ require("lazy").setup({
                 },
             },
         }
+    },
+
+    {
+        "jbyuki/nabla.nvim",
+        lazy = true,
+        config = function()
+            vim.api.nvim_create_autocmd({"InsertEnter"}, {
+                pattern = {"*.norg"},
+                callback = function()
+                    require("nabla").disable_virt()
+                end
+            })
+            vim.api.nvim_create_autocmd({"InsertLeave"}, {
+                pattern = {"*.norg"},
+                callback = function()
+                    require("nabla").enable_virt()
+                end
+            })
+            vim.api.nvim_create_autocmd({"BufEnter"}, {
+                pattern = {"*.norg"},
+                callback = function()
+                    require("nabla").enable_virt()
+                end
+            })
+            vim.api.nvim_create_autocmd({"TextChanged"}, {
+                pattern = {"*.norg"},
+                callback = function()
+                    require("nabla").disable_virt()
+                    require("nabla").enable_virt()
+                end
+            })
+        end,
     },
 
     {
