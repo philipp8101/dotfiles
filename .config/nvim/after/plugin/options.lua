@@ -29,6 +29,7 @@ vim.api.nvim_create_autocmd({"FileType"},{pattern = {"*"}, callback = function (
 end})
 vim.opt.linebreak = true
 vim.opt.breakindent = true
+vim.opt.foldlevel = 99
 
 local _border = "single"
 
