@@ -16,7 +16,7 @@ end
 --Remap space as leader key
 vim.api.nvim_set_keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+vim.g.maplocalleader = ","
 
 keymap("n", "<C-d>", "<C-d>zz", opts, "move a half-page down and center the cursor")
 keymap("n", "<C-u>", "<C-u>zz", opts, "move a half-page up and center the cursor")
