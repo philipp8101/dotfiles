@@ -6,12 +6,12 @@ export XDG_CONFIG_HOME=$HOME/.config
 
 export SSH_AUTH_SOCK=~/.ssh/ssh-agent.sock
 if [ -e $SSH_AUTH_SOCK ]; then
-  if [[ ! $(pgrep ssh-agent) ]]; then
-    rm "$SSH_AUTH_SOCK"
-  fi
+    if [[ ! $(pgrep ssh-agent) ]]; then
+        rm "$SSH_AUTH_SOCK"
+    fi
 fi
 if [ ! -e $SSH_AUTH_SOCK ]; then
-  ssh-agent -a "$SSH_AUTH_SOCK" >/dev/null
+    ssh-agent -a "$SSH_AUTH_SOCK" >/dev/null
 fi
 
 # Path to your oh-my-zsh installation.
@@ -21,8 +21,9 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-#ZSH_THEME="robbyrussell"
-ZSH_THEME="crcandy"
+ZSH_THEME="robbyrussell"
+# ZSH_THEME="crcandy"
+# ZSH_THEME="agnoster"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -126,7 +127,7 @@ alias vim=nvim
 alias git-dot="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias lazygit-dot="lazygit --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
-# fix autocompletion not working for new executables 
+# fix autocompletion not working for new executables
 # see: https://bbs.archlinux.org/viewtopic.php?id=215485
 zstyle ':completion:*' rehash true
 
@@ -147,5 +148,5 @@ export ZSH_EXEC=$(which zsh)
 # fi
 
 if command -v zoxide &> /dev/null; then
-  eval "$(zoxide init zsh --cmd=cd)"
+    eval "$(zoxide init zsh --cmd=cd)"
 fi
