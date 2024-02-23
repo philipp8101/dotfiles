@@ -13,8 +13,8 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
 
-	{ "nvim-lua/popup.nvim" }, -- An implementation of the Popup API from vim in Neovim
-	{ "nvim-lua/plenary.nvim" }, -- Useful lua functions used ny lots of plugins
+	{ "nvim-lua/popup.nvim" },
+	{ "nvim-lua/plenary.nvim" },
 
 	{
 		"nvim-neo-tree/neo-tree.nvim",
@@ -268,7 +268,6 @@ require("lazy").setup({
 		dependencies = { "nvim-lua/plenary.nvim" },
 		lazy = false,
 		keys = "<leader>u",
-		-- cant reopen undotree after opening once
 		opts = {},
 	},
 
@@ -285,7 +284,12 @@ require("lazy").setup({
 		},
 	},
 
-	{ "kylechui/nvim-surround", lazy = true, keys = { "ys", "ds", "cs" }, opts = {} },
+	{
+		"kylechui/nvim-surround",
+		lazy = true,
+		keys = { "ys", "ds", "cs" },
+		opts = {},
+	},
 
 	{
 		"lewis6991/gitsigns.nvim",
@@ -350,6 +354,7 @@ require("lazy").setup({
 	},
 
 	{ "mfussenegger/nvim-dap" },
+
 	{
 		"rcarriga/nvim-dap-ui",
 		lazy = true,
@@ -367,9 +372,9 @@ require("lazy").setup({
 	{ "tpope/vim-dispatch" },
 	{ "tpope/vim-repeat" },
 	{ "tpope/vim-fugitive" },
-	{ "tpope/vim-rhubarb" },
 	{ "tpope/vim-sleuth" },
 	{ "ggandor/leap.nvim" },
+
 	{
 		"SmiteshP/nvim-navbuddy",
 		dependencies = { "neovim/nvim-lspconfig", "SmiteshP/nvim-navic", "MunifTanjim/nui.nvim" },
@@ -380,10 +385,10 @@ require("lazy").setup({
 			local actions = require("nvim-navbuddy.actions")
 			navbuddy.setup({
 				mappings = {
-					["n"] = actions.parent(), -- Move to left panel
-					["e"] = actions.next_sibling(), -- down
-					["o"] = actions.previous_sibling(), -- up
-					["i"] = actions.children(), -- Move to right panel
+					["n"] = actions.parent(),
+					["e"] = actions.next_sibling(),
+					["o"] = actions.previous_sibling(),
+					["i"] = actions.children(),
 				},
 				lsp = {
 					auto_attach = true,
@@ -402,8 +407,6 @@ require("lazy").setup({
 		end,
 	},
 
-	-- Colorschemes
-	-- { "lunarvim/colorschemes" }, -- A bunch of colorschemes you can try out
 	{
 		"vim-airline/vim-airline",
 		lazy = false,
@@ -412,14 +415,16 @@ require("lazy").setup({
 			"nvim-tree/nvim-web-devicons",
 		},
 	},
-	{ "EdenEast/nightfox.nvim", opts = { options = { transparent = true } } },
 
-	-- { "catppuccin/nvim",
-	--     name = "catppuccin",
-	--     opts = { transparent_background = true }
-	-- },
+	{
+		"EdenEast/nightfox.nvim",
+		opts = {
+			options = { transparent = true },
+		},
+	},
 
 	{ "nvim-tree/nvim-web-devicons" }, -- icons
+
 	{
 		"norcalli/nvim-colorizer.lua",
 		config = function()
@@ -438,47 +443,15 @@ require("lazy").setup({
 		opts = {},
 	},
 
-	{
-		"nvim-neotest/neotest",
-		lazy = true,
-		dependencies = {
-			"theutz/neotest-pest",
-		},
-		config = function()
-			require("neotest").setup({
-				adapters = {
-					-- require('neotest-pest')({
-					--     pest_cmd = function()
-					--         return "./run-test.sh"
-					--     end
-					-- }),
-				},
-			})
-		end,
-	},
-
-	{
-		"andythigpen/nvim-coverage",
-		dependencies = "nvim-lua/plenary.nvim",
-		lazy = true,
-		ft = "php",
-		-- Optional: needed for PHP when using the cobertura parser
-		-- rocks = { 'lua-xmlreader' },
-		config = function()
-			require("coverage").setup()
-		end,
-	},
-
-	-- cmp plugins
-	{ "hrsh7th/nvim-cmp" }, -- The completion plugin
-	{ "hrsh7th/cmp-buffer" }, -- buffer completions
-	{ "hrsh7th/cmp-path" }, -- path completions
-	{ "hrsh7th/cmp-cmdline" }, -- cmdline completions
-	{ "saadparwaiz1/cmp_luasnip" }, -- snippet completions
+	{ "hrsh7th/nvim-cmp" },
+	{ "hrsh7th/cmp-buffer" },
+	{ "hrsh7th/cmp-path" },
+	{ "hrsh7th/cmp-cmdline" },
+	{ "saadparwaiz1/cmp_luasnip" },
 	{ "hrsh7th/cmp-nvim-lsp" },
 
-	-- db browser
 	{ "tpope/vim-dadbod" },
+
 	{
 		"kristijanhusak/vim-dadbod-ui",
 		lazy = true,
@@ -489,6 +462,7 @@ require("lazy").setup({
 			"DBUIFindBuffer",
 		},
 	},
+
 	{
 		"kristijanhusak/vim-dadbod-completion",
 		config = function()
@@ -501,7 +475,6 @@ require("lazy").setup({
 		end,
 	},
 
-	-- snippets
 	{
 		"L3MON4D3/LuaSnip",
 		opts = {
@@ -509,10 +482,15 @@ require("lazy").setup({
 			region_check_events = "InsertEnter",
 			delete_check_events = "TextChanged,InsertLeave",
 		},
-	}, --snippet engine
+	},
 
-	{ "rafamadriz/friendly-snippets" }, -- a bunch of snippets to use
-	{ "neovim/nvim-lspconfig", dependencies = { "mason-lspconfig.nvim", "nlsp-settings.nvim" } },
+	{ "rafamadriz/friendly-snippets" },
+
+	{
+		"neovim/nvim-lspconfig",
+		dependencies = { "mason-lspconfig.nvim" },
+	},
+
 	{
 		"williamboman/mason-lspconfig.nvim",
 		config = function()
@@ -535,7 +513,7 @@ require("lazy").setup({
 		end,
 		dependencies = "mason.nvim",
 	},
-	{ "tamago324/nlsp-settings.nvim", cmd = "LspSettings", lazy = true },
+
 	{
 		"williamboman/mason.nvim",
 		opts = {
@@ -670,35 +648,6 @@ require("lazy").setup({
 	},
 
 	{
-		"adalessa/laravel.nvim",
-		enabled = false,
-		dependencies = {
-			"nvim-telescope/telescope.nvim",
-			"tpope/vim-dotenv",
-			"MunifTanjim/nui.nvim",
-		},
-		lazy = true,
-		cmd = { "Sail", "Artisan", "Composer", "Npm", "Yarn", "Laravel" },
-		keys = {
-			{ "<leader>ka", ":Laravel artisan<cr>" },
-			{ "<leader>kr", ":Laravel routes<cr>" },
-			{
-				"<leader>kt",
-				function()
-					require("laravel.tinker").send_to_tinker()
-				end,
-				mode = "v",
-				desc = "Laravel Application Routes",
-			},
-		},
-		event = { "VeryLazy" },
-		config = function()
-			require("laravel").setup()
-			require("telescope").load_extension("laravel")
-		end,
-	},
-
-	{
 		"folke/neodev.nvim",
 		opts = {},
 	},
@@ -726,6 +675,7 @@ require("lazy").setup({
 			require("telescope").load_extension("hoogle")
 		end,
 	},
+
 	{
 		"Civitasv/cmake-tools.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
@@ -777,43 +727,7 @@ require("lazy").setup({
 		},
 	},
 
-	{
-		"ahmedkhalf/project.nvim",
-		opts = {},
-		config = function()
-			require("telescope").load_extension("projects")
-		end,
-	},
-
-	{
-		"ThePrimeagen/harpoon",
-	},
-
-	{
-		"nvim-treesitter/playground",
-		config = function()
-			require("nvim-treesitter.configs").setup({
-				playground = {
-					enable = true,
-					disable = {},
-					updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-					persist_queries = false, -- Whether the query persists across vim sessions
-					keybindings = {
-						toggle_query_editor = "o",
-						toggle_hl_groups = "i",
-						toggle_injected_languages = "t",
-						toggle_anonymous_nodes = "a",
-						toggle_language_display = "I",
-						focus_language = "f",
-						unfocus_language = "F",
-						update = "R",
-						goto_node = "<cr>",
-						show_help = "?",
-					},
-				},
-			})
-		end,
-	},
+	{ "ThePrimeagen/harpoon" },
 
 	{
 		"nvim-treesitter/nvim-treesitter",
