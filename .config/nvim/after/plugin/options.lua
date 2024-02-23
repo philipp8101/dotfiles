@@ -33,6 +33,8 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 vim.opt.linebreak = true
 vim.opt.breakindent = true
 vim.opt.foldlevel = 99
+vim.opt.updatetime = 250
+vim.opt.timeoutlen = 300
 
 local _border = "single"
 
