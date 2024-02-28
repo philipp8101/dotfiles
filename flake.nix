@@ -9,25 +9,33 @@
     };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, ... }: {
+  outputs = { self, nixpkgs, home-manager }: 
+  let 
+    system = "x86_64-linux";
+    pkgs = import nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
+    };
+    lib = nixpkgs.lib;
+  in {
     nixosConfigurations = {
-      nixos = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
+      MAIN = lib.nixosSystem { 
+        inherit system;
+        modules = [ 
           ./configuration.nix
           ./hardware-configuration.nix
-          { 
-            home-manager.useGlobalPkgs = true;
+          home-manager.nixosModules.home-manager {
+            home-manager.useGlobalPkgs = true; 
             home-manager.useUserPackages = true;
             home-manager.users.user = {
-              import = [ ./home.nix ];
+              imports = [ ./home.nix ];
+
             };
           }
-          home-manager.nixosModules.home-manager
         ];
       };
-    };
-
-
+    };  
   };
+
 }
+
