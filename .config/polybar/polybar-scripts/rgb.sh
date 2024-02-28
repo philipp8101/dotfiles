@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 status_file="/tmp/polybar-module-rgb-off"
 
 if [[ $(hostnamectl hostname) != "arch" ]]; then

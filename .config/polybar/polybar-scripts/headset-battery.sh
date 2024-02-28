@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 b=$(timeout 1m headsetcontrol -cb 2> /dev/null)
 m=$(timeout 1m headsetcontrol -cm 2> /dev/null)
 timeout 1m headsetcontrol -cb 2>&1 | grep -qP '[a-zA-Z]+' && exit 0

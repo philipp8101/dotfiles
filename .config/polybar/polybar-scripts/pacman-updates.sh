@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 ago=$(grep '\[PACMAN\] starting full system upgrade' /var/log/pacman.log |\
 	tail -n 1 |\
 	grep -E "\[[^P]+\]" -o  |\

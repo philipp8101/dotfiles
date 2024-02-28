@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 if command -v pulseaudio-control &> /dev/null
 then
 	case $1 in

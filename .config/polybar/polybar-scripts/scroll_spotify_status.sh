@@ -1,5 +1,5 @@
 
-#!/bin/bash
+#!/usr/bin/env bash
 
 # see man zscroll for documentation of the following parameters
 zscroll -l 20 \

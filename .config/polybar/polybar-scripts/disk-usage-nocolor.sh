@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #file=/tmp/polybar-disk-counter
 #if  [ -z $file ] || [ -e $file ]; then
 	#counter=$(cat $file);

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 l=$(checkupdates | grep -E '^linux ') || exit 1
 z=$(checkupdates | grep -E '^zfs-linux ') || exit 1
 
