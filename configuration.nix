@@ -61,6 +61,7 @@
 		fzf
 		home-manager
 		ripgrep
+		steam
 	];
 	environment.pathsToLink = ["/libexec"];
 	services.xserver = {
