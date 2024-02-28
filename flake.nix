@@ -15,6 +15,7 @@
         system = "x86_64-linux";
         modules = [
           ./configuration.nix
+          ./hardware-configuration.nix
           { 
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
