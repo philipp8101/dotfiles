@@ -2,15 +2,14 @@
   description = "NixOS config with home-manager";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
-      uri = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs }@inputs: {
-
+  outputs = inputs@{ nixpkgs, home-manager, ... }: {
     nixosConfigurations = {
       hostName = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
