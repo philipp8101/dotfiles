@@ -1,6 +1,6 @@
-include $XDG_CONFIG_HOME/i3/colors.config
-include $XDG_CONFIG_HOME/i3/modes.config
-include $XDG_CONFIG_HOME/i3/rules.config
+include ~/.config/i3/colors.config
+include ~/.config/i3/modes.config
+include ~/.config/i3/rules.config
 
 set $mod Mod4
 set $alt Mod1
