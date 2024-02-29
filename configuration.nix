@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 let 
-compiledLayout = pkgs.runCommand "keyboard-layout" {} "${pkgs.xorg.xkbcomp}/bin/xkbcomp ${.config/xkb/symbol/de} $out";
+layoutPath = builtins.path {
+	path = ./.config/xkb/symbols/de;
+	name = "custom-xkb-layout";
+};
+compiledLayout = pkgs.runCommand "keyboard-layout" {} "${pkgs.xorg.xkbcomp}/bin/xkbcomp ${layoutPath} $out";
 in
 {
 	imports = [
