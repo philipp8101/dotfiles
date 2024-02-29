@@ -34,14 +34,11 @@
 		pulse.enable = true;
 		jack.enable = true;
 	};
-	users.users.user = {
+	users.users.philipp = {
 		shell = pkgs.zsh;
 		isNormalUser = true;
-		description = "user";
+		description = "philipp";
 		extraGroups = [ "networkmanager" "wheel" ];
-		packages = with pkgs; [
-			firefox
-		];
 	};
 	programs.zsh.enable = true;
 
@@ -61,7 +58,7 @@
 		fzf
 		home-manager
 		ripgrep
-		steam
+		firefox
 	];
 	environment.pathsToLink = ["/libexec"];
 	services.xserver = {
