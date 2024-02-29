@@ -1,4 +1,7 @@
 { config, pkgs, ... }:
+let 
+compiledLayout = pkgs.runCommand "keyboard-layout" {} "${pkgs.xorg.xkbcomp}/bin/xkbcomp ${.config/xkb/symbol/de} $out";
+in
 {
 	imports = [
 		./hardware-configuration.nix
@@ -72,6 +75,7 @@
 		};
 		displayManager = {
 			defaultSession = "none+i3";
+			sessionCommands = "${pkgs.xorg.xkbcomp}/bin/xkbcomp ${compiledLayout} $DISPLAY";
 		};
 		windowManager.i3 = {
 			enable = true;
