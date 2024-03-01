@@ -49,15 +49,17 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
-    ".config/tmux".source = ./.config/tmux;
-    ".config/i3".source = ./.config/i3;
-    ".config/polybar".source = ./.config/polybar;
-    ".config/rofi".source = ./.config/rofi;
-    ".config/nvim/init.lua".source = ./.config/nvim/init.lua;
-    ".config/nvim/lua".source = ./.config/nvim/lua;
-    ".config/nvim/after".source = ./.config/nvim/after;
-    ".config/nvim/ftplugins".source = ./.config/nvim/ftplugins;
     ".background-image".source = ./nixos-wallpaper-catppuccin-macchiato.png;
+  };
+  xdg.configFile = {
+    "tmux".source = ./tmux;
+    "i3".source = ./i3;
+    "polybar".source = ./polybar;
+    "rofi".source = ./rofi;
+    "nvim/init.lua".source = ./nvim/init.lua;
+    "nvim/lua".source = ./nvim/lua;
+    "nvim/after".source = ./nvim/after;
+    "nvim/ftplugins".source = ./nvim/ftplugins;
   };
 
   # Home Manager can also manage your environment variables through
@@ -148,7 +150,24 @@
       graph = "log --all --decorate --oneline --graph";
       nb = "!f() { git checkout -b \"$1\"; }; f";
     };
-    delta.enable = true;
+    delta = {
+      enable = true;
+      options = {
+        line-numbers = true;
+      };
+    };
+    lfs.enable = true;
+    extraConfig = {
+      core = {
+        editor = "nvim";
+      };
+      push = {
+        autoSetupRemote = "true";
+      };
+      merge = {
+        conflictstyle = "diff3";
+      };
+    };
   };
   programs.kitty = {
     enable = true;
@@ -158,6 +177,65 @@
     };
     settings = {
       background_opacity = "0.8";
+    };
+  };
+  programs.alacritty = {
+    enable = true;
+    settings = {
+      colors.bright = {
+        black = "0x565656";
+        blue = "0x49a4f8";
+        cyan = "0x99faf2";
+        green = "0xc0e17d";
+        magenta = "0xa47de9";
+        red = "0xec5357";
+        white = "0xffffff";
+        yellow = "0xf9da6a";
+      };
+      colors.normal = {
+        black = "0x2e2e2e";
+        blue = "0x47a0f3";
+        cyan = "0x64dbed";
+        green = "0xabe047";
+        magenta = "0x7b5cb0";
+        red = "0xeb4129";
+        white = "0xe5e9f0";
+        yellow = "0xf6c744";
+      };
+      colors.primary = {
+        background = "0x101421";
+        foreground = "0xfffbf6";
+      };
+      env = {
+        TERM = "xterm-256color";
+      };
+      font = {
+        size = 14.0;
+      };
+      font.bold = {
+        family = "Inconsolata";
+        style = "Bold";
+      };
+      font.bold_italic = {
+        family = "Inconsolata";
+        style = "Bold Italic";
+      };
+      font.italic = {
+        family = "Inconsolata";
+        style = "Italic";
+      };
+      font.normal = {
+        family = "Inconsolata";
+        style = "Regular";
+      };
+      window = {
+        opacity = 0.8;
+        startup_mode = "Windowed";
+      };
+      window.dimensions = {
+        columns = 0;
+        lines = 0;
+      };
     };
   };
   services.dunst = {
@@ -182,7 +260,18 @@
       };
     };
   };
-  services.picom.enable = true;
+  services.picom = {
+    enable = true;
+    # backend = "glx";
+    fade = true;
+    fadeDelta = 4;
+    settings = {
+      blur = {
+        method = "dual_kawase";
+        strength = 3;
+      };
+    };
+  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 let 
 layoutPath = builtins.path {
-	path = ./.config/xkb/symbols/de;
+	path = ./keymap.xkb;
 	name = "custom-xkb-layout";
 };
 compiledLayout = pkgs.runCommand "keyboard-layout" {} "${pkgs.xorg.xkbcomp}/bin/xkbcomp ${layoutPath} $out";
