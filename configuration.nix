@@ -74,7 +74,7 @@ in
 	environment.pathsToLink = ["/libexec"];
 	services.xserver = {
 		enable = true;
-		layout = "de";
+		xkb.layout = "de";
 		resolutions = [
 			{ x = 1920; y = 1080; }
 		];
