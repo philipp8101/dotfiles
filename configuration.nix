@@ -37,6 +37,7 @@ in
 	services.printing.enable = true;
 	sound.enable = true;
 	hardware.pulseaudio.enable = false;
+	hardware.opengl.driSupport32Bit = true # https://nixos.wiki/wiki/Lutris
 	security.rtkit.enable = true;
 	services.pipewire = {
 		enable = true;
@@ -70,6 +71,21 @@ in
 		home-manager
 		ripgrep
 		firefox
+		xorg.xkbcomp
+		xsel
+		gnome.eog
+		mpv
+		evince
+		gnome.adwaita-icon-theme
+		(pkgs.discord.override {
+			withOpenASAR = true;
+			withVencord = true;
+		})
+		vesktop # https://nixos.wiki/wiki/Discord
+		(lutris.override {
+			extraLibraries =  pkgs: [
+			];
+		})
 	];
 	environment.pathsToLink = ["/libexec"];
 	services.xserver = {

@@ -130,6 +130,11 @@
       background_opacity = "0.8";
     };
   };
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+  };
   services.dunst = {
     enable = true;
     settings = {
