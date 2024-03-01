@@ -12,6 +12,10 @@ in
 	];
 	boot.loader.systemd-boot.enable = true;
 	boot.loader.efi.canTouchEfiVariables = true;
+	boot.supportedFilesystems = [ "zfs" ];
+	boot.zfs.forceImportRoot = false;
+	boot.zfs.extraPools = [ "test" ];
+	networking.hostId = "e52e59bb";
 	networking.hostName = "nixos";
 	networking.networkmanager.enable = true;
 	time.timeZone = "Europe/Berlin";
