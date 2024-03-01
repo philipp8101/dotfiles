@@ -57,6 +57,7 @@
     ".config/nvim/lua".source = ./.config/nvim/lua;
     ".config/nvim/after".source = ./.config/nvim/after;
     ".config/nvim/ftplugins".source = ./.config/nvim/ftplugins;
+    ".background-image".source = ./nixos-wallpaper-catppuccin-macchiato.png;
   };
 
   # Home Manager can also manage your environment variables through
@@ -78,10 +79,40 @@
     EDITOR = "nvim";
     XDG_CONFIG_HOME = "$HOME/.config";
   };
+  gtk = {
+    enable = true;
+    theme.name = "Adwaita";
+    cursorTheme.name = "Adwaita";
+    iconTheme.name = "Adwaita";
+  };
+  xresources.properties = {
+    "Xcursor.theme" = "Adwaita";
+  };
+  xdg.mimeApps.defaultApplications = {
+    "text/*" = [ "neovim.desktop" ];
+    "video/*" = [ "mpv.desktop" ];
+    "image/*" = [ "eog.desktop" ];
+    "application/pdf" = [ "evince.desktop" ];
+  };
+  xdg.desktopEntries = {
+    neovim = {
+      name = "Neovim";
+      genericName = "Text editor";
+      icon = "nvim";
+      exec = "kitty nvim %U";
+      mimeType = [ "text/*" ];
+    };
+    nvim = {
+      name = "nvim";
+      noDisplay = true;
+    };
+  };
   programs.zsh = {
     enable = true;
     enableAutosuggestions = true;
     syntaxHighlighting.enable = true;
+    enableCompletion = true;
+    initExtra = "zstyle ':completion:*' rehash true\n";
     history.save = 1000000;
     oh-my-zsh = {
       theme = "robbyrussell";
@@ -101,7 +132,6 @@
     enable = true;
     defaultEditor = true;
     vimAlias = true;
-    #extraLuaConfig = builtins.readFile ( builtins.fetchurl{ url = "https://github.com/nvim-lua/kickstart.nvim/raw/master/init.lua";} ); 
   };
   programs.zoxide = {
     enable = true;
@@ -158,7 +188,6 @@
     };
   };
   services.picom.enable = true;
-    
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

@@ -37,7 +37,7 @@ in
 	services.printing.enable = true;
 	sound.enable = true;
 	hardware.pulseaudio.enable = false;
-	hardware.opengl.driSupport32Bit = true # https://nixos.wiki/wiki/Lutris
+	hardware.opengl.driSupport32Bit = true; # https://nixos.wiki/wiki/Lutris
 	security.rtkit.enable = true;
 	services.pipewire = {
 		enable = true;
