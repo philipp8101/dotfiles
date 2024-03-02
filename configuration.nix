@@ -91,6 +91,8 @@ in
 			extraLibraries =  pkgs: [
 			];
 		})
+		nix-index
+		htop-vim
 	];
 	environment.pathsToLink = ["/libexec"];
 	services.xserver = {

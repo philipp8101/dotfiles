@@ -3,8 +3,13 @@
 {
   imports = [
     inputs.nix-colors.homeManagerModules.default
+    ./home/polybar.nix
   ];
-  colorScheme = inputs.nix-colors.colorSchemes.catppuccin-macchiato;
+  # colorScheme = inputs.nix-colors.colorSchemes.catppuccin-macchiato;
+  colorScheme = inputs.nix-colors.lib.schemeFromYAML "carbonfox" (builtins.readFile(builtins.fetchurl{
+    url = "https://github.com/EdenEast/nightfox.nvim/raw/main/extra/carbonfox/base16.yaml";
+    sha256 = "196934b7c57ddfe9427318a51fdc17dc4684e73a33660584fd9afa1486fd717b";
+  }));
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "philipp";
@@ -40,47 +45,37 @@
     # '')
   ];
 
-  # Home Manager is pretty good at managing dotfiles. The primary way to manage
-  # plain files is through 'home.file'.
   home.file = {
-    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-    # # symlink to the Nix store copy.
-    # ".screenrc".source = dotfiles/screenrc;
-
-    # # You can also set the file content immediately.
-    # ".gradle/gradle.properties".text = ''
-    #   org.gradle.console=verbose
-    #   org.gradle.daemon.idletimeout=3600000
-    # '';
     ".background-image".source = ./nixos-wallpaper-catppuccin-macchiato.png;
   };
   xdg.configFile = {
     "tmux".source = ./tmux;
-    "i3".source = ./i3;
+    "i3/config".source = ./i3/config;
+    "i3/modes.config".source = ./i3/modes.config;
+    "i3/rules.config".source = ./i3/rules.config;
+    "i3/scripts".source = ./i3/scripts;
     "polybar".source = ./polybar;
     "rofi".source = ./rofi;
     "nvim/init.lua".source = ./nvim/init.lua;
     "nvim/lua".source = ./nvim/lua;
     "nvim/after".source = ./nvim/after;
     "nvim/ftplugins".source = ./nvim/ftplugins;
+    # kitty -o allow_remote_control=yes
+    # kitty @ get-colors
+    # "kitty/themes/nix_colors.conf".text = ''
+    #   color0 #${config.colorScheme.colors.base00}
+    # '';
+    "i3/colors.config".text = ''
+      #class                   border                                backgr.                               text                                  indicator                             child_border
+      client.focused           #${config.colorScheme.colors.base04}  #${config.colorScheme.colors.base03}  #${config.colorScheme.colors.base05}  #${config.colorScheme.colors.base03}  #${config.colorScheme.colors.base03}
+      client.focused_inactive  #${config.colorScheme.colors.base03}  #${config.colorScheme.colors.base02}  #${config.colorScheme.colors.base05}  #${config.colorScheme.colors.base02}  #${config.colorScheme.colors.base02}
+      client.unfocused         #${config.colorScheme.colors.base02}  #${config.colorScheme.colors.base00}  #${config.colorScheme.colors.base05}  #${config.colorScheme.colors.base00}  #${config.colorScheme.colors.base00}
+      client.urgent            #${config.colorScheme.colors.base04}  #${config.colorScheme.colors.base08}  #${config.colorScheme.colors.base05}  #${config.colorScheme.colors.base08}  #${config.colorScheme.colors.base08}
+      client.placeholder       #${config.colorScheme.colors.base00}  #${config.colorScheme.colors.base00}  #${config.colorScheme.colors.base05}  #${config.colorScheme.colors.base00}  #${config.colorScheme.colors.base00}
+      client.background        #${config.colorScheme.colors.base00}                                                                                                                    
+    '';
   };
-
-  # Home Manager can also manage your environment variables through
-  # 'home.sessionVariables'. If you don't want to manage your shell through Home
-  # Manager then you have to manually source 'hm-session-vars.sh' located at
-  # either
-  #
-  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  /etc/profiles/per-user/user/etc/profile.d/hm-session-vars.sh
-  #
+#
   home.sessionVariables = {
     EDITOR = "nvim";
     XDG_CONFIG_HOME = "$HOME/.config";
@@ -246,21 +241,22 @@
     enable = true;
     settings = {
       globals = {
-        frame_color = "#8AADF4";
+        frame_color = "#${config.colorScheme.colors.base04}";
         separator_color = "frame";
       };
       urgency_low = {
-        background = "#24273A";
-        foreground = "#CAD3F5";
+        background = "#${config.colorScheme.colors.base00}";
+        foreground = "#${config.colorScheme.colors.base05}";
+        frame_color = "#${config.colorScheme.colors.base03}";
       };
       urgency_normal = {
-        background = "#24273A";
-        foreground = "#CAD3F5";
+        background = "#${config.colorScheme.colors.base00}";
+        foreground = "#${config.colorScheme.colors.base05}";
       };
       urgency_critical = {
-        background = "#24273A";
-        foreground = "#CAD3F5";
-        frame_color = "#F5A97F";
+        background = "#${config.colorScheme.colors.base00}";
+        foreground = "#${config.colorScheme.colors.base0F}";
+        frame_color = "#${config.colorScheme.colors.base08}";
       };
     };
   };
