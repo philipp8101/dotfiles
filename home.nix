@@ -1,6 +1,10 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
+  imports = [
+    inputs.nix-colors.homeManagerModules.default
+  ];
+  colorScheme = inputs.nix-colors.colorSchemes.catppuccin-macchiato;
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "philipp";
@@ -183,28 +187,28 @@
     enable = true;
     settings = {
       colors.bright = {
-        black = "0x565656";
-        blue = "0x49a4f8";
-        cyan = "0x99faf2";
-        green = "0xc0e17d";
-        magenta = "0xa47de9";
-        red = "0xec5357";
-        white = "0xffffff";
-        yellow = "0xf9da6a";
+        black = "0x${config.colorScheme.colors.base01}";
+        blue = "0x${config.colorScheme.colors.base0D}";
+        cyan = "0x${config.colorScheme.colors.base0C}";
+        green = "0x${config.colorScheme.colors.base0B}";
+        magenta = "0x${config.colorScheme.colors.base0E}";
+        red = "0x${config.colorScheme.colors.base08}";
+        white = "0x${config.colorScheme.colors.base05}";
+        yellow = "0x${config.colorScheme.colors.base0A}";
       };
       colors.normal = {
-        black = "0x2e2e2e";
-        blue = "0x47a0f3";
-        cyan = "0x64dbed";
-        green = "0xabe047";
-        magenta = "0x7b5cb0";
-        red = "0xeb4129";
-        white = "0xe5e9f0";
-        yellow = "0xf6c744";
+        black = "0x${config.colorScheme.colors.base01}";
+        blue = "0x${config.colorScheme.colors.base0D}";
+        cyan = "0x${config.colorScheme.colors.base0C}";
+        green = "0x${config.colorScheme.colors.base0B}";
+        magenta = "0x${config.colorScheme.colors.base0E}";
+        red = "0x${config.colorScheme.colors.base08}";
+        white = "0x${config.colorScheme.colors.base05}";
+        yellow = "0x${config.colorScheme.colors.base0A}";
       };
       colors.primary = {
-        background = "0x101421";
-        foreground = "0xfffbf6";
+        background = "0x${config.colorScheme.colors.base00}";
+        foreground = "0x${config.colorScheme.colors.base05}";
       };
       env = {
         TERM = "xterm-256color";
