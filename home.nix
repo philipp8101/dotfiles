@@ -4,6 +4,7 @@
   imports = [
     inputs.nix-colors.homeManagerModules.default
     ./home/polybar.nix
+    ./home/alacritty.nix
   ];
   # colorScheme = inputs.nix-colors.colorSchemes.catppuccin-macchiato;
   colorScheme = inputs.nix-colors.lib.schemeFromYAML "carbonfox" (builtins.readFile(builtins.fetchurl{
@@ -54,7 +55,7 @@
     "i3/modes.config".source = ./i3/modes.config;
     "i3/rules.config".source = ./i3/rules.config;
     "i3/scripts".source = ./i3/scripts;
-    "polybar".source = ./polybar;
+    "polybar/polybar-scripts".source = ./polybar/polybar-scripts;
     "rofi".source = ./rofi;
     "nvim/init.lua".source = ./nvim/init.lua;
     "nvim/lua".source = ./nvim/lua;
@@ -176,65 +177,6 @@
     };
     settings = {
       background_opacity = "0.8";
-    };
-  };
-  programs.alacritty = {
-    enable = true;
-    settings = {
-      colors.bright = {
-        black = "0x${config.colorScheme.colors.base01}";
-        blue = "0x${config.colorScheme.colors.base0D}";
-        cyan = "0x${config.colorScheme.colors.base0C}";
-        green = "0x${config.colorScheme.colors.base0B}";
-        magenta = "0x${config.colorScheme.colors.base0E}";
-        red = "0x${config.colorScheme.colors.base08}";
-        white = "0x${config.colorScheme.colors.base05}";
-        yellow = "0x${config.colorScheme.colors.base0A}";
-      };
-      colors.normal = {
-        black = "0x${config.colorScheme.colors.base01}";
-        blue = "0x${config.colorScheme.colors.base0D}";
-        cyan = "0x${config.colorScheme.colors.base0C}";
-        green = "0x${config.colorScheme.colors.base0B}";
-        magenta = "0x${config.colorScheme.colors.base0E}";
-        red = "0x${config.colorScheme.colors.base08}";
-        white = "0x${config.colorScheme.colors.base05}";
-        yellow = "0x${config.colorScheme.colors.base0A}";
-      };
-      colors.primary = {
-        background = "0x${config.colorScheme.colors.base00}";
-        foreground = "0x${config.colorScheme.colors.base05}";
-      };
-      env = {
-        TERM = "xterm-256color";
-      };
-      font = {
-        size = 14.0;
-      };
-      font.bold = {
-        family = "Inconsolata";
-        style = "Bold";
-      };
-      font.bold_italic = {
-        family = "Inconsolata";
-        style = "Bold Italic";
-      };
-      font.italic = {
-        family = "Inconsolata";
-        style = "Italic";
-      };
-      font.normal = {
-        family = "Inconsolata";
-        style = "Regular";
-      };
-      window = {
-        opacity = 0.8;
-        startup_mode = "Windowed";
-      };
-      window.dimensions = {
-        columns = 0;
-        lines = 0;
-      };
     };
   };
   services.dunst = {
