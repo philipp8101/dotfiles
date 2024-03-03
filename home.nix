@@ -64,16 +64,16 @@
     # kitty -o allow_remote_control=yes
     # kitty @ get-colors
     # "kitty/themes/nix_colors.conf".text = ''
-    #   color0 #${config.colorScheme.colors.base00}
+    #   color0 #${config.colorScheme.palette.base00}
     # '';
     "i3/colors.config".text = ''
       #class                   border                                backgr.                               text                                  indicator                             child_border
-      client.focused           #${config.colorScheme.colors.base04}  #${config.colorScheme.colors.base03}  #${config.colorScheme.colors.base05}  #${config.colorScheme.colors.base03}  #${config.colorScheme.colors.base03}
-      client.focused_inactive  #${config.colorScheme.colors.base03}  #${config.colorScheme.colors.base02}  #${config.colorScheme.colors.base05}  #${config.colorScheme.colors.base02}  #${config.colorScheme.colors.base02}
-      client.unfocused         #${config.colorScheme.colors.base02}  #${config.colorScheme.colors.base00}  #${config.colorScheme.colors.base05}  #${config.colorScheme.colors.base00}  #${config.colorScheme.colors.base00}
-      client.urgent            #${config.colorScheme.colors.base04}  #${config.colorScheme.colors.base08}  #${config.colorScheme.colors.base05}  #${config.colorScheme.colors.base08}  #${config.colorScheme.colors.base08}
-      client.placeholder       #${config.colorScheme.colors.base00}  #${config.colorScheme.colors.base00}  #${config.colorScheme.colors.base05}  #${config.colorScheme.colors.base00}  #${config.colorScheme.colors.base00}
-      client.background        #${config.colorScheme.colors.base00}                                                                                                                    
+      client.focused           #${config.colorScheme.palette.base04}  #${config.colorScheme.palette.base03}  #${config.colorScheme.palette.base05}  #${config.colorScheme.palette.base03}  #${config.colorScheme.palette.base03}
+      client.focused_inactive  #${config.colorScheme.palette.base03}  #${config.colorScheme.palette.base02}  #${config.colorScheme.palette.base05}  #${config.colorScheme.palette.base02}  #${config.colorScheme.palette.base02}
+      client.unfocused         #${config.colorScheme.palette.base02}  #${config.colorScheme.palette.base00}  #${config.colorScheme.palette.base05}  #${config.colorScheme.palette.base00}  #${config.colorScheme.palette.base00}
+      client.urgent            #${config.colorScheme.palette.base04}  #${config.colorScheme.palette.base08}  #${config.colorScheme.palette.base05}  #${config.colorScheme.palette.base08}  #${config.colorScheme.palette.base08}
+      client.placeholder       #${config.colorScheme.palette.base00}  #${config.colorScheme.palette.base00}  #${config.colorScheme.palette.base05}  #${config.colorScheme.palette.base00}  #${config.colorScheme.palette.base00}
+      client.background        #${config.colorScheme.palette.base00}                                                                                                                    
     '';
   };
 #
@@ -183,22 +183,22 @@
     enable = true;
     settings = {
       globals = {
-        frame_color = "#${config.colorScheme.colors.base04}";
+        frame_color = "#${config.colorScheme.palette.base04}";
         separator_color = "frame";
       };
       urgency_low = {
-        background = "#${config.colorScheme.colors.base00}";
-        foreground = "#${config.colorScheme.colors.base05}";
-        frame_color = "#${config.colorScheme.colors.base03}";
+        background = "#${config.colorScheme.palette.base00}";
+        foreground = "#${config.colorScheme.palette.base05}";
+        frame_color = "#${config.colorScheme.palette.base03}";
       };
       urgency_normal = {
-        background = "#${config.colorScheme.colors.base00}";
-        foreground = "#${config.colorScheme.colors.base05}";
+        background = "#${config.colorScheme.palette.base00}";
+        foreground = "#${config.colorScheme.palette.base05}";
       };
       urgency_critical = {
-        background = "#${config.colorScheme.colors.base00}";
-        foreground = "#${config.colorScheme.colors.base0F}";
-        frame_color = "#${config.colorScheme.colors.base08}";
+        background = "#${config.colorScheme.palette.base00}";
+        foreground = "#${config.colorScheme.palette.base0F}";
+        frame_color = "#${config.colorScheme.palette.base08}";
       };
     };
   };
