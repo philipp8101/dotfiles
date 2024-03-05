@@ -6,11 +6,11 @@
     ./home/polybar.nix
     ./home/alacritty.nix
   ];
-  # colorScheme = inputs.nix-colors.colorSchemes.catppuccin-macchiato;
-  colorScheme = inputs.nix-colors.lib.schemeFromYAML "carbonfox" (builtins.readFile(builtins.fetchurl{
-    url = "https://github.com/EdenEast/nightfox.nvim/raw/main/extra/carbonfox/base16.yaml";
-    sha256 = "196934b7c57ddfe9427318a51fdc17dc4684e73a33660584fd9afa1486fd717b";
-  }));
+  colorScheme = inputs.nix-colors.colorSchemes.catppuccin-macchiato;
+  # colorScheme = inputs.nix-colors.lib.schemeFromYAML "carbonfox" (builtins.readFile(builtins.fetchurl{
+  #   url = "https://github.com/EdenEast/nightfox.nvim/raw/main/extra/carbonfox/base16.yaml";
+  #   sha256 = "196934b7c57ddfe9427318a51fdc17dc4684e73a33660584fd9afa1486fd717b";
+  # }));
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "philipp";
@@ -47,7 +47,7 @@
   ];
 
   home.file = {
-    ".background-image".source = ./nixos-wallpaper-catppuccin-macchiato.png;
+    ".background-image".source = pkgs.substituteAll { src = "./nixos-wallpaper-catppuccin-macchiato.svg"; "#181926"="#ff0000";};
   };
   xdg.configFile = {
     "tmux".source = ./tmux;
