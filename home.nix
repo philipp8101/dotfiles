@@ -1,12 +1,23 @@
 { config, pkgs, inputs, ... }:
 
+let 
+bg = pkgs.stdenv.mkDerivation {
+      name = "modified-wallpaper";
+      src = ./nixos-wallpaper-catppuccin-macchiato.svg;
+      buildInputs = [ pkgs.gnused ];
+      buildCommand = ''
+        mkdir -p $out
+        sed -e 's/#181926/#${config.colorScheme.palette.base01}/g' -e 's/#f4dbd6/#${config.colorScheme.palette.base06}/g' -e 's/#8bd5ca/#${config.colorScheme.palette.base0C}/g' -e 's/#5b6078/#${config.colorScheme.palette.base04}/g' -e 's/#24273a/${config.colorScheme.palette.base00}/g' $src > $out/modified-wallpaper.svg
+      '';
+    };
+in
 {
   imports = [
     inputs.nix-colors.homeManagerModules.default
     ./home/polybar.nix
     ./home/alacritty.nix
   ];
-  colorScheme = inputs.nix-colors.colorSchemes.catppuccin-macchiato;
+  colorScheme = inputs.nix-colors.colorSchemes.gigavolt;
   # colorScheme = inputs.nix-colors.lib.schemeFromYAML "carbonfox" (builtins.readFile(builtins.fetchurl{
   #   url = "https://github.com/EdenEast/nightfox.nvim/raw/main/extra/carbonfox/base16.yaml";
   #   sha256 = "196934b7c57ddfe9427318a51fdc17dc4684e73a33660584fd9afa1486fd717b";
@@ -47,7 +58,7 @@
   ];
 
   home.file = {
-    ".background-image".source = pkgs.substituteAll { src = "./nixos-wallpaper-catppuccin-macchiato.svg"; "#181926"="#ff0000";};
+    ".background-image".source = "${bg.outPath}/modified-wallpaper.svg";
   };
   xdg.configFile = {
     "tmux/tmux-sessionizer".source = ./tmux/tmux-sessionizer;
