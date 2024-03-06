@@ -1,7 +1,8 @@
-{ config, ... }:
+{ pkgs, config, ... }:
 {
   programs.rofi = {
     enable = true;
+    plugins = [ pkgs.rofi-calc ];
     theme = let inherit (config.lib.formats.rasi) mkLiteral; in {
       "configuration" = {
         display-run = "";
@@ -28,7 +29,7 @@
       };
       "mainbox" = {
         padding = mkLiteral "12px";
-        children = mkLiteral "[inputbar, listview]";
+        children = mkLiteral "[inputbar, message, listview]";
       };
       "inputbar" = {
         background-color = mkLiteral "#${config.colorScheme.palette.base01}bb";
