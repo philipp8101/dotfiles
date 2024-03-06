@@ -18,6 +18,7 @@ in
     ./home/alacritty.nix
     ./rofi.nix
     ./tmux.nix
+    ./i3.nix
   ];
   colorScheme = inputs.nix-colors.colorSchemes.gigavolt;
   # colorScheme = inputs.nix-colors.lib.schemeFromYAML "carbonfox" (builtins.readFile(builtins.fetchurl{
@@ -63,12 +64,9 @@ in
     ".background-image".source = "${bg.outPath}/modified-wallpaper.svg";
   };
   xdg.configFile = {
+  "i3/scripts".source = ./i3/scripts;
     "tmux/tmux-sessionizer".source = ./tmux/tmux-sessionizer;
     "tmux/custom.conf".source = ./tmux/custom.conf;
-    "i3/config".source = ./i3/config;
-    "i3/modes.config".source = ./i3/modes.config;
-    "i3/rules.config".source = ./i3/rules.config;
-    "i3/scripts".source = ./i3/scripts;
     "polybar/polybar-scripts".source = ./polybar/polybar-scripts;
     "nvim/init.lua".source = ./nvim/init.lua;
     "nvim/lua".source = ./nvim/lua;
@@ -79,15 +77,6 @@ in
     # "kitty/themes/nix_colors.conf".text = ''
     #   color0 #${config.colorScheme.palette.base00}
     # '';
-    "i3/colors.config".text = ''
-      #class                   border                                backgr.                               text                                  indicator                             child_border
-      client.focused           #${config.colorScheme.palette.base04}  #${config.colorScheme.palette.base03}  #${config.colorScheme.palette.base05}  #${config.colorScheme.palette.base03}  #${config.colorScheme.palette.base03}
-      client.focused_inactive  #${config.colorScheme.palette.base03}  #${config.colorScheme.palette.base02}  #${config.colorScheme.palette.base05}  #${config.colorScheme.palette.base02}  #${config.colorScheme.palette.base02}
-      client.unfocused         #${config.colorScheme.palette.base02}  #${config.colorScheme.palette.base00}  #${config.colorScheme.palette.base05}  #${config.colorScheme.palette.base00}  #${config.colorScheme.palette.base00}
-      client.urgent            #${config.colorScheme.palette.base04}  #${config.colorScheme.palette.base08}  #${config.colorScheme.palette.base05}  #${config.colorScheme.palette.base08}  #${config.colorScheme.palette.base08}
-      client.placeholder       #${config.colorScheme.palette.base00}  #${config.colorScheme.palette.base00}  #${config.colorScheme.palette.base05}  #${config.colorScheme.palette.base00}  #${config.colorScheme.palette.base00}
-      client.background        #${config.colorScheme.palette.base00}                                                                                                                    
-    '';
   };
 #
   home.sessionVariables = {
