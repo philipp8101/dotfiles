@@ -1,5 +1,9 @@
 { config, ... }:
 {
+  xdg.configFile = {
+    "tmux/tmux-sessionizer".source = ./tmux/tmux-sessionizer;
+    "tmux/custom.conf".source = ./tmux/custom.conf;
+  };
   programs.tmux = {
     enable = true;
     extraConfig = ''

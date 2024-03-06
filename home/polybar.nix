@@ -7,6 +7,7 @@ let
     ppc-cmd = "PATH=${pkgs.pulseaudio}/bin:${pkgs.coreutils-full}/bin:${pkgs.gnugrep}/bin ${pkgs.bash}/bin/bash ${polybar-pulseaudio-control}";
 in
 {
+    xdg.configFile."polybar/polybar-scripts".source = ./polybar/polybar-scripts;
     services.polybar = {
         enable = true;
         script = "polybar primary &";

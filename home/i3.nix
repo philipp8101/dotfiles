@@ -3,6 +3,7 @@ let
 mod = "Mod4";
 in
 {
+  xdg.configFile."i3/scripts".source = ./i3/scripts;
   xsession.windowManager.i3 = {
     enable = true;
     extraConfig = ''

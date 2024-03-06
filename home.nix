@@ -16,10 +16,10 @@ in
     inputs.nix-colors.homeManagerModules.default
     ./home/polybar.nix
     ./home/alacritty.nix
-    ./rofi.nix
-    ./tmux.nix
-    ./i3.nix
-    ./lf.nix
+    ./home/rofi.nix
+    ./home/tmux.nix
+    ./home/i3.nix
+    ./home/lf.nix
   ];
   colorScheme = inputs.nix-colors.colorSchemes.gigavolt;
   # colorScheme = inputs.nix-colors.lib.schemeFromYAML "carbonfox" (builtins.readFile(builtins.fetchurl{
@@ -65,10 +65,6 @@ in
     ".background-image".source = "${bg.outPath}/modified-wallpaper.svg";
   };
   xdg.configFile = {
-  "i3/scripts".source = ./i3/scripts;
-    "tmux/tmux-sessionizer".source = ./tmux/tmux-sessionizer;
-    "tmux/custom.conf".source = ./tmux/custom.conf;
-    "polybar/polybar-scripts".source = ./polybar/polybar-scripts;
     "nvim/init.lua".source = ./nvim/init.lua;
     "nvim/lua".source = ./nvim/lua;
     "nvim/after".source = ./nvim/after;
