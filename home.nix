@@ -19,6 +19,7 @@ in
     ./rofi.nix
     ./tmux.nix
     ./i3.nix
+    ./lf.nix
   ];
   colorScheme = inputs.nix-colors.colorSchemes.gigavolt;
   # colorScheme = inputs.nix-colors.lib.schemeFromYAML "carbonfox" (builtins.readFile(builtins.fetchurl{
