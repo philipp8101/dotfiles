@@ -59,9 +59,9 @@ bindsym $mod+z exec flameshot gui
 bindsym $mod+Shift+z exec flameshot gui --raw | tesseract stdin stdout -l eng | xclip -in -selection clipboard
 bindsym $mod+q kill
 bindsym --release button2 kill
-bindsym $mod+g exec rofi -show drun -theme round
-bindsym $mod+Shift+g exec "~/.config/i3/scripts/next_empty_workspace ; rofi -show drun -theme round"
-bindsym $mod+v exec rofi -show power-menu -modi power-menu:~/.config/rofi/rofi-power-menu -theme round 
+bindsym $mod+g exec rofi -show drun
+bindsym $mod+Shift+g exec "~/.config/i3/scripts/next_empty_workspace ; rofi -show drun"
+bindsym $mod+v exec rofi -show power-menu -modi power-menu:~/.config/rofi/rofi-power-menu
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
@@ -93,9 +93,9 @@ bindsym $mod+Control+r restart
 # bindsym $mod+$alt+a move container to workspace prev_on_output
 # bindsym $mod+$alt+t move container to workspace next_on_output
 # custom rofi scripts, provide i3 commands separated by ´-´ in the mode variable
-bindsym $mod+f exec mode=workspace rofi -show "go to workspace" -modes "go to workspace:~/.config/i3/scripts/rofi_menu" -theme round
-# bindsym $mod+e exec mode="move container to workspace" rofi -show "move container to workspace" -modes "move container to workspace:~/.config/i3/scripts/rofi_menu" -theme round
-# bindsym $mod+o exec mode="move container to workspace - workspace" rofi -show "move container and go to workspace" -modes "move container and go to workspace:~/.config/i3/scripts/rofi_menu" -theme round
+bindsym $mod+f exec mode=workspace rofi -show "go to workspace" -modes "go to workspace:~/.config/i3/scripts/rofi_menu"
+# bindsym $mod+e exec mode="move container to workspace" rofi -show "move container to workspace" -modes "move container to workspace:~/.config/i3/scripts/rofi_menu"
+# bindsym $mod+o exec mode="move container to workspace - workspace" rofi -show "move container and go to workspace" -modes "move container and go to workspace:~/.config/i3/scripts/rofi_menu"
 # bindsym $mod+Shift+n exec i3-input -F "workspace %s" -P "go to workspace: "
 # bindsym $mod+Shift+e exec i3-input -F "move container to workspace %s" -P "move container to workspace: "
 # bindsym $mod+Shift+o exec i3-input -F "move container to workspace %s ; workspace %s" -P "move container and go to workspace: "
@@ -117,8 +117,8 @@ bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
-bindsym $mod+u exec rofi -show calc -modi calc -no-show-match -no-sort -theme round-message
-# bindsym $mod+p exec rofi -show time -modi time:~/.config/rofi/rofi-scripts/time.py -theme round
+bindsym $mod+u exec rofi -show calc -modi calc -no-show-match -no-sort
+# bindsym $mod+p exec rofi -show time -modi time:~/.config/rofi/rofi-scripts/time.py
 
 # switch to workspace
 bindsym $mod+t workspace 1

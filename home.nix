@@ -16,6 +16,7 @@ in
     inputs.nix-colors.homeManagerModules.default
     ./home/polybar.nix
     ./home/alacritty.nix
+    ./rofi.nix
   ];
   colorScheme = inputs.nix-colors.colorSchemes.gigavolt;
   # colorScheme = inputs.nix-colors.lib.schemeFromYAML "carbonfox" (builtins.readFile(builtins.fetchurl{
@@ -68,7 +69,6 @@ in
     "i3/rules.config".source = ./i3/rules.config;
     "i3/scripts".source = ./i3/scripts;
     "polybar/polybar-scripts".source = ./polybar/polybar-scripts;
-    "rofi".source = ./rofi;
     "nvim/init.lua".source = ./nvim/init.lua;
     "nvim/lua".source = ./nvim/lua;
     "nvim/after".source = ./nvim/after;
