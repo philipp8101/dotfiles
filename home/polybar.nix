@@ -18,7 +18,7 @@ in
                 width = "100%";
                 height = "27";
                 fixed-center = "true";
-                background = "#${config.colorScheme.palette.base00}3a";
+                background = "#aa${config.colorScheme.palette.base00}";
                 foreground = "#${config.colorScheme.palette.base05}";
                 line-size = "3";
                 border-bottom-size = "3";
@@ -28,7 +28,7 @@ in
                 module-margin-left = "1";
                 module-margin-right = "1";
                 font-0 = "Inconsolata:style=regular:size=11;2";
-                font-1 = "Inconsolata Nerd Font Mono:style=Regular:size=16;2";
+                font-1 = "Inconsolata Nerd Font Mono:style=Regular:size=21;5";
                 modules-left = "ws-move-left i3 ws-add ws-move-right";
                 modules-center = "date-script";
                 modules-right = "disk headset-battery pulseaudio-control temp tray";

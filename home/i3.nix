@@ -13,7 +13,7 @@ in
       fonts = {
         names = [ "Inconsolata Nerd Font" ];
         style = "Regular";
-        size = 11.0;
+        size = 8.0;
       };
       modifier = mod;
       floating.modifier = mod;
