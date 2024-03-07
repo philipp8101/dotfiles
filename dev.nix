@@ -1,10 +1,13 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, user, ... }:
 {
   imports = [
     inputs.nix-colors.homeManagerModules.default
     ./home/tmux.nix
     ./home/lf.nix
   ];
+  home.username = "${user}";
+  home.homeDirectory = "/home/${user}";
+  home.stateVersion = "23.11"; # Please read the comment before changing.
 
   colorScheme = inputs.nix-colors.colorSchemes.gigavolt;
   # colorScheme = inputs.nix-colors.lib.schemeFromYAML "carbonfox" (builtins.readFile(builtins.fetchurl{
@@ -12,8 +15,14 @@
   #   sha256 = "196934b7c57ddfe9427318a51fdc17dc4684e73a33660584fd9afa1486fd717b";
   # }));
 
-  home.packages = [
-    pkgs.go
+  home.packages = with pkgs; [
+    go
+    cargo
+    cmake
+    python3
+    nodejs_21
+    ghc
+    cabal-install
   ];
 
   xdg.configFile = {

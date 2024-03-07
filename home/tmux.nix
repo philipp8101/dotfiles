@@ -1,4 +1,4 @@
-{ config, ... }:
+{ pkgs, config, ... }:
 {
   xdg.configFile = {
     "tmux/tmux-sessionizer".source = ./tmux/tmux-sessionizer;
@@ -6,6 +6,7 @@
   };
   programs.tmux = {
     enable = true;
+    shell = "${pkgs.zsh}/bin/zsh";
     extraConfig = ''
       set -g mode-style "fg=#${config.colorScheme.palette.base00},bg=#${config.colorScheme.palette.base06}"
       set -g message-style "fg=#${config.colorScheme.palette.base00},bg=#${config.colorScheme.palette.base06}"

@@ -37,25 +37,19 @@
       };
     };  
     homeConfigurations = {
+      dev = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        extraSpecialArgs = { inherit inputs; user = "nix"; };
+        modules = [
+          ./dev.nix
+        ];
+      };
       full = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        extraSpecialArgs = { inherit inputs; };
-        home.username = "philipp";
-        home.homeDirectory = "/home/philipp";
-        home.stateVersion = "23.11"; # Please read the comment before changing.
+        extraSpecialArgs = { inherit inputs; user = "nix"; };
         modules = [
           ./dev.nix
           ./wm.nix
-        ];
-      };
-      dev = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        extraSpecialArgs = { inherit inputs; };
-        home.username = "philipp";
-        home.homeDirectory = "/home/philipp";
-        home.stateVersion = "23.11"; # Please read the comment before changing.
-        modules = [
-          ./dev.nix
         ];
       };
     };
