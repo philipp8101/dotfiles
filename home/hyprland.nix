@@ -19,31 +19,31 @@ in
         sensitivity = 0;
       };
       general = {
-        gaps_in = 5;
-        gaps_out = 20;
-        border_size = 2;
-        col.active_border = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-        col.inactive_border = "rgba(595959aa)";
-        layout = "dwindle";
+        # gaps_in = 5;
+        # gaps_out = 20;
+        # border_size = 2;
+        # col.active_border = "rgba(33ccffee) rgba(00ff99ee) 45deg";
+        # col.inactive_border = "rgba(595959aa)";
+        # layout = "dwindle";
       };
       decorations = {
-        rounding = 10;
-        drop_shadow = true;
-        shadow_range = 4;
-        shadow_render_power = 3;
-        col.shadow = "rgba(1a1a1aee)";
+        # rounding = 10;
+        # drop_shadow = true;
+        # shadow_range = 4;
+        # shadow_render_power = 3;
+        # col.shadow = "rgba(1a1a1aee)";
       };
       animations = {
-        enable = true;
-        bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
-        animation = [
-          "windows, 1, 7, myBezier"
-          "windowsOut, 1,7, default, popin 80%"
-          "border, 1, 10, default"
-          "borderangle, 1, 8, default"
-          "fade, 1, 7, default"
-          "workspace, 1, 6, default"
-        ];
+        # enable = true;
+        # bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
+        # animation = [
+        #   "windows, 1, 7, myBezier"
+        #   "windowsOut, 1,7, default, popin 80%"
+        #   "border, 1, 10, default"
+        #   "borderangle, 1, 8, default"
+        #   "fade, 1, 7, default"
+        #   "workspace, 1, 6, default"
+        # ];
       };
       dwindle = {
         pseudotile = true;
@@ -72,8 +72,8 @@ in
         "$mainMod, D, changegroupactive, previous"
         "$mainMod, tab, workspace, previous"
         "$mainMod, n, togglespecialworkspace"
-        "$mainMod, mouse:272, movewindow # mouse binds, if we change bind to bindm here the window will always be left floating "
-        "$mainMod, mouse:273, resizewindow"
+        # "$mainMod, mouse:272, movewindow # mouse binds, if we change bind to bindm here the window will always be left floating "
+        # "$mainMod, mouse:273, resizewindow"
         # "$mainMod, BACKSPACE, exec, sed -i '/workman/{ ; 4s/ workman// ; b ; } ; 4s/$/ workman/' ~/.config/hypr/input.conf"
         "$mainMod, a, movefocus, l"
         "$mainMod, t, movefocus, r"
@@ -109,8 +109,8 @@ in
         "$mainMod SHIFT, 0, movetoworkspace, 10"
         "$mainMod, X, workspace, m+1"
         "$mainMod, Z, workspace, m-1"
-        "$mainMod, mouse:272, movewindow"
-        "$mainMod, mouse:273, resizewindow"
+        # "$mainMod, mouse:272, movewindow"
+        # "$mainMod, mouse:273, resizewindow"
         "$mainMod, less, exec, ${pkgs.hyprshot}/bin/hyprshot"
         ", XF86MonBrightnessDown, exec, ${pkgs.brillo}/bin/brillo -U 5"
         ", XF86MonBrightnessUp, exec, ${pkgs.brillo}/bin/brillo -A 5"
@@ -120,23 +120,23 @@ in
         ", XF86AudioLowerVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-"
         ", XF86AudioMute, exec, ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
       ];
-      windowrulev2 = [
-        "nomaxsize, class:^(riotclientux.exe)$,title:^(Riot Client Main)$"
-        "float, class:^(riotclientux.exe)$,title:^(Riot Client Main)$"
-        "size 1540 850, class:^(riotclientux.exe)$,title:^(Riot Client Main)$"
-        "center, class:^(riotclientux.exe)$,title:^(Riot Client Main)$"
-        ""
-        "nomaxsize, class:^(leagueclientux.exe)$,title:^(League of Legends)$"
-        "float, class:^(leagueclientux.exe)$,title:^(League of Legends)$"
-        "size 1600 900,class:^(leagueclientux.exe)$,title:^(League of Legends)$"
-        "center, class:^(leagueclientux.exe)$,title:^(League of Legends)$"
-        "opacity 1.0 override 1.0 override, class:^(leagueclientux.exe)$,title:^(League of Legends)$"
-        ""
-        "opacity 1.0 override 1.0 override, class:^(league of legends.exe)$,title:^(League of Legends (TM) Client)$"
-        "float, class:^(league of legends.exe)$,title:^(League of Legends (TM) Client)$"
-        "nomaxsize, class:^(league of legends.exe)$,title:^(League of Legends (TM) Client)$"
-        "fullscreen, class:^(league of legends.exe)$,title:^(League of Legends (TM) Client)$ # doesn't seem to work"
-      ];
+      # windowrulev2 = [
+      #   "nomaxsize, class:^(riotclientux.exe)$,title:^(Riot Client Main)$"
+      #   "float, class:^(riotclientux.exe)$,title:^(Riot Client Main)$"
+      #   "size 1540 850, class:^(riotclientux.exe)$,title:^(Riot Client Main)$"
+      #   "center, class:^(riotclientux.exe)$,title:^(Riot Client Main)$"
+      #   ""
+      #   "nomaxsize, class:^(leagueclientux.exe)$,title:^(League of Legends)$"
+      #   "float, class:^(leagueclientux.exe)$,title:^(League of Legends)$"
+      #   "size 1600 900,class:^(leagueclientux.exe)$,title:^(League of Legends)$"
+      #   "center, class:^(leagueclientux.exe)$,title:^(League of Legends)$"
+      #   "opacity 1.0 override 1.0 override, class:^(leagueclientux.exe)$,title:^(League of Legends)$"
+      #   ""
+      #   "opacity 1.0 override 1.0 override, class:^(league of legends.exe)$,title:^(League of Legends (TM) Client)$"
+      #   "float, class:^(league of legends.exe)$,title:^(League of Legends (TM) Client)$"
+      #   "nomaxsize, class:^(league of legends.exe)$,title:^(League of Legends (TM) Client)$"
+      #   "fullscreen, class:^(league of legends.exe)$,title:^(League of Legends (TM) Client)$ # doesn't seem to work"
+      # ];
     };
   };
 }
