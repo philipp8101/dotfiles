@@ -1,21 +1,37 @@
-{ pkgs, config, ... }:
+{ pkgs, config, system, inputs, ... }:
 let
 mod = "Mod4";
 rofi-power-menu = pkgs.stdenv.mkDerivation {
-      name = "rofi-power-menu";
-      src = builtins.fetchurl {
-        url = "https://github.com/jluttine/rofi-power-menu/raw/master/rofi-power-menu";
-        sha256 = "3cfdf4cfb3553a62f56b055ed039e29c56abc063e9252cfbc3c7d3b5c98dfbb6";
-      };
-      buildCommand = ''
-        mkdir -p $out/bin/
-        cp $src $out/bin/rofi-power-menu
-        chmod +x $out/bin/rofi-power-menu
-      '';
-    };
+  name = "rofi-power-menu";
+  src = builtins.fetchurl {
+    url = "https://github.com/jluttine/rofi-power-menu/raw/master/rofi-power-menu";
+    sha256 = "3cfdf4cfb3553a62f56b055ed039e29c56abc063e9252cfbc3c7d3b5c98dfbb6";
+  };
+  buildCommand = ''
+    mkdir -p $out/bin/
+    cp $src $out/bin/rofi-power-menu
+    chmod +x $out/bin/rofi-power-menu
+    '';
+};
+pyenv = inputs.mach-nix.lib.${system}.mkPython {
+  python = "python3";
+  requirements = ''
+    i3ipc
+  '';
+};
+scripts = pkgs.stdenv.mkDerivation {
+  name = "i3-scripts";
+  src = ./i3scripts;
+  buildInputs = [ pkgs.gnused ];
+  buildCommand = ''
+    mkdir -p $out/bin
+    cp $src/*py $out/bin/
+    chmod +x $out/bin/*
+    sed -i -e '1i #!${pyenv}/bin/python' $out/bin/*
+  '';
+};
 in
 {
-  xdg.configFile."i3/scripts".source = ./i3/scripts;
   xsession.windowManager.i3 = {
     enable = true;
     extraConfig = ''
@@ -39,13 +55,13 @@ in
       bars = [];
       keybindings = {
         "${mod}+Return" = "exec ${pkgs.kitty}/bin/kitty";
-        "${mod}+Shift+Return" = "exec '~/.config/i3/scripts/next_empty_workspace ; ${pkgs.kitty}/bin/kitty'";
+        "${mod}+Shift+Return" = "exec \"${scripts}/bin/next_empty_workspace.py ; ${pkgs.kitty}/bin/kitty\"";
         "${mod}+z" = "exec flameshot gui";
         "${mod}+Shift+z" = "exec ${pkgs.flameshot}/binflameshot gui --raw | ${pkgs.tesseract}/bin/tesseract stdin stdout -l eng | ${pkgs.xclip}/bin/xclip -in -selection clipboard";
         "${mod}+q" = "kill";
         "--release button2" = "kill";
         "${mod}+g" = "exec ${pkgs.rofi}/bin/rofi -show drun";
-        "${mod}+Shift+g" = "exec '~/.config/i3/scripts/next_empty_workspace ; ${pkgs.rofi}/bin/rofi -show drun'";
+        "${mod}+Shift+g" = "exec \"${scripts}/bin/next_empty_workspace.py ; ${pkgs.rofi}/bin/rofi -show drun\"";
         "${mod}+v" = "exec ${pkgs.rofi}/bin/rofi -show power-menu -modi power-menu:${rofi-power-menu.outPath}/bin/rofi-power-menu";
         "${mod}+Left" = "focus left";
         "${mod}+Down" = "focus down";
@@ -66,19 +82,19 @@ in
         "${mod}+x" = "floating toggle";
         "${mod}+space" = "focus mode_toggle";
         "${mod}+p" = "focus parent";
-        "${mod}+Tab" = "exec ~/.config/i3/scripts/focus_last_workspace_on_output";
+        "${mod}+Tab" = "exec ${scripts}/bin/focus_last_workspace_on_output.py";
         "${mod}+m" = "move workspace to output left";
         "${mod}+c" = "move workspace to output right";
         "${mod}+Control+m" = "reload";
         "${mod}+Control+r" = "restart";
         # "${mod}+z" = "workspace prev_on_output";
         # "${mod}+x" = "workspace next_on_output";
-        # "${mod}+Shift+z" = "exec ~/.config/i3/scripts/move_to_next_workspace";
-        # "${mod}+Shift+x" = "exec ~/.config/i3/scripts/move_and_switch_to_next_workspace";
+        # "${mod}+Shift+z" = "exec ${scripts}/bin/move_to_next_workspace.py";
+        # "${mod}+Shift+x" = "exec ${scripts}/bin/move_and_switch_to_next_workspace.py";
         # "${mod}+$alt+a" = "move container to workspace prev_on_output";
         # "${mod}+$alt+t" = "move container to workspace next_on_output";
         # custom rofi scripts, provide i3 commands separated by ´-´ in the {mod}e variable
-        "${mod}+f" = "exec mode=workspace ${pkgs.rofi}/bin/rofi -show 'go to workspace' -modes 'go to workspace:~/.config/i3/scripts/rofi_menu'";
+        "${mod}+f" = "exec mode=workspace ${pkgs.rofi}/bin/rofi -show 'go to workspace' -modes 'go to workspace:${scripts}/bin/rofi_menu.py'";
         "${mod}+k" = "exec ${pkgs.mosquitto}/bin/mosquitto_pub -h 192.168.0.5 -t 'desk/control-height' -u mosquitto -P Y3Gnwwo= -m 'down'";
         "${mod}+l" = "exec ${pkgs.mosquitto}/bin/mosquitto_pub -h 192.168.0.5 -t 'desk/control-height' -u mosquitto -P Y3Gnwwo= -m 'up'";
         "${mod}+comma" = "exec ${pkgs.mosquitto}/bin/mosquitto_pub -h 192.168.0.5 -t 'desk/control-height' -u mosquitto -P Y3Gnwwo= -m 'p1'";

@@ -8,6 +8,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-colors.url = "github:misterio77/nix-colors";
+    mach-nix.url = "github:davhau/mach-nix";
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: 
@@ -46,7 +47,11 @@
       };
       full = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        extraSpecialArgs = { inherit inputs; user = "philipp"; };
+        extraSpecialArgs = {
+          inherit inputs;
+          inherit system;
+          user = "philipp";
+        };
         modules = [
           ./dev.nix
           ./wm.nix
