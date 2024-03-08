@@ -1,10 +1,18 @@
 { pkgs, config, ... }:
 let
 mod = "Mod4";
-  rofi-power-menu = builtins.fetchurl {
-    url = "https://github.com/jluttine/rofi-power-menu/raw/master/rofi-power-menu";
-    sha256 = "3cfdf4cfb3553a62f56b055ed039e29c56abc063e9252cfbc3c7d3b5c98dfbb6";
-  };
+rofi-power-menu = pkgs.stdenv.mkDerivation {
+      name = "rofi-power-menu";
+      src = builtins.fetchurl {
+        url = "https://github.com/jluttine/rofi-power-menu/raw/master/rofi-power-menu";
+        sha256 = "3cfdf4cfb3553a62f56b055ed039e29c56abc063e9252cfbc3c7d3b5c98dfbb6";
+      };
+      buildCommand = ''
+        mkdir -p $out/bin/
+        cp $src $out/bin/rofi-power-menu
+        chmod +x $out/bin/rofi-power-menu
+      '';
+    };
 in
 {
   xdg.configFile."i3/scripts".source = ./i3/scripts;
@@ -38,7 +46,7 @@ in
         "--release button2" = "kill";
         "${mod}+g" = "exec ${pkgs.rofi}/bin/rofi -show drun";
         "${mod}+Shift+g" = "exec '~/.config/i3/scripts/next_empty_workspace ; ${pkgs.rofi}/bin/rofi -show drun'";
-        "${mod}+v" = "exec ${pkgs.rofi}/bin/rofi -show power-menu -modi power-menu:${rofi-power-menu}";
+        "${mod}+v" = "exec ${pkgs.rofi}/bin/rofi -show power-menu -modi power-menu:${rofi-power-menu.outPath}/bin/rofi-power-menu";
         "${mod}+Left" = "focus left";
         "${mod}+Down" = "focus down";
         "${mod}+Up" = "focus up";
