@@ -103,6 +103,7 @@ in
 		];
 		desktopManager = {
 			xterm.enable = false;
+			plasma6.enable = true;
 		};
 		displayManager = {
 			defaultSession = "none+i3";
