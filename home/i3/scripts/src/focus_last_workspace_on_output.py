@@ -1,4 +1,3 @@
-#!/usr/bin/python
 import i3ipc
 
 i3 = i3ipc.Connection()

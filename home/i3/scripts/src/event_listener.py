@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 import signal
 from i3ipc import Connection, Event
 i3 = Connection()

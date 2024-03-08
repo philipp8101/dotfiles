@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-
 import json, subprocess
 
 output = subprocess.check_output(['i3-msg', '-t', 'get_workspaces'])

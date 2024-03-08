@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 from i3ipc import Connection, Event
 
 def on_workspace(i3, e):

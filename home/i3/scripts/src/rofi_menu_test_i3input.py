@@ -1,12 +1,8 @@
-#!/usr/bin/python
-
-import os
+from os import environ
 from sys import argv
 import subprocess
-from time import sleep
 from i3ipc import Connection
-mode = os.environ["mode"] if "mode" in os.environ else None
-recall = os.environ["recall"] if "recall" in os.environ else None
+mode = environ["mode"]
 choice = argv[1] if len(argv) > 1 else None
 
 
@@ -16,26 +12,21 @@ new_ws_identifier = "new workspace"
 ws_names = ws_number + ws_named
 
 tree = list(map(lambda x: x.name,Connection().get_workspaces()))
-combined = ws_names+tree
-
-
-def print_all_ws_names():
+if choice == None:
     print(new_ws_identifier)
     for i in list(tree+list(set(ws_names).difference(set(tree)))):
         print(i.split(":")[1] if ":" in i else i)
-
-
-if choice == None and recall == None:
-    print_all_ws_names()
 else:
-    if recall:
-        sleep(1)
+    combined = ws_names+tree
+    if choice == new_ws_identifier:
+        os.system("~/.config/i3/scripts/rofi-menu.py")
+        exit(0)
         output = subprocess.check_output("i3-input | grep output|grep -oP '(?<== ).*'",shell = True).decode('utf-8').strip()
         choice = "37:"+output
-
-    if choice.isalpha() and not recall:
+    elif choice.isalpha():
         for idx,i in reversed(list(enumerate(combined))):
             if i.find(choice) != -1:
                 choice = combined[idx]
     for i in mode.split("-"):
         subprocess.call(['i3-msg', i, choice], stdout=subprocess.DEVNULL)
+

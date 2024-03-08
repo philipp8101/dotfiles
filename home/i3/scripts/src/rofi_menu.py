@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 from os import environ
 from sys import argv
 import subprocess

@@ -1,4 +1,3 @@
-#!/usr/bin/python
 import i3ipc
 import sys
 
