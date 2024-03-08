@@ -136,13 +136,17 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "<leader>rh", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
 		-- vim.keymap.set("n", "gl", '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>', opts)
 		vim.keymap.set("n", "<leader>rl", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
-		vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-			buffer = ev.buf,
-			callback = vim.lsp.buf.document_highlight,
-		})
-		vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-			buffer = ev.buf,
-			callback = vim.lsp.buf.clear_references,
-		})
+		local client = vim.lsp.get_client_by_id(ev.data.client_id)
+		if client and client.server_capabilities.documentHighlightProvider then
+			vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+				buffer = ev.buf,
+				callback = vim.lsp.buf.document_highlight,
+			})
+
+			vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+				buffer = ev.buf,
+				callback = vim.lsp.buf.clear_references,
+			})
+		end
 	end,
 })
