@@ -56,8 +56,8 @@ in
       keybindings = {
         "${mod}+Return" = "exec ${pkgs.kitty}/bin/kitty";
         "${mod}+Shift+Return" = "exec \"${scripts}/bin/next_empty_workspace.py ; ${pkgs.kitty}/bin/kitty\"";
-        "${mod}+z" = "exec flameshot gui";
-        "${mod}+Shift+z" = "exec ${pkgs.flameshot}/binflameshot gui --raw | ${pkgs.tesseract}/bin/tesseract stdin stdout -l eng | ${pkgs.xclip}/bin/xclip -in -selection clipboard";
+        "${mod}+z" = "exec ${pkgs.flameshot}/bin/flameshot gui";
+        "${mod}+Shift+z" = "exec ${pkgs.flameshot}/bin/flameshot gui --raw | ${pkgs.tesseract}/bin/tesseract stdin stdout -l eng | ${pkgs.xclip}/bin/xclip -in -selection clipboard";
         "${mod}+q" = "kill";
         "--release button2" = "kill";
         "${mod}+g" = "exec ${pkgs.rofi}/bin/rofi -show drun";
