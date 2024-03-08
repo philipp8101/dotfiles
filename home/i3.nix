@@ -1,6 +1,10 @@
 { pkgs, config, ... }:
 let
 mod = "Mod4";
+  rofi-power-menu = builtins.fetchurl {
+    url = "https://github.com/jluttine/rofi-power-menu/raw/master/rofi-power-menu";
+    sha256 = "3cfdf4cfb3553a62f56b055ed039e29c56abc063e9252cfbc3c7d3b5c98dfbb6";
+  };
 in
 {
   xdg.configFile."i3/scripts".source = ./i3/scripts;
@@ -27,14 +31,14 @@ in
       bars = [];
       keybindings = {
         "${mod}+Return" = "exec ${pkgs.kitty}/bin/kitty";
-        "${mod}+Shift+Return" = "exec '~/.config/i3/scripts/next_empty_workspace ; kitty'";
+        "${mod}+Shift+Return" = "exec '~/.config/i3/scripts/next_empty_workspace ; ${pkgs.kitty}/bin/kitty'";
         "${mod}+z" = "exec flameshot gui";
-        "${mod}+Shift+z" = "exec flameshot gui --raw | tesseract stdin stdout -l eng | xclip -in -selection clipboard";
+        "${mod}+Shift+z" = "exec ${pkgs.flameshot}/binflameshot gui --raw | ${pkgs.tesseract}/bin/tesseract stdin stdout -l eng | ${pkgs.xclip}/bin/xclip -in -selection clipboard";
         "${mod}+q" = "kill";
         "--release button2" = "kill";
-        "${mod}+g" = "exec rofi -show drun";
-        "${mod}+Shift+g" = "exec '~/.config/i3/scripts/next_empty_workspace ; rofi -show drun'";
-        "${mod}+v" = "exec rofi -show power-menu -modi power-menu:~/.config/rofi/rofi-power-menu";
+        "${mod}+g" = "exec ${pkgs.rofi}/bin/rofi -show drun";
+        "${mod}+Shift+g" = "exec '~/.config/i3/scripts/next_empty_workspace ; ${pkgs.rofi}/bin/rofi -show drun'";
+        "${mod}+v" = "exec ${pkgs.rofi}/bin/rofi -show power-menu -modi power-menu:${rofi-power-menu}";
         "${mod}+Left" = "focus left";
         "${mod}+Down" = "focus down";
         "${mod}+Up" = "focus up";
@@ -66,23 +70,23 @@ in
         # "${mod}+$alt+a" = "move container to workspace prev_on_output";
         # "${mod}+$alt+t" = "move container to workspace next_on_output";
         # custom rofi scripts, provide i3 commands separated by ´-´ in the {mod}e variable
-        "${mod}+f" = "exec mode=workspace rofi -show 'go to workspace' -modes 'go to workspace:~/.config/i3/scripts/rofi_menu'";
-        "${mod}+k" = "exec mosquitto_pub -h 192.168.0.5 -t 'desk/control-height' -u mosquitto -P Y3Gnwwo= -m 'down'";
-        "${mod}+l" = "exec mosquitto_pub -h 192.168.0.5 -t 'desk/control-height' -u mosquitto -P Y3Gnwwo= -m 'up'";
-        "${mod}+comma" = "exec mosquitto_pub -h 192.168.0.5 -t 'desk/control-height' -u mosquitto -P Y3Gnwwo= -m 'p1'";
-        "${mod}+period" = "exec mosquitto_pub -h 192.168.0.5 -t 'desk/control-height' -u mosquitto -P Y3Gnwwo= -m 'p2'";
-        "${mod}+minus" = "exec mosquitto_pub -h 192.168.0.5 -t 'desk/control-height' -u mosquitto -P Y3Gnwwo= -m 'p3'";
+        "${mod}+f" = "exec mode=workspace ${pkgs.rofi}/bin/rofi -show 'go to workspace' -modes 'go to workspace:~/.config/i3/scripts/rofi_menu'";
+        "${mod}+k" = "exec ${pkgs.mosquitto}/bin/mosquitto_pub -h 192.168.0.5 -t 'desk/control-height' -u mosquitto -P Y3Gnwwo= -m 'down'";
+        "${mod}+l" = "exec ${pkgs.mosquitto}/bin/mosquitto_pub -h 192.168.0.5 -t 'desk/control-height' -u mosquitto -P Y3Gnwwo= -m 'up'";
+        "${mod}+comma" = "exec ${pkgs.mosquitto}/bin/mosquitto_pub -h 192.168.0.5 -t 'desk/control-height' -u mosquitto -P Y3Gnwwo= -m 'p1'";
+        "${mod}+period" = "exec ${pkgs.mosquitto}/bin/mosquitto_pub -h 192.168.0.5 -t 'desk/control-height' -u mosquitto -P Y3Gnwwo= -m 'p2'";
+        "${mod}+minus" = "exec ${pkgs.mosquitto}/bin/mosquitto_pub -h 192.168.0.5 -t 'desk/control-height' -u mosquitto -P Y3Gnwwo= -m 'p3'";
         "${mod}+y" = "gaps horizontal current set 5";
         "${mod}+Shift+y" = "gaps horizontal current set 350";
-        "XF86AudioRaiseVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%";
-        "XF86AudioLowerVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%";
-        "XF86AudioMute" = "exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle";
-        "XF86AudioMicMute" = "exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle";
-        "XF86AudioPlay" = "exec --no-startup-id playerctl play-pause";
-        "XF86AudioNext" = "exec --no-startup-id playerctl next";
-        "XF86AudioPrev" = "exec --no-startup-id playerctl previous";
-        "${mod}+u" = "exec rofi -show calc -modi calc -no-show-match -no-sort";
-        # bindsym ${mod}+p exec rofi -show time -modi time:~/.config/rofi/rofi-scripts/time.py
+        "XF86AudioRaiseVolume" = "exec --no-startup-id ${pkgs.pulseaudioFull}/bin/pactl set-sink-volume @DEFAULT_SINK@ +10%";
+        "XF86AudioLowerVolume" = "exec --no-startup-id ${pkgs.pulseaudioFull}/bin/pactl set-sink-volume @DEFAULT_SINK@ -10%";
+        "XF86AudioMute" = "exec --no-startup-id ${pkgs.pulseaudioFull}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle";
+        "XF86AudioMicMute" = "exec --no-startup-id ${pkgs.pulseaudioFull}/bin/pactl set-source-mute @DEFAULT_SOURCE@ toggle";
+        "XF86AudioPlay" = "exec --no-startup-id ${pkgs.playerctl}/bin/playerctl play-pause";
+        "XF86AudioNext" = "exec --no-startup-id ${pkgs.playerctl}/bin/playerctl next";
+        "XF86AudioPrev" = "exec --no-startup-id ${pkgs.playerctl}/bin/playerctl previous";
+        "${mod}+u" = "exec ${pkgs.rofi}/bin/rofi -show calc -modi calc -no-show-match -no-sort";
+        # bindsym ${mod}+p exec ${pkgs.rofi}/bin/rofi -show time -modi time:~/.config/rofi/rofi-scripts/time.py
         "${mod}+t" = "workspace 1";
         "${mod}+h" = "workspace 2";
         "${mod}+s" = "workspace 3";
