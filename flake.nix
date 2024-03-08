@@ -46,7 +46,7 @@
       };
       full = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        extraSpecialArgs = { inherit inputs; user = "nix"; };
+        extraSpecialArgs = { inherit inputs; user = "philipp"; };
         modules = [
           ./dev.nix
           ./wm.nix
