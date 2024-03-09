@@ -27,13 +27,17 @@
         modules = [ 
           ./configuration.nix
           ./hardware-configuration.nix
-          # home-manager.nixosModules.home-manager {
-          #   home-manager.useGlobalPkgs = true; 
-          #   home-manager.useUserPackages = true;
-          #   home-manager.users.philipp = {
-          #     imports = [ ./home.nix ];
-          #   };
-          # }
+          home-manager.nixosModules.home-manager {
+            home-manager = {
+              useGlobalPkgs = true; 
+              useUserPackages = true;
+              extraSpecialArgs = { inherit inputs; inherit system; user = "philipp"; };
+              users.philipp.imports = [
+                ./dev.nix
+                ./wm.nix
+              ];
+            };
+          }
         ];
       };
     };  

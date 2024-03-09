@@ -10,14 +10,23 @@ in
 	imports = [
 		./hardware-configuration.nix
 	];
-	boot.loader.systemd-boot.enable = true;
-	boot.loader.efi.canTouchEfiVariables = true;
-	boot.supportedFilesystems = [ "zfs" ];
-	boot.zfs.forceImportRoot = false;
-	boot.zfs.extraPools = [ "test" ];
-	networking.hostId = "e52e59bb";
-	networking.hostName = "nixos";
-	networking.networkmanager.enable = true;
+	boot = {
+		loader = {
+			systemd-boot.enable = true;
+			efi.canTouchEfiVariables = true;
+		};
+		supportedFilesystems = [ "zfs" ];
+		zfs = {
+			forceImportRoot = false;
+			extraPools = [ "test" ];
+		};
+		kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+	};
+	networking = {
+		hostId = "e52e59bb";
+		hostName = "nixos";
+		networkmanager.enable = true;
+	};
 	time.timeZone = "Europe/Berlin";
 	i18n.defaultLocale = "en_US.UTF-8";
 	i18n.extraLocaleSettings = {
@@ -34,97 +43,104 @@ in
 
 
 	console.keyMap = "de";
-	services.printing.enable = true;
 	sound.enable = true;
-	hardware.pulseaudio.enable = false;
-	hardware.opengl.driSupport32Bit = true; # https://nixos.wiki/wiki/Lutris
-	security.rtkit.enable = true;
-	services.pipewire = {
-		enable = true;
-		alsa.enable = true;
-		alsa.support32Bit = true;
-		pulse.enable = true;
-		jack.enable = true;
+	hardware = {
+		pulseaudio.enable = false;
+		opengl.enable = true;
+		opengl.driSupport32Bit = true; # https://nixos.wiki/wiki/Lutris
 	};
+	security.rtkit.enable = true;
 	users.users.philipp = {
 		shell = pkgs.zsh;
 		isNormalUser = true;
 		description = "philipp";
 		extraGroups = [ "networkmanager" "wheel" ];
 	};
-	programs.zsh.enable = true;
-	programs.steam = {
-		enable = true;
-		remotePlay.openFirewall = true;
-		dedicatedServer.openFirewall = true;
+	programs = {
+		zsh.enable = true;
+		steam = {
+			enable = true;
+			remotePlay.openFirewall = true;
+			dedicatedServer.openFirewall = true;
+		};
+		hyprland = {
+			enable = true;
+			xwayland.enable = true;
+		};
 	};
 
 	nixpkgs.config.allowUnfree = true;
 
-	environment.systemPackages = with pkgs; [
-		neovim
-		wget
-		tmux
-		kitty
-		polkit
-		xdg-desktop-portal-hyprland
-		dconf
-		xwayland
-		gcc
-		unzip
-		fzf
-		home-manager
-		ripgrep
-		firefox
-		xorg.xkbcomp
-		xsel
-		gnome.eog
-		mpv
-		evince
-		gnome.adwaita-icon-theme
-		(pkgs.discord.override {
-			withOpenASAR = true;
-			withVencord = true;
-		})
-		vesktop # https://nixos.wiki/wiki/Discord
-		(lutris.override {
-			extraLibraries =  pkgs: [
-			];
-		})
-		nix-index
-		htop-vim
-	];
-	environment.pathsToLink = ["/libexec"];
-	services.xserver = {
-		enable = true;
-		xkb.layout = "de";
-		resolutions = [
-			{ x = 1920; y = 1080; }
+	environment = {
+		shellAliases = {
+			"workman" =  "${pkgs.xorg.xkbcomp}/bin/xkbcomp ${compiledLayout} $DISPLAY";
+		};
+		systemPackages = with pkgs; [
+			neovim
+			wget
+			tmux
+			kitty
+			polkit
+			xdg-desktop-portal-hyprland
+			dconf
+			xwayland
+			gcc
+			unzip
+			fzf
+			home-manager
+			ripgrep
+			firefox
+			xsel
+			gnome.eog
+			mpv
+			evince
+			gnome.adwaita-icon-theme
+			(pkgs.discord.override {
+			 withOpenASAR = true;
+			 withVencord = true;
+			 })
+			vesktop # https://nixos.wiki/wiki/Discord
+			lutris
+			nix-index
+			htop-vim
 		];
-		desktopManager = {
-			xterm.enable = false;
-			plasma6.enable = true;
-		};
-		displayManager = {
-			defaultSession = "none+i3";
-			sessionCommands = "${pkgs.xorg.xkbcomp}/bin/xkbcomp ${compiledLayout} $DISPLAY";
-		};
-		windowManager.i3 = {
-			enable = true;
-			extraPackages = with pkgs; [
-				dmenu
-				i3status
-				i3lock
-				i3blocks
-				polybarFull
-				dunst
-				rofi
-			];
-		};
+		pathsToLink = ["/libexec"];
 	};
-	programs.hyprland = {
-		enable = true;
-		xwayland.enable = true;
+	services = {
+		printing.enable = true;
+		pipewire = {
+			enable = true;
+			alsa.enable = true;
+			alsa.support32Bit = true;
+			pulse.enable = true;
+			jack.enable = true;
+		};
+		xserver = {
+			enable = true;
+			xkb.layout = "de";
+			resolutions = [
+			{ x = 1920; y = 1080; }
+			];
+			desktopManager = {
+				xterm.enable = false;
+				plasma6.enable = true;
+			};
+			displayManager = {
+				defaultSession = "none+i3";
+			};
+			windowManager.i3 = {
+				enable = true;
+				extraPackages = with pkgs; [
+					dmenu
+						i3status
+						i3lock
+						i3blocks
+						polybarFull
+						dunst
+						rofi
+				];
+			};
+		};
 	};
 	fonts.packages = with pkgs; [
 		inconsolata
