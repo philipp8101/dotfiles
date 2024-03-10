@@ -62,6 +62,14 @@
         ];
       };
     };
+    neovim = pkgs.mkShell {
+      name = "neovim-shell";
+      buildInputs = with pkgs; [ lua-language-server nil stylua luajitPackages.luacheck go cargo nodejs_21 gcc ];
+      shellHook = ''
+        alias vim="${pkgs.neovim}/bin/nvim -u ${./nvim}/init.lua"
+        vim
+      '';
+    };
   };
 
 }
