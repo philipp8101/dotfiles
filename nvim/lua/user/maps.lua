@@ -84,12 +84,13 @@ keymap("x", "<C-k>", ":m-2 <CR>gv=gv", opts, "move the visually selected lines u
 keymap("x", "<C-j>", ":m'>+ <CR>gv=gv", opts, "move the visually selected lines down")
 
 local ripgrep_available = os.execute("which rg >/dev/null 2>&1")
-vim.keymap.set("n", "<leader>f", ":Telescope find_files hidden=true <CR>", opts, "open file search with Telescope")
-keymap("n", "<leader>g", ":Telescope live_grep <CR>", opts, "search project with Telescope(ripgrep)")
-keymap("n", "<leader>F", ":Telescope git_files <CR>", opts, "search git files")
-keymap("n", "<leader>b", ":Telescope git_branches <CR>", opts, "search git branches")
-keymap("n", "<leader>B", ":Telescope git_commits <CR>", opts, "search git branches")
-keymap("n", "<leader>G", ":Telescope buffers <CR>", opts, "search open buffers")
+vim.keymap.set("n", "<leader>sf", ":Telescope find_files hidden=true <CR>", opts, "open file search with Telescope")
+keymap("n", "<leader>sg", ":Telescope live_grep <CR>", opts, "search project with Telescope(ripgrep)")
+keymap("n", "<leader>st", ":Telescope git_files <CR>", opts, "search git files")
+keymap("n", "<leader>sb", ":Telescope git_branches <CR>", opts, "search git branches")
+keymap("n", "<leader>sc", ":Telescope git_commits <CR>", opts, "search git branches")
+keymap("n", "<leader>so", ":Telescope buffers <CR>", opts, "search open buffers")
+keymap("n", "<leader>sh", ":Telescope buffers <CR>", opts, "search help tags")
 
 keymap("n", "<leader>t", ":Gedit: <CR>", opts, "open fugitive")
 keymap("n", "<leader>T", ":GlLog <CR>", opts, "open fugitive")
@@ -123,19 +124,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 	callback = function(ev)
 		local opts = { noremap = true, silent = true, buffer = ev.buf }
-		vim.keymap.set("n", "<leader>rD", "<cmd>lua vim.lsp.buf.declaration()<CR>zz", opts)
-		vim.keymap.set("n", "<leader>rd", "<cmd>lua vim.lsp.buf.definition()<CR>zz", opts)
-		vim.keymap.set("n", "<leader>rk", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-		vim.keymap.set("n", "<leader>ri", "<cmd>lua vim.lsp.buf.implementation()<CR>zz", opts)
-		vim.keymap.set("n", "<leader>rK", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-		vim.keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-		vim.keymap.set("n", "<leader>rr", ":Telescope lsp_references <CR>", opts)
-		vim.keymap.set("n", "<leader>ra", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-		vim.keymap.set("n", "<leader>ri", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-		vim.keymap.set("n", "<leader>rq", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
-		vim.keymap.set("n", "<leader>rh", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
+		vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>zz", opts)
+		vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>zz", opts)
+		vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+		vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>zz", opts)
+		vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+		vim.keymap.set("n", "gR", "<cmd>Telescope lsp_references <CR>", opts)
+		vim.keymap.set("n", "ga", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+		vim.keymap.set("n", "]d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
 		-- vim.keymap.set("n", "gl", '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>', opts)
-		vim.keymap.set("n", "<leader>rl", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
+		vim.keymap.set("n", "[d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
 		vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 			buffer = ev.buf,
 			callback = vim.lsp.buf.document_highlight,
