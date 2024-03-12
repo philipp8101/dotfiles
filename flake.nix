@@ -9,6 +9,8 @@
     };
     nix-colors.url = "github:misterio77/nix-colors";
     mach-nix.url = "github:davhau/mach-nix";
+    nixvim.url = "github:nix-community/nixvim";
+    flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: 
@@ -19,6 +21,7 @@
       config.allowUnfree = true;
     };
     lib = nixpkgs.lib;
+    nixvim = import ./nixvim/nixvim.nix {inherit inputs; inherit pkgs; inherit system;};
   in {
     nixosConfigurations = {
       MAIN = lib.nixosSystem { 
@@ -62,15 +65,23 @@
         ];
       };
     };
-    neovim = pkgs.mkShell {
+    dev-env = pkgs.mkShell {
       name = "neovim-shell";
-      buildInputs = with pkgs; [ lua-language-server nil stylua luajitPackages.luacheck go cargo nodejs_21 gcc ];
+      buildInputs = with pkgs; [
+        lua-language-server
+        nil
+        stylua
+        luajitPackages.luacheck
+        go
+        cargo
+        nodejs_21
+        gcc
+      ];
       shellHook = ''
-        alias vim="${pkgs.neovim}/bin/nvim -u ${./nvim}/init.lua"
-        vim
+        alias vim=${nixvim}/bin/nvim
       '';
     };
+    nixvim = nixvim;
   };
 
 }
-
