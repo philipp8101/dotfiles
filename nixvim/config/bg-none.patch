@@ -1,0 +1,13 @@
+diff --git a/lua/nightfox/palette/carbonfox.lua b/lua/nightfox/palette/carbonfox.lua
+index de6f29a..42e67d6 100644
+--- a/lua/nightfox/palette/carbonfox.lua
++++ b/lua/nightfox/palette/carbonfox.lua
+@@ -6,7 +6,7 @@ local meta = {
+   light = false,
+ }
+ 
+-local bg = C("#161616")
++local bg = "none"
+ local fg = C("#f2f4f8")
+ 
+ -- stylua: ignore
