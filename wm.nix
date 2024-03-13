@@ -20,6 +20,11 @@ in
     ./home/i3.nix
     ./home/hyprland.nix
   ];
+  fonts.fontconfig.enableProfileFonts = true;
+  home.packages = with pkgs; [
+    inconsolata
+    inconsolata-nerdfont
+  ];
 
   home.file = {
     ".background-image".source = "${bg.outPath}/modified-wallpaper.svg";
