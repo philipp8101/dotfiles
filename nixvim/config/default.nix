@@ -28,5 +28,7 @@
     ./indent-blankline.nix
     ./dadbod.nix
     ./conform.nix
+    ./navbuddy.nix
+    ./surround.nix
   ];
 }

@@ -1,11 +1,6 @@
 {
     config = {
         keymaps = [
-            {
-                key = "<C-f>";
-                action = "<cmd>Telescope find_files<CR>";
-                options.desc = "Fuzzy find files";
-            }
             { key = "<C-d>"; action = "<C-d>zz"; }
             { key = "<C-u>"; action = "<C-u>zz"; }
             { key = "n"; action = "nzz"; }
@@ -59,6 +54,12 @@
                 key = "<C-l>";
                 action = "<cmd>lprev<CR>";
                 options.desc = "previous item in locationlist";
+            }
+            {
+                key = "<esc>";
+                mode = [ "n" ];
+                action = "<cmd>noh<CR>";
+                options.desc = "disable search highlights";
             }
         ];
         autoCmd = [
