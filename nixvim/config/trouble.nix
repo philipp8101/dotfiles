@@ -4,7 +4,7 @@
     };
     keymaps = [
         {
-            key = "<leader>d";
+            key = "<leader>dt";
             action = ''function() require("trouble").toggle(); end'';
             lua = true;
             options.desc = "open workspace diagnostics";
