@@ -1,3 +1,4 @@
+{ pkgs, ... }:
     let enabled_servers = [
       "gopls"
       "clangd"
@@ -23,8 +24,10 @@
     servers = builtins.listToAttrs ( builtins.map (s: { name = s ; value = {enable = true;}; }) enabled_servers) // {
       rust-analyzer = {
         enable = true;
-        installCargo = false;
-        installRustc = false;
+        installCargo = true;
+        cargoPackage = pkgs.cargo;
+        installRustc = true;
+        rustcPackage = pkgs.rustc;
       };
     };
     keymaps = {

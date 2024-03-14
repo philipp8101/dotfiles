@@ -6,7 +6,7 @@
     ./keymaps.nix
     (import ./colorscheme.nix args)
     ./treesitter.nix
-    ./lsp.nix
+    (import ./lsp.nix args)
     ./telescope.nix
     ./lualine.nix
     ./fugitive.nix
