@@ -52,6 +52,8 @@ bindsym $mod+F5 exec "bash -c '~/.scripts/bg-gen.sh ~/Pictures/wallpaper-aenamia
 # start redshift (nightmode)
 exec --no-startup-id "redshift-gtk -t 6500K:4500K -l 51:12"
 
+exec --no-startup-id "systemctl --user start dunst"
+
 
 bindsym $mod+Return exec "kitty"
 bindsym $mod+Shift+Return exec "~/.config/i3/scripts/next_empty_workspace ; kitty"
@@ -140,7 +142,7 @@ bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
-bindsym $mod+10 workspace 10
+bindsym $mod+0 workspace 10
 
 
 
@@ -164,7 +166,7 @@ bindsym $mod+Shift+6 move container to workspace number 6
 bindsym $mod+Shift+7 move container to workspace number 7
 bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9
-bindsym $mod+Shift+10 move container to workspace number 10
+bindsym $mod+Shift+0 move container to workspace number 10
 
 # # media controls
 # bindcode 172 exec ~/.scripts/playercall.sh play-pause
