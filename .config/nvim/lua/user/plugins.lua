@@ -372,6 +372,15 @@ require("lazy").setup({
 	{ "tpope/vim-dispatch" },
 	{ "tpope/vim-repeat" },
 	{ "tpope/vim-fugitive" },
+	{
+		"NeogitOrg/neogit",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"sindrets/diffview.nvim",
+			"nvim-telescope/telescope.nvim",
+		},
+		opts = {},
+	},
 	{ "tpope/vim-sleuth" },
 	{ "ggandor/leap.nvim" },
 
