@@ -156,7 +156,7 @@ require("lazy").setup({
 			max_join_length = 5000,
 			cursor_behavior = "hold",
 			notify = true,
-			langs = {--[[ configuration for languages ]]
+			langs = { --[[ configuration for languages ]]
 			},
 		},
 	},
@@ -343,7 +343,10 @@ require("lazy").setup({
 
 	{ "echasnovski/mini.pairs" },
 
-	{ "folke/which-key.nvim", opts = {} },
+	{
+		"folke/which-key.nvim",
+		opts = {},
+	},
 
 	{
 		"jay-babu/mason-nvim-dap.nvim",
@@ -673,7 +676,7 @@ require("lazy").setup({
 			vim.g.haskell_enable_pattern_synonyms = 1 -- to enable highlighting of `pattern`
 			vim.g.haskell_enable_typeroles = 1 -- to enable highlighting of type roles
 			vim.g.haskell_enable_static_pointers = 1 -- to enable highlighting of `static`
-			vim.g.haskell_backpack = 1 -- to enable highlighting of backpack keywords
+			vim.g.haskell_backpack = 1       -- to enable highlighting of backpack keywords
 		end,
 	},
 
@@ -813,7 +816,7 @@ require("lazy").setup({
 		},
 		keys = {
 			{ "<c-space>", desc = "Increment selection" },
-			{ "<bs>", desc = "Decrement selection", mode = "x" },
+			{ "<bs>",      desc = "Decrement selection", mode = "x" },
 		},
 		---@type TSConfig
 		opts = {
