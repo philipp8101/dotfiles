@@ -190,6 +190,7 @@ require("lazy").setup({
 
 	{
 		"stevearc/dressing.nvim",
+		enabled = false,
 		opts = {
 			input = {
 				enabled = true,
