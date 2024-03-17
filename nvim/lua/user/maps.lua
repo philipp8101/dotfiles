@@ -27,76 +27,74 @@ vim.keymap.set("c", "<CR>", function()
 	return vim.fn.getcmdtype() == "/" and "<CR>zzzv" or "<CR>"
 end, { expr = true })
 
-keymap("n", "<leader>L", ':lua require("harpoon.ui").toggle_quick_menu() <CR>', opts, "open harpoon menu")
-keymap("n", "<leader>l", ':lua require("harpoon.mark").add_file() <CR>', opts, "add current file to harpoon list")
+keymap("n", "<leader>L", '<cmd>lua require("harpoon.ui").toggle_quick_menu() <CR>', opts, "open harpoon menu")
+keymap("n", "<leader>l", '<cmd>lua require("harpoon.mark").add_file() <CR>', opts, "add current file to harpoon list")
 keymap(
 	"n",
 	"<leader>n",
-	':lua require("harpoon.ui").nav_file(1) <CR>zz',
+	'<cmd>lua require("harpoon.ui").nav_file(1) <CR>zz',
 	opts,
 	"Navigate to the first pinned file with harpoon"
 )
 keymap(
 	"n",
 	"<leader>e",
-	':lua require("harpoon.ui").nav_file(2) <CR>zz',
+	'<cmd>lua require("harpoon.ui").nav_file(2) <CR>zz',
 	opts,
 	"Navigate to the second pinned file with harpoon"
 )
 keymap(
 	"n",
 	"<leader>o",
-	':lua require("harpoon.ui").nav_file(3) <CR>zz',
+	'<cmd>lua require("harpoon.ui").nav_file(3) <CR>zz',
 	opts,
 	"Navigate to the third pinned file with harpoon"
 )
 keymap(
 	"n",
 	"<leader>i",
-	':lua require("harpoon.ui").nav_file(4) <CR>zz',
+	'<cmd>lua require("harpoon.ui").nav_file(4) <CR>zz',
 	opts,
 	"Navigate to the fourth pinned file with harpoon"
 )
 keymap(
 	"n",
 	"<leader>x",
-	":lua if vim.fn.expand('%') == '' then vim.cmd(':Neotree') else vim.cmd(':Neotree %') end <CR>",
+	"<cmd>lua if vim.fn.expand('%') == '' then vim.cmd(':Neotree') else vim.cmd(':Neotree %') end <CR>",
 	opts,
 	"Open File Browser"
 )
-keymap("n", "<leader>u", ":lua require('undotree').toggle() <CR>", opts, "Open undotree")
+keymap("n", "<leader>u", "<cmd>lua require('undotree').toggle() <CR>", opts, "Open undotree")
 
-keymap("n", "<leader>dd", ":lua require('dapui').toggle() <CR>", opts, "open debugger ui")
-keymap("n", "<leader>do", ":DapStepOver <CR>", opts, "debugger step over")
-keymap("n", "<leader>di", ":DapStepInto <CR>", opts, "debugger step into")
-keymap("n", "<leader>du", ":DapStepOut <CR>", opts, "debugger step out")
-keymap("n", "<leader>dt", ":DapToggleBreakpoint <CR>", opts, "debugger toggle breakpoint")
-keymap("n", "<leader>dc", ":DapContinue <CR>", opts, "debugger continue")
-keymap("n", "<leader>ds", ":DapTerminate <CR> <bar> lua require('dapui').close() <CR>", opts, "debugger stop")
-keymap("n", "<leader>de", ":lua require('dapui').eval() <CR>", opts, "debugger stop")
+keymap("n", "<leader>dd", "<cmd>lua require('dapui').toggle() <CR>", opts, "open debugger ui")
+keymap("n", "<leader>do", "<cmd>DapStepOver <CR>", opts, "debugger step over")
+keymap("n", "<leader>di", "<cmd>DapStepInto <CR>", opts, "debugger step into")
+keymap("n", "<leader>du", "<cmd>DapStepOut <CR>", opts, "debugger step out")
+keymap("n", "<leader>dt", "<cmd>DapToggleBreakpoint <CR>", opts, "debugger toggle breakpoint")
+keymap("n", "<leader>dc", "<cmd>DapContinue <CR>", opts, "debugger continue")
+keymap("n", "<leader>ds", "<cmd>DapTerminate <CR> <bar> lua require('dapui').close() <CR>", opts, "debugger stop")
+keymap("n", "<leader>de", "<cmd>lua require('dapui').eval() <CR>", opts, "debugger stop")
 
-keymap("n", "gs", ":TSJSplit <CR>", opts, "split a block of code, such as arrays or arguments, in multiple lines")
-keymap("n", "gj", ":TSJJoin <CR>", opts, "consolidate a block of code, such as arrays or arguments, into a single line")
+keymap("n", "gs", "<cmd>TSJSplit <CR>", opts, "split a block of code, such as arrays or arguments, in multiple lines")
+keymap("n", "gj", "<cmd>TSJJoin <CR>", opts,
+	"consolidate a block of code, such as arrays or arguments, into a single line")
 
-keymap("n", "<C-k>", ":m-2 <CR>", opts, "move the current line up")
-keymap("n", "<C-j>", ":m+1 <CR>", opts, "move the current line down")
-keymap("x", "<C-k>", ":m-2 <CR>gv=gv", opts, "move the visually selected lines up")
-keymap("x", "<C-j>", ":m'>+ <CR>gv=gv", opts, "move the visually selected lines down")
+keymap("n", "<C-k>", "<cmd>m-2 <CR>", opts, "move the current line up")
+keymap("n", "<C-j>", "<cmd>m+1 <CR>", opts, "move the current line down")
+keymap("x", "<C-k>", "<cmd>m-2 <CR>gv=gv", opts, "move the visually selected lines up")
+keymap("x", "<C-j>", "<cmd>m'>+ <CR>gv=gv", opts, "move the visually selected lines down")
 
-local ripgrep_available = os.execute("which rg >/dev/null 2>&1")
-vim.keymap.set("n", "<leader>sf", ":Telescope find_files hidden=true <CR>", opts, "open file search with Telescope")
-keymap("n", "<leader>sg", ":Telescope live_grep <CR>", opts, "search project with Telescope(ripgrep)")
-keymap("n", "<leader>st", ":Telescope git_files <CR>", opts, "search git files")
-keymap("n", "<leader>sb", ":Telescope git_branches <CR>", opts, "search git branches")
-keymap("n", "<leader>sc", ":Telescope git_commits <CR>", opts, "search git branches")
-keymap("n", "<leader>so", ":Telescope buffers <CR>", opts, "search open buffers")
-keymap("n", "<leader>sh", ":Telescope buffers <CR>", opts, "search help tags")
+keymap("n", "<leader>sf", "<cmd>Telescope find_files hidden=true <CR>", opts, "open file search with Telescope")
+keymap("n", "<leader>sg", "<cmd>Telescope live_grep <CR>", opts, "search project with Telescope(ripgrep)")
+keymap("n", "<leader>st", "<cmd>Telescope git_files <CR>", opts, "search git files")
+keymap("n", "<leader>sb", "<cmd>Telescope git_branches <CR>", opts, "search git branches")
+keymap("n", "<leader>sc", "<cmd>Telescope git_commits <CR>", opts, "search git branches")
+keymap("n", "<leader>so", "<cmd>Telescope buffers <CR>", opts, "search open buffers")
 
-keymap("n", "<leader>t", ":Gedit: <CR>", opts, "open fugitive")
-keymap("n", "<leader>T", ":GlLog <CR>", opts, "open fugitive")
-keymap("n", "<leader>ac", ":Git commit <CR>", opts, "open fugitive")
-keymap("n", "<leader>h", ":Navbuddy <CR>", opts, "open Navbuddy")
-keymap("n", "<leader>H", ":Trouble <CR>", opts, "open Trouble")
+keymap("n", "<leader>t", "<cmd>Neogit kind=replace<CR>", opts, "open neogit")
+keymap("n", "<leader>ac", "<cmd>Neogit commit <CR>", opts, "commit changes")
+keymap("n", "<leader>h", "<cmd>Navbuddy <CR>", opts, "open Navbuddy")
+keymap("n", "<leader>H", "<cmd>Trouble <CR>", opts, "open Trouble")
 keymap("n", "<leader>s", "<Plug>(leap-forward-to)", opts, "leap forwards")
 keymap("n", "<leader>S", "<Plug>(leap-backward-to)", opts, "leap backwards")
 
@@ -105,10 +103,10 @@ keymap("v", "<leader>y", '"+y', opts, "yank to system clipboard")
 keymap("n", "<leader>p", '"+p', opts, "paste to system clipboard")
 keymap("v", "<leader>p", '"+p', opts, "paste to system clipboard")
 
-keymap("n", "<C-n>", ":ene<CR>", opts, "open new buffer")
-keymap("n", "gn", ":bn<CR>", opts, "go to next buffer")
-keymap("n", "gp", ":bp<CR>", opts, "go to previous buffer")
-keymap("n", "<esc>", ":noh<CR>", opts)
+keymap("n", "<C-n>", "<cmd>ene<CR>", opts, "open new buffer")
+keymap("n", "gn", "<cmd>bn<CR>", opts, "go to next buffer")
+keymap("n", "gp", "<cmd>bp<CR>", opts, "go to previous buffer")
+keymap("n", "<esc>", "<cmd>noh<CR>", opts)
 
 keymap("n", "<C-q>", "<cmd>lclose<CR><cmd>cclose<CR>", opts)
 keymap("n", "<C-f>", "<cmd>lnext<CR>", opts)
@@ -131,16 +129,21 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
 		vim.keymap.set("n", "gR", "<cmd>Telescope lsp_references <CR>", opts)
 		vim.keymap.set("n", "ga", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-		vim.keymap.set("n", "]d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
-		-- vim.keymap.set("n", "gl", '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>', opts)
-		vim.keymap.set("n", "[d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
-		vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-			buffer = ev.buf,
-			callback = vim.lsp.buf.document_highlight,
-		})
-		vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-			buffer = ev.buf,
-			callback = vim.lsp.buf.clear_references,
-		})
+		vim.keymap.set("n", "gk", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+		vim.keymap.set("n", "gq", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
+		vim.keymap.set("n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
+		vim.keymap.set("n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
+		local client = vim.lsp.get_client_by_id(ev.data.client_id)
+		if client and client.server_capabilities.documentHighlightProvider then
+			vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+				buffer = ev.buf,
+				callback = vim.lsp.buf.document_highlight,
+			})
+
+			vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+				buffer = ev.buf,
+				callback = vim.lsp.buf.clear_references,
+			})
+		end
 	end,
 })

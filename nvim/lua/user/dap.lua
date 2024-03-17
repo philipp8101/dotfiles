@@ -48,15 +48,15 @@ dap.adapters.python = {
 
 --[[ dap.configurations.cpp = {
     {
-        name = 'Launch',
-        type = 'lldb',
-        request = 'launch',
-        program = function()
-            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-        end,
-        cwd = '${workspaceFolder}',
-        stopOnEntry = false,
-        args = {},
+	name = 'Launch',
+	type = 'lldb',
+	request = 'launch',
+	program = function()
+	    return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+	end,
+	cwd = '${workspaceFolder}',
+	stopOnEntry = false,
+	args = {},
     },
 }
 dap.configurations.c = dap.configurations.cpp
@@ -110,3 +110,9 @@ dap.configurations.haskell = {
 	},
 }
 dap.repl.commands = { "dap-repl" }
+
+dap.adapters.delve = {
+	type = 'server',
+	host = '127.0.0.1',
+	port = '33445',
+}
