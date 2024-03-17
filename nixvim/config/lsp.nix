@@ -2,7 +2,6 @@
     let enabled_servers = [
       "gopls"
       "clangd"
-      "hls"
       "nil_ls"
       "bashls"
       "cmake"
@@ -29,20 +28,23 @@
         installRustc = true;
         rustcPackage = pkgs.rustc;
       };
+      hls = {
+        enable = true;
+        package = pkgs.haskell-language-server;
+      };
     };
     keymaps = {
         diagnostic = {
-            "gn" = "goto_next";
-            "gp" = "goto_prev";
-            "<leader>di" = "open_float";
-            "<leader>dq" = "setloclist";
+            "]d" = "goto_next";
+            "[d" = "goto_prev";
+            "gk" = "open_float";
+            "gq" = "setloclist";
         };
         lspBuf = {
             K = "hover";
             gR = "references";
             gd = "definition";
             gi = "implementation";
-            gt = "type_definition";
             ga = "code_action";
             gr = "rename";
         };
