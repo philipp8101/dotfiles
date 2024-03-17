@@ -41,25 +41,25 @@
         }
         {
             key = "<leader>N";
-            action = ''function() require("harpoon.ui").gotoTerminal(1) end'';
+            action = ''function() require("harpoon.term").gotoTerminal(1) end'';
             lua = true;
             options.desc = "open terminal 1";
         }
         {
             key = "<leader>E";
-            action = ''function() require("harpoon.ui").gotoTerminal(2) end'';
+            action = ''function() require("harpoon.term").gotoTerminal(2) end'';
             lua = true;
             options.desc = "open terminal 2";
         }
         {
             key = "<leader>O";
-            action = ''function() require("harpoon.ui").gotoTerminal(3) end'';
+            action = ''function() require("harpoon.term").gotoTerminal(3) end'';
             lua = true;
             options.desc = "open terminal 3";
         }
         {
             key = "<leader>I";
-            action = ''function() require("harpoon.ui").gotoTerminal(4) end'';
+            action = ''function() require("harpoon.term").gotoTerminal(4) end'';
             lua = true;
             options.desc = "open terminal 4";
         }
