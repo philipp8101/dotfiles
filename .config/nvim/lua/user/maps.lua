@@ -85,6 +85,8 @@ keymap("x", "<C-k>", "<cmd>m-2 <CR>gv=gv", opts, "move the visually selected lin
 keymap("x", "<C-j>", "<cmd>m'>+ <CR>gv=gv", opts, "move the visually selected lines down")
 
 keymap("n", "<leader>sf", "<cmd>Telescope find_files hidden=true <CR>", opts, "open file search with Telescope")
+keymap("n", "<leader>sF", "<cmd>Telescope find_files hidden=true no_ignore=true <CR>", opts,
+	"open file search with Telescope")
 keymap("n", "<leader>sg", "<cmd>Telescope live_grep <CR>", opts, "search project with Telescope(ripgrep)")
 keymap("n", "<leader>st", "<cmd>Telescope git_files <CR>", opts, "search git files")
 keymap("n", "<leader>sb", "<cmd>Telescope git_branches <CR>", opts, "search git branches")
