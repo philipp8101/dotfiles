@@ -164,14 +164,14 @@ require("lazy").setup({
 	{
 		"numToStr/Comment.nvim",
 		lazy = false,
-		keys = { "gkk", "gbk", "gk", "gb", "gcO", "gco", "gcA" },
+		keys = { "gcc", "gbc", "gc", "gb", "gcO", "gco", "gcA" },
 		-- doesn't account for combinations like vgkk
 		opts = {
 			padding = true,
 			sticky = true,
 			ignore = nil,
-			toggler = { line = "gkk", block = "gbk" },
-			opleader = { line = "gk", block = "gb" },
+			toggler = { line = "gcc", block = "gbc" },
+			opleader = { line = "gc", block = "gb" },
 			extra = { above = "gcO", below = "gco", eol = "gcA" },
 			mappings = { basic = true, extra = true },
 			pre_hook = nil,
