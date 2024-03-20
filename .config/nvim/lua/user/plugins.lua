@@ -43,7 +43,7 @@ require("lazy").setup({
 			event_handlers = {
 				{
 					event = "file_opened",
-					handler = function(file_path)
+					handler = function(_)
 						require("neo-tree").close_all()
 					end,
 				},
@@ -300,7 +300,7 @@ require("lazy").setup({
 				delay = 0,
 			},
 			current_line_blame_formatter = "<author>, <abbrev_sha>, <author_time:%Y-%m-%d> - <summary>",
-			on_attach = function(bufnr)
+			on_attach = function(_)
 				local gs = package.loaded.gitsigns
 				-- Navigation
 				vim.keymap.set("n", "]c", function()
@@ -704,6 +704,12 @@ require("lazy").setup({
 
 	{
 		"nvim-telescope/telescope.nvim",
+		dependencies = {
+			"nvim-telescope/telescope-ui-select.nvim",
+			config = function()
+				require("telescope").load_extension("ui-select")
+			end
+		},
 		lazy = true,
 		cmd = "Telescope",
 		opts = {
@@ -818,7 +824,6 @@ require("lazy").setup({
 			{ "<c-space>", desc = "Increment selection" },
 			{ "<bs>",      desc = "Decrement selection", mode = "x" },
 		},
-		---@type TSConfig
 		opts = {
 			highlight = { enable = true },
 			indent = { enable = true },
