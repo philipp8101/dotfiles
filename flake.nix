@@ -11,9 +11,13 @@
     mach-nix.url = "github:davhau/mach-nix";
     nixvim.url = "github:nix-community/nixvim";
     flake-parts.url = "github:hercules-ci/flake-parts";
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: 
+  outputs = { self, nixpkgs, home-manager, nixos-generators, ... }@inputs: 
   let 
     system = "x86_64-linux";
     pkgs = import nixpkgs {
@@ -43,6 +47,13 @@
           }
         ];
       };
+      RPI = lib.nixosSystem {
+        system = "aarch64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./rpi.nix
+        ];
+      };
     };  
     homeConfigurations = {
       dev = home-manager.lib.homeManagerConfiguration {
@@ -62,6 +73,15 @@
         modules = [
           ./dev.nix
           ./wm.nix
+        ];
+      };
+    };
+    packages.aarch64-linux = {
+      sdcard = nixos-generators.nixosGenerate {
+        system = "aarch64-linux";
+        format = "sd-aarch64";
+        modules = [
+          ./rpi.nix
         ];
       };
     };
