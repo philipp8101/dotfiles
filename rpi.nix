@@ -1,11 +1,16 @@
-{config, lib, pkgs, ...}:{
+{config, lib, pkgs, user, ...}:{
     disabledModules = [
         "profiles/base.nix"
     ];
+    nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+    # Use the extlinux boot loader. (NixOS wants to enable GRUB by default)
+    boot.loader.grub.enable = false;
+    # Enables the generation of /boot/extlinux/extlinux.conf
+    boot.loader.generic-extlinux-compatible.enable = true;
     system.stateVersion = "23.11";
     users.users = {
-        pi = {
+        ${user} = {
             password = "admin123";
             isNormalUser = true;
             extraGroups = [ "wheel" ];
@@ -19,6 +24,8 @@
     nixpkgs.config.allowUnfree = true;
     environment.systemPackages = with pkgs; [
         openssh
+	git
+	neovim
     ];
 
     services.openssh.enable = true;

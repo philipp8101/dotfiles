@@ -24,6 +24,7 @@
       inherit system;
       config.allowUnfree = true;
     };
+    user = "philipp";
     lib = nixpkgs.lib;
     nixvim = import ./nixvim/nixvim.nix {inherit inputs; inherit pkgs; inherit system;};
   in {
@@ -38,8 +39,8 @@
             home-manager = {
               useGlobalPkgs = true; 
               useUserPackages = true;
-              extraSpecialArgs = { inherit inputs; inherit system; user = "philipp"; };
-              users.philipp.imports = [
+              extraSpecialArgs = { inherit inputs system user ; };
+              users.${user}.imports = [
                 ./dev.nix
                 ./wm.nix
               ];
@@ -49,16 +50,17 @@
       };
       RPI = lib.nixosSystem {
         system = "aarch64-linux";
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit inputs user; };
         modules = [
           ./rpi.nix
+	  ./rpi-hardware.nix
         ];
       };
     };  
     homeConfigurations = {
       dev = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        extraSpecialArgs = { inherit inputs; user = "nix"; };
+        extraSpecialArgs = { inherit inputs user ; };
         modules = [
           ./dev.nix
         ];
@@ -66,9 +68,7 @@
       full = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = {
-          inherit inputs;
-          inherit system;
-          user = "philipp";
+          inherit inputs system user ;
         };
         modules = [
           ./dev.nix
