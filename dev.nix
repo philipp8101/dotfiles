@@ -16,13 +16,6 @@
   # }));
 
   home.packages = with pkgs; [
-    go
-    cargo
-    cmake
-    python3
-    nodejs_21
-    ghc
-    cabal-install
   ];
 
   xdg.configFile = {
