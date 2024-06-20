@@ -13,21 +13,15 @@ rofi-power-menu = pkgs.stdenv.mkDerivation {
     chmod +x $out/bin/rofi-power-menu
     '';
 };
-pyenv = inputs.mach-nix.lib.${system}.mkPython {
-  python = "python3";
-  requirements = ''
-    i3ipc
-  '';
-};
 scripts = pkgs.stdenv.mkDerivation {
   name = "i3-scripts";
   src = ./i3scripts;
-  buildInputs = [ pkgs.gnused ];
+  buildInputs = with pkgs; [ gnused python312 python312Packages.i3ipc ];
   buildCommand = ''
     mkdir -p $out/bin
     cp $src/*py $out/bin/
     chmod +x $out/bin/*
-    sed -i -e '1i #!${pyenv}/bin/python' $out/bin/*
+    sed -i -e '1i #!${pkgs.python312}/bin/python' $out/bin/*
   '';
 };
 in
