@@ -1,8 +1,8 @@
 { pkgs, config, ...}:
 let
     polybar-pulseaudio-control = builtins.fetchurl {
-      url = "https://github.com/marioortizmanero/polybar-pulseaudio-control/raw/master/pulseaudio-control.bash";
-      sha256 = "043b8220551138550ca05e32c8c01071c5962f94ec6c0290069c4fca6383749c";
+      url = "https://github.com/marioortizmanero/polybar-pulseaudio-control/raw/ed03a1b85dd0e92f85bc7446b78e010b36be4606/pulseaudio-control";
+      sha256 = "46b5de0f4724c9088a30278d470ba97c3c0a4489dc2d71cde0da2c177c7297f4";
     };
     ppc-cmd = "PATH=${pkgs.pulseaudio}/bin:${pkgs.coreutils-full}/bin:${pkgs.gnugrep}/bin ${pkgs.bash}/bin/bash ${polybar-pulseaudio-control}";
 in
