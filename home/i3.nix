@@ -16,7 +16,7 @@ rofi-power-menu = pkgs.stdenv.mkDerivation {
 scripts = pkgs.stdenv.mkDerivation {
   name = "i3-scripts";
   src = ./i3scripts;
-  buildInputs = with pkgs; [ gnused python312 python312Packages.i3ipc ];
+  buildInputs = with pkgs; [ gnused python311 python311Packages.i3ipc ];
   buildCommand = ''
     mkdir -p $out/bin
     cp $src/*py $out/bin/
