@@ -107,6 +107,15 @@ in
 		];
 		pathsToLink = ["/libexec"];
 	};
+	environment.plasma6.excludePackages = with pkgs.kdePackages; [
+		plasma-browser-integration
+		oxygen
+	];
+	qt = {
+		enable = true;
+		platformTheme = "gnome";
+		style = "adwaita-dark";
+	};
 	services = {
 		printing.enable = true;
 		pipewire = {
@@ -116,32 +125,37 @@ in
 			pulse.enable = true;
 			jack.enable = true;
 		};
-		xserver = {
-			enable = true;
-			xkb.layout = "de";
-			resolutions = [
-			{ x = 1920; y = 1080; }
-			];
-			desktopManager = {
-				xterm.enable = false;
-				plasma6.enable = true;
-			};
-			displayManager = {
-				defaultSession = "none+i3";
-			};
-			windowManager.i3 = {
-				enable = true;
-				extraPackages = with pkgs; [
-					dmenu
-						i3status
-						i3lock
-						i3blocks
-						polybarFull
-						dunst
-						rofi
-				];
-			};
-		};
+		xserver.displayManager.sddm.wayland.enable = true;
+		displayManager.sddm.enable = true;
+		desktopManager.plasma6.enable = true;
+		xserver.displayManager.defaultSession = "plasma";
+
+		# xserver = {
+		# 	enable = true;
+		# 	xkb.layout = "de";
+		# 	resolutions = [
+		# 	{ x = 1920; y = 1080; }
+		# 	];
+		# 	desktopManager = {
+		# 		xterm.enable = false;
+		# 		plasma6.enable = true;
+		# 	};
+		# 	displayManager = {
+		# 		defaultSession = "none+i3";
+		# 	};
+		# 	windowManager.i3 = {
+		# 		enable = true;
+		# 		extraPackages = with pkgs; [
+		# 			dmenu
+		# 				i3status
+		# 				i3lock
+		# 				i3blocks
+		# 				polybarFull
+		# 				dunst
+		# 				rofi
+		# 		];
+		# 	};
+		# };
 	};
 	fonts.packages = with pkgs; [
 		inconsolata
