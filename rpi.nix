@@ -1,4 +1,4 @@
-{config, lib, pkgs, user, ...}:{
+{config, lib, pkgs, ...}:{
     disabledModules = [
         "profiles/base.nix"
     ];
@@ -10,7 +10,7 @@
     boot.loader.generic-extlinux-compatible.enable = true;
     system.stateVersion = "23.11";
     users.users = {
-        ${user} = {
+        "philipp" = {
             password = "admin123";
             isNormalUser = true;
             extraGroups = [ "wheel" ];
