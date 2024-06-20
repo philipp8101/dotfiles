@@ -21,6 +21,7 @@ in
 			extraPools = [ "test" ];
 		};
 		kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+		binfmt.emulatedSystems = [ "aarch64-linux" ];
 	};
 	networking = {
 		hostId = "e52e59bb";
