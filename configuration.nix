@@ -125,10 +125,10 @@ in
 			pulse.enable = true;
 			jack.enable = true;
 		};
-		xserver.displayManager.sddm.wayland.enable = true;
+		displayManager.sddm.wayland.enable = true;
 		displayManager.sddm.enable = true;
 		desktopManager.plasma6.enable = true;
-		xserver.displayManager.defaultSession = "plasma";
+		displayManager.defaultSession = "plasma";
 
 		# xserver = {
 		# 	enable = true;
