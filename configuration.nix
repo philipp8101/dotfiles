@@ -102,11 +102,12 @@ in
 			mpv
 			evince
 			gnome.adwaita-icon-theme
-			(pkgs.discord.override {
-			 withOpenASAR = true;
-			 withVencord = true;
-			 })
-			vesktop # https://nixos.wiki/wiki/Discord
+			discord
+			# (pkgs.discord.override {
+			#  withOpenASAR = true;
+			#  withVencord = true;
+			#  })
+			# vesktop # https://nixos.wiki/wiki/Discord
 			lutris
 			nix-index
 			htop-vim
