@@ -18,7 +18,7 @@ in
 		supportedFilesystems = [ "zfs" ];
 		zfs = {
 			forceImportRoot = false;
-			extraPools = [ "test" ];
+			extraPools = [ ];
 		};
 		kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
 		binfmt.emulatedSystems = [ "aarch64-linux" ];
