@@ -48,7 +48,13 @@ in
 	hardware = {
 		pulseaudio.enable = false;
 		opengl.enable = true;
+		opengl.driSupport = true; # https://nixos.wiki/wiki/Lutris
 		opengl.driSupport32Bit = true; # https://nixos.wiki/wiki/Lutris
+		nvidia = {
+			modesetting.enable = true;
+			open = false;
+			nvidiaSettings = true;
+		};
 	};
 	security.rtkit.enable = true;
 	users.users.philipp = {
@@ -129,6 +135,7 @@ in
 		displayManager.sddm.enable = true;
 		desktopManager.plasma6.enable = true;
 		displayManager.defaultSession = "plasma";
+		xserver.videoDrivers = [ "nvidia" ];
 
 		# xserver = {
 		# 	enable = true;
