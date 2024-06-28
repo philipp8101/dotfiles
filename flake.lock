@@ -38,6 +38,22 @@
         "type": "github"
       }
     },
+    "du": {
+      "locked": {
+        "lastModified": 1719513572,
+        "narHash": "sha256-oJo6fg7TI+WsMBAmtjQuayIMEHNZBD+mYtKgcGxcNcM=",
+        "owner": "Artturin",
+        "repo": "nixpkgs",
+        "rev": "76551701c130bd08fb6722cdd9b95d75bd021634",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Artturin",
+        "ref": "discordupdate6",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "locked": {
         "lastModified": 1696426674,
@@ -293,16 +309,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1718717462,
-        "narHash": "sha256-qddfQLMaWR2gxfEzUM/zFZVK6H1kTv9WBQSBQxbP3MU=",
+        "lastModified": 1718714799,
+        "narHash": "sha256-FUZpz9rg3gL8NVPKbqU8ei1VkPLsTIfAJ2fdAf5qjak=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "938aa157bbd6e3c6fd7dcb77998b1f92c2ad1631",
+        "rev": "c00d587b1a1afbf200b1d8f0b0e4ba9deb1c7f0e",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
-        "ref": "nixos-24.05",
+        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -363,6 +379,7 @@
     },
     "root": {
       "inputs": {
+        "du": "du",
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
         "nix-colors": "nix-colors",

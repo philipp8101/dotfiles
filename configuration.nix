@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 let 
 layoutPath = builtins.path {
 	path = ./keymap.xkb;
@@ -89,7 +89,6 @@ in
 			tmux
 			kitty
 			polkit
-			xdg-desktop-portal-hyprland
 			dconf
 			xwayland
 			gcc
@@ -103,7 +102,10 @@ in
 			mpv
 			evince
 			gnome.adwaita-icon-theme
-			discord
+			( import inputs.du {
+				system = "x86_64-linux";
+				config.allowUnfree = true;
+			}).discord
 			# (pkgs.discord.override {
 			#  withOpenASAR = true;
 			#  withVencord = true;
