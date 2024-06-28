@@ -33,9 +33,22 @@ in
 
   gtk = {
     enable = true;
-    theme.name = "Adwaita";
-    cursorTheme.name = "Adwaita";
-    iconTheme.name = "Adwaita";
+    theme.package = pkgs.adw-gtk3;
+    theme.name = "adw-gtk3-dark";
+    iconTheme.package = pkgs.adw-gtk3;
+    iconTheme.name = "adw-gtk3-dark";
+  };
+
+  qt = {
+    enable = true;
+    # platformTheme.name = "adwaita";
+    style.name = "Breeze";
+  };
+
+  dconf = {
+    enable = true;
+    settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
+    settings."org/gnome/desktop/input-sources".sources = "[('xkb', 'de')]";
   };
 
   xresources.properties = {

@@ -54,6 +54,7 @@ in
 			modesetting.enable = true;
 			open = false;
 			nvidiaSettings = true;
+			# package = config.boot.kernelPackages.nvidiaPackages.production;
 		};
 	};
 	security.rtkit.enable = true;
@@ -114,14 +115,18 @@ in
 		];
 		pathsToLink = ["/libexec"];
 	};
-	environment.plasma6.excludePackages = with pkgs.kdePackages; [
-		plasma-browser-integration
-		oxygen
-	];
-	qt = {
+	# environment.plasma6.excludePackages = with pkgs.kdePackages; [
+	# 	plasma-browser-integration
+	# 	oxygen
+	# ];
+	xdg.portal = {
 		enable = true;
-		platformTheme = "gnome";
-		style = "adwaita-dark";
+		extraPortals = with pkgs; [
+			xdg-desktop-portal-hyprland
+			# xdg-desktop-portal-wlr
+			# xdg-desktop-portal-kde
+			# xdg-desktop-portal-gtk
+		];
 	};
 	services = {
 		printing.enable = true;
@@ -135,7 +140,7 @@ in
 		displayManager.sddm.wayland.enable = true;
 		displayManager.sddm.enable = true;
 		desktopManager.plasma6.enable = true;
-		displayManager.defaultSession = "plasma";
+		displayManager.defaultSession = "hyprland";
 		xserver.videoDrivers = [ "nvidia" ];
 
 		# xserver = {
