@@ -66,6 +66,7 @@ in
 	};
 	programs = {
 		zsh.enable = true;
+		ssh.startAgent = true;
 		steam = {
 			enable = true;
 			remotePlay.openFirewall = true;
@@ -80,6 +81,9 @@ in
 	nixpkgs.config.allowUnfree = true;
 
 	environment = {
+		sessionVariables = {
+			SSH_AUTH_SOCK = "/run/user/1000/ssh-agent";
+		};
 		shellAliases = {
 			"workman" =  "${pkgs.xorg.xkbcomp}/bin/xkbcomp ${compiledLayout} $DISPLAY";
 		};
