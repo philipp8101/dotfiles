@@ -1,9 +1,17 @@
 { pkgs, config, ... }:
 let
-  rofi-power-menu = builtins.fetchurl {
-    url = "https://github.com/jluttine/rofi-power-menu/raw/master/rofi-power-menu";
+rofi-power-menu = pkgs.stdenv.mkDerivation {
+  name = "rofi-power-menu";
+  src = builtins.fetchurl {
+    url = "https://github.com/jluttine/rofi-power-menu/raw/395c1e07360b2dbd13c0a658665ab0a581024ec3/rofi-power-menu";
     sha256 = "3cfdf4cfb3553a62f56b055ed039e29c56abc063e9252cfbc3c7d3b5c98dfbb6";
   };
+  buildCommand = ''
+    mkdir -p $out/bin/
+    cp $src $out/bin/rofi-power-menu
+    chmod +x $out/bin/rofi-power-menu
+    '';
+};
 in
 {
   wayland.windowManager.hyprland = {
