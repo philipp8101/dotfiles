@@ -3,24 +3,30 @@
     programs.waybar = {
         enable = true;
         systemd.enable = true;
+        systemd.target = "hyprland-session.target";
         settings = {
             mainBar = {
                 layer= "top";
                 position= "top";
-                modules-left= ["wlr/workspaces"];
+                modules-left= ["hyprland/workspaces"];
                 modules-center= ["clock"];
                 modules-right= ["cpu" "memory" "network" "pulseaudio" "backlight" "battery" "tray"];
                 tray= {
                     icon-size= 21;
                     spacing= 10;
                 };
-                "wlr/workspaces"= {
-                    on-click= "activate";
-                    on-scroll-up= "hyprctl dispatch workspace m-1";
-                    on-scroll-down= "hyprctl dispatch workspace m+1";
+                "wayland/workspaces"= {
+                    "disable-scroll"= true;
+                    "format"= "{name} {icon}";
+                    "format-icons"= {
+                        "active"= " ";
+                        "default"= " ";
+                    };
                 };
                 clock= {
-                    format= "<span foreground='#C6AAE8'> </span>{:KW%V %a %d %H:%M}";
+                    interval= 60;
+                    max-length= 25;
+                    format= "<span foreground='#C6AAE8'>    </span>KW{:%V  %a %d  %H:%M}";
                     tooltip-format= "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
                 };
                 battery= {
@@ -35,44 +41,44 @@
                     format-plugged= "<span size='13000' foreground='#B1E3AD'> </span>{capacity}%";
                     format-alt= "<span size='13000' foreground='#B1E3AD'>{icon}</span> {time}";
                     format-full= "<span size='13000' foreground='#B1E3AD'> </span>{capacity}%";
-                    format-icons= ["" "" "" "" ""];
+                    format-icons= [" " " " " " " " " "];
                     tooltip-format= "{time}";
                 };
                 cpu= {
                     interval= 1;
-                    format= "{}%";
+                    format= "   {}%";
                     max-length= 10;
                 };
                 memory= {
                     interval= 1;
-                    format= "{}%";
+                    format= "   {}%";
                     max-length= 10;
                 };
                 network= {
-                    format-wifi= "<span size='13000' foreground='#F2CECF'> </span>{essid}";
-                    format-ethernet= "<span size='13000' foreground='#F2CECF'>󱊪 </span>{ipaddr}";
+                    format-wifi= "<span size='13000' foreground='#F2CECF'>  </span>{essid}";
+                    format-ethernet= "<span size='13000' foreground='#F2CECF'>󰈀 </span>{ipaddr}";
                     format-linked= "{ifname} (No IP) ";
                     format-disconnected= "<span size='13000' foreground='#F2CECF'> </span>Disconnected";
                     tooltip-format-wifi= "Signal Strenght: {signalStrength}%";
                 };
                 pulseaudio= {
                     on-click= "pactl set-sink-mute @DEFAULT_SINK@ toggle";
-                    format= "<span size='13000' foreground='#EBDDAA'>{icon}</span> {volume}%";
+                    format= "<span size='13000' foreground='#EBDDAA'>{icon} </span>{desc} {volume}%";
                     format-muted= "<span size='14000' foreground='#EBDDAA'></span> Muted";
                     format-icons= {
-                        headphone= "";
-                        hands-free= "";
-                        headset= "";
-                        phone= "";
-                        portable= "";
-                        car= "";
-                        default= ["" ""];
+                        headphone= " ";
+                        hands-free= " ";
+                        headset= " ";
+                        phone= " ";
+                        portable= " ";
+                        car= " ";
+                        default= [" " " "];
                     };
                 };
                 backlight= {
                     device= "intel_backlight";
                     format= "{icon} {percent}%";
-                    format-icons= ["" ""];
+                    format-icons= [" " " "];
                 };
 
             };
