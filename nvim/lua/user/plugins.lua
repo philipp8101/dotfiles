@@ -43,7 +43,7 @@ require("lazy").setup({
 			event_handlers = {
 				{
 					event = "file_opened",
-					handler = function(file_path)
+					handler = function(_)
 						require("neo-tree").close_all()
 					end,
 				},
@@ -164,14 +164,14 @@ require("lazy").setup({
 	{
 		"numToStr/Comment.nvim",
 		lazy = false,
-		keys = { "gkk", "gbk", "gk", "gb", "gcO", "gco", "gcA" },
+		keys = { "gcc", "gbc", "gc", "gb", "gcO", "gco", "gcA" },
 		-- doesn't account for combinations like vgkk
 		opts = {
 			padding = true,
 			sticky = true,
 			ignore = nil,
-			toggler = { line = "gkk", block = "gbk" },
-			opleader = { line = "gk", block = "gb" },
+			toggler = { line = "gcc", block = "gbc" },
+			opleader = { line = "gc", block = "gb" },
 			extra = { above = "gcO", below = "gco", eol = "gcA" },
 			mappings = { basic = true, extra = true },
 			pre_hook = nil,
@@ -300,7 +300,7 @@ require("lazy").setup({
 				delay = 0,
 			},
 			current_line_blame_formatter = "<author>, <abbrev_sha>, <author_time:%Y-%m-%d> - <summary>",
-			on_attach = function(bufnr)
+			on_attach = function(_)
 				local gs = package.loaded.gitsigns
 				-- Navigation
 				vim.keymap.set("n", "]c", function()
@@ -704,6 +704,12 @@ require("lazy").setup({
 
 	{
 		"nvim-telescope/telescope.nvim",
+		dependencies = {
+			"nvim-telescope/telescope-ui-select.nvim",
+			config = function()
+				require("telescope").load_extension("ui-select")
+			end
+		},
 		lazy = true,
 		cmd = "Telescope",
 		opts = {
@@ -818,7 +824,6 @@ require("lazy").setup({
 			{ "<c-space>", desc = "Increment selection" },
 			{ "<bs>",      desc = "Decrement selection", mode = "x" },
 		},
-		---@type TSConfig
 		opts = {
 			highlight = { enable = true },
 			indent = { enable = true },
