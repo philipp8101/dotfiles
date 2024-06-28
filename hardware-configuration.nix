@@ -22,6 +22,10 @@
     { device = "/dev/disk/by-uuid/E7DA-5440";
       fsType = "vfat";
     };
+  fileSystems."/tank" =
+    { device = "tank";
+      fsType = "zfs";
+    };
 
   swapDevices = [ ];
 
