@@ -18,32 +18,38 @@ in
         };
         sensitivity = 0;
       };
+      monitor = [
+        "DP-1, 1920x1080, 0x0, 1"
+        "DP-2, 1920x1080@144, 1920x0, 1"
+        "HDMI-A-0, 1920x1080, 3840x0, 1"
+        "Unknown-1,disable"
+      ];
       general = {
-        # gaps_in = 5;
-        # gaps_out = 20;
-        # border_size = 2;
-        # col.active_border = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-        # col.inactive_border = "rgba(595959aa)";
-        # layout = "dwindle";
+        gaps_in = 5;
+        gaps_out = 20;
+        border_size = 2;
+        "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
+        "col.inactive_border" = "rgba(595959aa)";
+        layout = "dwindle";
       };
-      decorations = {
-        # rounding = 10;
-        # drop_shadow = true;
-        # shadow_range = 4;
-        # shadow_render_power = 3;
-        # col.shadow = "rgba(1a1a1aee)";
+      decoration = {
+        rounding = 10;
+        drop_shadow = true;
+        shadow_range = 4;
+        shadow_render_power = 3;
+        "col.shadow" = "rgba(1a1a1aee)";
       };
       animations = {
-        # enable = true;
-        # bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
-        # animation = [
-        #   "windows, 1, 7, myBezier"
-        #   "windowsOut, 1,7, default, popin 80%"
-        #   "border, 1, 10, default"
-        #   "borderangle, 1, 8, default"
-        #   "fade, 1, 7, default"
-        #   "workspace, 1, 6, default"
-        # ];
+        enabled = true;
+        bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
+        animation = [
+          "windows, 1, 7, myBezier"
+          "windowsOut, 1,7, default, popin 80%"
+          "border, 1, 10, default"
+          "borderangle, 1, 8, default"
+          "fade, 1, 7, default"
+          "workspaces, 1, 6, default"
+        ];
       };
       dwindle = {
         pseudotile = true;
@@ -57,12 +63,13 @@ in
         workspace_swipe = true;
       };
       "$mod" = "SUPER";
+      workspace = "1,monitor:DP-2";
       bind = [
         "$mod, Return, exec, ${pkgs.alacritty}/bin/alacritty"
         "$mod, Q, killactive,"
-        "$mod SHIFT, R, exec, ${pkgs.rofi}/bin/rofi -show power-menu -modi power-menu:${rofi-power-menu}"
+        "$mod SHIFT, R, exec, ${pkgs.rofi-wayland}/bin/rofi -show power-menu -modi power-menu:${rofi-power-menu}"
         "$mod SHIFT, M, togglefloating,"
-        "$mod, G, exec, ${pkgs.rofi}/bin/rofi -show drun"
+        "$mod, G, exec, ${pkgs.rofi-wayland}/bin/rofi -show drun"
         "$mod, P, pseudo, # dwindle"
         "$mod, R, togglesplit, # dwindle"
         "$mod, B, fullscreen, 1"
@@ -72,8 +79,6 @@ in
         "$mod, D, changegroupactive, previous"
         "$mod, tab, workspace, previous"
         "$mod, n, togglespecialworkspace"
-        # "$mod, mouse:272, movewindow # mouse binds, if we change bind to bindm here the window will always be left floating "
-        # "$mod, mouse:273, resizewindow"
         # "$mod, BACKSPACE, exec, sed -i '/workman/{ ; 4s/ workman// ; b ; } ; 4s/$/ workman/' ~/.config/hypr/input.conf"
         "$mod, a, movefocus, l"
         "$mod, t, movefocus, r"
@@ -119,6 +124,10 @@ in
         ", XF86AudioRaiseVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"
         ", XF86AudioLowerVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-"
         ", XF86AudioMute, exec, ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+      ];
+      bindm = [
+        "$mod, mouse:272, movewindow"
+        "$mod, mouse:273, resizewindow"
       ];
       # windowrulev2 = [
       #   "nomaxsize, class:^(riotclientux.exe)$,title:^(Riot Client Main)$"
