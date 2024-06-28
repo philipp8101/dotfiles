@@ -53,7 +53,6 @@ require("lazy").setup({
 
 	{
 		"nvim-neorg/neorg",
-		build = ":Neorg sync-parsers",
 		lazy = true,
 		cmd = "Neorg",
 		dependencies = {
