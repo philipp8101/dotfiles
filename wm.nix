@@ -19,6 +19,7 @@ in
     ./home/rofi.nix
     ./home/i3.nix
     ./home/hyprland.nix
+    ./home/waybar.nix
   ];
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
