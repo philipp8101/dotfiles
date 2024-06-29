@@ -113,16 +113,6 @@ in
         "${mod}+e" = "workspace 6";
         "${mod}+o" = "workspace 7";
         "${mod}+i" = "workspace 8";
-        "${mod}+1" = "workspace 1";
-        "${mod}+2" = "workspace 2";
-        "${mod}+3" = "workspace 3";
-        "${mod}+4" = "workspace 4";
-        "${mod}+5" = "workspace 5";
-        "${mod}+6" = "workspace 6";
-        "${mod}+7" = "workspace 7";
-        "${mod}+8" = "workspace 8";
-        "${mod}+9" = "workspace 9";
-        "${mod}+0" = "workspace 10";
         "${mod}+Shift+t" = "move container to workspace number 1";
         "${mod}+Shift+h" = "move container to workspace number 2";
         "${mod}+Shift+s" = "move container to workspace number 3";
@@ -131,16 +121,6 @@ in
         "${mod}+Shift+e" = "move container to workspace number 6";
         "${mod}+Shift+o" = "move container to workspace number 7";
         "${mod}+Shift+i" = "move container to workspace number 8";
-        "${mod}+Shift+1" = "move container to workspace number 1";
-        "${mod}+Shift+2" = "move container to workspace number 2";
-        "${mod}+Shift+3" = "move container to workspace number 3";
-        "${mod}+Shift+4" = "move container to workspace number 4";
-        "${mod}+Shift+5" = "move container to workspace number 5";
-        "${mod}+Shift+6" = "move container to workspace number 6";
-        "${mod}+Shift+7" = "move container to workspace number 7";
-        "${mod}+Shift+8" = "move container to workspace number 8";
-        "${mod}+Shift+9" = "move container to workspace number 9";
-        "${mod}+Shift+0" = "move container to workspace number 10";
       };
       assigns = {
         "6" = [{class="Steam";}{class="steam";}{title="Steam";}{title="steam";}];
