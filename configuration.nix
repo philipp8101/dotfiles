@@ -118,6 +118,8 @@ in
 			lutris
 			nix-index
 			htop-vim
+			obsidian
+			wl-clipboard
 		];
 		pathsToLink = ["/libexec"];
 	};
