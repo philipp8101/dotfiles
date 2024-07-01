@@ -108,9 +108,11 @@ in
   services.dunst = {
     enable = true;
     settings = {
-      globals = {
+      global = {
         frame_color = "#${config.colorScheme.palette.base04}";
         separator_color = "frame";
+        offset = "20x50";
+        origin = "top-right";
       };
       urgency_low = {
         background = "#${config.colorScheme.palette.base00}";
