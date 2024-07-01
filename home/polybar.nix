@@ -4,7 +4,7 @@ let
       url = "https://github.com/marioortizmanero/polybar-pulseaudio-control/raw/ed03a1b85dd0e92f85bc7446b78e010b36be4606/pulseaudio-control";
       sha256 = "46b5de0f4724c9088a30278d470ba97c3c0a4489dc2d71cde0da2c177c7297f4";
     };
-    ppc-cmd = "PATH=${pkgs.pulseaudio}/bin:${pkgs.coreutils-full}/bin:${pkgs.gnugrep}/bin ${pkgs.bash}/bin/bash ${polybar-pulseaudio-control}";
+    ppc-cmd = "PATH=${pkgs.pulseaudio}/bin:${pkgs.coreutils-full}/bin:${pkgs.gnugrep}/bin:${pkgs.gawk}/bin:${pkgs.gnused}/bin ${pkgs.bash}/bin/bash ${polybar-pulseaudio-control}";
     i3scripts = import ./i3scripts.nix {inherit pkgs;};
 in
 {
@@ -139,7 +139,7 @@ in
             };
             "module/disk" = {
                 type = "custom/script";
-                exec = "PATH=${pkgs.bash}/bin:${pkgs.gawk}/bin:${pkgs.coreutils-full}/bin:${pkgs.zfs}/bin:${pkgs.smartmontools}/bin ~/.config/polybar/polybar-scripts/disk-usage.sh test";
+                exec = "PATH=${pkgs.bash}/bin:${pkgs.gawk}/bin:${pkgs.coreutils-full}/bin:${pkgs.zfs}/bin:${pkgs.smartmontools}/bin ~/.config/polybar/polybar-scripts/disk-usage.sh tank";
                 interval = "300";
             };
             "module/pulseaudio-control" = {
@@ -173,7 +173,7 @@ in
             "module/ws-add" = {
                 type = "custom/script";
                 exec = "echo 󰐕";
-                click-left = "${pkgs.python3}/bin/python ${i3scripts}/bin/next_empty_workspace.py ; rofi -show drun -theme round";
+                click-left = "${pkgs.python3}/bin/python ${i3scripts}/bin/next_empty_workspace.py ; ${pkgs.rofi}/bin/rofi -show drun";
             };
             "module/headset-battery" = {
                 type = "custom/script";
@@ -185,8 +185,7 @@ in
             "module/temp" = {
                 type = "custom/script";
                 exec = ''
-                    ${pkgs.coreutils-full}/bin/echo "%{F#6e738d}CPU:%{F-}$(${pkgs.lm_sensors}/bin/sensors |${pkgs.gawk}/bin/awk '/Core/{if (0+substr($3,2,2)>0+max) a=substr($3,2,2)} END{print a}')°C"
-                    # %{F#6e738d}GPU:%{F-}$(nvidia-smi -q|awk '/GPU Current Temp/{print $5}')°C"
+                    ${pkgs.coreutils-full}/bin/echo "%{F#6e738d}CPU:%{F-}$(${pkgs.lm_sensors}/bin/sensors |${pkgs.gawk}/bin/awk '/Core/{if (0+substr($3,2,2)>0+max) a=substr($3,2,2)} END{print a}')°C %{F#6e738d}GPU:%{F-}$(${pkgs.linuxKernel.packages.linux_6_8.nvidia_x11.bin}/bin/nvidia-smi -q|${pkgs.gawk}/bin/awk '/GPU Current Temp/{print $5}')°C"
                 '';
                 interval = "5";
             };
