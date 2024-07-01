@@ -121,6 +121,7 @@ in
 			htop-vim
 			obsidian
 			wl-clipboard
+			spotify
 		];
 		pathsToLink = ["/libexec"];
 	};
