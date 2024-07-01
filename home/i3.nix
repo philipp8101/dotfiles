@@ -30,12 +30,13 @@ in
     enable = true;
     extraConfig = ''
       show_marks yes
+      default_border pixel 3
     '';
     config = {
       fonts = {
         names = [ "Inconsolata Nerd Font" ];
         style = "Regular";
-        size = 8.0;
+        size = 10.0;
       };
       modifier = mod;
       floating.modifier = mod;
@@ -173,27 +174,27 @@ in
         background = "#${config.colorScheme.palette.base00}";
         focused = {
           border = "#${config.colorScheme.palette.base04}";
-          background = "#${config.colorScheme.palette.base01}";
-          text = "#${config.colorScheme.palette.base05}";
+          background = "#${config.colorScheme.palette.base04}";
+          text = "#${config.colorScheme.palette.base01}";
           indicator = "#${config.colorScheme.palette.base03}";
           childBorder = "#${config.colorScheme.palette.base03}";
         };
         focusedInactive = {
-          border = "#${config.colorScheme.palette.base03}";
+          border = "#${config.colorScheme.palette.base02}";
           background = "#${config.colorScheme.palette.base02}";
           text = "#${config.colorScheme.palette.base05}";
           indicator = "#${config.colorScheme.palette.base02}";
           childBorder = "#${config.colorScheme.palette.base02}";
         };
         unfocused = {
-          border = "#${config.colorScheme.palette.base02}";
+          border = "#${config.colorScheme.palette.base00}";
           background = "#${config.colorScheme.palette.base00}";
           text = "#${config.colorScheme.palette.base05}";
           indicator = "#${config.colorScheme.palette.base00}";
           childBorder = "#${config.colorScheme.palette.base00}";
         };
         urgent = {
-          border = "#${config.colorScheme.palette.base04}";
+          border = "#${config.colorScheme.palette.base08}";
           background = "#${config.colorScheme.palette.base08}";
           text = "#${config.colorScheme.palette.base05}";
           indicator = "#${config.colorScheme.palette.base08}";
