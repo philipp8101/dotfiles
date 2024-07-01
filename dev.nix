@@ -9,11 +9,24 @@
   home.homeDirectory = "/home/${user}";
   home.stateVersion = "23.11"; # Please read the comment before changing.
 
-  colorScheme = inputs.nix-colors.colorSchemes.gigavolt;
-  # colorScheme = inputs.nix-colors.lib.schemeFromYAML "carbonfox" (builtins.readFile(builtins.fetchurl{
-  #   url = "https://github.com/EdenEast/nightfox.nvim/raw/main/extra/carbonfox/base16.yaml";
-  #   sha256 = "196934b7c57ddfe9427318a51fdc17dc4684e73a33660584fd9afa1486fd717b";
-  # }));
+  colorScheme = let
+  tinted-theming = pkgs.fetchFromGitHub {
+    owner = "tinted-theming";
+    repo = "base16-schemes";
+    rev = "2b6f2d0677216ddda50c9cabd6ee70fae4665f81";
+    sha256 = "sha256-VTczZi1C4WSzejpTFbneMonAdarRLtDnFehVxWs6ad0=";
+  };
+  unikitty = pkgs.fetchFromGitHub {
+    owner = "joshwlewis";
+    repo = "base16-unikitty";
+    rev = "28362f3a37a0e81b04d844aa5b2923ad63140734";
+    sha256 = "sha256-VTczZi1C4WSzejpTFbneMonAdarRLtDnFehVxWs6ad0=";
+  };
+  theme = src: theme_name: inputs.nix-colors.lib.schemeFromYAML theme_name (builtins.readFile "${src}/${theme_name}.yaml");
+  in
+  # theme unikitty "unikitty-reversible";
+  theme tinted-theming "gigavolt";
+  # theme "carbonfox";
 
   home.packages = with pkgs; [
   ];
