@@ -5,6 +5,7 @@ let
       sha256 = "46b5de0f4724c9088a30278d470ba97c3c0a4489dc2d71cde0da2c177c7297f4";
     };
     ppc-cmd = "PATH=${pkgs.pulseaudio}/bin:${pkgs.coreutils-full}/bin:${pkgs.gnugrep}/bin ${pkgs.bash}/bin/bash ${polybar-pulseaudio-control}";
+    i3scripts = import ./i3scripts.nix {inherit pkgs;};
 in
 {
     xdg.configFile."polybar/polybar-scripts".source = ./polybar/polybar-scripts;
@@ -172,7 +173,7 @@ in
             "module/ws-add" = {
                 type = "custom/script";
                 exec = "echo 󰐕";
-                click-left = "${pkgs.python3}/bin/python ~/.config/i3/scripts/next_empty_workspace.py ; rofi -show drun -theme round";
+                click-left = "${pkgs.python3}/bin/python ${i3scripts}/bin/next_empty_workspace.py ; rofi -show drun -theme round";
             };
             "module/headset-battery" = {
                 type = "custom/script";
