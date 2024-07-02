@@ -11,7 +11,11 @@ in
     xdg.configFile."polybar/polybar-scripts".source = ./polybar/polybar-scripts;
     services.polybar = {
         enable = true;
-        script = "polybar primary &";
+        script = ''
+        MONITOR=DP-2 polybar primary &
+        MONITOR=DP-0 polybar auxilary &
+        MONITOR=HDMI-0 polybar secondary &
+        '';
         package = pkgs.polybarFull;
         settings = {
             "bar/primary" = {
@@ -32,7 +36,7 @@ in
                 font-1 = "Inconsolata Nerd Font Mono:style=Regular:size=21;5";
                 modules-left = "ws-move-left i3 ws-add ws-move-right";
                 modules-center = "date-script";
-                modules-right = "disk headset-battery pulseaudio-control temp tray";
+                modules-right = "headset-battery pulseaudio-control tray";
                 cursor-click = "pointer";
                 cursor-scroll = "ns-resize";
                 enable-ipc = "true";
