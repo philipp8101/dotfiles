@@ -28,6 +28,12 @@ in
 		hostName = "nixos";
 		networkmanager.enable = true;
 	};
+	services.udev = {
+		enable = true;
+		extraRules = ''
+		KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="1038", ATTRS{idProduct}=="12c2", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
+		'';
+	};
 	time.timeZone = "Europe/Berlin";
 	i18n.defaultLocale = "en_US.UTF-8";
 	i18n.extraLocaleSettings = {
