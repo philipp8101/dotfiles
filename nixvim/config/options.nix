@@ -2,7 +2,7 @@
     config = {
         enableMan = true;
         colorscheme = "carbonfox";
-        options = {
+        opts = {
             termguicolors = true;
             relativenumber = true;
             number = true;

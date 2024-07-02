@@ -1,7 +1,7 @@
 {
-    plugins.comment-nvim = {
+    plugins.comment = {
         enable = true;
-        mappings = {
+        settings.mappings = {
             basic = true;
             extra = true;
         };

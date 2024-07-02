@@ -12,8 +12,7 @@
     keymaps = [
         {
             key = "<leader>h";
-            action = ''require("nvim-navbuddy").open'';
-            lua = true;
+            action.__raw = ''require("nvim-navbuddy").open'';
         }
     ];
 }

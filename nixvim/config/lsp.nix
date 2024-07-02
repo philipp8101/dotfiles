@@ -2,7 +2,7 @@
     let enabled_servers = [
       "gopls"
       "clangd"
-      "nil_ls"
+      "nil-ls"
       "bashls"
       "cmake"
       "csharp-ls"
