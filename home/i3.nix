@@ -39,8 +39,8 @@ in
       };
       bars = [];
       keybindings = {
-        "${mod}+Return" = "exec ${pkgs.kitty}/bin/kitty";
-        "${mod}+Shift+Return" = "exec \"${scripts}/bin/next_empty_workspace.py ; ${pkgs.kitty}/bin/kitty\"";
+        "${mod}+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
+        "${mod}+Shift+Return" = "exec \"${scripts}/bin/next_empty_workspace.py ; ${pkgs.alacritty}/bin/alacritty\"";
         "${mod}+z" = "exec ${pkgs.flameshot}/bin/flameshot gui";
         "${mod}+Shift+z" = "exec ${pkgs.flameshot}/bin/flameshot gui --raw | ${pkgs.tesseract}/bin/tesseract stdin stdout -l eng | ${pkgs.xclip}/bin/xclip -in -selection clipboard";
         "${mod}+q" = "kill";
