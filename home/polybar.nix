@@ -181,9 +181,9 @@ in
             };
             "module/headset-battery" = {
                 type = "custom/script";
-                interval = "2";
+                interval = "0.5";
                 exec = ''
-                PATH=${pkgs.coreutils-full}/bin:${pkgs.gnugrep}/bin:${pkgs.headsetcontrol}/bin ${pkgs.bash}/bin/bash ~/.config/polybar/polybar-scripts/headset-battery.sh
+                PATH=${pkgs.coreutils-full}/bin:${pkgs.gnugrep}/bin:${pkgs.headsetcontrol}/bin:${pkgs.jq.bin}/bin ${pkgs.bash}/bin/bash ~/.config/polybar/polybar-scripts/headset-battery.sh
                 '';
             };
             "module/temp" = {
