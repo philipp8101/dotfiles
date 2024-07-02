@@ -80,11 +80,11 @@ in
         # "${mod}+$alt+t" = "move container to workspace next_on_output";
         # custom rofi scripts, provide i3 commands separated by ´-´ in the {mod}e variable
         "${mod}+f" = "exec mode=workspace ${pkgs.rofi}/bin/rofi -show 'go to workspace' -modes 'go to workspace:${scripts}/bin/rofi_menu.py'";
-        "${mod}+k" = "exec ${pkgs.mosquitto}/bin/mosquitto_pub -h 192.168.0.5 -t 'desk/control-height' -u mosquitto -P Y3Gnwwo= -m 'down'";
-        "${mod}+l" = "exec ${pkgs.mosquitto}/bin/mosquitto_pub -h 192.168.0.5 -t 'desk/control-height' -u mosquitto -P Y3Gnwwo= -m 'up'";
-        "${mod}+comma" = "exec ${pkgs.mosquitto}/bin/mosquitto_pub -h 192.168.0.5 -t 'desk/control-height' -u mosquitto -P Y3Gnwwo= -m 'p1'";
-        "${mod}+period" = "exec ${pkgs.mosquitto}/bin/mosquitto_pub -h 192.168.0.5 -t 'desk/control-height' -u mosquitto -P Y3Gnwwo= -m 'p2'";
-        "${mod}+minus" = "exec ${pkgs.mosquitto}/bin/mosquitto_pub -h 192.168.0.5 -t 'desk/control-height' -u mosquitto -P Y3Gnwwo= -m 'p3'";
+        "${mod}+k" = "exec ${pkgs.mosquitto}/bin/mosquitto_pub -h localhost -t 'desk/control-height' -m 'down'";
+        "${mod}+l" = "exec ${pkgs.mosquitto}/bin/mosquitto_pub -h localhost -t 'desk/control-height' -m 'up'";
+        "${mod}+comma" = "exec ${pkgs.mosquitto}/bin/mosquitto_pub -h localhost -t 'desk/control-height' -m 'p1'";
+        "${mod}+period" = "exec ${pkgs.mosquitto}/bin/mosquitto_pub -h localhost -t 'desk/control-height' -m 'p2'";
+        "${mod}+minus" = "exec ${pkgs.mosquitto}/bin/mosquitto_pub -h localhost -t 'desk/control-height' -m 'p3'";
         "${mod}+y" = "gaps horizontal current set 5";
         "${mod}+Shift+y" = "gaps horizontal current set 350";
         "XF86AudioRaiseVolume" = "exec --no-startup-id ${pkgs.pulseaudioFull}/bin/pactl set-sink-volume @DEFAULT_SINK@ +10%";

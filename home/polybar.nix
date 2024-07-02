@@ -131,14 +131,14 @@ in
                 type = "custom/script";
                 tail = "true";
                 exec = ''
-                    ${pkgs.mosquitto}/bin/mosquitto_sub -h 192.168.0.5 -t "desk/current-height" -u mosquitto -P Y3Gnwwo= 2> /dev/null
+                    ${pkgs.mosquitto}/bin/mosquitto_sub -h localhost -t "desk/current-height" 2> /dev/null
                 '';
                 format-prefix = "󱈹 ";
                 scroll-up = ''
-                    ${pkgs.mosquitto}/bin/mosquitto_pub -h 192.168.0.5 -t "desk/control-height" -u mosquitto -P Y3Gnwwo= -m "up"
+                    ${pkgs.mosquitto}/bin/mosquitto_pub -h localhost -t "desk/control-height" -m "up"
                 '';
                 scroll-down = ''
-                    ${pkgs.mosquitto}/bin/mosquitto_pub -h 192.168.0.5 -t "desk/control-height" -u mosquitto -P Y3Gnwwo= -m "down"
+                    ${pkgs.mosquitto}/bin/mosquitto_pub -h localhost -t "desk/control-height" -m "down"
                 '';
             };
             "module/disk" = {
