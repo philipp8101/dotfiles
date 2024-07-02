@@ -8,7 +8,6 @@ let
     i3scripts = import ./i3scripts.nix {inherit pkgs;};
 in
 {
-    xdg.configFile."polybar/polybar-scripts".source = ./polybar/polybar-scripts;
     services.polybar = {
         enable = true;
         script = ''
@@ -143,7 +142,15 @@ in
             };
             "module/disk" = {
                 type = "custom/script";
-                exec = "PATH=${pkgs.bash}/bin:${pkgs.gawk}/bin:${pkgs.coreutils-full}/bin:${pkgs.zfs}/bin:${pkgs.smartmontools}/bin ~/.config/polybar/polybar-scripts/disk-usage.sh tank";
+                exec = pkgs.writeShellScript "disk" ''
+                    a=$(${pkgs.zfs}/bin/zpool status | ${pkgs.gawk}/bin/awk "{if(\$1 ~ /$1/){print \$2}}")
+                    b=$(${pkgs.zfs}/bin/zpool iostat | ${pkgs.gawk}/bin/awk "{if(\$1 ~ /$1/){print \"%{F#6e738d}free:%{F-}\" \$3 }}") #" %{F#6e738d}read:%{F-}" $6 " %{F#6e738d}write:%{F-}" $7 }}')
+                    if [[ $a -eq "ONLINE" ]] ; then
+                        echo -n "%{F#6e738d}status:%{F-}"$a $b;
+                    else
+                        echo -n "%{F#6e738d}status:%{F-}%{F#f50a81}"$a"%{F-}" $b;
+                    fi
+                '';
                 interval = "300";
             };
             "module/pulseaudio-control" = {
@@ -182,14 +189,34 @@ in
             "module/headset-battery" = {
                 type = "custom/script";
                 interval = "0.5";
-                exec = ''
-                PATH=${pkgs.coreutils-full}/bin:${pkgs.gnugrep}/bin:${pkgs.headsetcontrol}/bin:${pkgs.jq.bin}/bin ${pkgs.bash}/bin/bash ~/.config/polybar/polybar-scripts/headset-battery.sh
+                exec = pkgs.writeShellScript "headset-battery" ''
+                    b=$(${pkgs.coreutils-full}/bin/timeout 1m ${pkgs.headsetcontrol}/bin/headsetcontrol -o JSON |${pkgs.jq.bin}/bin/jq ".devices[0].battery.level")
+                    m=$(${pkgs.coreutils-full}/bin/timeout 1m ${pkgs.headsetcontrol}/bin/headsetcontrol -o JSON |${pkgs.jq.bin}/bin/jq ".devices[0].chatmix")
+                    if [[ $b -ge 75 ]] ; then
+                        echo -n " "$b"% "
+                        elif [[ $b -ge 50 ]] ; then
+                        echo -n " "$b"% "
+                        elif [[ $b -ge 25 ]] ; then
+                        echo -n " "$b"% "
+                        elif [[ $b -eq -1 ]] ; then
+                        echo -n "Charging "
+                    else
+                        echo -n " "$b"% "
+                    fi
+                    if [[ $m -lt 64 ]] ; then
+                        echo "  󰋎 -"$(${pkgs.coreutils-full}/bin/expr 100 - $(${pkgs.coreutils-full}/bin/expr $m \* 100 / 64))"%"
+                    fi
+                    if [[ $m -gt 64 ]] ; then
+                        echo "   -"$(${pkgs.coreutils-full}/bin/expr $(${pkgs.coreutils-full}/bin/expr $m - 64) \* 100 / 64)"%"
+                    fi
                 '';
             };
             "module/temp" = {
                 type = "custom/script";
-                exec = ''
-                    ${pkgs.coreutils-full}/bin/echo "%{F#6e738d}CPU:%{F-}$(${pkgs.lm_sensors}/bin/sensors |${pkgs.gawk}/bin/awk '/Core/{if (0+substr($3,2,2)>0+max) a=substr($3,2,2)} END{print a}')°C %{F#6e738d}GPU:%{F-}$(${pkgs.linuxKernel.packages.linux_6_8.nvidia_x11.bin}/bin/nvidia-smi -q|${pkgs.gawk}/bin/awk '/GPU Current Temp/{print $5}')°C"
+                exec = pkgs.writeShellScript "temp" ''
+                    cpu=$(${pkgs.lm_sensors}/bin/sensors |${pkgs.gawk}/bin/awk '/Core/{if (0+substr($3,2,2)>0+max) a=substr($3,2,2)} END{print a}')
+                    gpu=$(${pkgs.linuxKernel.packages.linux_6_8.nvidia_x11.bin}/bin/nvidia-smi -q|${pkgs.gawk}/bin/awk '/GPU Current Temp/{print $5}')
+                    ${pkgs.coreutils-full}/bin/echo "%{F#6e738d}CPU:%{F-}$cpu°C %{F#6e738d}GPU:%{F-}$gpu°C"
                 '';
                 interval = "5";
             };
