@@ -27,6 +27,10 @@ in
 		hostId = "e52e59bb";
 		hostName = "nixos";
 		networkmanager.enable = true;
+		firewall = {
+			enable = true;
+			allowedTCPPorts = [ 1883 ];
+		};
 	};
 	services.udev = {
 		enable = true;
