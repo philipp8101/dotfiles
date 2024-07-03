@@ -1,12 +1,12 @@
-{ config, pkgs, inputs, user, ... }:
+{ config, pkgs, inputs, ... }:
 {
   imports = [
     inputs.nix-colors.homeManagerModules.default
     ./home/tmux.nix
     ./home/yazi.nix
   ];
-  home.username = "${user}";
-  home.homeDirectory = "/home/${user}";
+  home.username = builtins.getEnv "USER";
+  home.homeDirectory = "${builtins.getEnv "HOME"}";
   home.stateVersion = "23.11"; # Please read the comment before changing.
 
   colorScheme = let
