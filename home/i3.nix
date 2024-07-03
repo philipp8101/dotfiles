@@ -38,6 +38,11 @@ in
         outer = 5;
       };
       bars = [];
+      startup = [
+      { command = "systemctl --user restart polybar"; always = true; notification = false; }
+      { command = "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1"; always = true; notification = false; }
+      { command = "${pkgs.networkmanagerapplet}/bin/nm-applet"; always = true; notification = false; }
+      ];
       keybindings = {
         "${mod}+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
         "${mod}+Shift+Return" = "exec \"${scripts}/bin/next_empty_workspace.py ; ${pkgs.alacritty}/bin/alacritty\"";
