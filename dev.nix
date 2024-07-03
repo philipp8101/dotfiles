@@ -3,7 +3,7 @@
   imports = [
     inputs.nix-colors.homeManagerModules.default
     ./home/tmux.nix
-    ./home/lf.nix
+    ./home/yazi.nix
   ];
   home.username = "${user}";
   home.homeDirectory = "/home/${user}";
