@@ -76,6 +76,7 @@ in
 		extraGroups = [ "networkmanager" "wheel" ];
 	};
 	programs = {
+		xwayland.enable = true;
 		zsh.enable = true;
 		ssh.startAgent = true;
 		steam = {
@@ -94,6 +95,7 @@ in
 	environment = {
 		sessionVariables = {
 			SSH_AUTH_SOCK = "/run/user/1000/ssh-agent";
+			NIXOS_OZONE_WL = "1";
 		};
 		shellAliases = {
 			"workman" =  "${pkgs.xorg.xkbcomp}/bin/xkbcomp ${compiledLayout} $DISPLAY";
@@ -117,10 +119,7 @@ in
 			mpv
 			evince
 			gnome.adwaita-icon-theme
-			( import inputs.du {
-				system = "x86_64-linux";
-				config.allowUnfree = true;
-			}).discord
+			discord
 			# (pkgs.discord.override {
 			#  withOpenASAR = true;
 			#  withVencord = true;
@@ -145,7 +144,7 @@ in
 			xdg-desktop-portal-hyprland
 			# xdg-desktop-portal-wlr
 			# xdg-desktop-portal-kde
-			# xdg-desktop-portal-gtk
+			# xdg-desktop-portal-gnome
 		];
 	};
 	services = {
@@ -159,8 +158,10 @@ in
 		};
 		displayManager.sddm.wayland.enable = true;
 		displayManager.sddm.enable = true;
-		desktopManager.plasma6.enable = true;
+		# desktopManager.plasma6.enable = true;
 		displayManager.defaultSession = "hyprland";
+		# xserver.displayManager.gdm.enable = true;
+		# xserver.desktopManager.gnome.enable = true;
 		xserver.videoDrivers = [ "nvidia" ];
 
 		xserver = {

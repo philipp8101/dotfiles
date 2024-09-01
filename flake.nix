@@ -21,9 +21,6 @@
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    du = {
-      url = "github:Artturin/nixpkgs/discordupdate6";
-    };
   };
 
   outputs = { self, nixpkgs, home-manager, nixos-generators, ... }@inputs: 
