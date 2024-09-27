@@ -21,19 +21,23 @@
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    systems.url = "github:nix-systems/default";
+    flake-utils.url = "github:numtide/flake-utils";
+    flake-utils.inputs.systems.follows = "systems";
   };
 
   outputs = { self, nixpkgs, home-manager, nixos-generators, ... }@inputs: 
+  inputs.flake-utils.lib.eachDefaultSystem (system: 
   let 
-    system = "x86_64-linux";
     pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
     };
     user = "philipp";
     lib = nixpkgs.lib;
-    nixvim = import ./nixvim/nixvim.nix {inherit inputs; inherit pkgs; inherit system;};
-  in {
+    
+  in 
+  {
     nixosConfigurations = {
       MAIN = lib.nixosSystem { 
         specialArgs = { inherit inputs; };
@@ -103,10 +107,9 @@
         gcc
       ];
       shellHook = ''
-        alias vim=${nixvim}/bin/nvim
+        alias vim=${self.outputs.packages.${system}.nixvim}/bin/nvim
       '';
     };
-    nixvim = nixvim;
-  };
-
+    packages.nixvim = import ./nixvim/nixvim.nix {inherit inputs; inherit pkgs; inherit system;};
+  });
 }
