@@ -1,6 +1,6 @@
 {
     plugins.treesitter = {
         enable = true;
-        ensureInstalled = "all";
+        settings.ensureInstalled = "all";
     };
 }
