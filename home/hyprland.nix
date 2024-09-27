@@ -74,7 +74,11 @@ in
         workspace_swipe = true;
       };
       "$mod" = "SUPER";
-      workspace = "1,monitor:DP-2";
+      workspace = [
+        "1,monitor:DP-2"
+        "4,monitor:DP-1"
+        "8,monitor:HDMI-A-0"
+      ];
       bind = [
         "$mod, Return, exec, ${pkgs.alacritty}/bin/alacritty"
         "$mod, Q, killactive,"
