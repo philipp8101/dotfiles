@@ -12,11 +12,13 @@ bg = pkgs.stdenv.mkDerivation {
 };
 cursor = pkgs.stdenv.mkDerivation {
   name = "Empty-Butterfly-White-vr6";
-  src = builtins.fetchurl {
-    name = "Empty-Butterfly-White-vr6-Linux.zip";
-    url = "https://ocs-dl.fra1.cdn.digitaloceanspaces.com/data/files/1678767622/Empty-Butterfly-White-vr6-Linux.zip?response-content-disposition=attachment%3B%2520Empty-Butterfly-White-vr6-Linux.zip&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=RWJAQUNCHT7V2NCLZ2AL%2F20240628%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240628T172908Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=ed369deffc79b1ff734abd5fc8f5e19d9e463201cff3dbb3e95631d41ba41dd5";
-    sha256 = "6260fbcb8c935500b206d69bc580b5ef620c63b38d34b894d156263da2ececac";
-  };
+  # source https://store.kde.org/p/2002505
+  src = ./Empty-Butterfly-White-vr6-Linux.zip;
+  # builtins.fetchurl {
+  #  name = "Empty-Butterfly-White-vr6-Linux.zip";
+  #  url = "";
+  #  sha256 = "6260fbcb8c935500b206d69bc580b5ef620c63b38d34b894d156263da2ececac";
+  #};
   buildCommand = ''
     mkdir -p $out/share/icons/
     ${pkgs.unzip}/bin/unzip $src

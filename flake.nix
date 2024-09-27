@@ -67,16 +67,14 @@
     homeConfigurations = {
       dev = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        extraSpecialArgs = { inherit inputs user ; };
+        extraSpecialArgs = { inherit inputs system; };
         modules = [
           ./dev.nix
         ];
       };
       full = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        extraSpecialArgs = {
-          inherit inputs system user ;
-        };
+        extraSpecialArgs = { inherit inputs system; };
         modules = [
           ./dev.nix
           ./wm.nix
