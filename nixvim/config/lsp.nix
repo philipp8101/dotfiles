@@ -44,6 +44,7 @@
             K = "hover";
             gR = "references";
             gd = "definition";
+            gD = "declaration";
             gi = "implementation";
             ga = "code_action";
             gr = "rename";
