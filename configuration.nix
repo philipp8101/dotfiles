@@ -20,7 +20,7 @@ in
 			forceImportRoot = false;
 			extraPools = [ ];
 		};
-		kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+		# kernelPackages = pkgs.linuxPackages_6_9;
 		binfmt.emulatedSystems = [ "aarch64-linux" ];
 	};
 	networking = {
@@ -54,11 +54,9 @@ in
 
 
 	console.keyMap = "de";
-	sound.enable = true;
 	hardware = {
 		pulseaudio.enable = false;
 		opengl.enable = true;
-		opengl.driSupport = true; # https://nixos.wiki/wiki/Lutris
 		opengl.driSupport32Bit = true; # https://nixos.wiki/wiki/Lutris
 		nvidia = {
 			modesetting.enable = true;
@@ -117,21 +115,14 @@ in
 			mpv
 			evince
 			gnome.adwaita-icon-theme
-			( import inputs.du {
-				system = "x86_64-linux";
-				config.allowUnfree = true;
-			}).discord
-			# (pkgs.discord.override {
-			#  withOpenASAR = true;
-			#  withVencord = true;
-			#  })
-			# vesktop # https://nixos.wiki/wiki/Discord
 			lutris
 			nix-index
 			htop-vim
 			obsidian
 			wl-clipboard
 			spotify
+			vesktop
+			tidal-hifi
 		];
 		pathsToLink = ["/libexec"];
 	};

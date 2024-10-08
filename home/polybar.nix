@@ -215,7 +215,7 @@ in
                 type = "custom/script";
                 exec = pkgs.writeShellScript "temp" ''
                     cpu=$(${pkgs.lm_sensors}/bin/sensors |${pkgs.gawk}/bin/awk '/Core/{if (0+substr($3,2,2)>0+max) a=substr($3,2,2)} END{print a}')
-                    gpu=$(${pkgs.linuxKernel.packages.linux_6_8.nvidia_x11.bin}/bin/nvidia-smi -q|${pkgs.gawk}/bin/awk '/GPU Current Temp/{print $5}')
+                    gpu=$(${pkgs.linuxPackages.nvidia_x11.bin}/bin/nvidia-smi -q|${pkgs.gawk}/bin/awk '/GPU Current Temp/{print $5}')
                     ${pkgs.coreutils-full}/bin/echo "%{F#6e738d}CPU:%{F-}$cpu°C %{F#6e738d}GPU:%{F-}$gpu°C"
                 '';
                 interval = "5";
