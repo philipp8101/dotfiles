@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -23,7 +24,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-generators, ... }@inputs: 
+  outputs = { self, nixpkgs, home-manager, nixos-generators, nixvim, ... }@inputs: 
   let 
     system = "x86_64-linux";
     pkgs = import nixpkgs {
@@ -32,7 +33,6 @@
     };
     user = "philipp";
     lib = nixpkgs.lib;
-    nixvim = import ./nixvim/nixvim.nix {inherit inputs; inherit pkgs; inherit system;};
   in {
     nixosConfigurations = {
       MAIN = lib.nixosSystem { 
@@ -105,10 +105,14 @@
         gcc
       ];
       shellHook = ''
-        alias vim=${nixvim}/bin/nvim
+        alias vim=${self.nixvim}/bin/nvim
       '';
     };
-    nixvim = nixvim;
+    nixvim = (import ./nixvim/nixvim.nix {
+      pkgs = (import nixpkgs { inherit system; });
+      inherit system;
+      inherit nixvim;
+    });
   };
 
 }

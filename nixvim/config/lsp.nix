@@ -3,17 +3,11 @@
       "gopls"
       "clangd"
       "nil-ls"
-      "bashls"
-      "cmake"
-      "csharp-ls"
-      "dockerls"
       "elixirls"
       "elmls"
       "html"
       "htmx"
-      "julials"
       "pyright"
-      "ts-ls"
       "texlab"
     ];
     in
