@@ -30,5 +30,6 @@
     ./conform.nix
     ./navbuddy.nix
     ./surround.nix
+    ./neogit.nix
   ];
 }
