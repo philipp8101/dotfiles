@@ -57,8 +57,8 @@ in
 
   qt = {
     enable = true;
-    # platformTheme.name = "adwaita";
-    style.name = "Breeze";
+    platformTheme = "qtct";
+    style.name = "kvantum";
   };
   home.pointerCursor = {
     package = cursor;

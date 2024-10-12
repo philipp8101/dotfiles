@@ -71,8 +71,9 @@ in
 		shell = pkgs.zsh;
 		isNormalUser = true;
 		description = "philipp";
-		extraGroups = [ "networkmanager" "wheel" ];
+		extraGroups = [ "networkmanager" "wheel" "docker" "dialout" ];
 	};
+	services.openssh.enable = true;
 	programs = {
 		zsh.enable = true;
 		ssh.startAgent = true;
@@ -123,6 +124,8 @@ in
 			spotify
 			vesktop
 			tidal-hifi
+			libsForQt5.qtstyleplugin-kvantum
+			libsForQt5.qt5ct
 		];
 		pathsToLink = ["/libexec"];
 	};
@@ -190,5 +193,7 @@ in
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
 	system.stateVersion = "23.11";
+
+	virtualisation.docker.enable = true;
 
 }

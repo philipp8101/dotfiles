@@ -92,7 +92,7 @@
             }
 
             window#waybar {
-                background: #1E1E28;
+                background: transparent;
                 color: #DADAE8;
             }
 
@@ -106,8 +106,8 @@
 
             #workspaces {
                 background: #332E41;
-                margin-top: 2px;
-                margin-bottom: 2px;
+                margin-top: 1px;
+                margin-bottom: 1px;
                 border-radius: 0px 15px 15px 0px;
             }
 
