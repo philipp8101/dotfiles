@@ -13,7 +13,7 @@
       "htmx"
       "julials"
       "pyright"
-      "tsserver"
+      "ts-ls"
       "texlab"
     ];
     in

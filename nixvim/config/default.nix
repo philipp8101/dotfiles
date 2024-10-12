@@ -31,5 +31,6 @@
     ./navbuddy.nix
     ./surround.nix
     ./neogit.nix
+    ./web-devicon.nix
   ];
 }

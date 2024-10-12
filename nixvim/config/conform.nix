@@ -5,7 +5,7 @@
             lspFallback = true;
             timeoutMs = 500;
         };
-        formattersByFt = {
+        formatters_by_bt = {
             javascript = [ "prettier" ];
             typescript = [ "prettier" ];
             css = [ "prettier" ];
