@@ -12,6 +12,13 @@ rofi-power-menu = pkgs.stdenv.mkDerivation {
     chmod +x $out/bin/rofi-power-menu
     '';
 };
+nix-run-rofi = pkgs.writeShellScriptBin "nix-run-rofi.sh" ''
+if [ -z $1 ] ; then
+    nix flake show nixpkgs --legacy --json |nix run nixpkgs#jq -- -r '.legacyPackages.["x86_64-linux"] | keys_unsorted[]'
+else
+    nohup nix run nixpkgs#$1 > /dev/null &
+fi
+'';
 in
 {
   wayland.windowManager.hyprland = {
@@ -78,32 +85,15 @@ in
       "$mod" = "SUPER";
       workspace = "1,monitor:DP-2";
       bind = [
-        "$mod, Return, exec, ${pkgs.alacritty}/bin/alacritty"
+        "$mod, Return, exec, ${pkgs.kitty}/bin/kitty"
         "$mod, Q, killactive,"
-        "$mod SHIFT, R, exec, ${pkgs.rofi-wayland}/bin/rofi -show power-menu -modi power-menu:${rofi-power-menu}/bin/rofi-power-menu"
-        "$mod SHIFT, M, togglefloating,"
-        "$mod, G, exec, ${pkgs.rofi-wayland}/bin/rofi -show drun"
-        "$mod, P, pseudo, # dwindle"
+        "$mod, D, changegroupactive, previous"
+        "$mod SHIFT, D, togglegroup"
         "$mod, R, togglesplit, # dwindle"
         "$mod, B, fullscreen, 1"
         "$mod CTRL, B, fullscreen, 0"
         "$mod SHIFT, B, fakefullscreen"
-        "$mod SHIFT, D, togglegroup"
-        "$mod, D, changegroupactive, previous"
-        "$mod, tab, workspace, previous"
-        # "$mod, BACKSPACE, exec, sed -i '/workman/{ ; 4s/ workman// ; b ; } ; 4s/$/ workman/' ~/.config/hypr/input.conf"
-        "$mod, left, movefocus, l"
-        "$mod, right, movefocus, r"
-        "$mod, up, movefocus, u"
-        "$mod, down, movefocus, d"
-        "$mod SHIFT, left, movewindow, l"
-        "$mod SHIFT, right, movewindow, r"
-        "$mod SHIFT, up, movewindow, u"
-        "$mod SHIFT, down, movewindow, d"
-        "$mod CTRL, left, resizeactive, -20 0"
-        "$mod CTRL, right, resizeactive, 20 0"
-        "$mod CTRL, up, resizeactive, 0 -20"
-        "$mod CTRL, down, resizeactive, 0 20"
+        "$mod, P, pseudo, # dwindle"
         "$mod, t, workspace, 1"
         "$mod, h, workspace, 2"
         "$mod, s, workspace, 3"
@@ -120,13 +110,26 @@ in
         "$mod SHIFT, e, movetoworkspace, 6"
         "$mod SHIFT, o, movetoworkspace, 7"
         "$mod SHIFT, i, movetoworkspace, 8"
-        "$mod, X, workspace, m+1"
-        "$mod, Z, workspace, m-1"
-        "$mod, M, movewindow, mon:-1"
-        "$mod, C, movewindow, mon:+1"
-        # "$mod, mouse:272, movewindow"
-        # "$mod, mouse:273, resizewindow"
-        "$mod, less, exec, ${pkgs.hyprshot}/bin/hyprshot"
+        "$mod, G, exec, ${pkgs.rofi-wayland}/bin/rofi -show drun"
+        "$mod SHIFT, G, exec, ${pkgs.rofi-wayland}/bin/rofi -show nix-run -modi nix-run:${nix-run-rofi}/bin/nix-run-rofi.sh"
+        "$mod, Z, exec, ${pkgs.hyprshot}/bin/hyprshot"
+        "$mod, X, togglefloating,"
+        "$mod, M, movecurrentworkspacetomonitor, -1"
+        "$mod, C, movecurrentworkspacetomonitor, +1"
+        "$mod, V, exec, ${pkgs.rofi-wayland}/bin/rofi -show power-menu -modi power-menu:${rofi-power-menu}/bin/rofi-power-menu"
+        # "$mod, BACKSPACE, exec, sed -i '/workman/{ ; 4s/ workman// ; b ; } ; 4s/$/ workman/' ~/.config/hypr/input.conf"
+        "$mod, left, movefocus, l"
+        "$mod, right, movefocus, r"
+        "$mod, up, movefocus, u"
+        "$mod, down, movefocus, d"
+        "$mod SHIFT, left, movewindow, l"
+        "$mod SHIFT, right, movewindow, r"
+        "$mod SHIFT, up, movewindow, u"
+        "$mod SHIFT, down, movewindow, d"
+        "$mod CTRL, left, resizeactive, -20 0"
+        "$mod CTRL, right, resizeactive, 20 0"
+        "$mod CTRL, up, resizeactive, 0 -20"
+        "$mod CTRL, down, resizeactive, 0 20"
         ", XF86MonBrightnessDown, exec, ${pkgs.brillo}/bin/brillo -U 5"
         ", XF86MonBrightnessUp, exec, ${pkgs.brillo}/bin/brillo -A 5"
       ];
