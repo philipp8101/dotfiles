@@ -92,22 +92,6 @@
         ];
       };
     };
-    dev-env = pkgs.mkShell {
-      name = "neovim-shell";
-      buildInputs = with pkgs; [
-        lua-language-server
-        nil
-        stylua
-        luajitPackages.luacheck
-        go
-        cargo
-        nodejs_21
-        gcc
-      ];
-      shellHook = ''
-        alias vim=${self.nixvim}/bin/nvim
-      '';
-    };
     nixvim = (import ./nixvim/nixvim.nix {
       pkgs = (import inputs.nixpkgs-unstable { inherit system; });
       inherit system;

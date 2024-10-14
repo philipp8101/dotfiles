@@ -9,7 +9,7 @@
     (import ./lsp.nix args)
     ./telescope.nix
     ./lualine.nix
-    ./fugitive.nix
+    # ./fugitive.nix
     ./harpoon.nix
     ./undotree.nix
     (import ./treesj.nix args)
@@ -32,5 +32,6 @@
     ./surround.nix
     ./neogit.nix
     ./web-devicon.nix
+    ./treesitter-textobjects.nix
   ];
 }

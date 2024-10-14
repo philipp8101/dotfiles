@@ -1,7 +1,6 @@
 {
     config = {
         enableMan = true;
-        colorscheme = "carbonfox";
         opts = {
             termguicolors = true;
             relativenumber = true;

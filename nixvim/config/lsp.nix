@@ -2,11 +2,6 @@
     let enabled_servers = [
       "gopls"
       "clangd"
-      "nil-ls"
-      "elixirls"
-      "elmls"
-      "html"
-      "htmx"
       "pyright"
       "texlab"
     ];
@@ -45,11 +40,11 @@
     };
   };
 
-  extraPlugins = with pkgs.vimPlugins; [ nvim-lspconfig ];
-  extraPackages = with pkgs; [ arduino-language-server arduino-cli ];
-  extraConfigLua = ''
-    require("lspconfig").arduino_language_server.setup({
-      cmd = { "arduino-language-server", "-clangd", "${pkgs.clang-tools_17}/bin/clangd", "-cli", "${pkgs.arduino-cli}/bin/arduino-cli", "-cli-config", "$HOME/.arduino15/arduino-cli.yaml", "-fqbn", "sandeepmistry:nRF5:CalliopeMini" }
-    })
-  '';
+  # extraPlugins = with pkgs.vimPlugins; [ nvim-lspconfig ];
+  # extraPackages = with pkgs; [ arduino-language-server arduino-cli ];
+  # extraConfigLua = ''
+  #   require("lspconfig").arduino_language_server.setup({
+  #     cmd = { "arduino-language-server", "-clangd", "${pkgs.clang-tools_17}/bin/clangd", "-cli", "${pkgs.arduino-cli}/bin/arduino-cli", "-cli-config", "$HOME/.arduino15/arduino-cli.yaml", "-fqbn", "sandeepmistry:nRF5:CalliopeMini" }
+  #   })
+  # '';
 }

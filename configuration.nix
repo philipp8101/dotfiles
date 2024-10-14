@@ -98,7 +98,6 @@ in
 			"workman" =  "${pkgs.xorg.xkbcomp}/bin/xkbcomp ${compiledLayout} $DISPLAY";
 		};
 		systemPackages = with pkgs; [
-			neovim
 			wget
 			tmux
 			kitty
@@ -113,7 +112,6 @@ in
 			firefox
 			xsel
 			gnome.eog
-			mpv
 			evince
 			gnome.adwaita-icon-theme
 			lutris
@@ -127,6 +125,9 @@ in
 			libsForQt5.qtstyleplugin-kvantum
 			libsForQt5.qt5ct
 			self.outputs.nixvim
+			kdePackages.dolphin
+			kdePackages.gwenview
+			kdePackages.okular
 		];
 		pathsToLink = ["/libexec"];
 	};
