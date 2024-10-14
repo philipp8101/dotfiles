@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, self, ... }:
 let 
 layoutPath = builtins.path {
 	path = ./keymap.xkb;
@@ -126,6 +126,7 @@ in
 			tidal-hifi
 			libsForQt5.qtstyleplugin-kvantum
 			libsForQt5.qt5ct
+			self.outputs.nixvim
 		];
 		pathsToLink = ["/libexec"];
 	};
