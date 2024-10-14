@@ -13,7 +13,7 @@
     };
     nixvim = {
       url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
@@ -109,7 +109,7 @@
       '';
     };
     nixvim = (import ./nixvim/nixvim.nix {
-      pkgs = (import nixpkgs { inherit system; });
+      pkgs = (import inputs.nixpkgs-unstable { inherit system; });
       inherit system;
       inherit nixvim;
     });
