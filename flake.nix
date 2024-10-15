@@ -111,8 +111,26 @@
       inherit system;
       inherit nixvim;
     });
-    tmux = pkgs.writeShellScriptBin "tmux" '' ${pkgs.tmux}/bin/tmux -f ${self.outputs.packages.${system}.homeConfigurations.${user}.activationPackage}/home-files/.config/tmux/tmux.conf '';
-    zsh = pkgs.writeShellScriptBin "zsh" '' ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh ${pkgs.zsh}/bin/zsh -d -f -c "source ${self.outputs.packages.${system}.homeConfigurations.${user}.activationPackage}/home-files/.zshrc && ${pkgs.zsh}/bin/zsh" '';
+    tmux = pkgs.writeShellScriptBin "tmux" '' ${pkgs.tmux}/bin/tmux -f ${
+      (home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        extraSpecialArgs = { inherit inputs system user self ; };
+        modules = [
+          ./home
+          ./home/tmux.nix 
+        ];
+      }).activationPackage
+    }/home-files/.config/tmux/tmux.conf '';
+    zsh = pkgs.writeShellScriptBin "zsh" '' ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh ${pkgs.zsh}/bin/zsh -d -f -c "source ${
+      (home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        extraSpecialArgs = { inherit inputs system user self ; };
+        modules = [
+          ./home
+          ./home/zsh.nix 
+        ];
+      }).activationPackage
+    }/home-files/.zshrc && ${pkgs.zsh}/bin/zsh" '';
   };});
 
 }
