@@ -124,6 +124,7 @@
       }).activationPackage
     }/home-files/.config/tmux/tmux.conf '';
     zsh = pkgs.writeShellScriptBin "zsh" ''
+    export PATH=$PATH:${pkgs.fzf}/bin ;
     export ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh ;
     export ZDOTDIR=${
       (home-manager.lib.homeManagerConfiguration {
