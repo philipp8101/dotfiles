@@ -123,7 +123,7 @@
         ];
       }).activationPackage
     }/home-files/.config/tmux/tmux.conf '';
-    zsh = pkgs.writeShellScriptBin "zsh" '' ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh FZF_BASE=${pkgs.fzf} ZDOTDIR=${
+    zsh = pkgs.writeShellScriptBin "zsh" '' ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh FZF_BASE=${pkgs.fzf}/bin ZDOTDIR=${
       (home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = { inherit inputs system user self ; };
