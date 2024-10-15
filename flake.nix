@@ -111,6 +111,8 @@
       inherit system;
       inherit nixvim;
     });
+    tmux = pkgs.writeShellScriptBin "tmux" '' ${pkgs.tmux}/bin/tmux -f ${self.outputs.packages.${system}.homeConfigurations.${user}.activationPackage}/home-files/.config/tmux/tmux.conf '';
+    zsh = pkgs.writeShellScriptBin "zsh" '' ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh ${pkgs.zsh}/bin/zsh -d -f -c "source ${self.outputs.packages.${system}.homeConfigurations.${user}.activationPackage}/home-files/.zshrc && ${pkgs.zsh}/bin/zsh" '';
   };});
 
 }
