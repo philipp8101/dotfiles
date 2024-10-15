@@ -14,8 +14,20 @@ rofi-power-menu = pkgs.stdenv.mkDerivation {
     '';
 };
 scripts = import ./i3scripts.nix {inherit pkgs;};
+bg = pkgs.stdenv.mkDerivation {
+  name = "modified-wallpaper";
+  src = ./nixos-wallpaper-catppuccin-macchiato.svg;
+  buildInputs = [ pkgs.gnused ];
+  buildCommand = ''
+    mkdir -p $out
+    sed -e 's/#181926/#${config.colorScheme.palette.base01}/g' -e 's/#f4dbd6/#${config.colorScheme.palette.base06}/g' -e 's/#8bd5ca/#${config.colorScheme.palette.base0C}/g' -e 's/#5b6078/#${config.colorScheme.palette.base04}/g' -e 's/#24273a/${config.colorScheme.palette.base00}/g' $src > $out/modified-wallpaper.svg
+    '';
+};
 in
 {
+  home.file = {
+    ".background-image".source = "${bg.outPath}/modified-wallpaper.svg";
+  };
   xsession.windowManager.i3 = {
     enable = true;
     extraConfig = ''

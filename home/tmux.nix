@@ -1,5 +1,8 @@
 { pkgs, config, ... }:
 {
+  imports = [
+    ./nix-colors.nix
+  ];
   xdg.configFile = {
     "tmux/tmux-sessionizer".source = ./tmux/tmux-sessionizer;
     "tmux/custom.conf".source = ./tmux/custom.conf;

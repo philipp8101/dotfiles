@@ -37,27 +37,41 @@
     user = "philipp";
   in { packages = {
     nixosConfigurations = {
-      MAIN = nixpkgs.lib.nixosSystem { 
+      desktop = nixpkgs.lib.nixosSystem { 
         specialArgs = { inherit inputs self; };
         inherit system;
         modules = [ 
-          ./configuration.nix
+          ./configuration
+          ./configuration/hyprland.nix
           ./hardware-configuration.nix
           home-manager.nixosModules.home-manager {
             home-manager = {
               useGlobalPkgs = true; 
               useUserPackages = true;
-              extraSpecialArgs = { inherit inputs system user ; };
+              extraSpecialArgs = { inherit inputs system user self ; };
               users.${user}.imports = [
-                ./dev.nix
-                ./wm.nix
+                ./home
+                ./home/alacritty.nix
+                ./home/fonts.nix
+                ./home/git.nix
+                ./home/hyprland.nix
+                ./home/kitty.nix
+                ./home/mpv.nix
+                ./home/rofi.nix
+                ./home/theme.nix
+                ./home/tmux.nix
+                ./home/waybar.nix
+                ./home/xkblayout.nix
+                ./home/yazi.nix
+                ./home/zoxide.nix
+                ./home/zsh.nix
               ];
             };
           }
         ];
       };
-      RPI = nixpkgs.lib.nixosSystem {
-        system = "aarch64-linux";
+      raspberrypi = nixpkgs.lib.nixosSystem {
+        inherit system;
         specialArgs = { inherit inputs user; };
         modules = [
           ./rpi.nix
@@ -67,21 +81,21 @@
       };
     };  
     homeConfigurations = {
-      dev = home-manager.lib.homeManagerConfiguration {
+      ${user} = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        extraSpecialArgs = { inherit inputs user ; };
+        extraSpecialArgs = { inherit inputs system user self ; };
         modules = [
-          ./dev.nix
-        ];
-      };
-      full = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        extraSpecialArgs = {
-          inherit inputs system user ;
-        };
-        modules = [
-          ./dev.nix
-          ./wm.nix
+          ./home
+          ./home/alacritty.nix
+          ./home/fonts.nix
+          ./home/git.nix
+          ./home/kitty.nix
+          ./home/mpv.nix
+          ./home/tmux.nix
+          ./home/xkblayout.nix
+          ./home/yazi.nix
+          ./home/zoxide.nix
+          ./home/zsh.nix
         ];
       };
     };
