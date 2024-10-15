@@ -124,7 +124,7 @@ in
 			tidal-hifi
 			libsForQt5.qtstyleplugin-kvantum
 			libsForQt5.qt5ct
-			self.outputs.nixvim
+			self.outputs.packages.${system}.nixvim
 			kdePackages.dolphin
 			kdePackages.gwenview
 			kdePackages.okular

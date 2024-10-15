@@ -22,20 +22,22 @@
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    systems.url = "github:nix-systems/default";
+    flake-utils.url = "github:numtide/flake-utils";
+    flake-utils.inputs.systems.follows = "systems";
   };
 
   outputs = { self, nixpkgs, home-manager, nixos-generators, nixvim, ... }@inputs: 
+  inputs.flake-utils.lib.eachDefaultSystem (system:
   let 
-    system = "x86_64-linux";
     pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
     };
     user = "philipp";
-    lib = nixpkgs.lib;
-  in {
+  in { packages = {
     nixosConfigurations = {
-      MAIN = lib.nixosSystem { 
+      MAIN = nixpkgs.lib.nixosSystem { 
         specialArgs = { inherit inputs self; };
         inherit system;
         modules = [ 
@@ -54,7 +56,7 @@
           }
         ];
       };
-      RPI = lib.nixosSystem {
+      RPI = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
         specialArgs = { inherit inputs user; };
         modules = [
@@ -83,20 +85,18 @@
         ];
       };
     };
-    packages.aarch64-linux = {
-      sdcard = nixos-generators.nixosGenerate {
-        system = "aarch64-linux";
-        format = "sd-aarch64";
-        modules = [
-          ./rpi.nix
-        ];
-      };
+    sdcard = nixos-generators.nixosGenerate {
+      system = "aarch64-linux";
+      format = "sd-aarch64";
+      modules = [
+        ./rpi.nix
+      ];
     };
     nixvim = (import ./nixvim/nixvim.nix {
       pkgs = (import inputs.nixpkgs-unstable { inherit system; });
       inherit system;
       inherit nixvim;
     });
-  };
+  };});
 
 }
