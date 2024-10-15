@@ -60,6 +60,7 @@
                 ./home/rofi.nix
                 ./home/theme.nix
                 ./home/tmux.nix
+                ./home/vim.nix
                 ./home/waybar.nix
                 ./home/xkblayout.nix
                 ./home/yazi.nix
@@ -92,6 +93,7 @@
           ./home/kitty.nix
           ./home/mpv.nix
           ./home/tmux.nix
+          ./home/vim.nix
           ./home/xkblayout.nix
           ./home/yazi.nix
           ./home/zoxide.nix
@@ -121,7 +123,7 @@
         ];
       }).activationPackage
     }/home-files/.config/tmux/tmux.conf '';
-    zsh = pkgs.writeShellScriptBin "zsh" '' ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh ${pkgs.zsh}/bin/zsh -d -f -c "source ${
+    zsh = pkgs.writeShellScriptBin "zsh" '' ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh ZDOTDIR=${
       (home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = { inherit inputs system user self ; };
@@ -130,7 +132,7 @@
           ./home/zsh.nix 
         ];
       }).activationPackage
-    }/home-files/.zshrc && ${pkgs.zsh}/bin/zsh" '';
+    }/home-files/ ${pkgs.zsh}/bin/zsh '';
   };});
 
 }
