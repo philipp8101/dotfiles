@@ -125,7 +125,6 @@
     }/home-files/.config/tmux/tmux.conf '';
     zsh = pkgs.writeShellScriptBin "zsh" ''
     export ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh ;
-    export FZF_BASE=${pkgs.fzf}/bin ;
     export ZDOTDIR=${
       (home-manager.lib.homeManagerConfiguration {
         inherit pkgs;

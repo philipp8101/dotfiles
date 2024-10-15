@@ -21,6 +21,7 @@
     envExtra = ''
       export TIMER_THRESHOLD="3";
       export TIMER_FORMAT="[%d]";
+      export FZF_BASE=${pkgs.fzf}/bin
     '';
   };
 }
