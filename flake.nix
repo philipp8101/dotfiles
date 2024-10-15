@@ -123,7 +123,7 @@
         ];
       }).activationPackage
     }/home-files/.config/tmux/tmux.conf '';
-    zsh = pkgs.writeShellScriptBin "zsh" '' ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh ZDOTDIR=${
+    zsh = pkgs.writeShellScriptBin "zsh" '' ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh FZF_BASE=${pkgs.fzf} ZDOTDIR=${
       (home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = { inherit inputs system user self ; };
@@ -132,7 +132,7 @@
           ./home/zsh.nix 
         ];
       }).activationPackage
-    }/home-files/ ${pkgs.zsh}/bin/zsh '';
+    }/home-files ${pkgs.zsh}/bin/zsh '';
   };});
 
 }
