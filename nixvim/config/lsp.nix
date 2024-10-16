@@ -10,7 +10,7 @@
   plugins.lsp = {
     enable = true;
     servers = builtins.listToAttrs ( builtins.map (s: { name = s ; value = {enable = true;}; }) enabled_servers) // {
-      rust-analyzer = {
+      rust_analyzer = {
         enable = true;
         installCargo = true;
         cargoPackage = pkgs.cargo;
@@ -20,6 +20,8 @@
       hls = {
         enable = true;
         package = pkgs.haskell-language-server;
+        installGhc = true;
+        ghcPackage = pkgs.ghc;
       };
     };
     keymaps = {
