@@ -138,6 +138,11 @@
     }/home-files ;
     ${pkgs.zsh}/bin/zsh
     '';
+    devShell = pkgs.writeShellScriptBin "dev" ''
+    alias tmux=${self.packages.${system}.tmux}/bin/tmux ;
+    alias vim=${self.packages.${system}.nixvim}/bin/nvim ;
+    ${self.packages.${system}.zsh}/bin/zsh
+    '';
   };});
 
 }
