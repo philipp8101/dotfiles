@@ -80,5 +80,17 @@
         action.__raw = ''require("gitsigns").toggle_deleted'';
         options.desc = "toggle deleted";
     }
+    {
+        mode = ["n"];
+        key = "]c";
+        action.__raw= ''require("gitsigns").next_hunk'';
+        options.desc = "next change";
+    }
+    {
+        mode = ["n"];
+        key = "[c";
+        action.__raw= ''require("gitsigns").prev_hunk'';
+        options.desc = "previous change";
+    }
     ];
 }
