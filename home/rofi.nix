@@ -3,6 +3,7 @@
   programs.rofi = {
     enable = true;
     plugins = [ pkgs.rofi-calc ];
+    package = pkgs.rofi-wayland;
     theme = let inherit (config.lib.formats.rasi) mkLiteral; in {
       "configuration" = {
         display-run = "";
