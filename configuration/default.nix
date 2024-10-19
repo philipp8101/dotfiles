@@ -47,8 +47,8 @@
 	console.keyMap = "de";
 	hardware = {
 		pulseaudio.enable = false;
-		opengl.enable = true;
-		opengl.driSupport32Bit = true; # https://nixos.wiki/wiki/Lutris
+		graphics.enable = true;
+		graphics.enable32Bit = true; # https://nixos.wiki/wiki/Lutris
 		nvidia = {
 			modesetting.enable = true;
 			open = false;
@@ -100,17 +100,16 @@
 			htop-vim
 			obsidian
 			wl-clipboard
-			spotify
 			vesktop
 			tidal-hifi
 			libsForQt5.qtstyleplugin-kvantum
 			libsForQt5.qt5ct
 			self.outputs.packages.${system}.nixvim
-			gnome.nautilus
-			gnome.adwaita-icon-theme
+			nautilus
+			adwaita-icon-theme
 			evince
-			gnome.eog
-			gnome.file-roller
+			eog
+			file-roller
 		];
 		pathsToLink = ["/libexec"];
 	};

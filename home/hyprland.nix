@@ -92,7 +92,6 @@ in
         "$mod, R, togglesplit, # dwindle"
         "$mod, B, fullscreen, 1"
         "$mod CTRL, B, fullscreen, 0"
-        "$mod SHIFT, B, fakefullscreen"
         "$mod, U, exec, ${pkgs.rofi-wayland}/bin/rofi -show calc -modi calc -no-show-match -no-sort"
         "$mod, P, pseudo, # dwindle"
         "$mod, t, workspace, 1"

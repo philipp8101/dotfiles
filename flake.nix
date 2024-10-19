@@ -2,8 +2,7 @@
   description = "NixOS config with home-manager";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -13,7 +12,7 @@
     };
     nixvim = {
       url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
@@ -109,7 +108,7 @@
       ];
     };
     nixvim = (import ./nixvim/nixvim.nix {
-      pkgs = (import inputs.nixpkgs-unstable { inherit system; });
+      pkgs = (import inputs.nixpkgs { inherit system; });
       inherit system;
       inherit nixvim;
     });
