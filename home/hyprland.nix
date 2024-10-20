@@ -21,6 +21,9 @@ fi
 '';
 in
 {
+  imports = [
+    ./nix-colors.nix
+  ];
   wayland.windowManager.hyprland = {
     enable = true;
     # enableNvidiaPatches = true; # was apparently removed
@@ -49,8 +52,8 @@ in
         gaps_in = 5;
         gaps_out = 5;
         border_size = 2;
-        "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-        "col.inactive_border" = "rgba(595959aa)";
+        "col.active_border" = "rgba(${config.colorScheme.palette.base0D}ee) rgba(${config.colorScheme.palette.base0B}ee) 45deg";
+        "col.inactive_border" = "rgba(${config.colorScheme.palette.base02}aa)";
         layout = "dwindle";
       };
       decoration = {
@@ -92,7 +95,7 @@ in
         "$mod, R, togglesplit, # dwindle"
         "$mod, B, fullscreen, 1"
         "$mod CTRL, B, fullscreen, 0"
-        "$mod, U, exec, ${pkgs.rofi-wayland}/bin/rofi -show calc -modi calc -no-show-match -no-sort"
+        "$mod, U, exec, rofi -show calc -modi calc -no-show-match -no-sort"
         "$mod, P, pseudo, # dwindle"
         "$mod, t, workspace, 1"
         "$mod, h, workspace, 2"
@@ -110,13 +113,13 @@ in
         "$mod SHIFT, e, movetoworkspace, 6"
         "$mod SHIFT, o, movetoworkspace, 7"
         "$mod SHIFT, i, movetoworkspace, 8"
-        "$mod, G, exec, ${pkgs.rofi-wayland}/bin/rofi -show drun"
-        "$mod SHIFT, G, exec, ${pkgs.rofi-wayland}/bin/rofi -show nix-run -modi nix-run:${nix-run-rofi}/bin/nix-run-rofi.sh"
+        "$mod, G, exec, rofi -show drun"
+        "$mod SHIFT, G, exec, rofi -show nix-run -modi nix-run:${nix-run-rofi}/bin/nix-run-rofi.sh"
         "$mod, Z, exec, ${pkgs.hyprshot}/bin/hyprshot -m region --clipboard-only"
         "$mod, X, togglefloating,"
         "$mod, M, movecurrentworkspacetomonitor, -1"
         "$mod, C, movecurrentworkspacetomonitor, +1"
-        "$mod, V, exec, ${pkgs.rofi-wayland}/bin/rofi -show power-menu -modi power-menu:${rofi-power-menu}/bin/rofi-power-menu"
+        "$mod, V, exec, rofi -show power-menu -modi power-menu:${rofi-power-menu}/bin/rofi-power-menu"
         # "$mod, BACKSPACE, exec, sed -i '/workman/{ ; 4s/ workman// ; b ; } ; 4s/$/ workman/' ~/.config/hypr/input.conf"
         "$mod, left, movefocus, l"
         "$mod, right, movefocus, r"

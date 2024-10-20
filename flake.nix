@@ -51,6 +51,7 @@
               users.${user}.imports = [
                 ./home
                 ./home/alacritty.nix
+                ./home/dunst.nix
                 ./home/fonts.nix
                 ./home/git.nix
                 ./home/hyprland.nix

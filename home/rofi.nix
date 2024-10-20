@@ -3,7 +3,7 @@
   programs.rofi = {
     enable = true;
     plugins = [ pkgs.rofi-calc ];
-    package = pkgs.rofi-wayland;
+    package = pkgs.rofi;
     theme = let inherit (config.lib.formats.rasi) mkLiteral; in {
       "configuration" = {
         display-run = "";
@@ -71,11 +71,11 @@
         border-radius = mkLiteral "16px";
       };
       "element normal active" = {
-        text-color = mkLiteral "#${config.colorScheme.palette.base02}bb";
+        # text-color = mkLiteral "#${config.colorScheme.palette.base02}bb";
       };
       "element selected normal, element selected active" = {
         background-color = mkLiteral "#${config.colorScheme.palette.base02}bb";
-        text-color = mkLiteral "#${config.colorScheme.palette.base01}bb";
+        # text-color = mkLiteral "#${config.colorScheme.palette.base01}bb";
       };
       "element-icon" = {
         "size" = mkLiteral "1em";

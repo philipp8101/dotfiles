@@ -1,5 +1,8 @@
-{ ... }:
+{ pkgs, config, ... }:
 {
+    imports = [
+        ./nix-colors.nix
+    ];
     programs.waybar = {
         enable = true;
         systemd.enable = true;
@@ -10,7 +13,7 @@
                 position= "top";
                 modules-left= ["hyprland/workspaces"];
                 modules-center= ["clock"];
-                modules-right= ["cpu" "memory" "network" "pulseaudio" "backlight" "battery" "tray"];
+                modules-right= ["cpu" "memory" "network" "pulseaudio" "backlight" "battery" "backlight" "custom/weather" "tray"];
                 tray= {
                     icon-size= 21;
                     spacing= 10;
@@ -80,9 +83,21 @@
                     format= "{icon} {percent}%";
                     format-icons= [" " " "];
                 };
+                temperature = {
+                    thermal-zone = "1";
+                    format = "{temperatureC}°C";
+                };
+                "custom/weather" = {
+                    format = "{}°";
+                    tooltip = "true";
+                    interval = "3600";
+                    exec = "${pkgs.wttrbar}/bin/wttrbar";
+                    return-type = "json";
+                };
 
             };
         };
+        # https://github.com/Alexays/Waybar/wiki/Styling
         style = ''
             * {
                 border-radius: 0;
@@ -93,88 +108,46 @@
 
             window#waybar {
                 background: transparent;
-                color: #DADAE8;
+                color: #${config.colorScheme.palette.base05};
             }
 
             tooltip {
-                    background: #1E1E28;
-                    border-radius: 15px;
-                    border-width: 2px;
-                    border-style: solid;
-                    border-color: #a4b9ef;
-                    }
-
-            #workspaces {
-                background: #332E41;
-                margin-top: 1px;
-                margin-bottom: 1px;
-                border-radius: 0px 15px 15px 0px;
+                background: #${config.colorScheme.palette.base00};
+                border-radius: 15px;
+                border-width: 2px;
+                border-style: solid;
+                border-color: #${config.colorScheme.palette.base02};
             }
 
             #workspaces button {
-                padding-left: 10px;
-                padding-right: 10px;
-                min-width: 0;
-                color: #DADAE8;
+                color: #${config.colorScheme.palette.base05};
+                border-radius: 12px;
             }
 
             #workspaces button.active {
-                color: #A4B9EF;
-                border-color: #A4B9EF;
-                border-style: solid none none none;
-                border-width: 2px;
+                background: #${config.colorScheme.palette.base02};
             }
 
             #workspaces button.urgent {
-                color: #F9C096;
-                border-color: #F9C096;
-                border-style: solid none none none;
-                border-width: 2px;
+                background: #${config.colorScheme.palette.base08};
             }
 
             #workspaces button:hover {
-                background: #332e41;
-                border-color: #332e41;
-                    color: #A4B9EF;
+                background: #${config.colorScheme.palette.base02};
+            }
+            
+            #workspaces {
+            padding: 0px;
             }
 
-            #tray, #network, #cpu, #memory, #battery, #pulseaudio, #workspaces, #mpd, #backlight  {
-                    padding-left: 8px;
-                    padding-right: 8px;
-                background: #332E41;
-                margin-top: 2px;
-                margin-bottom: 2px;
-            }
-
-            #cpu {
-                padding-left: 15px;
-                padding-right: 2px;
-                background: #332E41;
-                border-radius: 15px 0px 0px 15px;
-                margin-top: 2px;
-                margin-bottom: 2px;
-            }
-
-            #custom-vpn {
-                background: #332E41;
-                padding-right: 10px;
-                margin-top: 2px;
-                margin-bottom: 2px;
-            }
-
-            /* #pulseaudio { */
-            /*     padding-right: 15px; */
-            /*     margin-right: 5px; */
-            /*     border-radius: 0px 15px 15px 0px; */
-            /* } */
-
-            #clock, #custom-spotify {
-                background: #332E41;
-                margin-top: 2px;
-                margin-bottom: 2px;
-                padding-right: 15px;
-                padding-left: 15px;
+            .module {
+                background: #${config.colorScheme.palette.base00};
                 border-radius: 15px;
+                border-style: solid;
+                border-width: 2px;
+                border-color: #${config.colorScheme.palette.base02};
+                padding: 0px 7px;
+                margin: 0px 3px;
             }
         '';
     };
