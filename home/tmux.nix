@@ -31,9 +31,6 @@ tmux switch-client -t $selected_name
 '';
 in
 {
-  imports = [
-    ./nix-colors.nix
-  ];
   programs.tmux = {
     enable = true;
     shell = "${pkgs.zsh}/bin/zsh";

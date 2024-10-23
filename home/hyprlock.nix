@@ -1,8 +1,5 @@
 { pkgs, config, ... }:
 {
-  imports = [
-    ./nix-colors.nix
-  ];
   programs.hyprlock = {
     enable = true;
     settings = {

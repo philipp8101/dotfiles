@@ -1,4 +1,4 @@
-{ pkgs, inputs, system, ... }:
+{ pkgs, inputs, system, config, ... }:
 {
   services.hyprpaper = {
     enable = true;
