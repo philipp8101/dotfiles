@@ -12,6 +12,11 @@
 		};
 		binfmt.emulatedSystems = [ "aarch64-linux" ];
 	};
+	programs.nix-ld = {
+		enable = true;
+		libraries = with pkgs; [
+		];
+	};
 	networking = {
 		hostId = "e52e59bb";
 		hostName = "desktop";
