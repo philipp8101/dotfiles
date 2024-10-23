@@ -24,6 +24,7 @@
     systems.url = "github:nix-systems/default";
     flake-utils.url = "github:numtide/flake-utils";
     flake-utils.inputs.systems.follows = "systems";
+    hyprpaper-custom.url = "github:philipp8101/hyprpaper";
   };
 
   outputs = { self, nixpkgs, home-manager, nixos-generators, nixvim, ... }@inputs: 

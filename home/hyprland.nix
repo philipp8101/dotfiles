@@ -23,6 +23,9 @@ in
 {
   imports = [
     ./nix-colors.nix
+    ./hypridle.nix
+    ./hyprlock.nix
+    ./hyprpaper.nix
   ];
   wayland.windowManager.hyprland = {
     enable = true;
@@ -41,6 +44,8 @@ in
       };
       exec-once = [
         "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1"
+        "${inputs.hyprpaper-custom.packages.${system}.default}/bin/hyprpaper"
+        "${pkgs.hypridle}/bin/hypridle"
       ];
       monitor = [
         "DP-1, 1920x1080, 0x0, 1"
