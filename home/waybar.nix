@@ -13,7 +13,7 @@
                 position= "top";
                 modules-left= ["hyprland/workspaces"];
                 modules-center= ["clock"];
-                modules-right= ["cpu" "memory" "network" "pulseaudio" "backlight" "battery" "backlight" "custom/weather" "tray"];
+                modules-right= ["cpu" "memory" "custom/brightness" "network" "pulseaudio" "backlight" "battery" "backlight" "custom/weather" "tray"];
                 tray= {
                     icon-size= 21;
                     spacing= 10;
@@ -65,7 +65,7 @@
                     tooltip-format-wifi= "Signal Strenght: {signalStrength}%";
                 };
                 pulseaudio= {
-                    on-click= "pactl set-sink-mute @DEFAULT_SINK@ toggle";
+                    on-click= "wpctl set-mute @DEFAULT_SINK@ toggle";
                     format= "<span size='13000' foreground='#EBDDAA'>{icon} </span>{desc} {volume}%";
                     format-muted= "<span size='14000' foreground='#EBDDAA'></span> Muted";
                     format-icons= {
@@ -94,7 +94,18 @@
                     exec = "${pkgs.wttrbar}/bin/wttrbar";
                     return-type = "json";
                 };
-
+                "custom/brightness" = {
+                    format = "{icon} {percentage}%";
+                    format-icons = ["󰃞 " "󰃟 " "󰃠 "];
+                    return-type = "json";
+                    exec = ''${pkgs.ddcutil}/bin/ddcutil --bus 8 getvcp 10 | grep -oP 'current[^0-9]*[0-9]+'|grep -oP '[0-9]+' | ${pkgs.jq}/bin/jq '{percentage: . | tonumber}' | tr -d '\n' '';
+                    on-scroll-up = " for i in \{6..8\} ; do ${pkgs.ddcutil}/bin/ddcutil --noverify --bus $i setvcp 10 + 10 & done";
+                    on-scroll-down = " for i in \{6..8\} ; do ${pkgs.ddcutil}/bin/ddcutil --noverify --bus $i setvcp 10 - 10 & done";
+                    on-click = " for i in \{6..8\} ; do ${pkgs.ddcutil}/bin/ddcutil --noverify --bus $i setvcp 10 0 & done";
+                    on-click-right = " for i in \{6..8\} ; do ${pkgs.ddcutil}/bin/ddcutil --noverify --bus $i setvcp 10 100 & done";
+                    interval = "1";
+                    tooltip = "false";
+                };
             };
         };
         # https://github.com/Alexays/Waybar/wiki/Styling

@@ -64,6 +64,7 @@
 				persistencedSha256 = pkgs.lib.fakeSha256;
 			};
 		};
+		i2c.enable = true; # for ddcutil
 	};
 	security.rtkit.enable = true;
 	users.users.philipp = {
@@ -143,6 +144,7 @@
 				settings.allow_anonymous = true;
 			}];
 		};
+		ddccontrol.enable = true;
 	};
 	fonts.packages = with pkgs; [
 		inconsolata
