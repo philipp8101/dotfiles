@@ -4,7 +4,7 @@ save-screenshots = import ./save-screenshots.nix { inherit pkgs; };
 in
 { 
   services.hypridle = {
-    enable = true;
+    enable = config.wayland.windowManager.hyprland.enable;
     settings = {
       general = {
         after_sleep_cmd = "hyprctl dispatch dpms on";

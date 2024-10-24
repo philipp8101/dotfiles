@@ -9,7 +9,7 @@ let
 in
 {
     services.polybar = {
-        enable = true;
+        enable = config.xsession.windowManager.i3.enable;
         script = ''
         MONITOR=DP-2 polybar primary &
         MONITOR=DP-0 polybar auxilary &

@@ -1,5 +1,10 @@
 { config, pkgs, inputs, self, ... }:
 {
+	imports = [
+		./i3.nix
+		./plasma.nix
+		./hyprland.nix
+	];
 	boot = {
 		loader = {
 			systemd-boot.enable = true;

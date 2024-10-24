@@ -1,7 +1,7 @@
 { pkgs, inputs, system, config, ... }:
 {
   services.hyprpaper = {
-    enable = true;
+    enable = config.wayland.windowManager.hyprland.enable;
     package = inputs.hyprpaper-custom.packages.${system}.default;
     settings = {
       preload-random = "/tank/home/Pictures/wallpaper/wallpaper-guweiz/dark/, pic1, pic2, pic3";

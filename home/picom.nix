@@ -1,6 +1,7 @@
+{ pkgs, config, ... }:
 {
   services.picom = {
-    enable = true;
+    enable = config.xsession.windowManager.i3.enable;
     # backend = "glx";
     fade = true;
     fadeDelta = 4;

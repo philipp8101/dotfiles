@@ -1,7 +1,7 @@
 { pkgs, config, ... }:
 {
   services.dunst = {
-    enable = true;
+    enable = config.wayland.windowManager.hyprland.enable || config.xsession.windowManager.i3.enable;
     settings = {
       global = {
         frame_color = "#${config.colorScheme.palette.base02}";

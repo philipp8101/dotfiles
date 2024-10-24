@@ -1,7 +1,7 @@
 { pkgs, config, ... }:
 {
     programs.waybar = {
-        enable = true;
+        enable = config.wayland.windowManager.hyprland.enable;
         systemd.enable = true;
         systemd.target = "hyprland-session.target";
         settings = {

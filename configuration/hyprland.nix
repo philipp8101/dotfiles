@@ -1,14 +1,13 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
 	programs.hyprland = {
-		enable = true;
 		xwayland.enable = true;
 	};
 	xdg.portal = {
-		enable = true;
+		enable = config.programs.hyprland.enable;
 		extraPortals = with pkgs; [
-			xdg-desktop-portal-hyprland
+			(pkgs.lib.mkIf config.services.desktopManager.plasma6.enable xdg-desktop-portal-hyprland)
 		];
 	};
-	services.displayManager.defaultSession = "hyprland";
+	services.displayManager.defaultSession = pkgs.lib.mkIf config.programs.hyprland.enable "hyprland";
 }

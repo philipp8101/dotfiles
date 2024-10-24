@@ -1,12 +1,12 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
 	services.xserver = {
-		enable = true;
+		enable = config.services.xserver.windowManager.i3.enable;
 		resolutions = [
 		{ x = 1920; y = 1080; }
 		];
 		windowManager.i3 = {
-			enable = true;
+			# enable = true;
 			extraPackages = with pkgs; [
 				dmenu
 					i3status

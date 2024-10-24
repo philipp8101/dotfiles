@@ -42,7 +42,6 @@
         inherit system;
         modules = [ 
           ./configuration
-          ./configuration/hyprland.nix
           ./hardware-configuration.nix
           home-manager.nixosModules.home-manager {
             home-manager = {
@@ -60,6 +59,7 @@
               };
             };
           }
+          { programs.hyprland.enable = true; }
         ];
       };
       raspberrypi = nixpkgs.lib.nixosSystem {
@@ -78,17 +78,6 @@
         extraSpecialArgs = { inherit inputs system user self ; };
         modules = [
           ./home
-          ./home/alacritty.nix
-          ./home/fonts.nix
-          ./home/git.nix
-          ./home/kitty.nix
-          ./home/mpv.nix
-          ./home/tmux.nix
-          ./home/vim.nix
-          ./home/xkblayout.nix
-          ./home/yazi.nix
-          ./home/zoxide.nix
-          ./home/zsh.nix
         ];
       };
     };
