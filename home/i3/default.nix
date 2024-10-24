@@ -25,6 +25,10 @@ let
   };
 in
 {
+  imports = [
+    ./picom.nix
+    ./polybar.nix
+  ];
   home.file = {
     ".background-image".source = "${bg.outPath}/modified-wallpaper.svg";
   };

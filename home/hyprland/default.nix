@@ -26,6 +26,7 @@ in
     ./hypridle.nix
     ./hyprlock.nix
     ./hyprpaper.nix
+    ./waybar.nix
   ];
   options.wayland.windowManager.hyprland.layout = lib.mkOption {
     type = with lib.types; enum [ "dwindle" "master" "scroller" ];
