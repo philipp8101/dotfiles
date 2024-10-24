@@ -23,6 +23,15 @@
         installGhc = true;
         ghcPackage = pkgs.ghc;
       };
+      nixd = {
+        enable = true;
+        settings = {
+          formatting.command = ["nixpkgs-fmt"];
+          nixpkgs.expr = "import <nixpkgs> { }";
+          options.nixos.expr = ''(builtins.getFlake "github:philipp8101/dotfiles").nixosConfigurations.desktop.options'';
+          options."home_manager".expr = ''(builtins.getFlake "github:philipp8101/dotfiles").homeConfigurations.philipp.options'';
+        };
+      };
     };
     keymaps = {
         diagnostic = {
