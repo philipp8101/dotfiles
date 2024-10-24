@@ -4,7 +4,7 @@
     shellAliases = {
       vim = "nvim";
     };
-    autosuggestion.enable= true;
+    autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     enableCompletion = true;
     initExtra = "zstyle ':completion:*' rehash true\n";

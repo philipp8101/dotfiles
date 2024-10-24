@@ -1,28 +1,28 @@
 { pkgs, config, system, inputs, ... }:
 let
-mod = "Mod4";
-rofi-power-menu = pkgs.stdenv.mkDerivation {
-  name = "rofi-power-menu";
-  src = builtins.fetchurl {
-    url = "https://github.com/jluttine/rofi-power-menu/raw/395c1e07360b2dbd13c0a658665ab0a581024ec3/rofi-power-menu";
-    sha256 = "3cfdf4cfb3553a62f56b055ed039e29c56abc063e9252cfbc3c7d3b5c98dfbb6";
+  mod = "Mod4";
+  rofi-power-menu = pkgs.stdenv.mkDerivation {
+    name = "rofi-power-menu";
+    src = builtins.fetchurl {
+      url = "https://github.com/jluttine/rofi-power-menu/raw/395c1e07360b2dbd13c0a658665ab0a581024ec3/rofi-power-menu";
+      sha256 = "3cfdf4cfb3553a62f56b055ed039e29c56abc063e9252cfbc3c7d3b5c98dfbb6";
+    };
+    buildCommand = ''
+      mkdir -p $out/bin/
+      cp $src $out/bin/rofi-power-menu
+      chmod +x $out/bin/rofi-power-menu
+    '';
   };
-  buildCommand = ''
-    mkdir -p $out/bin/
-    cp $src $out/bin/rofi-power-menu
-    chmod +x $out/bin/rofi-power-menu
+  scripts = import ./i3scripts.nix { inherit pkgs; };
+  bg = pkgs.stdenv.mkDerivation {
+    name = "modified-wallpaper";
+    src = ./nixos-wallpaper-catppuccin-macchiato.svg;
+    buildInputs = [ pkgs.gnused ];
+    buildCommand = ''
+      mkdir -p $out
+      sed -e 's/#181926/#${config.colorScheme.palette.base01}/g' -e 's/#f4dbd6/#${config.colorScheme.palette.base06}/g' -e 's/#8bd5ca/#${config.colorScheme.palette.base0C}/g' -e 's/#5b6078/#${config.colorScheme.palette.base04}/g' -e 's/#24273a/${config.colorScheme.palette.base00}/g' $src > $out/modified-wallpaper.svg
     '';
-};
-scripts = import ./i3scripts.nix {inherit pkgs;};
-bg = pkgs.stdenv.mkDerivation {
-  name = "modified-wallpaper";
-  src = ./nixos-wallpaper-catppuccin-macchiato.svg;
-  buildInputs = [ pkgs.gnused ];
-  buildCommand = ''
-    mkdir -p $out
-    sed -e 's/#181926/#${config.colorScheme.palette.base01}/g' -e 's/#f4dbd6/#${config.colorScheme.palette.base06}/g' -e 's/#8bd5ca/#${config.colorScheme.palette.base0C}/g' -e 's/#5b6078/#${config.colorScheme.palette.base04}/g' -e 's/#24273a/${config.colorScheme.palette.base00}/g' $src > $out/modified-wallpaper.svg
-    '';
-};
+  };
 in
 {
   home.file = {
@@ -48,11 +48,11 @@ in
         inner = 5;
         outer = 5;
       };
-      bars = [];
+      bars = [ ];
       startup = [
-      { command = "systemctl --user restart polybar"; always = true; notification = false; }
-      { command = "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1"; always = true; notification = false; }
-      { command = "${pkgs.networkmanagerapplet}/bin/nm-applet"; always = true; notification = false; }
+        { command = "systemctl --user restart polybar"; always = true; notification = false; }
+        { command = "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1"; always = true; notification = false; }
+        { command = "${pkgs.networkmanagerapplet}/bin/nm-applet"; always = true; notification = false; }
       ];
       keybindings = {
         "${mod}+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
@@ -130,9 +130,9 @@ in
         "${mod}+Shift+i" = "move container to workspace number 8";
       };
       assigns = {
-        "6" = [{class="Steam";}{class="steam";}{title="Steam";}{title="steam";}];
-        "7" = [{instance="^league";}{instance="^riot";}{title="^League";}{instance="upc.exe";}{instance="anno*";}{instance="origin.exe";}{instance="lutris";}];
-        "8" = [{class="discord";}];
+        "6" = [{ class = "Steam"; } { class = "steam"; } { title = "Steam"; } { title = "steam"; }];
+        "7" = [{ instance = "^league"; } { instance = "^riot"; } { title = "^League"; } { instance = "upc.exe"; } { instance = "anno*"; } { instance = "origin.exe"; } { instance = "lutris"; }];
+        "8" = [{ class = "discord"; }];
       };
       workspaceOutputAssign = [
         { output = "DP-2"; workspace = "1"; }
@@ -163,18 +163,18 @@ in
       # tiling_from - same as floating_from
       window.commands = [
         { command = "floating enable"; criteria = { window_role = "task_dialog"; }; }
-        { command = "floating enable"; criteria = { instance="origin.exe"; }; }
-        { command = "resize set width 15 ppt"; criteria = { class="Steam"; title="Friends List"; }; }
-        { command = "floating enable"; criteria = { class="Steam"; title="Steam Guard"; }; }
-        { command = "floating enable"; criteria = { class="Steam"; title="Steam - News"; }; }
-        { command = "border pixel 3"; criteria = { class="firefox"; }; }
-        { command = "floating enable"; criteria = { instance="Places"; class="firefox"; }; }
-        { command = "border pixel 3"; criteria = { class="Alacritty"; }; }
-        { command = "border pixel 3"; criteria = { class="kitty"; }; }
+        { command = "floating enable"; criteria = { instance = "origin.exe"; }; }
+        { command = "resize set width 15 ppt"; criteria = { class = "Steam"; title = "Friends List"; }; }
+        { command = "floating enable"; criteria = { class = "Steam"; title = "Steam Guard"; }; }
+        { command = "floating enable"; criteria = { class = "Steam"; title = "Steam - News"; }; }
+        { command = "border pixel 3"; criteria = { class = "firefox"; }; }
+        { command = "floating enable"; criteria = { instance = "Places"; class = "firefox"; }; }
+        { command = "border pixel 3"; criteria = { class = "Alacritty"; }; }
+        { command = "border pixel 3"; criteria = { class = "kitty"; }; }
         # insert new containers to mark
         #bindsym $mod+p move container to mark insert
         #bindsym $mod+Control+p mark --toggle insert
-        { command = "move container to mark insert"; criteria = {window_type="normal";};}
+        { command = "move container to mark insert"; criteria = { window_type = "normal"; }; }
       ];
       colors = {
         background = "#${config.colorScheme.palette.base00}";

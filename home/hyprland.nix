@@ -1,25 +1,25 @@
 { pkgs, config, inputs, system, ... }:
 let
-rofi-power-menu = pkgs.stdenv.mkDerivation {
-  name = "rofi-power-menu";
-  src = builtins.fetchurl {
-    url = "https://github.com/jluttine/rofi-power-menu/raw/395c1e07360b2dbd13c0a658665ab0a581024ec3/rofi-power-menu";
-    sha256 = "3cfdf4cfb3553a62f56b055ed039e29c56abc063e9252cfbc3c7d3b5c98dfbb6";
-  };
-  buildCommand = ''
-    mkdir -p $out/bin/
-    cp $src $out/bin/rofi-power-menu
-    chmod +x $out/bin/rofi-power-menu
+  rofi-power-menu = pkgs.stdenv.mkDerivation {
+    name = "rofi-power-menu";
+    src = builtins.fetchurl {
+      url = "https://github.com/jluttine/rofi-power-menu/raw/395c1e07360b2dbd13c0a658665ab0a581024ec3/rofi-power-menu";
+      sha256 = "3cfdf4cfb3553a62f56b055ed039e29c56abc063e9252cfbc3c7d3b5c98dfbb6";
+    };
+    buildCommand = ''
+      mkdir -p $out/bin/
+      cp $src $out/bin/rofi-power-menu
+      chmod +x $out/bin/rofi-power-menu
     '';
-};
-nix-run-rofi = pkgs.writeShellScriptBin "nix-run-rofi.sh" ''
-if [ -z $1 ] ; then
-    nix flake show nixpkgs --legacy --json |nix run nixpkgs#jq -- -r '.legacyPackages.["x86_64-linux"] | keys_unsorted[]'
-else
-    nohup nix run nixpkgs#$1 > /dev/null &
-fi
-'';
-lib = pkgs.lib;
+  };
+  nix-run-rofi = pkgs.writeShellScriptBin "nix-run-rofi.sh" ''
+    if [ -z $1 ] ; then
+        nix flake show nixpkgs --legacy --json |nix run nixpkgs#jq -- -r '.legacyPackages.["x86_64-linux"] | keys_unsorted[]'
+    else
+        nohup nix run nixpkgs#$1 > /dev/null &
+    fi
+  '';
+  lib = pkgs.lib;
 in
 {
   imports = [
@@ -28,7 +28,7 @@ in
     ./hyprpaper.nix
   ];
   options.wayland.windowManager.hyprland.layout = lib.mkOption {
-    type = with lib.types; enum ["dwindle" "master" "scroller"];
+    type = with lib.types; enum [ "dwindle" "master" "scroller" ];
     default = "dwindle";
   };
   config.wayland.windowManager.hyprland = {
@@ -87,11 +87,11 @@ in
         bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
         animation = [
           "windows, 1, 7, myBezier"
-            "windowsOut, 1,7, default, popin 80%"
-            "border, 1, 10, default"
-            "borderangle, 1, 8, default"
-            "fade, 1, 7, default"
-            "workspaces, 1, 6, default"
+          "windowsOut, 1,7, default, popin 80%"
+          "border, 1, 10, default"
+          "borderangle, 1, 8, default"
+          "fade, 1, 7, default"
+          "workspaces, 1, 6, default"
         ];
       };
       dwindle = {
@@ -107,10 +107,11 @@ in
       "$mod" = "SUPER";
       workspace = [
         "1,monitor:DP-2"
-          "4,moniter:DP-1"
-          "8,monitor:HDMI-A-1"
+        "4,moniter:DP-1"
+        "8,monitor:HDMI-A-1"
       ];
-      bind = [ "$mod, Return, exec, ${pkgs.kitty}/bin/kitty"
+      bind = [
+        "$mod, Return, exec, ${pkgs.kitty}/bin/kitty"
         "$mod, Q, killactive,"
         "$mod CTRL, B, fullscreen, 0"
         "$mod, U, exec, rofi -show calc -modi calc -no-show-match -no-sort"
@@ -173,12 +174,12 @@ in
       ];
       binde = [
         ", XF86AudioRaiseVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"
-          ", XF86AudioLowerVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-"
-          ", XF86AudioMute, exec, ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        ", XF86AudioLowerVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-"
+        ", XF86AudioMute, exec, ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
       ];
       bindm = [
         "$mod, mouse:272, movewindow"
-          "$mod, mouse:273, resizewindow"
+        "$mod, mouse:273, resizewindow"
       ];
     };
   };

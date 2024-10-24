@@ -1,27 +1,32 @@
 {
-    plugins.conform-nvim = {
-        enable = true;
-        settings = {
-            format_on_save = {
-                lspFallback = true;
-                timeoutMs = 500;
-            };
-            formatters_by_bt = {
-                javascript = [ "prettier" ];
-                typescript = [ "prettier" ];
-                css = [ "prettier" ];
-                html = [ "prettier" ];
-                json = [ "prettier" ];
-                yaml = [ "prettier" ];
-                markdown = [ "prettier" ];
-                graphql = [ "prettier" ];
-                lua = [ "stylua" ];
-                python = [ "black" ];
-                bash = [ "beautysh" ];
-                sh = [ "beautysh" ];
-                zsh = [ "beautysh" ];
-                latex = [ "latexindent" ];
-            };
-        };
+  plugins.conform-nvim = {
+    enable = true;
+    settings = {
+      format_on_save = {
+        lspFallback = true;
+        timeoutMs = 500;
+      };
+      formatters_by_bt = {
+        javascript = [ "prettier" ];
+        typescript = [ "prettier" ];
+        css = [ "prettier" ];
+        html = [ "prettier" ];
+        json = [ "prettier" ];
+        yaml = [ "prettier" ];
+        markdown = [ "prettier" ];
+        graphql = [ "prettier" ];
+        lua = [ "stylua" ];
+        python = [ "black" ];
+        bash = [ "beautysh" ];
+        sh = [ "beautysh" ];
+        zsh = [ "beautysh" ];
+        latex = [ "latexindent" ];
+        c = [ "clang-format" ];
+        cpp = [ "clang-format" ];
+        nix = [ "nixpkgs-fmt" ];
+        rust = [ "rustfmt" ];
+        go = [ "gofmt" ];
+      };
     };
+  };
 }

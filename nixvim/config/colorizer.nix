@@ -1,6 +1,6 @@
 {
-    plugins.nvim-colorizer = {
-        enable = true;
-        bufTypes = ["*"];
-    };
+  plugins.nvim-colorizer = {
+    enable = true;
+    bufTypes = [ "*" ];
+  };
 }

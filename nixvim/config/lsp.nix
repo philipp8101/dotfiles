@@ -1,15 +1,16 @@
 { pkgs, ... }:
-    let enabled_servers = [
-      "gopls"
-      "clangd"
-      "pyright"
-      "texlab"
-    ];
-    in
+let
+  enabled_servers = [
+    "gopls"
+    "clangd"
+    "pyright"
+    "texlab"
+  ];
+in
 {
   plugins.lsp = {
     enable = true;
-    servers = builtins.listToAttrs ( builtins.map (s: { name = s ; value = {enable = true;}; }) enabled_servers) // {
+    servers = builtins.listToAttrs (builtins.map (s: { name = s; value = { enable = true; }; }) enabled_servers) // {
       rust_analyzer = {
         enable = true;
         installCargo = true;
@@ -26,7 +27,7 @@
       nixd = {
         enable = true;
         settings = {
-          formatting.command = ["nixpkgs-fmt"];
+          formatting.command = [ "nixpkgs-fmt" ];
           nixpkgs.expr = "import <nixpkgs> { }";
           options.nixos.expr = ''(builtins.getFlake "github:philipp8101/dotfiles").nixosConfigurations.desktop.options'';
           options."home_manager".expr = ''(builtins.getFlake "github:philipp8101/dotfiles").homeConfigurations.philipp.options'';
@@ -34,20 +35,20 @@
       };
     };
     keymaps = {
-        diagnostic = {
-            "]d" = "goto_next";
-            "[d" = "goto_prev";
-            "gk" = "open_float";
-            "gq" = "setloclist";
-        };
-        lspBuf = {
-            K = "hover";
-            gR = "references";
-            gd = "definition";
-            gi = "implementation";
-            ga = "code_action";
-            gr = "rename";
-        };
+      diagnostic = {
+        "]d" = "goto_next";
+        "[d" = "goto_prev";
+        "gk" = "open_float";
+        "gq" = "setloclist";
+      };
+      lspBuf = {
+        K = "hover";
+        gR = "references";
+        gd = "definition";
+        gi = "implementation";
+        ga = "code_action";
+        gr = "rename";
+      };
     };
   };
 

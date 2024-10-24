@@ -19,7 +19,7 @@
         text-color = mkLiteral "#${config.colorScheme.palette.base05}bb";
         margin = mkLiteral "0px";
         padding = mkLiteral "0px";
-        highlight =mkLiteral "bold";
+        highlight = mkLiteral "bold";
         spacing = mkLiteral "0px";
         width = mkLiteral "30%";
         height = mkLiteral "50%";

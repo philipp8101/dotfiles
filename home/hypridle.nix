@@ -1,8 +1,8 @@
 { pkgs, config, ... }:
 let
-save-screenshots = import ./save-screenshots.nix { inherit pkgs; };
+  save-screenshots = import ./save-screenshots.nix { inherit pkgs; };
 in
-{ 
+{
   services.hypridle = {
     enable = config.wayland.windowManager.hyprland.enable;
     settings = {
@@ -13,15 +13,15 @@ in
       };
 
       listener = [
-      {
-        timeout = 900;
-        on-timeout = "${save-screenshots}/bin/save-screenshots ; ${pkgs.hyprlock}/bin/hyprlock";
-      }
-      {
-        timeout = 1800;
-        on-timeout = "hyprctl dispatch dpms off";
-        on-resume = "hyprctl dispatch dpms on";
-      }
+        {
+          timeout = 900;
+          on-timeout = "${save-screenshots}/bin/save-screenshots ; ${pkgs.hyprlock}/bin/hyprlock";
+        }
+        {
+          timeout = 1800;
+          on-timeout = "hyprctl dispatch dpms off";
+          on-resume = "hyprctl dispatch dpms on";
+        }
       ];
     };
   };
