@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, config, inputs, system, ... }:
 let
 rofi-power-menu = pkgs.stdenv.mkDerivation {
   name = "rofi-power-menu";
@@ -19,22 +19,36 @@ else
     nohup nix run nixpkgs#$1 > /dev/null &
 fi
 '';
+lib = pkgs.lib;
 in
 {
   imports = [
-    ./nix-colors.nix
     ./hypridle.nix
     ./hyprlock.nix
     ./hyprpaper.nix
   ];
-  wayland.windowManager.hyprland = {
-    enable = true;
-    # enableNvidiaPatches = true; # was apparently removed
+  options.wayland.windowManager.hyprland.layout = lib.mkOption {
+    type = with lib.types; enum ["dwindle" "master" "scroller"];
+    default = "dwindle";
+  };
+  config.wayland.windowManager.hyprland = {
     xwayland.enable = true;
-    plugins = [
-
-    ];
+    plugins = (with pkgs.hyprlandPlugins; [
+      hyprwinwrap
+      (lib.mkIf (config.wayland.windowManager.hyprland.layout == "scroller") hyprscroller)
+    ]);
     settings = {
+      plugin = {
+        hyprwinwrap = {
+          title = [
+            "gifview"
+          ];
+        };
+        scroller = {
+          focus_wrap = "false";
+          column_widths = "onehalf one";
+        };
+      };
       input = {
         kb_layout = "de";
         touchpad = {
@@ -59,7 +73,7 @@ in
         border_size = 2;
         "col.active_border" = "rgba(${config.colorScheme.palette.base0D}ee) rgba(${config.colorScheme.palette.base0B}ee) 45deg";
         "col.inactive_border" = "rgba(${config.colorScheme.palette.base02}aa)";
-        layout = "dwindle";
+        layout = config.wayland.windowManager.hyprland.layout;
       };
       decoration = {
         rounding = 10;
@@ -73,11 +87,11 @@ in
         bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
         animation = [
           "windows, 1, 7, myBezier"
-          "windowsOut, 1,7, default, popin 80%"
-          "border, 1, 10, default"
-          "borderangle, 1, 8, default"
-          "fade, 1, 7, default"
-          "workspaces, 1, 6, default"
+            "windowsOut, 1,7, default, popin 80%"
+            "border, 1, 10, default"
+            "borderangle, 1, 8, default"
+            "fade, 1, 7, default"
+            "workspaces, 1, 6, default"
         ];
       };
       dwindle = {
@@ -91,14 +105,13 @@ in
         workspace_swipe = true;
       };
       "$mod" = "SUPER";
-      workspace = "1,monitor:DP-2";
-      bind = [
-        "$mod, Return, exec, ${pkgs.kitty}/bin/kitty"
+      workspace = [
+        "1,monitor:DP-2"
+          "4,moniter:DP-1"
+          "8,monitor:HDMI-A-1"
+      ];
+      bind = [ "$mod, Return, exec, ${pkgs.kitty}/bin/kitty"
         "$mod, Q, killactive,"
-        "$mod, D, changegroupactive, previous"
-        "$mod SHIFT, D, togglegroup"
-        "$mod, R, togglesplit, # dwindle"
-        "$mod, B, fullscreen, 1"
         "$mod CTRL, B, fullscreen, 0"
         "$mod, U, exec, rofi -show calc -modi calc -no-show-match -no-sort"
         "$mod, P, pseudo, # dwindle"
@@ -125,7 +138,17 @@ in
         "$mod, M, movecurrentworkspacetomonitor, -1"
         "$mod, C, movecurrentworkspacetomonitor, +1"
         "$mod, V, exec, rofi -show power-menu -modi power-menu:${rofi-power-menu}/bin/rofi-power-menu"
-        # "$mod, BACKSPACE, exec, sed -i '/workman/{ ; 4s/ workman// ; b ; } ; 4s/$/ workman/' ~/.config/hypr/input.conf"
+        "$mod CTRL, left, resizeactive, -20 0"
+        "$mod CTRL, right, resizeactive, 20 0"
+        "$mod CTRL, up, resizeactive, 0 -20"
+        "$mod CTRL, down, resizeactive, 0 20"
+        ", XF86MonBrightnessDown, exec, ${pkgs.brillo}/bin/brillo -U 5"
+        ", XF86MonBrightnessUp, exec, ${pkgs.brillo}/bin/brillo -A 5"
+      ] ++ lib.lists.optionals (config.wayland.windowManager.hyprland.layout != "scroller") [
+        "$mod, D, changegroupactive, previous"
+        "$mod SHIFT, D, togglegroup"
+        "$mod, R, togglesplit, # dwindle"
+        "$mod, B, fullscreen, 1"
         "$mod, left, movefocus, l"
         "$mod, right, movefocus, r"
         "$mod, up, movefocus, u"
@@ -134,39 +157,29 @@ in
         "$mod SHIFT, right, movewindow, r"
         "$mod SHIFT, up, movewindow, u"
         "$mod SHIFT, down, movewindow, d"
-        "$mod CTRL, left, resizeactive, -20 0"
-        "$mod CTRL, right, resizeactive, 20 0"
-        "$mod CTRL, up, resizeactive, 0 -20"
-        "$mod CTRL, down, resizeactive, 0 20"
-        ", XF86MonBrightnessDown, exec, ${pkgs.brillo}/bin/brillo -U 5"
-        ", XF86MonBrightnessUp, exec, ${pkgs.brillo}/bin/brillo -A 5"
+      ] ++ lib.lists.optionals (config.wayland.windowManager.hyprland.layout == "scroller") [
+        "$mod, D, scroller:admitwindow"
+        "$mod, R, scroller:expelwindow"
+        "$mod, W, scroller:toggleoverview"
+        "$mod, B, scroller:cyclesize, next"
+        "$mod, left, scroller:movefocus, l"
+        "$mod, right, scroller:movefocus, r"
+        "$mod, up, scroller:movefocus, u"
+        "$mod, down, scroller:movefocus, d"
+        "$mod SHIFT, left, scroller:movewindow, l"
+        "$mod SHIFT, right, scroller:movewindow, r"
+        "$mod SHIFT, up, scroller:movewindow, u"
+        "$mod SHIFT, down, scroller:movewindow, d"
       ];
       binde = [
         ", XF86AudioRaiseVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"
-        ", XF86AudioLowerVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-"
-        ", XF86AudioMute, exec, ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+          ", XF86AudioLowerVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-"
+          ", XF86AudioMute, exec, ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
       ];
       bindm = [
         "$mod, mouse:272, movewindow"
-        "$mod, mouse:273, resizewindow"
+          "$mod, mouse:273, resizewindow"
       ];
-      # windowrulev2 = [
-      #   "nomaxsize, class:^(riotclientux.exe)$,title:^(Riot Client Main)$"
-      #   "float, class:^(riotclientux.exe)$,title:^(Riot Client Main)$"
-      #   "size 1540 850, class:^(riotclientux.exe)$,title:^(Riot Client Main)$"
-      #   "center, class:^(riotclientux.exe)$,title:^(Riot Client Main)$"
-      #   ""
-      #   "nomaxsize, class:^(leagueclientux.exe)$,title:^(League of Legends)$"
-      #   "float, class:^(leagueclientux.exe)$,title:^(League of Legends)$"
-      #   "size 1600 900,class:^(leagueclientux.exe)$,title:^(League of Legends)$"
-      #   "center, class:^(leagueclientux.exe)$,title:^(League of Legends)$"
-      #   "opacity 1.0 override 1.0 override, class:^(leagueclientux.exe)$,title:^(League of Legends)$"
-      #   ""
-      #   "opacity 1.0 override 1.0 override, class:^(league of legends.exe)$,title:^(League of Legends (TM) Client)$"
-      #   "float, class:^(league of legends.exe)$,title:^(League of Legends (TM) Client)$"
-      #   "nomaxsize, class:^(league of legends.exe)$,title:^(League of Legends (TM) Client)$"
-      #   "fullscreen, class:^(league of legends.exe)$,title:^(League of Legends (TM) Client)$ # doesn't seem to work"
-      # ];
     };
   };
 }

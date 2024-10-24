@@ -49,25 +49,15 @@
               useGlobalPkgs = true; 
               useUserPackages = true;
               extraSpecialArgs = { inherit inputs system user self ; };
-              users.${user}.imports = [
-                ./home
-                ./home/alacritty.nix
-                ./home/dunst.nix
-                ./home/fonts.nix
-                ./home/git.nix
-                ./home/hyprland.nix
-                ./home/kitty.nix
-                ./home/mpv.nix
-                ./home/rofi.nix
-                ./home/theme.nix
-                ./home/tmux.nix
-                ./home/vim.nix
-                ./home/waybar.nix
-                ./home/xkblayout.nix
-                ./home/yazi.nix
-                ./home/zoxide.nix
-                ./home/zsh.nix
-              ];
+              users.${user} = {
+                imports = [
+                  ./home
+                ];
+                wayland.windowManager.hyprland = {
+                  enable = true;
+                  layout = "scroller";
+                };
+              };
             };
           }
         ];
