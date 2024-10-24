@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, self, system, user, ... }:
 let
   enabled_servers = [
     "gopls"
@@ -29,8 +29,8 @@ in
         settings = {
           formatting.command = [ "nixpkgs-fmt" ];
           nixpkgs.expr = "import <nixpkgs> { }";
-          options.nixos.expr = ''(builtins.getFlake "github:philipp8101/dotfiles").nixosConfigurations.desktop.options'';
-          options."home_manager".expr = ''(builtins.getFlake "github:philipp8101/dotfiles").homeConfigurations.philipp.options'';
+          options.nixos.expr = ''(builtins.getFlake "${self}").nixosConfigurations.desktop.options'';
+          options."home_manager".expr = ''(builtins.getFlake "${self}").homeConfigurations.philipp.options'';
         };
       };
     };

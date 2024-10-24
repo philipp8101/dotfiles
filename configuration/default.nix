@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, self, ... }:
+{ config, pkgs, inputs, self, user, ... }:
 {
   imports = [
     ./i3.nix
@@ -77,10 +77,10 @@
     i2c.enable = true; # for ddcutil
   };
   security.rtkit.enable = true;
-  users.users.philipp = {
+  users.users.${user} = {
     shell = pkgs.zsh;
     isNormalUser = true;
-    description = "philipp";
+    description = "${user}";
     extraGroups = [ "networkmanager" "wheel" "docker" "dialout" ];
   };
   services.openssh.enable = true;

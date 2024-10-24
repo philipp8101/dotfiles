@@ -1,9 +1,7 @@
-{ pkgs, nixvim, system, ... }:
+{ pkgs, nixvim, system, ... }@inputs:
 nixvim.legacyPackages.${system}.makeNixvimWithModule {
   inherit pkgs;
   module = import ./config;
-  extraSpecialArgs = {
-    inherit pkgs;
-  };
+  extraSpecialArgs = inputs;
 }
 

@@ -40,7 +40,7 @@
         packages = {
           nixosConfigurations = {
             desktop = nixpkgs.lib.nixosSystem {
-              specialArgs = { inherit inputs self; };
+              specialArgs = { inherit inputs self user; };
               inherit system;
               modules = [
                 ./configuration
@@ -93,8 +93,7 @@
           };
           nixvim = (import ./nixvim/nixvim.nix {
             pkgs = (import inputs.nixpkgs { inherit system; });
-            inherit system;
-            inherit nixvim;
+            inherit system nixvim self user;
           });
           tmux = pkgs.writeShellScriptBin "tmux" '' ${pkgs.tmux}/bin/tmux -f ${self.packages.${system}.homeConfigurations.${user}}/home-files/.config/tmux/tmux.conf '';
           zsh = pkgs.writeShellScriptBin "zsh" ''
