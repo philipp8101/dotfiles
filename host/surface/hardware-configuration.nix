@@ -17,7 +17,7 @@
   };
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/f8a2a6e4-d8e0-4af2-a0ef-8e9a179addee";
+    { device = "/dev/disk/by-uuid/8343268f-f3e5-43cc-9a47-7f04b4e87481";
       fsType = "btrfs";
       options = [ "subvol=@" ];
     };
