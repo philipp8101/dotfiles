@@ -21,10 +21,4 @@
     gtk.enable = true;
     x11.enable = true;
   };
-
-  dconf = {
-    enable = true;
-    settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
-    settings."org/gnome/desktop/input-sources".sources = "[('xkb', 'de')]";
-  };
 }
