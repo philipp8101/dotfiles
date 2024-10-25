@@ -44,7 +44,7 @@
               inherit system;
               modules = [
                 ./configuration
-                ./host/desktop-hardware.nix
+                ./host/desktop
                 home-manager.nixosModules.home-manager
                 {
                   home-manager = {
@@ -70,7 +70,7 @@
               inherit system;
               modules = [
                 ./configuration
-                ./host/surface-hardware.nix
+                ./host/surface
                 home-manager.nixosModules.home-manager
                 {
                   home-manager = {

@@ -5,41 +5,26 @@
 
 {
   imports =
-    [
-      (modulesPath + "/installer/scan/not-detected.nix")
+    [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   boot = {
-    initrd.availableKernelModules = [ "xhci_pci" "nvme" "usbhid" ];
-    initrd.kernelModules = [ ];
+    initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" ];
+    initrd.kernelModules = [ "dm-snapshot" ];
     kernelModules = [ "kvm-intel" ];
     extraModulePackages = [ ];
-    supportedFilesystems = [ "zfs" ];
-    zfs = {
-      forceImportRoot = false;
-      extraPools = [ ];
-    };
-  };
-  networking = {
-    hostId = "e52e59bb";
-    hostName = "desktop";
   };
 
   fileSystems."/" =
-    {
-      device = "/dev/disk/by-uuid/736036f6-bddf-438e-af79-1497da815fa4";
-      fsType = "ext4";
+    { device = "/dev/disk/by-uuid/f8a2a6e4-d8e0-4af2-a0ef-8e9a179addee";
+      fsType = "btrfs";
+      options = [ "subvol=@" ];
     };
 
   fileSystems."/boot" =
-    {
-      device = "/dev/disk/by-uuid/E7DA-5440";
+    { device = "/dev/disk/by-uuid/131C-D97E";
       fsType = "vfat";
     };
-  # fileSystems."/tank" =
-  #   { device = "tank";
-  #     fsType = "zfs";
-  #   };
 
   swapDevices = [ ];
 
@@ -48,7 +33,8 @@
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp1s0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp0s13f0u1u4.useDHCP = lib.mkDefault true;
+  # networking.interfaces.wlp0s20f3.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
