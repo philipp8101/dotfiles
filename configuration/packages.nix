@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, self, ... }:
 {
   environment.systemPackages = with pkgs; [
     wget
@@ -25,17 +25,18 @@
     libsForQt5.qt5ct
     self.outputs.packages.${system}.nixvim
     adwaita-icon-theme
-    dolphin
+    libsForQt5.dolphin
     libsForQt5.kde-cli-tools
     kdePackages.breeze
-    kdePackages.breeze-icons
-    kdePackages.qtwayland
-    kdePackages.qtsvg
+    libsForQt5.breeze-icons
+    libsForQt5.qtwayland
+    libsForQt5.qtsvg
     kdePackages.kio-fuse
-    kdePackages.kio-extras
+    libsForQt5.kio-extras
     kdePackages.kdesdk-thumbnailers
-    kdePackages.kdegraphics-thumbnailers
-    kdePackages.ffmpegthumbs
+    libsForQt5.kdegraphics-thumbnailers
+    libsForQt5.ffmpegthumbs
+    libsForQt5.dolphin-plugins
     okular
     gwenview
     ark
