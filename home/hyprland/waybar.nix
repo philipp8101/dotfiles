@@ -55,7 +55,7 @@
           max-length = 10;
         };
         network = {
-          format-wifi = "<span size='13000' foreground='#F2CECF'>  </span>";
+          format-wifi = "<span size='13000' foreground='#F2CECF'> </span>";
           tooltip-format-wifi = "SSID: {essid}\nSignal Strenght: {signalStrength}%\nFrequency: {frequency} GHz";
           format-ethernet = "<span size='13000' foreground='#F2CECF'>󰈀 </span>";
           tooltip-format-ethernet = "Interface: {ifname}\nIP: {ipaddr}/{cidr}";
