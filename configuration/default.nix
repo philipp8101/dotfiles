@@ -124,11 +124,22 @@
       libsForQt5.qtstyleplugin-kvantum
       libsForQt5.qt5ct
       self.outputs.packages.${system}.nixvim
-      nautilus
       adwaita-icon-theme
-      evince
-      eog
-      file-roller
+      dolphin
+      libsForQt5.kde-cli-tools
+      kdePackages.breeze
+      kdePackages.breeze-icons
+      kdePackages.qtwayland
+      kdePackages.qtsvg
+      kdePackages.kio-fuse
+      kdePackages.kio-extras
+      kdePackages.kdesdk-thumbnailers
+      kdePackages.kdegraphics-thumbnailers
+      kdePackages.ffmpegthumbs
+      okular
+      gwenview
+      ark
+      libsForQt5.qt5.qtgraphicaleffects
     ];
     pathsToLink = [ "/libexec" ];
   };
@@ -141,8 +152,22 @@
       pulse.enable = true;
       jack.enable = true;
     };
-    displayManager.sddm.wayland.enable = true;
-    displayManager.sddm.enable = true;
+    displayManager.sddm = {
+      enable = true;
+      theme = "Elegant";
+      settings.Theme.ThemeDir = "${pkgs.elegant-sddm.override {
+         themeConfig.General = {
+           background = "${builtins.fetchurl {
+             url = "https://raw.githubusercontent.com/JaKooLit/Wallpaper-Bank/a0f287a72a04eac7acdaabcaf1a9ecfbdcea1eb8/wallpapers/Anime-City-Night.png";
+             sha256 = "sha256:1yv1ckg95614mcldkwznvbxdylrjfmsahdf6c9fp2zk339vs34z1";
+           }}";
+         };
+      }}/share/sddm/themes";
+      wayland = {
+        enable = true;
+        compositor = "kwin";
+      };
+    };
     xserver.videoDrivers = [ "nvidia" ];
     xserver.xkb.layout = "de";
     mosquitto = {
