@@ -10,7 +10,7 @@
         position = "top";
         modules-left = [ "hyprland/workspaces" ];
         modules-center = [ "clock" ];
-        modules-right = [ "cpu" "memory" "network" "pulseaudio" "backlight" "battery" "backlight" "custom/weather" "tray" ];
+        modules-right = [ "cpu" "memory" "network" "pulseaudio" "battery" "custom/weather" "tray" ];
         tray = {
           icon-size = 21;
           spacing = 10;
