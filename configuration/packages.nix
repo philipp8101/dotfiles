@@ -1,0 +1,44 @@
+{ pkgs, ... }:
+{
+  environment.systemPackages = with pkgs; [
+    wget
+    tmux
+    kitty
+    polkit
+    dconf
+    xwayland
+    gcc
+    unzip
+    fzf
+    home-manager
+    ripgrep
+    firefox
+    xsel
+    lutris
+    nix-index
+    htop-vim
+    obsidian
+    wl-clipboard
+    vesktop
+    tidal-hifi
+    libsForQt5.qtstyleplugin-kvantum
+    libsForQt5.qt5ct
+    self.outputs.packages.${system}.nixvim
+    adwaita-icon-theme
+    dolphin
+    libsForQt5.kde-cli-tools
+    kdePackages.breeze
+    kdePackages.breeze-icons
+    kdePackages.qtwayland
+    kdePackages.qtsvg
+    kdePackages.kio-fuse
+    kdePackages.kio-extras
+    kdePackages.kdesdk-thumbnailers
+    kdePackages.kdegraphics-thumbnailers
+    kdePackages.ffmpegthumbs
+    okular
+    gwenview
+    ark
+    libsForQt5.qt5.qtgraphicaleffects
+  ];
+}

@@ -1,9 +1,13 @@
 { config, pkgs, inputs, self, user, ... }:
 {
   imports = [
-    ./i3.nix
-    ./plasma.nix
+    ./graphics.nix
     ./hyprland.nix
+    ./i3.nix
+    ./mosquitto.nix
+    ./packages.nix
+    ./plasma.nix
+    ./sddm.nix
   ];
   boot = {
     loader = {
@@ -26,12 +30,6 @@
     hostId = "e52e59bb";
     hostName = "desktop";
     networkmanager.enable = true;
-    firewall = {
-      enable = true;
-      allowedTCPPorts = [
-        1883 # mqtt
-      ];
-    };
   };
   services.udev = {
     enable = true;
@@ -57,23 +55,6 @@
   console.keyMap = "de";
   hardware = {
     pulseaudio.enable = false;
-    graphics.enable = true;
-    graphics.enable32Bit = true; # https://nixos.wiki/wiki/Lutris
-    nvidia = {
-      modesetting.enable = true;
-      open = false;
-      nvidiaSettings = true;
-      powerManagement.enable = true;
-      # package = config.boot.kernelPackages.nvidiaPackages.production;
-      package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
-        version = "555.42.02";
-        sha256_64bit = "sha256-k7cI3ZDlKp4mT46jMkLaIrc2YUx1lh1wj/J4SVSHWyk=";
-        sha256_aarch64 = "sha256-rtDxQjClJ+gyrCLvdZlT56YyHQ4sbaL+d5tL4L4VfkA=";
-        openSha256 = "sha256-rtDxQjClJ+gyrCLvdZlT56YyHQ4sbaL+d5tL4L4VfkA=";
-        settingsSha256 = "sha256-rtDxQjClJ+gyrCLvdZlT56YyHQ4sbaL+d5tL4L4VfkA=";
-        persistencedSha256 = pkgs.lib.fakeSha256;
-      };
-    };
     i2c.enable = true; # for ddcutil
   };
   security.rtkit.enable = true;
@@ -100,47 +81,6 @@
     sessionVariables = {
       SSH_AUTH_SOCK = "/run/user/1000/ssh-agent";
     };
-    systemPackages = with pkgs; [
-      wget
-      tmux
-      kitty
-      polkit
-      dconf
-      xwayland
-      gcc
-      unzip
-      fzf
-      home-manager
-      ripgrep
-      firefox
-      xsel
-      lutris
-      nix-index
-      htop-vim
-      obsidian
-      wl-clipboard
-      vesktop
-      tidal-hifi
-      libsForQt5.qtstyleplugin-kvantum
-      libsForQt5.qt5ct
-      self.outputs.packages.${system}.nixvim
-      adwaita-icon-theme
-      dolphin
-      libsForQt5.kde-cli-tools
-      kdePackages.breeze
-      kdePackages.breeze-icons
-      kdePackages.qtwayland
-      kdePackages.qtsvg
-      kdePackages.kio-fuse
-      kdePackages.kio-extras
-      kdePackages.kdesdk-thumbnailers
-      kdePackages.kdegraphics-thumbnailers
-      kdePackages.ffmpegthumbs
-      okular
-      gwenview
-      ark
-      libsForQt5.qt5.qtgraphicaleffects
-    ];
     pathsToLink = [ "/libexec" ];
   };
   services = {
@@ -152,33 +92,7 @@
       pulse.enable = true;
       jack.enable = true;
     };
-    displayManager.sddm = {
-      enable = true;
-      theme = "Elegant";
-      settings.Theme.ThemeDir = "${pkgs.elegant-sddm.override {
-         themeConfig.General = {
-           background = "${builtins.fetchurl {
-             url = "https://raw.githubusercontent.com/JaKooLit/Wallpaper-Bank/a0f287a72a04eac7acdaabcaf1a9ecfbdcea1eb8/wallpapers/Anime-City-Night.png";
-             sha256 = "sha256:1yv1ckg95614mcldkwznvbxdylrjfmsahdf6c9fp2zk339vs34z1";
-           }}";
-         };
-      }}/share/sddm/themes";
-      wayland = {
-        enable = true;
-        compositor = "kwin";
-      };
-    };
-    xserver.videoDrivers = [ "nvidia" ];
     xserver.xkb.layout = "de";
-    mosquitto = {
-      enable = true;
-      listeners = [{
-        acl = [ "pattern readwrite #" ];
-        port = 1883;
-        omitPasswordAuth = true;
-        settings.allow_anonymous = true;
-      }];
-    };
     ddccontrol.enable = true;
   };
   fonts.packages = with pkgs; [
