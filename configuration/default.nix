@@ -14,11 +14,6 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    supportedFilesystems = [ "zfs" ];
-    zfs = {
-      forceImportRoot = false;
-      extraPools = [ ];
-    };
     binfmt.emulatedSystems = [ "aarch64-linux" ];
   };
   programs.nix-ld = {
@@ -27,8 +22,6 @@
     ];
   };
   networking = {
-    hostId = "e52e59bb";
-    hostName = "desktop";
     networkmanager.enable = true;
   };
   services.udev = {

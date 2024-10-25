@@ -8,10 +8,16 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ "dm-snapshot" ];
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
+  boot = {
+    initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" ];
+    initrd.kernelModules = [ "dm-snapshot" ];
+    kernelModules = [ "kvm-intel" ];
+    extraModulePackages = [ ];
+  };
+  networking = {
+    hostId = "dda0a13d";
+    hostName = "surface";
+  };
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/f8a2a6e4-d8e0-4af2-a0ef-8e9a179addee";
