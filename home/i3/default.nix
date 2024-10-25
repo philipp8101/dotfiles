@@ -13,7 +13,7 @@ let
       chmod +x $out/bin/rofi-power-menu
     '';
   };
-  scripts = import ./i3scripts.nix { inherit pkgs; };
+  scripts = import ./i3scripts { inherit pkgs; };
   bg = pkgs.stdenv.mkDerivation {
     name = "modified-wallpaper";
     src = ./nixos-wallpaper-catppuccin-macchiato.svg;

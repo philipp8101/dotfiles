@@ -1,7 +1,7 @@
 { pkgs, ... }:
 pkgs.stdenv.mkDerivation {
   name = "i3-scripts";
-  src = ./i3scripts;
+  src = ./.;
   buildInputs = with pkgs; [ gnused python311 python311Packages.i3ipc ];
   buildCommand = ''
     mkdir -p $out/bin
