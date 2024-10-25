@@ -10,7 +10,7 @@
         position = "top";
         modules-left = [ "hyprland/workspaces" ];
         modules-center = [ "clock" ];
-        modules-right = [ "cpu" "memory" "custom/brightness" "network" "pulseaudio" "backlight" "battery" "backlight" "custom/weather" "tray" ];
+        modules-right = [ "cpu" "memory" "network" "pulseaudio" "backlight" "battery" "backlight" "custom/weather" "tray" ];
         tray = {
           icon-size = 21;
           spacing = 10;
@@ -55,16 +55,20 @@
           max-length = 10;
         };
         network = {
-          format-wifi = "<span size='13000' foreground='#F2CECF'>  </span>{essid}";
-          format-ethernet = "<span size='13000' foreground='#F2CECF'>󰈀 </span>{ipaddr}";
+          format-wifi = "<span size='13000' foreground='#F2CECF'>  </span>";
+          tooltip-format-wifi = "SSID: {essid}\nSignal Strenght: {signalStrength}%\nFrequency: {frequency} GHz";
+          format-ethernet = "<span size='13000' foreground='#F2CECF'>󰈀 </span>";
+          tooltip-format-ethernet = "Interface: {ifname}\nIP: {ipaddr}/{cidr}";
           format-linked = "{ifname} (No IP) ";
-          format-disconnected = "<span size='13000' foreground='#F2CECF'> </span>Disconnected";
-          tooltip-format-wifi = "Signal Strenght: {signalStrength}%";
+          format-disconnected = "<span size='13000' foreground='#F2CECF'> </span>";
+          tooltip-format-disconnected = "Disconnected";
         };
         pulseaudio = {
           on-click = "wpctl set-mute @DEFAULT_SINK@ toggle";
-          format = "<span size='13000' foreground='#EBDDAA'>{icon} </span>{desc} {volume}%";
-          format-muted = "<span size='14000' foreground='#EBDDAA'></span> Muted";
+          format = "<span size='13000' foreground='#EBDDAA'>{icon} </span>{volume}%";
+          tooltip-format = "{desc}";
+          format-muted = "<span size='14000' foreground='#EBDDAA'>󰝟 </span>";
+          tooltip-format-muted = "Muted\n{desc}";
           format-icons = {
             headphone = " ";
             hands-free = " ";
