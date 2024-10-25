@@ -1,10 +1,8 @@
 { config, pkgs, inputs, self, user, ... }:
 {
   imports = [
-    ./graphics.nix
     ./hyprland.nix
     ./i3.nix
-    ./mosquitto.nix
     ./packages.nix
     ./plasma.nix
     ./sddm.nix
