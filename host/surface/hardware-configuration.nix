@@ -13,6 +13,7 @@
     initrd.kernelModules = [ "dm-snapshot" ];
     kernelModules = [ "kvm-intel" ];
     extraModulePackages = [ ];
+    supportedFilesystems = [ "btrfs" ];
   };
 
   fileSystems."/" =
