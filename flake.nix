@@ -44,7 +44,33 @@
               inherit system;
               modules = [
                 ./configuration
-                ./hardware-configuration.nix
+                ./host/desktop-hardware.nix
+                home-manager.nixosModules.home-manager
+                {
+                  home-manager = {
+                    useGlobalPkgs = true;
+                    useUserPackages = true;
+                    extraSpecialArgs = { inherit inputs system user self; };
+                    users.${user} = {
+                      imports = [
+                        ./home
+                      ];
+                      wayland.windowManager.hyprland = {
+                        enable = true;
+                        layout = "scroller";
+                      };
+                    };
+                  };
+                }
+                { programs.hyprland.enable = true; }
+              ];
+            };
+            surface = nixpkgs.lib.nixosSystem {
+              specialArgs = { inherit inputs self user; };
+              inherit system;
+              modules = [
+                ./configuration
+                ./host/surface-hardware.nix
                 home-manager.nixosModules.home-manager
                 {
                   home-manager = {
