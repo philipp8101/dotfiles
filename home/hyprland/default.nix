@@ -53,7 +53,7 @@ in
       input = {
         kb_layout = "de";
         touchpad = {
-          natural_scroll = "no";
+          natural_scroll = "yes";
         };
         sensitivity = 0;
       };
