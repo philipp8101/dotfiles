@@ -2,6 +2,13 @@
 {
   environment.systemPackages = with pkgs; [
     wget
+    traceroute
+    dig
+    file
+    whois
+    nix-tree
+    jq
+    smartmontools
     tmux
     kitty
     polkit
