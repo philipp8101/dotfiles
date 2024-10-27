@@ -47,6 +47,8 @@
   hardware = {
     pulseaudio.enable = false;
     i2c.enable = true; # for ddcutil
+    bluetooth.enable = true;
+    bluetooth.powerOnBoot = true;
   };
   security.rtkit.enable = true;
   users.users.${user} = {
