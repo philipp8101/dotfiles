@@ -46,12 +46,12 @@
         };
         cpu = {
           interval = 1;
-          format = "   {}%";
+          format = "   {usage}%";
           max-length = 10;
         };
         memory = {
           interval = 1;
-          format = "   {}%";
+          format = "   {percentage}%";
           max-length = 10;
         };
         network = {
