@@ -108,7 +108,7 @@ in
       "$mod" = "SUPER";
       workspace = [
         "1,monitor:DP-2"
-        "4,moniter:DP-1"
+        "4,monitor:DP-1"
         "8,monitor:HDMI-A-1"
       ];
       bind = [
