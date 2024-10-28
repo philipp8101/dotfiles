@@ -25,6 +25,7 @@
     flake-utils.url = "github:numtide/flake-utils";
     flake-utils.inputs.systems.follows = "systems";
     hyprpaper-custom.url = "github:philipp8101/hyprpaper";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
   outputs = { self, nixpkgs, home-manager, nixos-generators, nixvim, ... }@inputs:
@@ -69,6 +70,7 @@
               specialArgs = { inherit inputs self user; };
               inherit system;
               modules = [
+                inputs.nixos-hardware.nixosModules.microsoft-surface-pro-intel
                 ./configuration
                 ./host/surface
                 home-manager.nixosModules.home-manager
