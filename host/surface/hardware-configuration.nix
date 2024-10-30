@@ -17,17 +17,21 @@
   };
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/8343268f-f3e5-43cc-9a47-7f04b4e87481";
+    { device = "/dev/disk/by-uuid/0dcdf9b8-b11a-49a8-8d03-aba930cfc8bb";
       fsType = "btrfs";
       options = [ "subvol=@" ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/131C-D97E";
+    { device = "/dev/disk/by-uuid/793A-36E0";
       fsType = "vfat";
+      options = [ "fmask=0022" "dmask=0022" ];
     };
 
-  swapDevices = [ ];
+  swapDevices =
+    [ { device = "/dev/disk/by-uuid/4d806dde-fd6a-4607-8563-08b4ee76349e"; }
+    ];
+
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
@@ -40,3 +44,5 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
+
+
