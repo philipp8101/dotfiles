@@ -3,5 +3,6 @@
     ./hardware-configuration.nix
     ./luks.nix
     ./network.nix
+    ./kmonad.nix
   ];
 }
