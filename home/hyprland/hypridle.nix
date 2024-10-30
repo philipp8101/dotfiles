@@ -4,7 +4,7 @@ let
 in
 {
   services.hypridle = {
-    enable = config.wayland.windowManager.hyprland.enable;
+    enable = false;
     settings = {
       general = {
         after_sleep_cmd = "hyprctl dispatch dpms on";
