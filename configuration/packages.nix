@@ -5,6 +5,7 @@
     traceroute
     dig
     file
+    killall
     whois
     nix-tree
     jq
