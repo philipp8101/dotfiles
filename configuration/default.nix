@@ -59,6 +59,7 @@
     extraGroups = [ "networkmanager" "wheel" "docker" "dialout" ];
   };
   services.openssh.enable = true;
+  services.tailscale.enable = true;
   programs = {
     zsh.enable = true;
     ssh.startAgent = true;
