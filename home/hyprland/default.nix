@@ -61,6 +61,7 @@ in
         "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1"
         "${inputs.hyprpaper-custom.packages.${system}.default}/bin/hyprpaper"
         "${pkgs.hypridle}/bin/hypridle"
+        "${pkgs.sway-audio-idle-inhibit}/bin/sway-audio-idle-inhibit"
       ];
       monitor = [
         "DP-1, 1920x1080, 0x0, 1"
