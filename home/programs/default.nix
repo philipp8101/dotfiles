@@ -1,6 +1,7 @@
 {
   imports = [
     ./alacritty.nix
+    ./direnv.nix
     ./dunst.nix
     ./git.nix
     ./kitty.nix
