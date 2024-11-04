@@ -13,6 +13,7 @@
       efi.canTouchEfiVariables = true;
     };
     binfmt.emulatedSystems = [ "aarch64-linux" ];
+    loader.systemd-boot.configurationLimit = 5;
   };
   programs.nix-ld = {
     enable = true;
