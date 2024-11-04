@@ -4,12 +4,23 @@
     enable = true;
     shellAliases = {
       vim = "nvim";
+      y = ''
+        {
+          local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+          yazi "$@" --cwd-file="$tmp"
+          if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+            cd -- "$cwd"
+          fi
+          rm -f -- "$tmp"
+        }
+      '';
     };
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     enableCompletion = true;
     initExtra = "zstyle ':completion:*' rehash true\n";
     history.save = 1000000;
+    historySubstringSearch.enable = false;
     oh-my-zsh = {
       custom = "${pkgs.stdenv.mkDerivation {
       name = "custom-theme";
