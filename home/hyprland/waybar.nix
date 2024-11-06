@@ -10,7 +10,7 @@
         position = "top";
         modules-left = [ "hyprland/workspaces" ];
         modules-center = [ "clock" ];
-        modules-right = [ "cpu" "memory" "network" "pulseaudio" "battery" "custom/weather" "tray" ];
+        modules-right = [ "custom/headsetbattery" "cpu" "memory" "network" "pulseaudio" "battery" "custom/weather" "tray" ];
         tray = {
           icon-size = 21;
           spacing = 10;
@@ -99,13 +99,21 @@
           format = "{icon} {percentage}%";
           format-icons = [ "󰃞 " "󰃟 " "󰃠 " ];
           return-type = "json";
-          exec = ''${pkgs.ddcutil}/bin/ddcutil --bus 8 getvcp 10 | grep -oP 'current[^0-9]*[0-9]+'|grep -oP '[0-9]+' | ${pkgs.jq}/bin/jq '{percentage: . | tonumber}' | tr -d '\n' '';
+          exec = ''${pkgs.ddcutil}/bin/ddcutil --bus 8 getvcp 10 | grep -oP 'current[^0-9]*[0-9]+'|grep -oP '[0-9]+' | ${pkgs.jq}/bin/jq -c '{percentage: . | tonumber}' '';
           on-scroll-up = " for i in \{6..8\} ; do ${pkgs.ddcutil}/bin/ddcutil --noverify --bus $i setvcp 10 + 10 & done";
           on-scroll-down = " for i in \{6..8\} ; do ${pkgs.ddcutil}/bin/ddcutil --noverify --bus $i setvcp 10 - 10 & done";
           on-click = " for i in \{6..8\} ; do ${pkgs.ddcutil}/bin/ddcutil --noverify --bus $i setvcp 10 0 & done";
           on-click-right = " for i in \{6..8\} ; do ${pkgs.ddcutil}/bin/ddcutil --noverify --bus $i setvcp 10 100 & done";
           interval = "1";
           tooltip = "false";
+        };
+        "custom/headsetbattery" = {
+          exec = "${pkgs.headsetcontrol}/bin/headsetcontrol -o JSON | ${pkgs.jq}/bin/jq -c '{ percentage: (.devices[0].battery.level | tonumber)}'";
+          exec-if = "test 0 -ne $(${pkgs.headsetcontrol}/bin/headsetcontrol -o JSON | ${pkgs.jq}/bin/jq '.device_count')";
+          return-type = "json";
+          format = "{icon} {percentage}%";
+          format-icons = [ "󰁺" "󰁻" "󰁼" "󰁽" "󰁿" "󰂀" "󰂁" "󰁹" ];
+          interval = 10;
         };
       };
     };
