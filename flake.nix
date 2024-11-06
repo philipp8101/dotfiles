@@ -79,7 +79,7 @@
                     users.${user} = {
                       imports = [
                         ./home
-                        ./host/desktop/home.nix
+                        ./host/surface/home.nix
                       ];
                     };
                   };
