@@ -1,15 +1,16 @@
 { pkgs, inputs, system, config, ... }:
+let
+inherit (pkgs.lib) length foldr zipListsWith range;
+concat = foldr (a: b: a + b) "";
+r = range 1 (length config.displays);
+in 
 {
   services.hyprpaper = {
     enable = config.wayland.windowManager.hyprland.enable;
     package = inputs.hyprpaper-custom.packages.${system}.default;
     settings = {
-      preload-random = "/tank/home/Pictures/wallpaper/wallpaper-guweiz/dark/, pic1, pic2, pic3";
-      wallpaper = [
-        "DP-1, pic1"
-        "DP-2, pic2"
-        "HDMI-A-1, pic3"
-      ];
+      preload-random = "/tank/home/Pictures/wallpaper/wallpaper-guweiz/dark/${concat (map (i: ", pic${toString i}") r)}";
+      wallpaper = zipListsWith (i: x: "${x.identifier}, pic${toString i}") r config.displays;
     };
   };
 }

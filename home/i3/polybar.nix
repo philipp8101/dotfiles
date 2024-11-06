@@ -6,14 +6,18 @@ let
   };
   ppc-cmd = "PATH=${pkgs.pulseaudio}/bin:${pkgs.coreutils-full}/bin:${pkgs.gnugrep}/bin:${pkgs.gawk}/bin:${pkgs.gnused}/bin ${pkgs.bash}/bin/bash ${polybar-pulseaudio-control}";
   i3scripts = import ./i3scripts { inherit pkgs; };
+  lib = pkgs.lib;
+  secondaryDisplay = lib.lists.remove config.primaryDisplay config.displays;
 in
 {
   services.polybar = {
     enable = config.xsession.windowManager.i3.enable;
     script = ''
-      MONITOR=DP-2 polybar primary &
-      MONITOR=DP-0 polybar auxilary &
-      MONITOR=HDMI-0 polybar secondary &
+      MONITOR=${config.primaryDisplay.identifier} polybar primary &
+    '' + lib.strings.optionalString (lib.lists.length secondaryDisplay > 1) ''
+      MONITOR=${(builtins.elemAt secondaryDisplay 0).identifier} polybar secondary &
+    '' + lib.strings.optionalString (lib.lists.length secondaryDisplay > 2) ''
+      MONITOR=${(builtins.elemAt secondaryDisplay 1).identifier} polybar auxilary &
     '';
     package = pkgs.polybarFull;
     settings = {

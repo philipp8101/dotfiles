@@ -55,11 +55,8 @@
                     users.${user} = {
                       imports = [
                         ./home
+                        ./host/desktop/home.nix
                       ];
-                      wayland.windowManager.hyprland = {
-                        enable = true;
-                        layout = "scroller";
-                      };
                     };
                   };
                 }
@@ -82,11 +79,8 @@
                     users.${user} = {
                       imports = [
                         ./home
+                        ./host/desktop/home.nix
                       ];
-                      wayland.windowManager.hyprland = {
-                        enable = true;
-                        layout = "scroller";
-                      };
                     };
                   };
                 }

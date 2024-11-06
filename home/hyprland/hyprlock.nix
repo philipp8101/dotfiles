@@ -15,12 +15,12 @@
           path = "/tmp/${m}.png";
           blur_passes = 3;
           blur_size = 8;
-        }) [ "DP-2" "DP-1" "HDMI-A-1" ];
+        }) (map (x: x.identifier) config.displays);
       input-field = [
         {
           size = "200, 50";
           position = "0, -80";
-          monitor = "DP-2";
+          monitor = "${config.primaryDisplay.identifier}";
           dots_center = true;
           fade_on_empty = false;
           font_color = "rgb(${config.colorScheme.palette.base05})";

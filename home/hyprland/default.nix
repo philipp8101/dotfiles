@@ -20,6 +20,7 @@ let
     fi
   '';
   lib = pkgs.lib;
+  secondaryDisplay = lib.lists.remove config.primaryDisplay config.displays;
 in
 {
   imports = [
@@ -63,10 +64,7 @@ in
         "${pkgs.hypridle}/bin/hypridle"
         "${pkgs.sway-audio-idle-inhibit}/bin/sway-audio-idle-inhibit"
       ];
-      monitor = [
-        "DP-1, 1920x1080, 0x0, 1"
-        "DP-2, 1920x1080@144, 1920x0, 1"
-        "HDMI-A-0, 1920x1080, 3840x0, 1"
+      monitor = map (x: "${x.identifier}, ${x.resolution}@${x.refreshrate}, ${x.offset}, ${x.scale}") config.displays ++ [
         "Unknown-1,disable"
       ];
       general = {
@@ -108,10 +106,11 @@ in
       };
       "$mod" = "SUPER";
       workspace = [
-        "1,monitor:DP-2"
-        "4,monitor:DP-1"
-        "8,monitor:HDMI-A-1"
-      ];
+        "1,monitor:${config.primaryDisplay.identifier}"
+      ] ++ lib.lists.optional (lib.lists.length secondaryDisplay > 1)
+        "4,monitor:${(builtins.elemAt secondaryDisplay 0).identifier}"
+        ++ lib.lists.optional (lib.lists.length secondaryDisplay > 2)
+        "8,monitor:${(builtins.elemAt secondaryDisplay 1).identifier}";
       bind = [
         "$mod, Return, exec, ${pkgs.kitty}/bin/kitty"
         "$mod, Q, killactive,"

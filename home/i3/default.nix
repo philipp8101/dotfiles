@@ -23,6 +23,8 @@ let
       sed -e 's/#181926/#${config.colorScheme.palette.base01}/g' -e 's/#f4dbd6/#${config.colorScheme.palette.base06}/g' -e 's/#8bd5ca/#${config.colorScheme.palette.base0C}/g' -e 's/#5b6078/#${config.colorScheme.palette.base04}/g' -e 's/#24273a/${config.colorScheme.palette.base00}/g' $src > $out/modified-wallpaper.svg
     '';
   };
+  lib = pkgs.lib;
+  secondaryDisplay = lib.lists.remove config.primaryDisplay config.displays;
 in
 {
   imports = [
@@ -139,15 +141,16 @@ in
         "8" = [{ class = "discord"; }];
       };
       workspaceOutputAssign = [
-        { output = "DP-2"; workspace = "1"; }
-        { output = "DP-2"; workspace = "2"; }
-        { output = "DP-2"; workspace = "3"; }
-        { output = "DP-0"; workspace = "4"; }
-        { output = "DP-2"; workspace = "5"; }
-        { output = "DP-2"; workspace = "6"; }
-        { output = "DP-2"; workspace = "7"; }
-        { output = "HDMI-0"; workspace = "8"; }
-      ];
+        { output = "${config.primaryDisplay.identifier}"; workspace = "1"; }
+        { output = "${config.primaryDisplay.identifier}"; workspace = "2"; }
+        { output = "${config.primaryDisplay.identifier}"; workspace = "3"; }
+        { output = "${config.primaryDisplay.identifier}"; workspace = "5"; }
+        { output = "${config.primaryDisplay.identifier}"; workspace = "6"; }
+        { output = "${config.primaryDisplay.identifier}"; workspace = "7"; }
+      ] ++ lib.lists.optional (lib.lists.length secondaryDisplay > 1)
+        { output = "${(builtins.elemAt secondaryDisplay 0).identifier}"; workspace = "4"; }
+        ++ lib.lists.optional (lib.lists.length secondaryDisplay > 2)
+        { output = "${(builtins.elemAt secondaryDisplay 1).identifier}"; workspace = "8"; };
       # command criteria
       # all - matches all windows
       # class - second part of WM_CLASS
