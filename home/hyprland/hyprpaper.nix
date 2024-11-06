@@ -9,7 +9,7 @@ in
     enable = config.wayland.windowManager.hyprland.enable;
     package = inputs.hyprpaper-custom.packages.${system}.default;
     settings = {
-      preload-random = "/tank/home/Pictures/wallpaper/wallpaper-guweiz/dark/${concat (map (i: ", pic${toString i}") r)}";
+      preload-random = "~/Pictures/wallpaper/${concat (map (i: ", pic${toString i}") r)}";
       wallpaper = zipListsWith (i: x: "${x.identifier}, pic${toString i}") r config.displays;
     };
   };
