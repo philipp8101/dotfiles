@@ -4,6 +4,8 @@
     enable = true;
     shellAliases = {
       vim = "nvim";
+      vi = "nvim";
+      v = "nvim";
       y = ''
         {
           local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
