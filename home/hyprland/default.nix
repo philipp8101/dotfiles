@@ -107,9 +107,9 @@ in
       "$mod" = "SUPER";
       workspace = [
         "1,monitor:${config.primaryDisplay.identifier}"
-      ] ++ lib.lists.optional (lib.lists.length secondaryDisplay > 1)
+      ] ++ lib.lists.optional (lib.lists.length secondaryDisplay >= 1)
         "4,monitor:${(builtins.elemAt secondaryDisplay 0).identifier}"
-        ++ lib.lists.optional (lib.lists.length secondaryDisplay > 2)
+        ++ lib.lists.optional (lib.lists.length secondaryDisplay >= 2)
         "8,monitor:${(builtins.elemAt secondaryDisplay 1).identifier}";
       bind = [
         "$mod, Return, exec, ${pkgs.kitty}/bin/kitty"
@@ -137,8 +137,8 @@ in
         "$mod SHIFT, G, exec, rofi -show nix-run -modi nix-run:${nix-run-rofi}/bin/nix-run-rofi.sh"
         "$mod, Z, exec, ${pkgs.hyprshot}/bin/hyprshot -m region --clipboard-only"
         "$mod, X, togglefloating,"
-        "$mod, M, movecurrentworkspacetomonitor, -1"
-        "$mod, C, movecurrentworkspacetomonitor, +1"
+        "$mod, M, movecurrentworkspacetomonitor, l"
+        "$mod, C, movecurrentworkspacetomonitor, r"
         "$mod, V, exec, rofi -show power-menu -modi power-menu:${rofi-power-menu}/bin/rofi-power-menu"
         "$mod CTRL, left, resizeactive, -20 0"
         "$mod CTRL, right, resizeactive, 20 0"
