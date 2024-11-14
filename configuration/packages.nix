@@ -49,5 +49,6 @@
     gwenview
     ark
     libsForQt5.qt5.qtgraphicaleffects
+    thunderbird
   ];
 }
