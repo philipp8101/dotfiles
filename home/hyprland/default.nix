@@ -162,7 +162,8 @@ in
       ] ++ lib.lists.optionals (config.wayland.windowManager.hyprland.layout == "scroller") [
         "$mod, D, scroller:admitwindow"
         "$mod, R, scroller:expelwindow"
-        "$mod, W, scroller:toggleoverview"
+        "$mod, W, scroller:setmode, r"
+        "$mod SHIFT, W, scroller:setmode, c"
         "$mod, B, scroller:cyclesize, next"
         "$mod, left, scroller:movefocus, l"
         "$mod, right, scroller:movefocus, r"
