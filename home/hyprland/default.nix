@@ -64,7 +64,7 @@ in
         "${pkgs.hypridle}/bin/hypridle"
         "${pkgs.sway-audio-idle-inhibit}/bin/sway-audio-idle-inhibit"
       ];
-      monitor = map (x: "${x.identifier}, ${x.resolution}@${x.refreshrate}, ${x.offset}, ${x.scale}") config.displays ++ [
+      monitor = map (x: "${x.identifier}, ${x.resolution}@${lib.strings.floatToString x.refreshrate}, ${x.offset}, ${lib.strings.floatToString x.scale}") config.displays ++ [
         "Unknown-1,disable"
       ];
       general = {

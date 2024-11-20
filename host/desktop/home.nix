@@ -9,7 +9,7 @@ in
       identifier = "DP-2";
       isPrimary = true;
       offset = "1920x0";
-      refreshrate = "144";
+      refreshrate = 144;
     }
     {
       identifier = "HDMI-A-1";

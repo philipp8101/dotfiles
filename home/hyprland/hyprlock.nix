@@ -18,7 +18,7 @@
         }) (map (x: x.identifier) config.displays);
       input-field = [
         {
-          size = "200, 50";
+          size = "${pkgs.lib.strings.floatToString (200 * config.primaryDisplay.scale)}, ${pkgs.lib.strings.floatToString (50 * config.primaryDisplay.scale)}";
           position = "0, -80";
           monitor = "${config.primaryDisplay.identifier}";
           dots_center = true;

@@ -20,9 +20,9 @@ display = lib.types.submodule {
           description = "resolution of the display";
         };
         refreshrate = lib.mkOption {
-          type = lib.types.str;
-          example = "144";
-          default = "60";
+          type = lib.types.float;
+          example = 144;
+          default = 60;
           description = "refresh rate of the display";
         };
         offset = lib.mkOption {
@@ -31,9 +31,9 @@ display = lib.types.submodule {
           default = "0x0";
         };
         scale = lib.mkOption {
-          type = lib.types.str;
-          example = "2";
-          default = "1";
+          type = lib.types.int;
+          example = 2;
+          default = 1;
         };
       };
     };
