@@ -108,4 +108,8 @@
 
   programs.wireshark.enable = true;
   programs.wireshark.package = pkgs.wireshark;
+
+  documentation.enable = true;
+  documentation.man.enable = true;
+  documentation.doc.enable = true;
 }
