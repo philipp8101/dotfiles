@@ -18,6 +18,6 @@ in
   ];
   wayland.windowManager.hyprland = {
     enable = true;
-    layout = "scroller";
+    layout = "dwindle";
   };
 }

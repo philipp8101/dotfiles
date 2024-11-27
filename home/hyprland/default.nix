@@ -36,7 +36,7 @@ in
   config.wayland.windowManager.hyprland = {
     xwayland.enable = true;
     plugins = (with pkgs.hyprlandPlugins; [
-      hyprwinwrap
+      # hyprwinwrap # broken?
       (lib.mkIf (config.wayland.windowManager.hyprland.layout == "scroller") hyprscroller)
     ]);
     settings = {
@@ -77,10 +77,6 @@ in
       };
       decoration = {
         rounding = 10;
-        drop_shadow = true;
-        shadow_range = 4;
-        shadow_render_power = 3;
-        "col.shadow" = "rgba(1a1a1aee)";
       };
       animations = {
         enabled = true;
