@@ -56,7 +56,13 @@
     shell = pkgs.zsh;
     isNormalUser = true;
     description = "${user}";
-    extraGroups = [ "networkmanager" "wheel" "docker" "dialout" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "docker"
+      "dialout"
+      "wireshark"
+    ];
   };
   services.openssh.enable = true;
   services.tailscale.enable = true;
@@ -100,4 +106,6 @@
 
   virtualisation.docker.enable = true;
 
+  programs.wireshark.enable = true;
+  programs.wireshark.package = pkgs.wireshark;
 }
