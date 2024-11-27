@@ -185,6 +185,7 @@ in
       ];
       windowrulev2 = [
         "workspace 8, class:(vesktop)"
+        "fullscreen, class:(steam_proton)"
       ];
     };
   };
