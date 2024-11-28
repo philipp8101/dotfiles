@@ -21,8 +21,8 @@ display = lib.types.submodule {
         };
         refreshrate = lib.mkOption {
           type = lib.types.float;
-          example = 144;
-          default = 60;
+          example = 144.0;
+          default = 60.0;
           description = "refresh rate of the display";
         };
         offset = lib.mkOption {
