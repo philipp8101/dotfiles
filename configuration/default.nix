@@ -62,8 +62,10 @@
       "docker"
       "dialout"
       "wireshark"
+      "video" # control screen brightness via brillo
     ];
   };
+  hardware.brillo.enable = true;
   services.openssh.enable = true;
   services.tailscale.enable = true;
   programs = {
