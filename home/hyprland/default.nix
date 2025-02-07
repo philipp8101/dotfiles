@@ -131,7 +131,7 @@ in
         "$mod SHIFT, i, movetoworkspace, 8"
         "$mod, G, exec, rofi -show drun"
         "$mod SHIFT, G, exec, rofi -show nix-run -modi nix-run:${nix-run-rofi}/bin/nix-run-rofi.sh"
-        "$mod, Z, exec, ${pkgs.hyprshot}/bin/hyprshot -m region --clipboard-only"
+        "$mod, Z, exec, ${pkgs.hyprshot}/bin/hyprshot -z -m region --clipboard-only"
         "$mod, X, togglefloating,"
         "$mod, M, movecurrentworkspacetomonitor, l"
         "$mod, C, movecurrentworkspacetomonitor, r"
