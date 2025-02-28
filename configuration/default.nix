@@ -51,6 +51,7 @@
     bluetooth.enable = true;
     bluetooth.powerOnBoot = true;
   };
+  services.blueman.enable = true;
   security.rtkit.enable = true;
   users.users.${user} = {
     shell = pkgs.zsh;
