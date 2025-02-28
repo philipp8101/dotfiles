@@ -52,5 +52,6 @@
     thunderbird
     bottles
     man-pages
+    nix-output-monitor
   ];
 }
