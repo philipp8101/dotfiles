@@ -6,7 +6,6 @@
     ./packages.nix
     ./plasma.nix
     ./sddm.nix
-    ./syncthing.nix
   ];
   boot = {
     loader = {

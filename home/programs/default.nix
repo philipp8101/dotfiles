@@ -8,6 +8,7 @@
     ./lf.nix
     ./mpv.nix
     ./rofi.nix
+    ./syncthing.nix
     ./tmux.nix
     ./vim.nix
     ./yazi.nix
