@@ -21,6 +21,7 @@
       foldlevel = 99;
       updatetime = 250;
       timeoutlen = 300;
+      showmode = false;
     };
     extraConfigLua = ''
       vim.opt.undodir = os.getenv("HOME") .. "/.cache/nvimundo";
