@@ -20,9 +20,9 @@ in
       };
       hls = {
         enable = true;
-        package = pkgs.haskell-language-server;
-        installGhc = true;
-        ghcPackage = pkgs.ghc;
+        package = null;
+        installGhc = false;
+        ghcPackage = null;
       };
       nixd = {
         enable = true;
