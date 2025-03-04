@@ -18,7 +18,6 @@
       #   persistencedSha256 = pkgs.lib.fakeSha256;
       # };
     };
-    opengl.enable = true;
   };
   nixpkgs.config.cudaSupport = true;
   services.xserver.videoDrivers = [ "nvidia" ];

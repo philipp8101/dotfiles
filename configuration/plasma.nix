@@ -7,7 +7,7 @@
   xdg.portal = {
     enable = true;
     extraPortals = with pkgs; [
-      (pkgs.lib.mkIf config.services.desktopManager.plasma6.enable xdg-desktop-portal-kde)
+      (pkgs.lib.mkIf config.services.desktopManager.plasma6.enable kdePackages.xdg-desktop-portal-kde)
     ];
   };
 }

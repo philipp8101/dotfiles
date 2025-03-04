@@ -31,23 +31,25 @@
     tidal-hifi
     libsForQt5.qtstyleplugin-kvantum
     libsForQt5.qt5ct
+    kdePackages.qt6ct
+    kdePackages.qtstyleplugin-kvantum
     self.outputs.packages.${system}.nixvim
     adwaita-icon-theme
-    libsForQt5.dolphin
-    libsForQt5.kde-cli-tools
+    kdePackages.dolphin
+    kdePackages.kde-cli-tools
     kdePackages.breeze
-    libsForQt5.breeze-icons
-    libsForQt5.qtwayland
-    libsForQt5.qtsvg
+    kdePackages.breeze-icons
+    kdePackages.qtwayland
+    kdePackages.qtsvg
     kdePackages.kio-fuse
-    libsForQt5.kio-extras
+    kdePackages.kio-extras
     kdePackages.kdesdk-thumbnailers
-    libsForQt5.kdegraphics-thumbnailers
-    libsForQt5.ffmpegthumbs
-    libsForQt5.dolphin-plugins
-    okular
-    gwenview
-    ark
+    kdePackages.kdegraphics-thumbnailers
+    kdePackages.ffmpegthumbs
+    kdePackages.dolphin-plugins
+    kdePackages.okular
+    kdePackages.gwenview
+    kdePackages.ark
     libsForQt5.qt5.qtgraphicaleffects
     thunderbird
     bottles

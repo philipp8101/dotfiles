@@ -46,7 +46,6 @@
 
   console.keyMap = "de";
   hardware = {
-    pulseaudio.enable = false;
     i2c.enable = true; # for ddcutil
     bluetooth.enable = true;
     bluetooth.powerOnBoot = true;
@@ -89,6 +88,7 @@
   };
   services = {
     printing.enable = true;
+    pulseaudio.enable = false;
     pipewire = {
       enable = true;
       alsa.enable = true;
@@ -101,7 +101,7 @@
   };
   fonts.packages = with pkgs; [
     inconsolata
-    inconsolata-nerdfont
+    nerd-fonts.inconsolata
   ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 

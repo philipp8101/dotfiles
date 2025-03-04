@@ -3,6 +3,6 @@
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
     inconsolata
-    inconsolata-nerdfont
+    nerd-fonts.inconsolata
   ];
 }
