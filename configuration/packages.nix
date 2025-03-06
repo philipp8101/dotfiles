@@ -17,6 +17,7 @@
     xwayland
     gcc
     unzip
+    rar
     fzf
     home-manager
     ripgrep
