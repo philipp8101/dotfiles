@@ -12,8 +12,8 @@
 
   qt = {
     enable = true;
-    platformTheme.name = "qtct";
-    style.name = "kvantum";
+    platformTheme.name = "kde";
+    style.name = "breeze-dark";
   };
   home.pointerCursor = {
     package = import ./Empty-Butterfly-cursor { inherit pkgs; };
