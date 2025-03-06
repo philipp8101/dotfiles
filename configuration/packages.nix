@@ -50,6 +50,7 @@
     kdePackages.okular
     kdePackages.gwenview
     kdePackages.ark
+    libsForQt5.kservice
     libsForQt5.qt5.qtgraphicaleffects
     thunderbird
     bottles
