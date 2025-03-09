@@ -20,7 +20,22 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     enableCompletion = true;
-    initExtra = "zstyle ':completion:*' rehash true\n";
+    # TODO get completion working with `nr` and `ns`
+    initExtra = ''
+    zstyle ':completion:*' rehash true\n
+    function nr () {
+      local first=$1
+      shift 1
+      nix run nixpkgs#"$first" -- "$@"
+    }
+    function ns () {
+      local result=()
+      for arg in $@; do 
+        result+="nixpkgs#''${arg}"
+      done
+      nix shell "''${result[@]}"
+    }
+    '';
     history.save = 1000000;
     historySubstringSearch.enable = false;
     oh-my-zsh = {
