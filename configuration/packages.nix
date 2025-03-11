@@ -57,5 +57,6 @@
     bottles
     man-pages
     nix-output-monitor
+    lsof
   ];
 }
