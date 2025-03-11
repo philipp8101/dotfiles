@@ -23,12 +23,6 @@
   networking = {
     networkmanager.enable = true;
   };
-  services.udev = {
-    enable = true;
-    extraRules = ''
-      		KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="1038", ATTRS{idProduct}=="12c2", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
-      		'';
-  };
   time.timeZone = "Europe/Berlin";
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {
@@ -50,7 +44,6 @@
     bluetooth.enable = true;
     bluetooth.powerOnBoot = true;
   };
-  services.blueman.enable = true;
   security.rtkit.enable = true;
   users.users.${user} = {
     shell = pkgs.zsh;
@@ -66,8 +59,6 @@
     ];
   };
   hardware.brillo.enable = true;
-  services.openssh.enable = true;
-  services.tailscale.enable = true;
   programs = {
     zsh.enable = true;
     ssh.startAgent = true;
@@ -89,6 +80,10 @@
   services = {
     printing.enable = true;
     pulseaudio.enable = false;
+    openssh.enable = true;
+    tailscale.enable = true;
+    blueman.enable = true;
+    locate.enable = true;
     pipewire = {
       enable = true;
       alsa.enable = true;
@@ -98,6 +93,11 @@
     };
     xserver.xkb.layout = "de";
     ddccontrol.enable = true;
+    udev = {
+      enable = true;
+      # steelseries for headsetctl
+      extraRules = ''KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="1038", ATTRS{idProduct}=="12c2", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"'';
+    };
   };
   fonts.packages = with pkgs; [
     inconsolata
