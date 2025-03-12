@@ -84,6 +84,7 @@
     tailscale.enable = true;
     blueman.enable = true;
     locate.enable = true;
+    locate.package = pkgs.plocate;
     pipewire = {
       enable = true;
       alsa.enable = true;
