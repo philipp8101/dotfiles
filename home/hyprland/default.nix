@@ -12,13 +12,6 @@ let
       chmod +x $out/bin/rofi-power-menu
     '';
   };
-  nix-run-rofi = pkgs.writeShellScriptBin "nix-run-rofi.sh" ''
-    if [ -z $1 ] ; then
-        nix flake show nixpkgs --legacy --json |nix run nixpkgs#jq -- -r '.legacyPackages.["x86_64-linux"] | keys_unsorted[]'
-    else
-        nohup nix run nixpkgs#$1 > /dev/null &
-    fi
-  '';
   lib = pkgs.lib;
   secondaryDisplay = lib.lists.remove config.primaryDisplay config.displays;
 in
@@ -130,7 +123,6 @@ in
         "$mod SHIFT, o, movetoworkspace, 7"
         "$mod SHIFT, i, movetoworkspace, 8"
         "$mod, G, exec, rofi -show drun"
-        "$mod SHIFT, G, exec, rofi -show nix-run -modi nix-run:${nix-run-rofi}/bin/nix-run-rofi.sh"
         "$mod, Z, exec, ${pkgs.hyprshot}/bin/hyprshot -z -m region --clipboard-only"
         "$mod, X, togglefloating,"
         "$mod, M, movecurrentworkspacetomonitor, l"
