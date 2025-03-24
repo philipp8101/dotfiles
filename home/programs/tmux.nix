@@ -4,7 +4,7 @@ let
     if [[ $# -eq 1 ]]; then
         selected=$1
     else
-        selected=$(find ~/git -mindepth 1 -maxdepth 1 -type d | fzf)
+        selected=$(find ~/git/ -mindepth 1 -maxdepth 1 -type d | fzf)
     fi
 
     if [[ -z $selected ]]; then
@@ -12,11 +12,8 @@ let
     fi
 
     selected_name=$(basename "$selected" | tr . _)
-    selected_name=$\{selected_name\}
+
     tmux_running=$(pgrep tmux)
-
-    # if already open in other terminal, focus that terminal
-
     if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
         tmux new-session -s $selected_name -c $selected
         exit 0
