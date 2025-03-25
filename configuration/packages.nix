@@ -58,5 +58,7 @@
     man-pages
     nix-output-monitor
     lsof
+    # https://github.com/aristocratos/btop/issues/426#issuecomment-2104289634
+    (btop.override {cudaSupport = true;})
   ];
 }
