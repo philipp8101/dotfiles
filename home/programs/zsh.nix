@@ -43,7 +43,9 @@
       name = "custom-theme";
       rr = pkgs.writeText "robbyrussell.zsh-theme" ''
   PROMPT="%(?:%{$fg_bold[green]%}%1{➜%} :%{$fg_bold[red]%}%1{➜%} ) "
-  PROMPT+='$(if [ $SHLVL -gt 1 -o ! -z $DIRENV_DIR ] ; then echo "%{$fg[cyan]%}󱄅 %{$reset_color%} "; fi)'
+  PROMPT+='$(if [ ! -z $DIRENV_DIR ] ; then echo "%{$fg[green]%} %{$reset_color%} "; fi)'
+  PROMPT+='$(if [ $SHLVL -gt 1 -a -z $TMUX ] ; then echo "%{$fg[cyan]%}󱄅 %{$reset_color%} "; fi)'
+  PROMPT+='$(if [ $SHLVL -gt 2 -a ! -z $TMUX ] ; then echo "%{$fg[cyan]%}󱄅 %{$reset_color%} "; fi)'
   PROMPT+="%{$fg[cyan]%}%c%{$reset_color%}"
   PROMPT+=' $(git_prompt_info)'
 
