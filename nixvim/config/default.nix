@@ -10,7 +10,7 @@
     ./telescope.nix
     ./lualine.nix
     # ./fugitive.nix
-    ./harpoon.nix
+    (import ./harpoon.nix args)
     ./undotree.nix
     (import ./treesj.nix args)
     ./cmp.nix
