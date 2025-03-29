@@ -4,9 +4,9 @@
     enable = config.wayland.windowManager.hyprland.enable;
     settings = {
       general = {
-        disable_loading_bar = true;
+        disable_loading_bar = false;
         grace = 10;
-        hide_cursor = true;
+        hide_cursor = false;
         no_fade_in = false;
       };
       background = builtins.map
