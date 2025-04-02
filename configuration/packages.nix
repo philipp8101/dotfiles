@@ -28,7 +28,7 @@
     htop-vim
     obsidian
     wl-clipboard
-    vesktop
+    discord
     tidal-hifi
     libsForQt5.qtstyleplugin-kvantum
     libsForQt5.qt5ct
