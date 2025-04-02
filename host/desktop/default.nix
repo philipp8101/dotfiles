@@ -5,5 +5,6 @@
     ./mosquitto.nix
     ./network.nix
     ./zfs.nix
+    ./libvirt.nix
   ];
 }
