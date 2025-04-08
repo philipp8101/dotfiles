@@ -55,7 +55,6 @@ in
         "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1"
         "${inputs.hyprpaper-custom.packages.${system}.default}/bin/hyprpaper"
         "${pkgs.hypridle}/bin/hypridle"
-        "${pkgs.sway-audio-idle-inhibit}/bin/sway-audio-idle-inhibit"
       ];
       monitor = map (x: "${x.identifier}, ${x.resolution}@${lib.strings.floatToString x.refreshrate}, ${x.offset}, ${lib.strings.floatToString x.scale}") config.displays ++ [
         "Unknown-1,disable"
@@ -96,10 +95,10 @@ in
       "$mod" = "SUPER";
       workspace = [
         "1,monitor:${config.primaryDisplay.identifier}"
-      ] ++ lib.lists.optional (lib.lists.length secondaryDisplay >= 1)
+      ] ++ lib.lists.optionals (lib.lists.length secondaryDisplay >= 1) [
         "4,monitor:${(builtins.elemAt secondaryDisplay 0).identifier}"
-        ++ lib.lists.optional (lib.lists.length secondaryDisplay >= 2)
-        "8,monitor:${(builtins.elemAt secondaryDisplay 1).identifier}";
+        "8,monitor:${(builtins.elemAt secondaryDisplay 0).identifier}"
+      ];
       bind = [
         "$mod, Return, exec, ${pkgs.kitty}/bin/kitty"
         "$mod, Q, killactive,"
@@ -173,7 +172,7 @@ in
       ];
       windowrulev2 = [
         "workspace 8, class:(vesktop)"
-        "fullscreen, class:(steam_proton)"
+        "workspace 8, class:(discord)"
       ];
     };
   };
