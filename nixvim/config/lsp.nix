@@ -5,6 +5,7 @@ let
     "clangd"
     "pyright"
     "texlab"
+    "lua_ls"
   ];
 in
 {
