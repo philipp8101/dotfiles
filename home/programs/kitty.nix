@@ -8,5 +8,8 @@
     settings = {
       background_opacity = "0.8";
     };
+    extraConfig = ''
+    map ctrl+shift+p>f kitten hints --type path --program @
+    '';
   };
 }
