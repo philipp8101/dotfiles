@@ -1,6 +1,7 @@
 {
   plugins.telescope = {
     enable = true;
+    extensions.ui-select.enable = true;
     keymaps = {
       "<leader>sf" = {
         action = "find_files";
