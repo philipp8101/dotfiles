@@ -33,5 +33,6 @@
     ./neogit.nix
     ./web-devicon.nix
     ./treesitter-textobjects.nix
+    ./harpoon2-plugin.nix
   ];
 }
