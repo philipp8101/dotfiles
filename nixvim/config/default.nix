@@ -2,37 +2,36 @@
 {
   # Import all your configuration modules here
   imports = [
-    ./options.nix
-    ./keymaps.nix
-    (import ./colorscheme.nix args)
-    ./treesitter.nix
-    (import ./lsp.nix args)
-    ./telescope.nix
-    ./lualine.nix
-    # ./fugitive.nix
-    (import ./harpoon.nix args)
-    ./undotree.nix
-    (import ./treesj.nix args)
     ./cmp.nix
-    ./neo-tree.nix
-    ./trouble.nix
-    ./which-key.nix
-    ./todo-comments.nix
+    ./colorizer.nix
     ./comment.nix
+    ./conform.nix
+    ./dadbod.nix
+    ./dap.nix
     ./diffview.nix
     ./gitsigns.nix
-    ./tpope.nix
-    ./dap.nix
-    ./markdown-preview.nix
-    ./colorizer.nix
+    ./harpoon2-module.nix
+    (import ./colorscheme.nix args)
+    (import ./harpoon.nix args)
+    (import ./lsp.nix args)
+    (import ./treesj.nix args)
     ./indent-blankline.nix
-    ./dadbod.nix
-    ./conform.nix
+    ./keymaps.nix
+    ./lualine.nix
+    ./markdown-preview.nix
     ./navbuddy.nix
-    ./surround.nix
     ./neogit.nix
-    ./web-devicon.nix
+    ./neo-tree.nix
+    ./options.nix
+    ./surround.nix
+    ./telescope.nix
+    ./todo-comments.nix
+    ./tpope.nix
+    ./treesitter.nix
     ./treesitter-textobjects.nix
-    ./harpoon2-plugin.nix
+    ./trouble.nix
+    ./undotree.nix
+    ./web-devicon.nix
+    ./which-key.nix
   ];
 }
