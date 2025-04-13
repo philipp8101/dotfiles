@@ -1,6 +1,6 @@
 {
   plugins.fugitive = {
-    enable = true;
+    enable = false;
   };
   keymaps = [
     {
