@@ -1,8 +1,9 @@
+{ lib, config, ...}:
 {
   plugins.fugitive = {
     enable = false;
   };
-  keymaps = [
+  keymaps = lib.mkIf config.plugins.fugitive.enable [
     {
       key = "<leader>t";
       action = ":Gedit: <CR>";
