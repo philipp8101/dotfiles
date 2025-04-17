@@ -6,6 +6,7 @@ let
     "pyright"
     "texlab"
     "lua_ls"
+    "dartls"
   ];
 in
 {
