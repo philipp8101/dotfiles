@@ -56,6 +56,7 @@
       "dialout"
       "wireshark"
       "video" # control screen brightness via brillo
+      "adbusers"
     ];
   };
   hardware.brillo.enable = true;
@@ -67,6 +68,7 @@
       remotePlay.openFirewall = true;
       dedicatedServer.openFirewall = true;
     };
+    adb.enable = true;
   };
 
   nixpkgs.config.allowUnfree = true;
