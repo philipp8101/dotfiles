@@ -4,8 +4,8 @@
     enable = true;
     package = pkgs.vimPlugins.harpoon2;
     settings = {
-      "compile_commands" = {
-        create_list_item = helpers.mkRaw ''function(config,cmd)
+      "compile_commands" = let
+      create_term = ''
           local command = nil
           local shell = vim.o.shell
           if (type(cmd)=="string") then
@@ -25,7 +25,10 @@
               channel = _channel,
               initcmd = cmd,
             },
-          }
+          }'';
+      in {
+        create_list_item = helpers.mkRaw ''function(config,cmd)
+        ${create_term}
         end'';
         select = helpers.mkRaw ''function(list_item, list, options)
           vim.api.nvim_win_set_buf(0,list_item.context.buf);
@@ -38,29 +41,8 @@
           return vim.json.encode(obj.context.initcmd)
         end'';
         decode = helpers.mkRaw ''function(str)
-          vim.print(vim.inspect(str))
           local cmd = vim.json.decode(str)
-          vim.print(vim.inspect(cmd))
-          local command = nil
-          local shell = vim.o.shell
-          if (type(cmd)=="string") then
-            command = cmd
-          else
-            command = cmd.command
-            shell = cmd.shell
-          end
-          local _buf = vim.api.nvim_create_buf(true,true);
-          vim.api.nvim_win_set_buf(0,_buf);
-          vim.fn.termopen(shell);
-          local _channel = vim.bo.channel;
-          return {
-            value = command,
-            context = {
-              buf = _buf,
-              channel = _channel,
-              initcmd = cmd,
-            },
-          }
+          ${create_term}
         end'';
       };
     };
