@@ -26,6 +26,10 @@ in
         installGhc = false;
         ghcPackage = null;
       };
+      nil_ls = {
+        enable = true;
+        extraOptions.settings.nix.flake.autoEvalInputs = true;
+      };
       nixd = {
         enable = true;
         settings = {
