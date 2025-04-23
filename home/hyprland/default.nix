@@ -31,6 +31,7 @@ in
     plugins = (with pkgs.hyprlandPlugins; [
       # hyprwinwrap # broken?
       (lib.mkIf (config.wayland.windowManager.hyprland.layout == "scroller") hyprscroller)
+      hyprspace
     ]);
     settings = {
       plugin = {
@@ -43,6 +44,7 @@ in
           focus_wrap = "false";
           column_widths = "onehalf one";
         };
+        overview.showEmptyWorkspace = false;
       };
       input = {
         kb_layout = "de";
@@ -138,6 +140,7 @@ in
         "$mod, D, changegroupactive, previous"
         "$mod SHIFT, D, togglegroup"
         "$mod, R, togglesplit, # dwindle"
+        "$mod, W, overview:toggle"
         "$mod, B, fullscreen, 1"
         "$mod, left, movefocus, l"
         "$mod, right, movefocus, r"
