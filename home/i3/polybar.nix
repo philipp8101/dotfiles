@@ -21,9 +21,8 @@ in
     '';
     package = pkgs.polybarFull;
     settings = {
-      "bar/primary" = lib.mkIf (builtins.length config.displays > 1) {
+      "bar/primary" = {
         monitor = "\${env:MONITOR:}";
-      } // {
         width = "100%";
         height = "27";
         fixed-center = "true";
@@ -195,6 +194,7 @@ in
         type = "custom/script";
         interval = "0.5";
         exec = pkgs.writeShellScript "headset-battery" ''
+          ${pkgs.coreutils-full}/bin/timeout 1m ${pkgs.headsetcontrol}/bin/headsetcontrol -o JSON |${pkgs.jq.bin}/bin/jq ".device_count > 0" -e &> /dev/null || exit 0 ;
           b=$(${pkgs.coreutils-full}/bin/timeout 1m ${pkgs.headsetcontrol}/bin/headsetcontrol -o JSON |${pkgs.jq.bin}/bin/jq ".devices[0].battery.level")
           m=$(${pkgs.coreutils-full}/bin/timeout 1m ${pkgs.headsetcontrol}/bin/headsetcontrol -o JSON |${pkgs.jq.bin}/bin/jq ".devices[0].chatmix")
           if [[ $b -ge 75 ]] ; then
