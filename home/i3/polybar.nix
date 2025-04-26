@@ -21,8 +21,9 @@ in
     '';
     package = pkgs.polybarFull;
     settings = {
-      "bar/primary" = {
+      "bar/primary" = lib.mkIf (builtins.length config.displays > 1) {
         monitor = "\${env:MONITOR:}";
+      } // {
         width = "100%";
         height = "27";
         fixed-center = "true";

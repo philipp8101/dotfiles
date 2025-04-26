@@ -41,6 +41,7 @@ in {
   options.displays = lib.mkOption {
     type = lib.types.listOf display;
     description = "list of all displays";
+    default = [ { identifier = ""; isPrimary = true; } ];
   };
   options.primaryDisplay = lib.mkOption {
     type = display;
