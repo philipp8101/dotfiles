@@ -21,8 +21,7 @@
     syntaxHighlighting.enable = true;
     enableCompletion = true;
     # TODO get completion working with `nr` and `ns`
-    initExtra = ''
-    zstyle ':completion:*' rehash true\n
+    initContent = ''
     function nr () {
       local first=$1
       shift 1
@@ -35,6 +34,7 @@
       done
       nix shell "''${result[@]}"
     }
+    zstyle ':completion:*' rehash true\n
     '';
     history.save = 1000000;
     historySubstringSearch.enable = false;
