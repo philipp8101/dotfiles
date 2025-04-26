@@ -31,6 +31,10 @@
     { device = "/dev/disk/by-uuid/81760683-8200-4731-98a7-7ed54c2cd9eb"; }
   ];
 
+  # fileSystems."/tank" = 
+  #   { device = "tank";
+  #     fsType = "zfs";
+  #   };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
