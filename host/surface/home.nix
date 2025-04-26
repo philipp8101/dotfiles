@@ -8,4 +8,5 @@
       scale = 2;
     }
   ];
+  wayland.windowManager.hyprland.enable = true;
 }

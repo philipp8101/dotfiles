@@ -103,15 +103,20 @@
               ];
             };
           };
-          homeConfigurations = {
-            philipp = home-manager.lib.homeManagerConfiguration {
+          homeConfigurations = 
+            let homecfg = module: home-manager.lib.homeManagerConfiguration {
               inherit pkgs;
               extraSpecialArgs = { inherit inputs system user self; };
               modules = [
                 ./home
+                module
               ];
             };
-          };
+            in
+            builtins.listToAttrs [
+            { name = "hyprland"; value = homecfg { wayland.windowManager.hyprland.enable = true; }; }
+            { name = "i3"; value = homecfg { xsession.windowManager.i3.enable = true; }; }
+            ];
           sdcard = nixos-generators.nixosGenerate {
             system = "aarch64-linux";
             format = "sd-aarch64";
