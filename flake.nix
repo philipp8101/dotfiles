@@ -22,9 +22,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     systems.url = "github:nix-systems/default";
-    flake-utils.url = "github:numtide/flake-utils";
-    flake-utils.inputs.systems.follows = "systems";
-    hyprpaper-custom.url = "github:philipp8101/hyprpaper";
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+      inputs.systems.follows = "systems";
+    };
+    hyprpaper-custom = {
+      url = "github:philipp8101/hyprpaper";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.systems.follows = "systems";
+    };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
@@ -41,7 +47,7 @@
         packages = {
           nixosConfigurations = {
             desktop = nixpkgs.lib.nixosSystem {
-              specialArgs = { inherit inputs self user; };
+              specialArgs = { inherit inputs self user system; };
               inherit system;
               modules = [
                 ./configuration
