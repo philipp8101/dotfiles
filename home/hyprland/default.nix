@@ -27,6 +27,7 @@ in
     default = "dwindle";
   };
   config.wayland.windowManager.hyprland = {
+    enable = lib.mkDefault true;
     xwayland.enable = true;
     plugins = (with pkgs.hyprlandPlugins; [
       # hyprwinwrap # broken?

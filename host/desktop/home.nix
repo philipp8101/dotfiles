@@ -1,5 +1,3 @@
-let
-in
 {
   displays = [
     {
@@ -12,8 +10,4 @@ in
       refreshrate = 144.0;
     }
   ];
-  wayland.windowManager.hyprland = {
-    enable = true;
-    layout = "dwindle";
-  };
 }

@@ -104,20 +104,11 @@
             };
           };
           homeConfigurations = {
-            desktop = home-manager.lib.homeManagerConfiguration {
+            philipp = home-manager.lib.homeManagerConfiguration {
               inherit pkgs;
               extraSpecialArgs = { inherit inputs system user self; };
               modules = [
                 ./home
-                ./host/desktop/home.nix
-              ];
-            };
-            surface = home-manager.lib.homeManagerConfiguration {
-              inherit pkgs;
-              extraSpecialArgs = { inherit inputs system user self; };
-              modules = [
-                ./home
-                ./host/surface/home.nix
               ];
             };
           };

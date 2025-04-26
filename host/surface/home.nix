@@ -1,5 +1,3 @@
-let
-in
 {
   displays = [
     {
@@ -10,8 +8,4 @@ in
       scale = 2;
     }
   ];
-  wayland.windowManager.hyprland = {
-    enable = true;
-    layout = "dwindle";
-  };
 }
