@@ -140,7 +140,7 @@ in
         "7" = [{ instance = "^league"; } { instance = "^riot"; } { title = "^League"; } { instance = "upc.exe"; } { instance = "anno*"; } { instance = "origin.exe"; } { instance = "lutris"; }];
         "8" = [{ class = "discord"; }];
       };
-      workspaceOutputAssign = [
+      workspaceOutputAssign = lib.mkIf (config.primaryDisplay.identifier != "") [
         { output = "${config.primaryDisplay.identifier}"; workspace = "1"; }
         { output = "${config.primaryDisplay.identifier}"; workspace = "2"; }
         { output = "${config.primaryDisplay.identifier}"; workspace = "3"; }
