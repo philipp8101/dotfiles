@@ -1,4 +1,3 @@
-{ pkgs, ... }:
 {
   # colorschemes.ayu = {
   #     enable = true;

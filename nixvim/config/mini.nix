@@ -1,4 +1,4 @@
-{ helpers, ... }:
+{ helpers, lib, config, ... }:
 {
   plugins.mini = {
     enable = true;
@@ -6,7 +6,7 @@
       files = {};
     };
   };
-  keymaps = [
+  keymaps = lib.mkIf config.plugins.mini.enable [
     {
       key = "<leader>X";
       action = helpers.mkRaw "require'mini.files'.open";

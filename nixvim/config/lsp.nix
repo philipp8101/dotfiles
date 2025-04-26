@@ -1,4 +1,4 @@
-{ pkgs, self, system, user, ... }:
+{ pkgs, self, ... }:
 let
   enabled_servers = [
     "gopls"

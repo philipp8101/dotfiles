@@ -1,9 +1,10 @@
+{ helpers, lib, config, ... }:
 {
   plugins.undotree.enable = true;
-  keymaps = [
+  keymaps = lib.mkIf config.plugins.undotree.enable [
     {
       key = "<leader>u";
-      action = "<cmd>UndotreeToggle <CR><cmd>UndotreeFocus <CR>";
+      action = helpers.mkRaw "function() vim.cmd.UndotreeToggle(); vim.cmd.UndotreeFocus(); end";
       options.desc = "open undotree";
     }
   ];

@@ -66,5 +66,6 @@
     teamspeak6-client
     obs-studio
     virtiofsd
+    sioyek
   ];
 }

@@ -1,3 +1,4 @@
+{ helpers, lib, config, ... }:
 {
   plugins.neo-tree = {
     enable = true;
@@ -24,20 +25,12 @@
       event_handlers = [
         {
           event = "file_opened";
-          handler = {
-            # don't know if this is the proper way to pass lua code
-            # ref: https://github.com/nix-community/nixvim/blob/main/lib/to-lua.nix
-            __raw = ''
-              function(file_path)
-              require('neo-tree').close_all()
-              end;
-            '';
-          };
+          handler = helpers.mkRaw "require('neo-tree').close_all";
         }
       ];
     };
   };
-  keymaps = [
+  keymaps = lib.mkIf config.plugins.neo-tree.enable [
     {
       key = "<leader>x";
       action = "<cmd>Neotree reveal<CR>";

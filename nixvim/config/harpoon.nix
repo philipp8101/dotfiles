@@ -1,4 +1,4 @@
-{ pkgs, helpers, ... }:
+{ pkgs, helpers, lib, config, ... }:
 {
   plugins.harpoon2 = {
     enable = true;
@@ -47,7 +47,7 @@
       };
     };
   };
-  extraConfigLua = ''
+  extraConfigLua = lib.mkIf config.plugins.harpoon2.enable ''
   vim.api.nvim_create_user_command("AddCompileCommand", function(args) 
     local cmd = table.concat(args.fargs," "):gsub("\\n","\n")
     local arg = {shell = vim.o.shell, command = cmd }
@@ -61,60 +61,60 @@
     require"harpoon":list("compile_commands"):add(item)
   end, {nargs = '+'})
   '';
-  keymaps = [
+  keymaps = lib.mkIf config.plugins.harpoon2.enable [
     {
       key = "<leader>l";
-      action.__raw = ''function() require("harpoon"):list():add() end'';
+      action = helpers.mkRaw "function() require('harpoon'):list():add() end";
       options.desc = "add current buffer to harpoon";
     }
     {
       key = "<leader>L";
-      action.__raw = ''function() require("harpoon").ui:toggle_quick_menu(require("harpoon"):list()) end'';
+      action = helpers.mkRaw "function() require('harpoon').ui:toggle_quick_menu(require('harpoon'):list()) end";
       options.desc = "open harpoon menu";
     }
     {
       key = "<leader>n";
-      action.__raw = ''function() require("harpoon"):list():select(1) end'';
+      action = helpers.mkRaw "function() require('harpoon'):list():select(1) end";
       options.desc = "open harpoon entry 1";
     }
     {
       key = "<leader>e";
-      action.__raw = ''function() require("harpoon"):list():select(2) end'';
+      action = helpers.mkRaw "function() require('harpoon'):list():select(2) end";
       options.desc = "open harpoon entry 2";
     }
     {
       key = "<leader>o";
-      action.__raw = ''function() require("harpoon"):list():select(3) end'';
+      action = helpers.mkRaw "function() require('harpoon'):list():select(3) end";
       options.desc = "open harpoon entry 3";
     }
     {
       key = "<leader>i";
-      action.__raw = ''function() require("harpoon"):list():select(4) end'';
+      action = helpers.mkRaw "function() require('harpoon'):list():select(4) end";
       options.desc = "open harpoon entry 4";
     }
     {
       key = "<leader>C";
-      action.__raw = ''function() require("harpoon").ui:toggle_quick_menu(require("harpoon"):list("compile_commands")) end'';
+      action = helpers.mkRaw "function() require('harpoon').ui:toggle_quick_menu(require('harpoon'):list('compile_commands')) end";
       options.desc = "open harpoon menu";
     }
     {
       key = "<leader>N";
-      action.__raw = ''function() require("harpoon"):list("compile_commands"):select(1) end'';
+      action = helpers.mkRaw "function() require('harpoon'):list('compile_commands'):select(1) end";
       options.desc = "run harpoon compile command 1";
     }
     {
       key = "<leader>E";
-      action.__raw = ''function() require("harpoon"):list("compile_commands"):select(2) end'';
+      action = helpers.mkRaw "function() require('harpoon'):list('compile_commands'):select(2) end";
       options.desc = "run harpoon compile command 2";
     }
     {
       key = "<leader>O";
-      action.__raw = ''function() require("harpoon"):list("compile_commands"):select(3) end'';
+      action = helpers.mkRaw "function() require('harpoon'):list('compile_commands'):select(3) end";
       options.desc = "run harpoon compile command 3";
     }
     {
       key = "<leader>I";
-      action.__raw = ''function() require("harpoon"):list("compile_commands"):select(4) end'';
+      action = helpers.mkRaw "function() require('harpoon'):list('compile_commands'):select(4) end";
       options.desc = "run harpoon compile command 4";
     }
   ];

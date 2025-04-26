@@ -1,3 +1,4 @@
+{ helpers, lib, config, ... }:
 {
   plugins.navbuddy = {
     enable = true;
@@ -9,10 +10,10 @@
     };
     lsp.autoAttach = true;
   };
-  keymaps = [
+  keymaps = lib.mkIf config.plugins.navbuddy.enable [
     {
       key = "<leader>h";
-      action.__raw = ''require("nvim-navbuddy").open'';
+      action = helpers.mkRaw "require('nvim-navbuddy').open";
     }
   ];
 }
