@@ -31,7 +31,9 @@
         ${create_term}
         end'';
         select = helpers.mkRaw ''function(list_item, list, options)
-          vim.api.nvim_win_set_buf(0,list_item.context.buf);
+          if (vim.fn.bufwinnr(list_item.context.buf) == -1) then
+            vim.api.nvim_win_set_buf(0,list_item.context.buf);
+          end
           vim.api.nvim_chan_send(list_item.context.channel, list_item.value .. "\n")
         end'';
         display = helpers.mkRaw ''function(list_item)
