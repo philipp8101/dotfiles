@@ -107,6 +107,7 @@
     nerd-fonts.inconsolata
   ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.trusted-users = [ "@wheel" ];
 
   system.stateVersion = "23.11";
 
