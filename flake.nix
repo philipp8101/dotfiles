@@ -97,9 +97,9 @@
               inherit system;
               specialArgs = { inherit inputs user; };
               modules = [
-                ./rpi.nix
-                ./rpi-hardware.nix
-                ./hifiberry.nix
+                # inputs.nixos-hardware.nixosModules.raspberry-pi-3
+                inputs.nixos-hardware.nixosModules.raspberry-pi-4
+                ./host/rpi
               ];
             };
           };
@@ -121,7 +121,8 @@
             system = "aarch64-linux";
             format = "sd-aarch64";
             modules = [
-              ./rpi.nix
+                inputs.nixos-hardware.nixosModules.raspberry-pi-3
+                ./host/rpi
             ];
           };
           nixvim = (import ./nixvim/nixvim.nix {

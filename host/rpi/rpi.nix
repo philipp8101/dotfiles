@@ -11,7 +11,7 @@
   system.stateVersion = "23.11";
   users.users = {
     "philipp" = {
-      password = "admin123";
+      initialPassword = "123";
       isNormalUser = true;
       extraGroups = [ "wheel" ];
       openssh.authorizedKeys.keys = [
