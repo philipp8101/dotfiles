@@ -1,0 +1,13 @@
+diff --git a/ulauncher.service b/ulauncher.service
+index 9af0ca09..71a2ce99 100644
+--- a/ulauncher.service
++++ b/ulauncher.service
+@@ -6,7 +6,7 @@ Documentation=https://ulauncher.io/
+ Type=simple
+ Restart=always
+ RestartSec=1
+-ExecStart=env GDK_BACKEND=x11 /usr/bin/ulauncher --hide-window
++ExecStart=/usr/bin/env GDK_BACKEND=x11 ulauncher --hide-window --no-window-shadow --verbose
+ 
+ [Install]
+ WantedBy=graphical-session.target

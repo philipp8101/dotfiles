@@ -67,5 +67,9 @@
     obs-studio
     virtiofsd
     sioyek
+    (ulauncher.overrideAttrs (old: {
+      patches = old.patches ++ [ ./ulauncher-fix-systemd-service.patch ];
+      propagatedBuildInputs = old.propagatedBuildInputs ++ (with python3Packages; [ requests pint simpleeval parsedatetime pytz ]);
+    } ))
   ];
 }
