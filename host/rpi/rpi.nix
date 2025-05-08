@@ -44,4 +44,5 @@
   ];
 
   services.openssh.enable = true;
+  nix.settings.trusted-users = [ "@wheel" ];
 }
