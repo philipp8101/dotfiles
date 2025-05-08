@@ -32,6 +32,11 @@
       inputs.systems.follows = "systems";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    hyprlux = {
+      url = "github:amadejkastelic/Hyprlux";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.systems.follows = "systems";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, nixos-generators, nixvim, ... }@inputs:

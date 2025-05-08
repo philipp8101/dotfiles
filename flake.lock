@@ -142,6 +142,29 @@
         "type": "github"
       }
     },
+    "hyprlux": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "systems": [
+          "systems"
+        ]
+      },
+      "locked": {
+        "lastModified": 1735852727,
+        "narHash": "sha256-t5IBNLpQ523yOa5zFHH05kpGLHmaCIUo7IVKVZKrq+M=",
+        "owner": "amadejkastelic",
+        "repo": "Hyprlux",
+        "rev": "1fd49828d91a127348082aa469bc81049ecfc76c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "amadejkastelic",
+        "repo": "Hyprlux",
+        "type": "github"
+      }
+    },
     "hyprpaper-custom": {
       "inputs": {
         "hyprlang": "hyprlang",
@@ -413,6 +436,7 @@
         "flake-parts": "flake-parts",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
+        "hyprlux": "hyprlux",
         "hyprpaper-custom": "hyprpaper-custom",
         "nix-colors": "nix-colors",
         "nixos-generators": "nixos-generators",
