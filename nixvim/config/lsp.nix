@@ -54,6 +54,7 @@ in
         gi = "implementation";
         ga = "code_action";
         gr = "rename";
+        gI = "incoming_calls";
       };
     };
   };
