@@ -13,6 +13,7 @@
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.systems.follows = "systems";
     };
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
