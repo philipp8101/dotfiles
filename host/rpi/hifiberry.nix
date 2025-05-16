@@ -21,18 +21,18 @@
     "vc4"
     "drm_kms_helper"
   ];
-  boot.kernelPatches = [
-    {
-      name = "snd-soc-pcm";
-      patch = null;
-      extraConfig = ''
-        CONFIG_SND_SOC_PCM512x_I2C m
-        CONFIG_SND_SOC_PCM512x m
-        CONFIG_DYNAMIC_DEBUG y
-        CONFIG_DEBUG_FS y
-      '';
-    }
-  ];
+  # boot.kernelPatches = [
+  #   {
+  #     name = "snd-soc-pcm";
+  #     patch = null;
+  #     extraConfig = ''
+  #       CONFIG_SND_SOC_PCM512x_I2C m
+  #       CONFIG_SND_SOC_PCM512x m
+  #       CONFIG_DYNAMIC_DEBUG y
+  #       CONFIG_DEBUG_FS y
+  #     '';
+  #   }
+  # ];
 
   hardware.i2c.enable = true;
   hardware.deviceTree.enable = true;

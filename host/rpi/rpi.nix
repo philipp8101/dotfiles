@@ -22,6 +22,10 @@
   boot.kernelParams = [ "snd_bcm2835.enable_hdmi=1" ];
   system.stateVersion = "23.11";
   security.sudo.wheelNeedsPassword = false;
+  hardware = {
+    bluetooth.enable = true;
+    bluetooth.powerOnBoot = true;
+  };
   users.users = {
     "philipp" = {
       initialPassword = "123";

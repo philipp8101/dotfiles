@@ -103,10 +103,10 @@
               inherit system;
               specialArgs = { inherit inputs user; };
               modules = [
-                {
-                  nixpkgs.buildPlatform = "x86_64-linux";
-                  nixpkgs.hostPlatform = "aarch64-linux";
-                }
+                # {
+                #   nixpkgs.buildPlatform = "x86_64-linux";
+                #   nixpkgs.hostPlatform = "aarch64-linux";
+                # }
                 inputs.nixos-hardware.nixosModules.raspberry-pi-3
                 ./host/rpi
               ];
