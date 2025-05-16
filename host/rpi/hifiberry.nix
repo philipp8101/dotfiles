@@ -1,60 +1,124 @@
-{ pkgs, config, ... }: let
-  hifiberry-dts = builtins.fetchurl {
-    url = "https://github.com/raspberrypi/linux/raw/refs/heads/rpi-6.1.y/arch/arm/boot/dts/overlays/hifiberry-dacplus-overlay.dts";
-    sha256 = "sha256:1lhcg86anx4bqpxvkc9aznfvlqgmzajv7madwknlnplw13s7l5jl";
-  };
-in {
-  hardware.pulseaudio.enable = true;
-  services.mopidy = {
-    enable = true;
-    configuration = ''
-      	    [jellyfin]
-      	    hostname = http://localhost:8096
-      	    username = jellyfin
-      	    password = 123
-      	    libraries = Music
-      	    max_bitrate = 48000
-      	    [audio]
-      	    output = pulsesink server=127.0.0.1
-      	'';
-    extensionPackages = with pkgs; [
-      mopidy-jellyfin
-    ];
-  };
-  services.jellyfin = {
-    enable = true;
-    openFirewall = true;
-  };
-  hardware.pulseaudio.tcp = {
-    enable = true;
-    anonymousClients.allowedIpRanges = [ "127.0.0.1" ];
-  };
+{ pkgs, config, ... }:
+{
+  boot.blacklistedKernelModules = [
+    # "snd_bcm2835"
+    # "snd_soc_pcm5102a"
+    # "i2c_dev"
+    # "snd_soc_rpi_simple_soundcard"
+  ];
   
   boot.kernelPackages = pkgs.linuxPackages_rpi3;
+
+  boot.kernelModules = [
+    "regmap-i2c"
+    "i2c-bcm2835"
+    # "snd-soc-bcm2708"
+    "snd-soc-pcm512x"
+    "snd-soc-pcm512x-i2c"
+    # "clk-hifiberry-dacpro"
+    "snd-soc-hifiberry-dacplus"
+    "bcm2835-v4l2"
+    "vc4"
+    "drm_kms_helper"
+  ];
+  boot.kernelPatches = [
+    {
+      name = "snd-soc-pcm";
+      patch = null;
+      extraConfig = ''
+        CONFIG_SND_SOC_PCM512x_I2C m
+        CONFIG_SND_SOC_PCM512x m
+        CONFIG_DYNAMIC_DEBUG y
+        CONFIG_DEBUG_FS y
+      '';
+    }
+  ];
 
   hardware.i2c.enable = true;
   hardware.deviceTree.enable = true;
   hardware.deviceTree = {
-    filter = "bcm*-rpi-3-b.dtb";
-    # Equivalent to: https://github.com/raspberrypi/linux/blob/fbd8b3facb36ce888b1cdcf5f45a78475a8208f2/arch/arm/boot/dts/overlays/hifiberry-dac-overlay.dts
     overlays = [
-      "${config.boot.kernelPackages.kernel}/dtbs/overlays/hifiberry-dac.dtbo"
+      {
+        name = "hifiberry-dacplus";
+        filter = "bcm*-rpi-3-b*";
+        dtboFile = "${config.boot.kernelPackages.kernel}/dtbs/overlays/hifiberry-dacplus.dtbo";
+      }
+      {
+        name = "hifiberry-dacplus-std";
+        filter = "bcm*-rpi-3-b*";
+        dtboFile = "${config.boot.kernelPackages.kernel}/dtbs/overlays/hifiberry-dacplus-std.dtbo";
+      }
+      # {
+      #   name = "audio";
+      #   filter = "bcm*-rpi-3-b*";
+      #   dtboFile = "${config.boot.kernelPackages.kernel}/dtbs/overlays/vc4-kms-v3d.dtbo";
+      # }
+      # {
+      #   name = "audio";
+      #   filter = "bcm*-rpi-3-b*";
+      #   dtsText = ''
+      #   /dts-v1/;
+      #   /plugin/;
+      #   
+      #   / {
+      #     compatible = "brcm,bcm2835";
+      #     
+      #     fragment@0 {
+      #       target = <&i2s>;
+      #       __overlay__ {
+      #         status = "okay";
+      #       };
+      #     };
+      #     
+      #     fragment@1 {
+      #       target-path = "/";
+      #       __overlay__ {
+      #         pcm5102a-codec {
+      #           #sound-dai-cells = <0>;
+      #           compatible = "ti,pcm5102a";
+      #           status = "okay";
+      #         };
+      #       };
+      #     };
+      #     
+      #     fragment@2 {
+      #       target = <&sound>;
+      #       __overlay__ {
+      #         compatible = "hifiberry,hifiberry-dac";
+      #         i2s-controller = <&i2s>;
+      #         status = "okay";
+      #       };
+      #     };
+      #   };
+      #   '';
+      # }
+      {
+        name = "i2c0";
+        filter = "*rpi*";
+        dtboFile = "${config.boot.kernelPackages.kernel}/dtbs/overlays/i2c0.dtbo";
+      }
+      {
+        name = "i2c1";
+        filter = "*rpi*";
+        dtboFile = "${config.boot.kernelPackages.kernel}/dtbs/overlays/i2c1.dtbo";
+      }
+      {
+        name = "i2cgpio";
+        filter = "*rpi*";
+        dtboFile = "${config.boot.kernelPackages.kernel}/dtbs/overlays/i2c-gpio.dtbo";
+      }
     ];
   };
-
-  # # https://blog.suddaby.net/post/nixos-hifiberry-dac-light/
-  # hardware = {
-  #   # doesnt exist for pi 3, dont know if we need it
-  #   # raspberry-pi."4".apply-overlays-dtmerge.enable = true;
-  #   deviceTree = {
-  #     enable = true;
-  #     filter = "bcm2711-rpi-3*.dtb";
-  #     overlays = [
-  #       {
-  #         name = "hifiberry-dac";
-  #         dtsText = builtins.readFile hifiberry-dts;
-  #       }
-  #     ];
+  # systemd.services = {
+  #   "hifiberry-dac-overlay" = {
+  #     serviceConfig = {
+  #       Type = "oneshot";
+  #     };
+  #     wantedBy = ["multi-user.target"];
+  #     script = ''
+  #       ${pkgs.libraspberrypi}/bin/dtoverlay -d ${config.boot.kernelPackages.kernel}/dtbs/overlays/ hifiberry-dac || echo "already in use"
+  #     '';
   #   };
   # };
+
 }
