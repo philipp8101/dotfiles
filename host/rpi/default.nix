@@ -5,5 +5,6 @@
     ./audio.nix
     ./services.nix
     ./hifiberry.nix
+    ./network.nix
   ];
 }
