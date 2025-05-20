@@ -36,6 +36,11 @@
       "homeassistant_hardware"
       "zha"
     ];
+    extraPackages = ps: with ps; [
+      getmac
+      gtts
+      paho-mqtt
+    ];
     config = {
       # Includes dependencies for a basic setup
       # https://www.home-assistant.io/integrations/default_config/
@@ -59,7 +64,7 @@
     };
   };
   services.mosquitto = {
-    enable = config.services.zigbee2mqtt.enable;
+    enable = true;
     listeners = [
     {
       acl = [ "pattern readwrite #" ];
