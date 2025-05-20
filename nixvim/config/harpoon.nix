@@ -34,7 +34,9 @@
           if (vim.fn.bufwinnr(list_item.context.buf) == -1) then
             vim.api.nvim_win_set_buf(0,list_item.context.buf);
           end
-          vim.api.nvim_chan_send(list_item.context.channel, list_item.value .. "\n")
+          if (options == true) then
+            vim.api.nvim_chan_send(list_item.context.channel, list_item.value .. "\n")
+          end
         end'';
         display = helpers.mkRaw ''function(list_item)
           return list_item.value:gsub("\n"," \\n ")
@@ -101,23 +103,62 @@
     }
     {
       key = "<leader>N";
-      action = helpers.mkRaw "function() require('harpoon'):list('compile_commands'):select(1) end";
+      action = helpers.mkRaw "function() require('harpoon'):list('compile_commands'):select(1, true) end";
       options.desc = "run harpoon compile command 1";
     }
     {
       key = "<leader>E";
-      action = helpers.mkRaw "function() require('harpoon'):list('compile_commands'):select(2) end";
+      action = helpers.mkRaw "function() require('harpoon'):list('compile_commands'):select(2, true) end";
       options.desc = "run harpoon compile command 2";
     }
     {
       key = "<leader>O";
-      action = helpers.mkRaw "function() require('harpoon'):list('compile_commands'):select(3) end";
+      action = helpers.mkRaw "function() require('harpoon'):list('compile_commands'):select(3, true) end";
       options.desc = "run harpoon compile command 3";
     }
     {
       key = "<leader>I";
-      action = helpers.mkRaw "function() require('harpoon'):list('compile_commands'):select(4) end";
+      action = helpers.mkRaw "function() require('harpoon'):list('compile_commands'):select(4, true) end";
+      options.desc = "run harpoon compile command 4";
+    }
+    {
+      key = "<leader><C-n>";
+      action = helpers.mkRaw "function() require('harpoon'):list('compile_commands'):select(1, false) end";
+      options.desc = "run harpoon compile command 1";
+    }
+    {
+      key = "<leader><C-e>";
+      action = helpers.mkRaw "function() require('harpoon'):list('compile_commands'):select(2, false) end";
+      options.desc = "run harpoon compile command 2";
+    }
+    {
+      key = "<leader><C-o>";
+      action = helpers.mkRaw "function() require('harpoon'):list('compile_commands'):select(3, false) end";
+      options.desc = "run harpoon compile command 3";
+    }
+    {
+      key = "<leader><C-i>";
+      action = helpers.mkRaw "function() require('harpoon'):list('compile_commands'):select(4, false) end";
       options.desc = "run harpoon compile command 4";
     }
   ];
+  # TODO fix this
+  # ] ++ (builtins.map ({key, list ? null, id, args ? null}: {
+  #     inherit key;
+  #     action = helpers.mkRaw "function() require('harpoon'):list('${lib.optionalString (!builtins.isNull list) list}'):select(${builtins.toString id}${lib.optionalString (!builtins.isNull args) ",${builtins.toString args}"}) end";
+  #     # options.desc = "open harpoon entry ${builtins.toString id} on list ${builtins.toString list ? "default"} with args: ${builtins.toString args ? "empty"}";
+  # }) [
+  #   { key = "<leader>n"; id = 1; }
+  #   { key = "<leader>e"; id = 2; }
+  #   { key = "<leader>o"; id = 3; }
+  #   { key = "<leader>i"; id = 4; }
+  #   { key = "<leader>N"; id = 1; list = "compile_commands"; args = true; }
+  #   { key = "<leader>E"; id = 2; list = "compile_commands"; args = true; }
+  #   { key = "<leader>O"; id = 3; list = "compile_commands"; args = true; }
+  #   { key = "<leader>I"; id = 4; list = "compile_commands"; args = true; }
+  #   { key = "<leader><C-n>"; id = 1; list = "compile_commands"; args = false; }
+  #   { key = "<leader><C-e>"; id = 2; list = "compile_commands"; args = false; }
+  #   { key = "<leader><C-o>"; id = 3; list = "compile_commands"; args = false; }
+  #   { key = "<leader><C-i>"; id = 4; list = "compile_commands"; args = false; }
+  # ]));
 }
