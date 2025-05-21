@@ -1,6 +1,7 @@
+{ config, ... }:
 {
   programs.hyprlux = {
-    enable = true;
+    enable = config.wayland.windowManager.hyprland.enable;
 
     systemd = {
       enable = true;
