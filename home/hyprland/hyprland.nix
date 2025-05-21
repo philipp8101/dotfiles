@@ -117,7 +117,7 @@ in
         "$mod SHIFT, e, movetoworkspace, 6"
         "$mod SHIFT, o, movetoworkspace, 7"
         "$mod SHIFT, i, movetoworkspace, 8"
-        "$mod, G, exec, ulauncher-toggle"
+        "$mod, G, exec, walker"
         "$mod, Z, exec, ${pkgs.hyprshot}/bin/hyprshot -z -m region --clipboard-only"
         "$mod SHIFT, Z, exec, ${pkgs.hyprshot}/bin/hyprshot -z -m region --clipboard-only --raw | ${pkgs.tesseract}/bin/tesseract stdin stdout -l eng | wl-copy"
         "$mod, X, togglefloating,"
@@ -169,7 +169,6 @@ in
         "$mod, mouse:273, resizewindow"
       ];
       windowrulev2 = [
-        "noborder, class:(Ulauncher)"
         "workspace 8, class:(vesktop)"
         "workspace 8, class:(discord)"
       ];

@@ -446,7 +446,8 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "nixvim": "nixvim",
-        "systems": "systems_2"
+        "systems": "systems_2",
+        "walker": "walker"
       }
     },
     "systems": {
@@ -476,6 +477,29 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "walker": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "systems": [
+          "systems"
+        ]
+      },
+      "locked": {
+        "lastModified": 1747746261,
+        "narHash": "sha256-qZ9AwEiAB2GkSLBR23NUVi35TWhcy7lTFEdGHXLAr94=",
+        "owner": "abenz1267",
+        "repo": "walker",
+        "rev": "0fed5e4af1530ede04da6d18e0d3bd423f7caceb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "abenz1267",
+        "repo": "walker",
         "type": "github"
       }
     }

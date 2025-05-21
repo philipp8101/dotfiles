@@ -9,6 +9,7 @@
     ./i3
     ./misc
     ./programs
+    inputs.walker.homeManagerModules.default
   ];
 
   programs.home-manager.enable = true;
