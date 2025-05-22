@@ -4,5 +4,6 @@
     ./luks.nix
     ./network.nix
     ./kmonad.nix
+    ./touchscreen.nix
   ];
 }
