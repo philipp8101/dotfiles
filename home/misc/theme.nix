@@ -4,8 +4,8 @@
     enable = true;
     theme.package = pkgs.adw-gtk3;
     theme.name = "adw-gtk3-dark";
-    iconTheme.package = pkgs.adw-gtk3;
-    iconTheme.name = "adw-gtk3-dark";
+    iconTheme.package = pkgs.adwaita-icon-theme;
+    iconTheme.name = "Adwaita";
     cursorTheme.package = import ./Empty-Butterfly-cursor { inherit pkgs; };
     cursorTheme.name = "Empty-Butterfly-White-vr6";
   };
