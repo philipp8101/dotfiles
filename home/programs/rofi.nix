@@ -1,7 +1,7 @@
 { pkgs, config, ... }:
 {
   programs.rofi = {
-    enable = true;
+    enable = config.gui;
     plugins = [ pkgs.rofi-calc ];
     package = pkgs.rofi;
     theme = let inherit (config.lib.formats.rasi) mkLiteral; in {

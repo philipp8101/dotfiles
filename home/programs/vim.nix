@@ -1,10 +1,10 @@
-{ pkgs, self, system, ... }:
+{ self, ... }:
 {
   home.sessionVariables = {
     EDITOR = "nvim";
   };
 
   home.packages = [
-    self.packages.${system}.nixvim
+    self.nixvim
   ];
 }

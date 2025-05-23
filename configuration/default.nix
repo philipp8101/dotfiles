@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, self, user, ... }:
+{ pkgs, user, ... }:
 {
   imports = [
     ./hyprland.nix
@@ -6,6 +6,7 @@
     ./packages.nix
     ./plasma.nix
     ./sddm.nix
+    ./xdg.nix
   ];
   boot = {
     loader = {

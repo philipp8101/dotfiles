@@ -1,17 +1,12 @@
-{ pkgs, config, ... }:
+{ pkgs, config, user, lib, ... }:
 {
   programs.hyprland = {
+    enable = lib.mkDefault (config.home-manager.users.${user}.wayland.windowManager.hyprland.enable or false);
     xwayland.enable = true;
-  };
-  xdg.portal = {
-    enable = config.programs.hyprland.enable;
-    extraPortals = with pkgs; [
-      (pkgs.lib.mkIf config.services.desktopManager.plasma6.enable xdg-desktop-portal-hyprland)
-    ];
   };
   services.displayManager.defaultSession = pkgs.lib.mkIf config.programs.hyprland.enable "hyprland";
   systemd.user.services.sway-audio-idle-inhibit = {
-    enable = true;
+    enable = config.programs.hyprland.enable;
     wantedBy = [ "default.target" ];
     description = "prevent suspending system when audio is playing";
     serviceConfig = {

@@ -1,24 +1,26 @@
-{ pkgs, ... }:
-{
+{ pkgs, config, ... }:
+let
+cursor = pkgs.callPackage ./Empty-Butterfly-cursor {};
+in {
   gtk = {
-    enable = true;
+    enable = config.gui;
     theme.package = pkgs.adw-gtk3;
     theme.name = "adw-gtk3-dark";
     iconTheme.package = pkgs.adwaita-icon-theme;
     iconTheme.name = "Adwaita";
-    cursorTheme.package = import ./Empty-Butterfly-cursor { inherit pkgs; };
+    cursorTheme.package = cursor;
     cursorTheme.name = "Empty-Butterfly-White-vr6";
   };
 
   qt = {
-    enable = true;
+    enable = config.gui;
     platformTheme.name = "kde";
     style.name = "breeze-dark";
   };
   home.pointerCursor = {
-    package = import ./Empty-Butterfly-cursor { inherit pkgs; };
+    package = cursor;
     name = "Empty-Butterfly-White-vr6";
-    gtk.enable = true;
-    x11.enable = true;
+    gtk.enable = config.gui;
+    x11.enable = config.gui;
   };
 }

@@ -1,10 +1,10 @@
 # Generated via dconf2nix: https://github.com/gvolpe/dconf2nix
-{ lib, ... }:
+{ lib, config, ... }:
 
 with lib.hm.gvariant;
 
 {
-  dconf.enable = true;
+  dconf.enable = config.gui;
   dconf.settings = {
     "org/a11y/accerciser" = {
       hpaned = 637;

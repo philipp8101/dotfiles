@@ -45,7 +45,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-generators, nixvim, ... }@inputs:
+  outputs = { nixpkgs, home-manager, nixos-generators, nixvim, ... }@inputs:
     inputs.flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs {
@@ -53,6 +53,7 @@
           config.allowUnfree = true;
         };
         user = "philipp";
+        self = inputs.self.packages.${system};
       in
       {
         packages = {
@@ -63,22 +64,8 @@
               modules = [
                 ./configuration
                 ./host/desktop
-                home-manager.nixosModules.home-manager
-                {
-                  home-manager = {
-                    useGlobalPkgs = true;
-                    useUserPackages = true;
-                    extraSpecialArgs = { inherit inputs system user self; };
-                    users.${user} = {
-                      imports = [
-                        ./home
-                        ./host/desktop/home.nix
-                      ];
-                    };
-                  };
-                }
-                { programs.hyprland.enable = true; }
-              ];
+                { home-manager.users.${user}.imports = [ ./host/desktop/home.nix ]; }
+              ] ++ self.nixosHomeModules.hyprland;
             };
             surface = nixpkgs.lib.nixosSystem {
               specialArgs = { inherit inputs self user; };
@@ -87,22 +74,8 @@
                 inputs.nixos-hardware.nixosModules.microsoft-surface-pro-intel
                 ./configuration
                 ./host/surface
-                home-manager.nixosModules.home-manager
-                {
-                  home-manager = {
-                    useGlobalPkgs = true;
-                    useUserPackages = true;
-                    extraSpecialArgs = { inherit inputs system user self; };
-                    users.${user} = {
-                      imports = [
-                        ./home
-                        ./host/surface/home.nix
-                      ];
-                    };
-                  };
-                }
-                { programs.hyprland.enable = true; }
-              ];
+                { home-manager.users.${user}.imports = [ ./host/surface/home.nix ]; }
+              ] ++ self.nixosHomeModules.hyprland;
             };
             raspberrypi = nixpkgs.lib.nixosSystem {
               inherit system;
@@ -114,23 +87,41 @@
                 # }
                 inputs.nixos-hardware.nixosModules.raspberry-pi-3
                 ./host/rpi
+                self.nixosHomeModules.minimal
               ];
             };
           };
-          homeConfigurations = 
-            let homecfg = module: home-manager.lib.homeManagerConfiguration {
-              inherit pkgs;
-              extraSpecialArgs = { inherit inputs system user self; };
-              modules = [
-                ./home
-                module
-              ];
+          nixosHomeModules = builtins.mapAttrs (name: imports: [
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                extraSpecialArgs = { inherit inputs system user self; };
+                users.${user} = {
+                  inherit imports;
+                };
+              };
+            }
+          ]) self.homeModules;
+          homeConfigurations = builtins.mapAttrs (name: modules: home-manager.lib.homeManagerConfiguration {
+            inherit pkgs;
+            extraSpecialArgs = { inherit inputs system user self; };
+            inherit modules;
+          }) self.homeModules;
+          homeModules = builtins.mapAttrs (name: module: [ ./home module ] ) {
+            hyprland = {
+              wayland.windowManager.hyprland.enable = true;
+              gui = true;
             };
-            in
-            builtins.listToAttrs [
-            { name = "hyprland"; value = homecfg { wayland.windowManager.hyprland.enable = true; }; }
-            { name = "i3"; value = homecfg { xsession.windowManager.i3.enable = true; }; }
-            ];
+            i3 = {
+              xsession.windowManager.i3.enable = true;
+              gui = true;
+            };
+            minimal = {
+              gui = false;
+            };
+          };
           sdcard = nixos-generators.nixosGenerate {
             system = "aarch64-linux";
             format = "sd-aarch64";
@@ -140,20 +131,19 @@
             ];
           };
           nixvim = (import ./nixvim/nixvim.nix {
-            pkgs = (import inputs.nixpkgs { inherit system; });
-            inherit system nixvim self user;
+            inherit system nixvim self user inputs pkgs;
           });
-          tmux = pkgs.writeShellScriptBin "tmux" '' ${pkgs.tmux}/bin/tmux -f ${self.packages.${system}.homeConfigurations.${user}}/home-files/.config/tmux/tmux.conf '';
+          tmux = pkgs.writeShellScriptBin "tmux" '' ${pkgs.tmux}/bin/tmux -f ${self.homeConfigurations.${user}}/home-files/.config/tmux/tmux.conf '';
           zsh = pkgs.writeShellScriptBin "zsh" ''
             export PATH=$PATH:${pkgs.fzf}/bin ;
             export ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh ;
-            export ZDOTDIR=${self.packages.${system}.homeConfigurations.${user}}/home-files ;
+            export ZDOTDIR=${self.homeConfigurations.${user}}/home-files ;
             ${pkgs.zsh}/bin/zsh
           '';
           devShell = pkgs.writeShellScriptBin "dev" ''
-            alias tmux=${self.packages.${system}.tmux}/bin/tmux ;
-            alias vim=${self.packages.${system}.nixvim}/bin/nvim ;
-            ${self.packages.${system}.zsh}/bin/zsh
+            alias tmux=${self.tmux}/bin/tmux ;
+            alias vim=${self.nixvim}/bin/nvim ;
+            ${self.zsh}/bin/zsh
           '';
         };
       });

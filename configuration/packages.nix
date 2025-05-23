@@ -1,4 +1,4 @@
-{ pkgs, self, ... }:
+{ pkgs, self, config, user, ... }:
 {
   environment.systemPackages = with pkgs; [
     wget
@@ -11,21 +11,29 @@
     jq
     smartmontools
     tmux
-    kitty
     polkit
-    dconf
-    xwayland
     gcc
     unzip
     rar
     fzf
     home-manager
     ripgrep
-    firefox
     xsel
-    lutris
     nix-index
     htop-vim
+    self.nixvim
+    man-pages
+    nix-output-monitor
+    lsof
+    # https://github.com/aristocratos/btop/issues/426#issuecomment-2104289634
+    (btop.override {cudaSupport = true;})
+    virtiofsd
+  ] ++ lib.optionals config.home-manager.users.${user}.gui [
+    kitty
+    dconf
+    xwayland
+    firefox
+    lutris
     obsidian
     wl-clipboard
     discord
@@ -34,7 +42,6 @@
     libsForQt5.qt5ct
     kdePackages.qt6ct
     kdePackages.qtstyleplugin-kvantum
-    self.outputs.packages.${system}.nixvim
     adwaita-icon-theme
     kdePackages.dolphin
     kdePackages.kde-cli-tools
@@ -55,17 +62,11 @@
     libsForQt5.qt5.qtgraphicaleffects
     thunderbird
     bottles
-    man-pages
-    nix-output-monitor
-    lsof
-    # https://github.com/aristocratos/btop/issues/426#issuecomment-2104289634
-    (btop.override {cudaSupport = true;})
     prismlauncher
     bazecor
     teamspeak3
     teamspeak6-client
     obs-studio
-    virtiofsd
     sioyek
   ];
 }

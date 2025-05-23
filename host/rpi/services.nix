@@ -35,6 +35,7 @@
       "radio_browser"
       "homeassistant_hardware"
       "zha"
+      "tuya"
     ];
     extraPackages = ps: with ps; [
       getmac
@@ -45,6 +46,10 @@
       # Includes dependencies for a basic setup
       # https://www.home-assistant.io/integrations/default_config/
       default_config = {};
+      resources = [{
+        type = "js";
+        url = "/local/zha-network-card.js";
+      }];
     };
   };
   networking.firewall.allowedTCPPorts = [ 8123 1883 ];
