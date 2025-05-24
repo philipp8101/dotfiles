@@ -9,7 +9,7 @@
   };
   config = {
     home.username = "${user}";
-    home.homeDirectory = "/home/${user}";
+    home.homeDirectory = lib.mkForce "/home/${user}";
     home.stateVersion = "23.11"; # Please read the comment before changing.
 
 

@@ -34,7 +34,6 @@
   #   }
   # ];
 
-  hardware.i2c.enable = true;
   hardware.deviceTree.enable = true;
   hardware.deviceTree = {
     overlays = [
@@ -90,8 +89,8 @@
       #       };
       #     };
       #   };
-      #   '';
       # }
+      #   '';
       {
         name = "i2c0";
         filter = "*rpi*";

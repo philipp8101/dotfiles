@@ -1,7 +1,7 @@
-{ pkgs, ... }:
+{ pkgs, lib, config, user, ... }:
 {
   services.displayManager.sddm = {
-    enable = true;
+    enable = lib.mkDefault (config.home-manager.users.${user}.gui or false);
     # theme = "Elegant";
     # settings.Theme.ThemeDir = "${pkgs.elegant-sddm.override {
     #    themeConfig.General = {

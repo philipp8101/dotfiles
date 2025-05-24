@@ -14,7 +14,6 @@
     polkit
     gcc
     unzip
-    rar
     fzf
     home-manager
     ripgrep
@@ -27,13 +26,11 @@
     lsof
     # https://github.com/aristocratos/btop/issues/426#issuecomment-2104289634
     (btop.override {cudaSupport = true;})
-    virtiofsd
   ] ++ lib.optionals config.home-manager.users.${user}.gui [
     kitty
     dconf
     xwayland
     firefox
-    lutris
     obsidian
     wl-clipboard
     discord
@@ -58,11 +55,10 @@
     kdePackages.okular
     kdePackages.gwenview
     kdePackages.ark
+    rar
     libsForQt5.kservice
     libsForQt5.qt5.qtgraphicaleffects
     thunderbird
-    bottles
-    prismlauncher
     bazecor
     teamspeak3
     teamspeak6-client

@@ -146,9 +146,10 @@ in
       };
       "module/disk" = {
         type = "custom/script";
+        exec-if = "command -v zpool";
         exec = pkgs.writeShellScript "disk" ''
-          a=$(${pkgs.zfs}/bin/zpool status | ${pkgs.gawk}/bin/awk "{if(\$1 ~ /$1/){print \$2}}")
-          b=$(${pkgs.zfs}/bin/zpool iostat | ${pkgs.gawk}/bin/awk "{if(\$1 ~ /$1/){print \"%{F#6e738d}free:%{F-}\" \$3 }}") #" %{F#6e738d}read:%{F-}" $6 " %{F#6e738d}write:%{F-}" $7 }}')
+          a=$(zpool status | ${pkgs.gawk}/bin/awk "{if(\$1 ~ /$1/){print \$2}}")
+          b=$(zpool iostat | ${pkgs.gawk}/bin/awk "{if(\$1 ~ /$1/){print \"%{F#6e738d}free:%{F-}\" \$3 }}") #" %{F#6e738d}read:%{F-}" $6 " %{F#6e738d}write:%{F-}" $7 }}')
           if [[ $a -eq "ONLINE" ]] ; then
               echo -n "%{F#6e738d}status:%{F-}"$a $b;
           else

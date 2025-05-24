@@ -1,4 +1,4 @@
-{ pkgs, user, ... }:
+{ pkgs, user, lib, ... }:
 {
   imports = [
     ./hyprland.nix
@@ -13,7 +13,7 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    binfmt.emulatedSystems = [ "aarch64-linux" ];
+    binfmt.emulatedSystems = lib.mkIf (pkgs.stdenv.hostPlatform.system != "aarch64-linux") [ "aarch64-linux" ];
     loader.systemd-boot.configurationLimit = 5;
   };
   programs.nix-ld = {
@@ -50,6 +50,7 @@
     shell = pkgs.zsh;
     isNormalUser = true;
     description = "${user}";
+    # group = "${user}";
     extraGroups = [
       "networkmanager"
       "wheel"
@@ -60,15 +61,11 @@
       "adbusers"
     ];
   };
+  # users.groups.${user} = {};
   hardware.brillo.enable = true;
   programs = {
     zsh.enable = true;
     ssh.startAgent = true;
-    steam = {
-      enable = true;
-      remotePlay.openFirewall = true;
-      dedicatedServer.openFirewall = true;
-    };
     adb.enable = true;
   };
 

@@ -14,13 +14,14 @@
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" =
+  # mkDefault because nixos-generator needs to overwrite this
+  fileSystems."/" = lib.mkDefault
     {
       device = "/dev/disk/by-uuid/44444444-4444-4444-8888-888888888888";
       fsType = "ext4";
     };
 
-  swapDevices =
+  swapDevices = lib.mkDefault
     [{ device = "/dev/disk/by-uuid/0432950f-f130-46c5-9c4e-9fa45dc5a128"; }];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
@@ -32,4 +33,9 @@
   # networking.interfaces.wlan0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
+  hardware.graphics.enable32Bit = lib.mkForce false;
+  boot.loader = {
+    systemd-boot.enable = lib.mkForce false;
+    efi.canTouchEfiVariables = lib.mkForce false;
+  };
 }

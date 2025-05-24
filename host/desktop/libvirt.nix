@@ -17,6 +17,9 @@
     };
   };
   programs.virt-manager.enable = true;
+  environment.systemPackages = with pkgs; [
+    virtiofsd
+  ];
   users.users.${user} = {
     extraGroups = [ "libvirtd" ];
   };

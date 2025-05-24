@@ -57,41 +57,30 @@
       in
       {
         packages = {
-          nixosConfigurations = {
-            desktop = nixpkgs.lib.nixosSystem {
+          nixosConfigurations = builtins.mapAttrs (name: modules:
+            nixpkgs.lib.nixosSystem {
               specialArgs = { inherit inputs self user system; };
-              inherit system;
-              modules = [
-                ./configuration
-                ./host/desktop
+              inherit system modules;
+            }
+          ) self.nixosModules;
+          nixosModules = builtins.mapAttrs (name: modules: [ ./configuration ./host/${name} ] ++ modules) {
+            desktop = [
+                ./configuration/gaming.nix
                 { home-manager.users.${user}.imports = [ ./host/desktop/home.nix ]; }
               ] ++ self.nixosHomeModules.hyprland;
-            };
-            surface = nixpkgs.lib.nixosSystem {
-              specialArgs = { inherit inputs self user; };
-              inherit system;
-              modules = [
+            surface = [
                 inputs.nixos-hardware.nixosModules.microsoft-surface-pro-intel
-                ./configuration
-                ./host/surface
                 { home-manager.users.${user}.imports = [ ./host/surface/home.nix ]; }
               ] ++ self.nixosHomeModules.hyprland;
-            };
-            raspberrypi = nixpkgs.lib.nixosSystem {
-              inherit system;
-              specialArgs = { inherit inputs user; };
-              modules = [
+            raspberrypi = [
                 # {
                 #   nixpkgs.buildPlatform = "x86_64-linux";
                 #   nixpkgs.hostPlatform = "aarch64-linux";
                 # }
                 inputs.nixos-hardware.nixosModules.raspberry-pi-3
-                ./host/rpi
-                self.nixosHomeModules.minimal
-              ];
-            };
+              ] ++ self.nixosHomeModules.minimal;
           };
-          nixosHomeModules = builtins.mapAttrs (name: imports: [
+          nixosHomeModules = builtins.mapAttrs (_: imports: [
             home-manager.nixosModules.home-manager
             {
               home-manager = {
@@ -104,31 +93,25 @@
               };
             }
           ]) self.homeModules;
-          homeConfigurations = builtins.mapAttrs (name: modules: home-manager.lib.homeManagerConfiguration {
+          homeConfigurations = builtins.mapAttrs (_: modules: home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
             extraSpecialArgs = { inherit inputs system user self; };
             inherit modules;
           }) self.homeModules;
-          homeModules = builtins.mapAttrs (name: module: [ ./home module ] ) {
+          homeModules = builtins.mapAttrs (_: module: [ ./home module ] ) {
             hyprland = {
               wayland.windowManager.hyprland.enable = true;
-              gui = true;
             };
             i3 = {
               xsession.windowManager.i3.enable = true;
-              gui = true;
             };
-            minimal = {
-              gui = false;
-            };
+            minimal = { gui = false; };
           };
           sdcard = nixos-generators.nixosGenerate {
             system = "aarch64-linux";
             format = "sd-aarch64";
-            modules = [
-                inputs.nixos-hardware.nixosModules.raspberry-pi-3
-                ./host/rpi
-            ];
+            specialArgs = { inherit inputs self user system; };
+            modules = self.nixosModules.raspberrypi;
           };
           nixvim = (import ./nixvim/nixvim.nix {
             inherit system nixvim self user inputs pkgs;
