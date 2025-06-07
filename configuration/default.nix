@@ -7,6 +7,7 @@
     ./plasma.nix
     ./sddm.nix
     ./xdg.nix
+    ./audio.nix
   ];
   boot = {
     loader = {
@@ -85,13 +86,6 @@
     blueman.enable = true;
     locate.enable = true;
     locate.package = pkgs.plocate;
-    pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-      jack.enable = true;
-    };
     xserver.xkb.layout = "de";
     ddccontrol.enable = true;
     udev = {
