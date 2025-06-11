@@ -64,5 +64,10 @@
     teamspeak6-client
     obs-studio
     sioyek
+    qpwgraph
+    rnote
+    qbittorrent
+    kdePackages.kolourpaint
+    audacity
   ];
 }
