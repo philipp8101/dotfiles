@@ -69,5 +69,8 @@
     qbittorrent
     kdePackages.kolourpaint
     audacity
+    kicad
+    freecad
+    openscad
   ];
 }
