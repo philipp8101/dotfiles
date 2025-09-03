@@ -13,6 +13,7 @@
       Type = "simple";
       ExecStart = ''${pkgs.sway-audio-idle-inhibit}/bin/sway-audio-idle-inhibit'';
       Restart = "on-failure";
+      RestartSec = 30;
     };
   };
 }
