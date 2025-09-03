@@ -14,7 +14,9 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    binfmt.emulatedSystems = lib.mkIf (pkgs.stdenv.hostPlatform.system != "aarch64-linux") [ "aarch64-linux" ];
+    binfmt.emulatedSystems = builtins.concatMap (arch: (lib.optional (pkgs.stdenv.hostPlatform.system != arch) arch)) [
+      "aarch64-linux"
+    ];
     loader.systemd-boot.configurationLimit = 5;
   };
   programs.nix-ld = {
@@ -68,6 +70,7 @@
     zsh.enable = true;
     ssh.startAgent = true;
     adb.enable = true;
+    kdeconnect.enable = true;
   };
 
   nixpkgs.config.allowUnfree = true;
