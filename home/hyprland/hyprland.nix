@@ -134,6 +134,7 @@ in
         "$mod, D, changegroupactive, previous"
         "$mod SHIFT, D, togglegroup"
         "$mod, R, togglesplit, # dwindle"
+        "$mod SHIFT, R, moveoutofgroup"
         "$mod, W, overview:toggle"
         "$mod, B, fullscreen, 1"
         "$mod, left, movefocus, l"
