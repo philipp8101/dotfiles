@@ -13,7 +13,7 @@
     initrd.availableKernelModules = [ "xhci_pci" "nvme" "usbhid" ];
     initrd.kernelModules = [ ];
     kernelModules = [ "kvm-intel" ];
-    extraModulePackages = [ ];
+    extraModulePackages = with config.boot.kernelPackages; [ usbip ];
   };
 
   fileSystems."/" =
