@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -6,4 +7,5 @@
     ./kmonad.nix
     ./touchscreen.nix
   ];
+  hardware.microsoft-surface.kernelVersion = "stable";
 }

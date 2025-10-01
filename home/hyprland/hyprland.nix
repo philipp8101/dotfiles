@@ -25,7 +25,6 @@ in
     plugins = (with pkgs.hyprlandPlugins; [
       # hyprwinwrap # broken?
       (lib.mkIf (config.wayland.windowManager.hyprland.layout == "scroller") hyprscroller)
-      hyprspace
     ]);
     settings = {
       plugin = {

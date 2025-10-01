@@ -2,7 +2,6 @@
 lib.nixvim.plugins.mkNeovimPlugin {
   name = "harpoon2";
   moduleName = "harpoon";
-  packPathName = "harpoon";
   package = "harpoon2";
   setup = ":setup";
 

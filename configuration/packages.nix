@@ -61,7 +61,6 @@
     libsForQt5.qt5.qtgraphicaleffects
     thunderbird
     bazecor
-    teamspeak3
     teamspeak6-client
     obs-studio
     sioyek
