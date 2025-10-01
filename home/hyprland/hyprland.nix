@@ -16,29 +16,9 @@ let
   secondaryDisplay = lib.lists.remove config.primaryDisplay config.displays;
 in
 {
-  options.wayland.windowManager.hyprland.layout = lib.mkOption {
-    type = with lib.types; enum [ "dwindle" "master" "scroller" ];
-    default = "dwindle";
-  };
   config.wayland.windowManager.hyprland = {
     xwayland.enable = true;
-    plugins = (with pkgs.hyprlandPlugins; [
-      # hyprwinwrap # broken?
-      (lib.mkIf (config.wayland.windowManager.hyprland.layout == "scroller") hyprscroller)
-    ]);
     settings = {
-      plugin = {
-        hyprwinwrap = {
-          title = [
-            "gifview"
-          ];
-        };
-        scroller = {
-          focus_wrap = "false";
-          column_widths = "onehalf one";
-        };
-        overview.showEmptyWorkspace = false;
-      };
       input = {
         kb_layout = "de";
         touchpad = {
@@ -60,7 +40,6 @@ in
         border_size = 2;
         "col.active_border" = "rgba(${config.colorScheme.palette.base0D}ee) rgba(${config.colorScheme.palette.base0B}ee) 45deg";
         "col.inactive_border" = "rgba(${config.colorScheme.palette.base02}aa)";
-        layout = config.wayland.windowManager.hyprland.layout;
       };
       decoration = {
         rounding = 10;
@@ -126,34 +105,8 @@ in
         "$mod CTRL, down, resizeactive, 0 20"
         ", XF86MonBrightnessDown, exec, ${pkgs.brillo}/bin/brillo -U 5"
         ", XF86MonBrightnessUp, exec, ${pkgs.brillo}/bin/brillo -A 5"
-      ] ++ lib.lists.optionals (config.wayland.windowManager.hyprland.layout != "scroller") [
-        "$mod, D, changegroupactive, previous"
-        "$mod SHIFT, D, togglegroup"
-        "$mod, R, togglesplit, # dwindle"
-        "$mod SHIFT, R, moveoutofgroup"
-        "$mod, B, fullscreen, 1"
-        "$mod, left, movefocus, l"
-        "$mod, right, movefocus, r"
-        "$mod, up, movefocus, u"
-        "$mod, down, movefocus, d"
-        "$mod SHIFT, left, movewindow, l"
-        "$mod SHIFT, right, movewindow, r"
-        "$mod SHIFT, up, movewindow, u"
-        "$mod SHIFT, down, movewindow, d"
-      ] ++ lib.lists.optionals (config.wayland.windowManager.hyprland.layout == "scroller") [
-        "$mod, D, scroller:admitwindow"
-        "$mod, R, scroller:expelwindow"
-        "$mod, W, scroller:setmode, r"
-        "$mod SHIFT, W, scroller:setmode, c"
-        "$mod, B, scroller:cyclesize, next"
-        "$mod, left, scroller:movefocus, l"
-        "$mod, right, scroller:movefocus, r"
-        "$mod, up, scroller:movefocus, u"
-        "$mod, down, scroller:movefocus, d"
-        "$mod SHIFT, left, scroller:movewindow, l"
-        "$mod SHIFT, right, scroller:movewindow, r"
-        "$mod SHIFT, up, scroller:movewindow, u"
-        "$mod SHIFT, down, scroller:movewindow, d"
+        "$mod, mouse_down, exec, hyprctl -q keyword cursor:zoom_factor $(hyprctl getoption cursor:zoom_factor -j | ${pkgs.jq}/bin/jq '.float * 1.3')"
+        "$mod, mouse_up, exec, hyprctl -q keyword cursor:zoom_factor $(hyprctl getoption cursor:zoom_factor -j | ${pkgs.jq}/bin/jq '(.float * 0.7) | if . < 1 then 1 else . end')"
       ];
       binde = [
         ", XF86AudioRaiseVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"
@@ -168,6 +121,9 @@ in
         "workspace 8, class:(vesktop)"
         "workspace 8, class:(discord)"
       ];
+      binds.scroll_event_delay = 50;
+      ecosystem.no_update_news = true;
+      ecosystem.no_donation_nag = true;
     };
   };
 }
