@@ -84,9 +84,6 @@ in
       master = {
         orientation = "right";
       };
-      gestures = {
-        workspace_swipe = true;
-      };
       "$mod" = "SUPER";
       workspace = [
         "1,monitor:${config.primaryDisplay.identifier}"
@@ -134,7 +131,6 @@ in
         "$mod SHIFT, D, togglegroup"
         "$mod, R, togglesplit, # dwindle"
         "$mod SHIFT, R, moveoutofgroup"
-        "$mod, W, overview:toggle"
         "$mod, B, fullscreen, 1"
         "$mod, left, movefocus, l"
         "$mod, right, movefocus, r"
