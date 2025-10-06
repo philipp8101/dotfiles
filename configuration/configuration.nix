@@ -15,8 +15,9 @@
     libraries = with pkgs; [
     ];
   };
-  networking = {
-    networkmanager.enable = true;
+  networking.networkmanager = {
+    enable = true;
+    plugins = [ pkgs.networkmanager-openvpn ];
   };
   time.timeZone = "Europe/Berlin";
   i18n.defaultLocale = "en_US.UTF-8";
