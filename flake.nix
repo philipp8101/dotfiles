@@ -124,6 +124,8 @@
             ${self.zsh}/bin/zsh
           '';
         };
-      });
+      })//{
+        templates = import ./templates;
+      };
 
 }
