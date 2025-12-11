@@ -73,6 +73,7 @@ in
       bind = [
         "$mod, Return, exec, ${pkgs.kitty}/bin/kitty"
         "$mod, Q, killactive,"
+        "$mod SHIFT, Q, forcekillactive,"
         "$mod CTRL, B, fullscreen, 0"
         "$mod, U, exec, rofi -show calc -modi calc -no-show-match -no-sort"
         "$mod, P, pseudo, # dwindle"
@@ -124,6 +125,7 @@ in
       binds.scroll_event_delay = 50;
       ecosystem.no_update_news = true;
       ecosystem.no_donation_nag = true;
+      misc.enable_anr_dialog = false; # anr = application not responding
     };
   };
 }
