@@ -111,11 +111,11 @@
           nixvim = (import ./nixvim/nixvim.nix {
             inherit system nixvim self user inputs pkgs;
           });
-          tmux = pkgs.writeShellScriptBin "tmux" '' ${pkgs.tmux}/bin/tmux -f ${self.homeConfigurations.${user}}/home-files/.config/tmux/tmux.conf '';
+          tmux = pkgs.writeShellScriptBin "tmux" '' ${pkgs.tmux}/bin/tmux -f ${self.homeConfigurations.minimal.activationPackage}/home-files/.config/tmux/tmux.conf '';
           zsh = pkgs.writeShellScriptBin "zsh" ''
             export PATH=$PATH:${pkgs.fzf}/bin ;
             export ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh ;
-            export ZDOTDIR=${self.homeConfigurations.${user}}/home-files ;
+            export ZDOTDIR=${self.homeConfigurations.minimal.activationPackage}/home-files ;
             ${pkgs.zsh}/bin/zsh
           '';
           devShell = pkgs.writeShellScriptBin "dev" ''
