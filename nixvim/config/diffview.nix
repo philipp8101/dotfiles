@@ -1,7 +1,7 @@
 {
   plugins.diffview = {
     enable = true;
-    signs = {
+    settings.signs = {
       done = "";
       foldClosed = "";
       foldOpen = "";

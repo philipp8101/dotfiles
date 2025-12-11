@@ -1,4 +1,4 @@
-{ lib, helpers, ... }:
+{ lib, ... }:
 lib.nixvim.plugins.mkNeovimPlugin {
   name = "bufjump";
   moduleName = "bufjump";

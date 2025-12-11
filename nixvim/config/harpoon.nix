@@ -1,4 +1,4 @@
-{ pkgs, helpers, lib, config, ... }:
+{ pkgs, lib, config, ... }:
 {
   plugins.harpoon2 = {
     enable = true;
@@ -27,10 +27,10 @@
             },
           }'';
       in {
-        create_list_item = helpers.mkRaw ''function(config,cmd)
+        create_list_item = lib.nixvim.mkRaw ''function(config,cmd)
         ${create_term}
         end'';
-        select = helpers.mkRaw ''function(list_item, list, options)
+        select = lib.nixvim.mkRaw ''function(list_item, list, options)
           if (vim.fn.bufwinnr(list_item.context.buf) == -1) then
             vim.api.nvim_win_set_buf(0,list_item.context.buf);
           end
@@ -38,13 +38,13 @@
             vim.api.nvim_chan_send(list_item.context.channel, list_item.value .. "\n")
           end
         end'';
-        display = helpers.mkRaw ''function(list_item)
+        display = lib.nixvim.mkRaw ''function(list_item)
           return list_item.value:gsub("\n"," \\n ")
         end'';
-        encode = helpers.mkRaw ''function(obj)
+        encode = lib.nixvim.mkRaw ''function(obj)
           return vim.json.encode(obj.context.initcmd)
         end'';
-        decode = helpers.mkRaw ''function(str)
+        decode = lib.nixvim.mkRaw ''function(str)
           local cmd = vim.json.decode(str)
           ${create_term}
         end'';
@@ -68,84 +68,84 @@
   keymaps = lib.mkIf config.plugins.harpoon2.enable [
     {
       key = "<leader>l";
-      action = helpers.mkRaw "function() require('harpoon'):list():add() end";
+      action = lib.nixvim.mkRaw "function() require('harpoon'):list():add() end";
       options.desc = "add current buffer to harpoon";
     }
     {
       key = "<leader>L";
-      action = helpers.mkRaw "function() require('harpoon').ui:toggle_quick_menu(require('harpoon'):list()) end";
+      action = lib.nixvim.mkRaw "function() require('harpoon').ui:toggle_quick_menu(require('harpoon'):list()) end";
       options.desc = "open harpoon menu";
     }
     {
       key = "<leader>n";
-      action = helpers.mkRaw "function() require('harpoon'):list():select(1) end";
+      action = lib.nixvim.mkRaw "function() require('harpoon'):list():select(1) end";
       options.desc = "open harpoon entry 1";
     }
     {
       key = "<leader>e";
-      action = helpers.mkRaw "function() require('harpoon'):list():select(2) end";
+      action = lib.nixvim.mkRaw "function() require('harpoon'):list():select(2) end";
       options.desc = "open harpoon entry 2";
     }
     {
       key = "<leader>o";
-      action = helpers.mkRaw "function() require('harpoon'):list():select(3) end";
+      action = lib.nixvim.mkRaw "function() require('harpoon'):list():select(3) end";
       options.desc = "open harpoon entry 3";
     }
     {
       key = "<leader>i";
-      action = helpers.mkRaw "function() require('harpoon'):list():select(4) end";
+      action = lib.nixvim.mkRaw "function() require('harpoon'):list():select(4) end";
       options.desc = "open harpoon entry 4";
     }
     {
       key = "<leader>C";
-      action = helpers.mkRaw "function() require('harpoon').ui:toggle_quick_menu(require('harpoon'):list('compile_commands')) end";
+      action = lib.nixvim.mkRaw "function() require('harpoon').ui:toggle_quick_menu(require('harpoon'):list('compile_commands')) end";
       options.desc = "open harpoon menu";
     }
     {
       key = "<leader>N";
-      action = helpers.mkRaw "function() require('harpoon'):list('compile_commands'):select(1, true) end";
+      action = lib.nixvim.mkRaw "function() require('harpoon'):list('compile_commands'):select(1, true) end";
       options.desc = "run harpoon compile command 1";
     }
     {
       key = "<leader>E";
-      action = helpers.mkRaw "function() require('harpoon'):list('compile_commands'):select(2, true) end";
+      action = lib.nixvim.mkRaw "function() require('harpoon'):list('compile_commands'):select(2, true) end";
       options.desc = "run harpoon compile command 2";
     }
     {
       key = "<leader>O";
-      action = helpers.mkRaw "function() require('harpoon'):list('compile_commands'):select(3, true) end";
+      action = lib.nixvim.mkRaw "function() require('harpoon'):list('compile_commands'):select(3, true) end";
       options.desc = "run harpoon compile command 3";
     }
     {
       key = "<leader>I";
-      action = helpers.mkRaw "function() require('harpoon'):list('compile_commands'):select(4, true) end";
+      action = lib.nixvim.mkRaw "function() require('harpoon'):list('compile_commands'):select(4, true) end";
       options.desc = "run harpoon compile command 4";
     }
     {
       key = "<leader><C-n>";
-      action = helpers.mkRaw "function() require('harpoon'):list('compile_commands'):select(1, false) end";
+      action = lib.nixvim.mkRaw "function() require('harpoon'):list('compile_commands'):select(1, false) end";
       options.desc = "run harpoon compile command 1";
     }
     {
       key = "<leader><C-e>";
-      action = helpers.mkRaw "function() require('harpoon'):list('compile_commands'):select(2, false) end";
+      action = lib.nixvim.mkRaw "function() require('harpoon'):list('compile_commands'):select(2, false) end";
       options.desc = "run harpoon compile command 2";
     }
     {
       key = "<leader><C-o>";
-      action = helpers.mkRaw "function() require('harpoon'):list('compile_commands'):select(3, false) end";
+      action = lib.nixvim.mkRaw "function() require('harpoon'):list('compile_commands'):select(3, false) end";
       options.desc = "run harpoon compile command 3";
     }
     {
       key = "<leader><C-i>";
-      action = helpers.mkRaw "function() require('harpoon'):list('compile_commands'):select(4, false) end";
+      action = lib.nixvim.mkRaw "function() require('harpoon'):list('compile_commands'):select(4, false) end";
       options.desc = "run harpoon compile command 4";
     }
   ];
   # TODO fix this
   # ] ++ (builtins.map ({key, list ? null, id, args ? null}: {
   #     inherit key;
-  #     action = helpers.mkRaw "function() require('harpoon'):list('${lib.optionalString (!builtins.isNull list) list}'):select(${builtins.toString id}${lib.optionalString (!builtins.isNull args) ",${builtins.toString args}"}) end";
+  #     action = lib.nixvim.mkRaw "function() require('harpoon'):list('${lib.optionalString (!builtins.isNull list) list}'):select(${builtins.toString id}${lib.optionalString (!builtins.isNull args) ",${builtins.toString args}"}) end";
   #     # options.desc = "open harpoon entry ${builtins.toString id} on list ${builtins.toString list ? "default"} with args: ${builtins.toString args ? "empty"}";
   # }) [
   #   { key = "<leader>n"; id = 1; }

@@ -1,4 +1,4 @@
-{ lib, helpers, ... }:
+{ lib, ... }:
 lib.nixvim.plugins.mkNeovimPlugin {
   name = "harpoon2";
   moduleName = "harpoon";
@@ -9,8 +9,8 @@ lib.nixvim.plugins.mkNeovimPlugin {
 
   settingsExample = {
     "some_name" = {
-      add = helpers.mkRaw ''function(possible_value) return { value = ... , context = ... } end'';
-      select = helpers.mkRaw ''function(list_item, list, options) ... end'';
+      add = lib.nixvim.mkRaw ''function(possible_value) return { value = ... , context = ... } end'';
+      select = lib.nixvim.mkRaw ''function(list_item, list, options) ... end'';
     };
   };
 }

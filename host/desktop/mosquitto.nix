@@ -13,6 +13,7 @@
     allowedTCPPorts = [
       1883 # mqtt
       3240 # usbip
+      8080
     ];
   };
 }

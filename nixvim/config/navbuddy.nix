@@ -1,19 +1,21 @@
-{ helpers, lib, config, ... }:
+{ lib, config, ... }:
 {
   plugins.navbuddy = {
     enable = true;
-    mappings = {
-      "n" = "parent";
-      "e" = "next_sibling";
-      "o" = "previous_sibling";
-      "i" = "children";
+    settings = {
+      mappings = {
+        "n" = "parent";
+        "e" = "next_sibling";
+        "o" = "previous_sibling";
+        "i" = "children";
+      };
+      lsp.autoAttach = true;
     };
-    lsp.autoAttach = true;
   };
   keymaps = lib.mkIf config.plugins.navbuddy.enable [
     {
       key = "<leader>h";
-      action = helpers.mkRaw "require('nvim-navbuddy').open";
+      action = lib.nixvim.mkRaw "require('nvim-navbuddy').open";
     }
   ];
 }

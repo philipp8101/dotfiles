@@ -1,29 +1,24 @@
 {
   programs.git = {
     enable = true;
-    userEmail = "philipp8101@gmail.com";
-    userName = "Philipp Conrad";
-    aliases = {
-      graph = "log --all --decorate --oneline --graph";
-      nb = "!f() { git checkout -b \"$1\"; }; f";
-    };
-    delta = {
-      enable = true;
-      options = {
-        line-numbers = true;
+    settings = {
+      user.email = "philipp8101@gmail.com";
+      user.name = "Philipp Conrad";
+      aliases = {
+        graph = "log --all --decorate --oneline --graph";
+        nb = "!f() { git checkout -b \"$1\"; }; f";
       };
+      delta = {
+        enable = true;
+        options = {
+          line-numbers = true;
+        };
+      };
+      core.editor = "nvim";
+      push.autoSetupRemote = "true";
+      merge.conflictstyle = "diff3";
     };
     lfs.enable = true;
-    extraConfig = {
-      core = {
-        editor = "nvim";
-      };
-      push = {
-        autoSetupRemote = "true";
-      };
-      merge = {
-        conflictstyle = "diff3";
-      };
-    };
   };
+  programs.delta.enableGitIntegration = true;
 }

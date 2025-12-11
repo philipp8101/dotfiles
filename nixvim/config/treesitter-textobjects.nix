@@ -1,7 +1,7 @@
 {
   plugins.treesitter-textobjects = {
     enable = true;
-    select = {
+    settings = {
       enable = true;
       keymaps = {
         "af".query = "@function.outer";
