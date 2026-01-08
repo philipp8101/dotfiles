@@ -61,7 +61,6 @@
   programs = {
     zsh.enable = true;
     ssh.startAgent = true;
-    adb.enable = true;
     kdeconnect.enable = true;
   };
 

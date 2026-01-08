@@ -72,5 +72,6 @@
     kicad
     freecad
     openscad
+    android-tools
   ];
 }
