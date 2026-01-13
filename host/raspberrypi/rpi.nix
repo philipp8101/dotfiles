@@ -1,4 +1,21 @@
-{ config, lib, pkgs, ... }: {
+{ config, lib, pkgs, inputs, ... }: {
+  hardware = {
+    raspberry-pi."4".apply-overlays-dtmerge.enable = true;
+    deviceTree = {
+      enable = true;
+      filter = "*rpi-4-*.dtb";
+    };
+  };
+  system.stateVersion = "26.05";
+
+  # workaround for https://github.com/NixOS/nixpkgs/issues/154163
+  nixpkgs.overlays = [
+    (final: super: {
+      makeModulesClosure = x:
+        super.makeModulesClosure (x // { allowMissing = true; });
+    })
+  ];
+
   disabledModules = [
     "profiles/base.nix"
   ];
@@ -17,7 +34,7 @@
   # dt* configs.txt seems to not apply ?
   # find working config.txt (with hifiberry) from vanilla raspbian
   # see if vcgencmd shows the dt* configs on raspbian
-  boot.kernelParams = [ "snd_bcm2835.enable_hdmi=1" ];
+  # boot.kernelParams = [ "snd_bcm2835.enable_hdmi=1" ];
   security.sudo.wheelNeedsPassword = false;
   networking.firewall.enable = false;
 
@@ -37,7 +54,18 @@
   };
 
   environment.systemPackages = with pkgs; [
-    libraspberrypi
     pciutils
+    libraspberrypi
+    raspberrypi-eeprom
   ];
+  users.users.raspberrypi = {
+    isNormalUser = true;
+    initialPassword = "123";
+    extraGroups = [
+      "wheel"
+    ];
+  };
+  nix.settings.trusted-users = [ "@wheel" ];
+  services.openssh.enable = true;
+
 }

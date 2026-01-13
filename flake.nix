@@ -58,7 +58,7 @@
               inherit system modules;
             }
           ) self.nixosModules;
-          nixosModules = builtins.mapAttrs (name: modules: [ ./configuration ./host/${name} ] ++ modules) {
+          nixosModules = (builtins.mapAttrs (name: modules: [ ./configuration ./host/${name} ] ++ modules) {
             desktop = [
                 ./configuration/gaming.nix
                 { home-manager.users.${user}.imports = [ ./host/desktop/home.nix ]; }
@@ -67,13 +67,15 @@
                 inputs.nixos-hardware.nixosModules.microsoft-surface-pro-intel
                 { home-manager.users.${user}.imports = [ ./host/surface/home.nix ]; }
               ] ++ self.nixosHomeModules.hyprland;
+          })//{
             raspberrypi = [
-                # {
-                #   nixpkgs.buildPlatform = "x86_64-linux";
+                {
+                  # nixpkgs.buildPlatform = "x86_64-linux";
                 #   nixpkgs.hostPlatform = "aarch64-linux";
-                # }
-                inputs.nixos-hardware.nixosModules.raspberry-pi-3
-              ] ++ self.nixosHomeModules.minimal;
+                }
+                inputs.nixos-hardware.nixosModules.raspberry-pi-4
+                ./host/raspberrypi
+              ];
           };
           nixosHomeModules = builtins.mapAttrs (_: imports: [
             home-manager.nixosModules.home-manager

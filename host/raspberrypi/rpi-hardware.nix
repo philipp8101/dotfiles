@@ -33,6 +33,7 @@
   # networking.interfaces.wlan0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
+  # nixpkgs.hostPlatform = lib.mkDefault "armv7l-linux";
   hardware.graphics.enable32Bit = lib.mkForce false;
   boot.loader = {
     systemd-boot.enable = lib.mkForce false;
