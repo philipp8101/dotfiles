@@ -5,31 +5,27 @@
     settings = {
       enable_git_status = true;
       enable_modified_markers = true;
-      extraOptions = {
-        window = {
-          mappings = {
-            "n" = "close_node";
-            "e" = "none";
-            "o" = "none";
-            "i" = "open";
-            "<leader>as" = "git_add_file";
-            "<leader>au" = "git_unstage_file";
-            "og" = "noop";
-            "ot" = "noop";
-            "os" = "noop";
-            "om" = "noop";
-            "on" = "noop";
-            "od" = "noop";
-            "oc" = "noop";
-          };
-        };
-        event_handlers = [
-          {
-            event = "file_opened";
-            handler = lib.nixvim.mkRaw "require('neo-tree').close_all";
-          }
-        ];
+      window.mappings = {
+          "n" = "close_node";
+          "e" = "move_cursor_down";
+          "o" = "move_cursor_up";
+          "i" = "open";
+          "<leader>as" = "git_add_file";
+          "<leader>au" = "git_unstage_file";
+          "og" = "noop";
+          "ot" = "noop";
+          "os" = "noop";
+          "om" = "noop";
+          "on" = "noop";
+          "od" = "noop";
+          "oc" = "noop";
       };
+      event_handlers = [
+      {
+        event = "file_opened";
+        handler = lib.nixvim.mkRaw "require('neo-tree').close_all";
+      }
+      ];
     };
   };
   keymaps = lib.mkIf config.plugins.neo-tree.enable [
