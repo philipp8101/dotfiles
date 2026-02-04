@@ -38,9 +38,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.systems.follows = "systems";
     };
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v1.0.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, nixos-generators, nixvim, ... }@inputs:
+  outputs = { nixpkgs, home-manager, nixos-generators, nixvim, lanzaboote, ... }@inputs:
     inputs.flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs {
@@ -54,7 +58,7 @@
         packages = {
           nixosConfigurations = builtins.mapAttrs (name: modules:
             nixpkgs.lib.nixosSystem {
-              specialArgs = { inherit inputs self user system; };
+              specialArgs = { inherit inputs self user system lanzaboote; };
               inherit system modules;
             }
           ) self.nixosModules;
