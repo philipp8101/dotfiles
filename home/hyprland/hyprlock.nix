@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, config, lib, nixosConfig, ... }:
 {
   programs.hyprlock = {
     enable = config.wayland.windowManager.hyprland.enable;
@@ -16,8 +16,7 @@
           blur_passes = 3;
           blur_size = 8;
         }) (map (x: x.identifier) config.displays);
-      input-field = [
-        {
+      input-field = [ {
           size = "${pkgs.lib.strings.floatToString (200 * config.primaryDisplay.scale)}, ${pkgs.lib.strings.floatToString (50 * config.primaryDisplay.scale)}";
           position = "0, -80";
           monitor = "${config.primaryDisplay.identifier}";
@@ -29,8 +28,12 @@
           outline_thickness = 5;
           placeholder_text = ''<span foreground="##${config.colorScheme.palette.base05}">Password...</span>'';
           shadow_passes = 2;
-        }
-      ];
+        } ];
+      label = lib.mkIf nixosConfig.services.kmonad.enable [ {
+          text = ''cmd[update:500] echo "<span foreground='##${config.colorScheme.palette.base05}'>$(systemctl is-active --quiet kmonad && echo kmonad loaded || echo test)</span>"'';
+          font_size = 10;
+          position = "0, -140";
+      } ];
     };
   };
 }
