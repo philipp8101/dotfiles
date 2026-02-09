@@ -12,7 +12,13 @@
   boot = {
     initrd.availableKernelModules = [ "xhci_pci" "nvme" "usbhid" ];
     initrd.kernelModules = [ ];
-    kernelModules = [ "kvm-intel" ];
+    kernelModules = [
+      "kvm-intel"
+    ] ++ [ # sensors/pwm stuff
+      "coretemp"
+      "jc42"
+      "nct6775"
+    ];
     extraModulePackages = with config.boot.kernelPackages; [ usbip ];
   };
 
