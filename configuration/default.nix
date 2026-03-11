@@ -8,5 +8,6 @@
     ./sddm.nix
     ./xdg.nix
     ./audio.nix
+    ./media.nix
   ];
 }
