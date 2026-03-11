@@ -110,4 +110,7 @@
   documentation.enable = true;
   documentation.man.enable = true;
   documentation.doc.enable = true;
+
+  boot.kernel.sysctl."kernel.sysrq" = 502;
+
 }
