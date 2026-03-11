@@ -60,15 +60,16 @@
   hardware.brillo.enable = true;
   programs = {
     zsh.enable = true;
-    ssh.startAgent = true;
+    # ssh.startAgent = true; # replaced by gnome-keyring
     kdeconnect.enable = true;
   };
+  services.gnome.gnome-keyring.enable = true;
 
   nixpkgs.config.allowUnfree = true;
 
   environment = {
     sessionVariables = {
-      SSH_AUTH_SOCK = "/run/user/1000/ssh-agent";
+      SSH_AUTH_SOCK = "/run/user/1000/gcr/ssh";
     };
     pathsToLink = [ "/libexec" ];
   };
