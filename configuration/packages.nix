@@ -73,5 +73,9 @@
     freecad
     openscad
     android-tools
+    songrec
+    teamspeak6-client
+    element-desktop
+    moonlight-qt
   ];
 }
