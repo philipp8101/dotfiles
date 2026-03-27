@@ -30,6 +30,11 @@ in
         "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1"
         "${inputs.hyprpaper-custom.packages.${system}.default}/bin/hyprpaper"
         "${pkgs.hypridle}/bin/hypridle"
+        (lib.getExe (pkgs.writeShellApplication {
+          text = lib.getExe inputs.noctalia.packages.${system}.default;
+          name = "noctalia";
+          runtimeInputs = with pkgs; [ grim slurp wl-clipboard tesseract imagemagick zbar curl translate-shell wf-recorder ffmpeg gifski ];
+        }))
       ];
       monitor = map (x: "${x.identifier}, ${x.resolution}@${lib.strings.floatToString x.refreshrate}, ${x.offset}, ${lib.strings.floatToString x.scale}") config.displays ++ [
         "Unknown-1,disable"
