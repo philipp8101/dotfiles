@@ -12,5 +12,6 @@
         { run = "quit"; on = [ "q"]; }
       ];
     };
+    shellWrapperName = "yy";
   };
 }
