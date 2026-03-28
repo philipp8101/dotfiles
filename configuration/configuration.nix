@@ -92,6 +92,8 @@
         ''SUBSYSTEM=="usb", ATTR{idVendor}=="0925", ATTR{idProduct}=="3881", MODE="0666", GROUP="plugdev"''
       ];
     };
+    power-profiles-daemon.enable = true;
+    upower.enable = true;
   };
   fonts.packages = with pkgs; [
     inconsolata

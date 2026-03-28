@@ -31,7 +31,7 @@ in
         "${inputs.hyprpaper-custom.packages.${system}.default}/bin/hyprpaper"
         "${pkgs.hypridle}/bin/hypridle"
         (lib.getExe (pkgs.writeShellApplication {
-          text = lib.getExe inputs.noctalia.packages.${system}.default;
+          text = ''${lib.getExe inputs.noctalia.packages.${system}.default} "$@" '';
           name = "noctalia";
           runtimeInputs = with pkgs; [ grim slurp wl-clipboard tesseract imagemagick zbar curl translate-shell wf-recorder ffmpeg gifski ];
         }))
