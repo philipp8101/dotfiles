@@ -4,7 +4,7 @@
     settings = {
       user.email = "philipp8101@gmail.com";
       user.name = "Philipp Conrad";
-      aliases = {
+      alias = {
         graph = "log --all --decorate --oneline --graph";
         nb = "!f() { git checkout -b \"$1\"; }; f";
       };
