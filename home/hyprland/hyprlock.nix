@@ -30,7 +30,7 @@
           shadow_passes = 2;
         } ];
       label = lib.mkIf nixosConfig.services.kmonad.enable [ {
-          text = ''cmd[update:500] echo "<span foreground='##${config.colorScheme.palette.base05}'>$(systemctl is-active --quiet kmonad && echo kmonad loaded || echo test)</span>"'';
+          text = ''cmd[update:500] echo "<span foreground='##${config.colorScheme.palette.base05}'>$(systemctl is-active --quiet kmonad\*service && echo kmonad loaded)</span>"'';
           font_size = 10;
           position = "0, -140";
       } ];
