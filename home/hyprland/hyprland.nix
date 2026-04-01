@@ -14,6 +14,11 @@ let
   };
   lib = pkgs.lib;
   secondaryDisplay = lib.lists.remove config.primaryDisplay config.displays;
+  noctalia = lib.getExe (pkgs.writeShellApplication {
+          text = ''${lib.getExe inputs.noctalia.packages.${system}.default} "$@"'';
+          name = "noctalia";
+          runtimeInputs = with pkgs; [ grim slurp wl-clipboard tesseract imagemagick zbar curl translate-shell wf-recorder ffmpeg gifski ];
+        });
 in
 {
   config.wayland.windowManager.hyprland = {
@@ -30,11 +35,7 @@ in
         "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1"
         "${inputs.hyprpaper-custom.packages.${system}.default}/bin/hyprpaper"
         "${pkgs.hypridle}/bin/hypridle"
-        (lib.getExe (pkgs.writeShellApplication {
-          text = ''${lib.getExe inputs.noctalia.packages.${system}.default} "$@" '';
-          name = "noctalia";
-          runtimeInputs = with pkgs; [ grim slurp wl-clipboard tesseract imagemagick zbar curl translate-shell wf-recorder ffmpeg gifski ];
-        }))
+        noctalia
       ];
       monitor = map (x: "${x.identifier}, ${x.resolution}@${lib.strings.floatToString x.refreshrate}, ${x.offset}, ${lib.strings.floatToString x.scale}") config.displays ++ [
         "Unknown-1,disable"
@@ -76,7 +77,7 @@ in
         "8,monitor:${(builtins.elemAt secondaryDisplay 0).identifier}"
       ];
       bind = [
-        "$mod, Return, exec, ${pkgs.kitty}/bin/kitty"
+        "$mod, Return, exec, ${lib.getExe pkgs.kitty}"
         "$mod, Q, killactive,"
         "$mod SHIFT, Q, forcekillactive,"
         "$mod CTRL, B, fullscreen, 0"
@@ -98,26 +99,26 @@ in
         "$mod SHIFT, e, movetoworkspace, 6"
         "$mod SHIFT, o, movetoworkspace, 7"
         "$mod SHIFT, i, movetoworkspace, 8"
-        "$mod, G, exec, rofi -show drun"
-        "$mod, Z, exec, ${pkgs.hyprshot}/bin/hyprshot -z -m region --clipboard-only"
-        "$mod SHIFT, Z, exec, ${pkgs.hyprshot}/bin/hyprshot -z -m region --clipboard-only --raw | ${pkgs.tesseract}/bin/tesseract stdin stdout -l eng | wl-copy"
+        "$mod, G, exec, ${noctalia} ipc call launcher toggle"
+        "$mod, Z, exec, ${lib.getExe pkgs.hyprshot} -z -m region --clipboard-only"
+        "$mod SHIFT, Z, exec, ${lib.getExe pkgs.hyprshot} -z -m region --clipboard-only --raw | ${lib.getExe pkgs.tesseract} stdin stdout -l eng | wl-copy"
         "$mod, X, togglefloating,"
         "$mod, M, movecurrentworkspacetomonitor, l"
         "$mod, C, movecurrentworkspacetomonitor, r"
-        "$mod, V, exec, rofi -show power-menu -modi power-menu:${rofi-power-menu}/bin/rofi-power-menu"
+        "$mod, V, exec, ${noctalia} ipc call sessionMenu toggle"
         "$mod CTRL, left, resizeactive, -20 0"
         "$mod CTRL, right, resizeactive, 20 0"
         "$mod CTRL, up, resizeactive, 0 -20"
         "$mod CTRL, down, resizeactive, 0 20"
-        ", XF86MonBrightnessDown, exec, ${pkgs.brillo}/bin/brillo -U 5"
-        ", XF86MonBrightnessUp, exec, ${pkgs.brillo}/bin/brillo -A 5"
-        "$mod, mouse_down, exec, hyprctl -q keyword cursor:zoom_factor $(hyprctl getoption cursor:zoom_factor -j | ${pkgs.jq}/bin/jq '.float * 1.3')"
-        "$mod, mouse_up, exec, hyprctl -q keyword cursor:zoom_factor $(hyprctl getoption cursor:zoom_factor -j | ${pkgs.jq}/bin/jq '(.float * 0.7) | if . < 1 then 1 else . end')"
+        ", XF86MonBrightnessDown, exec, ${noctalia} ipc call brightness decrease"
+        ", XF86MonBrightnessUp, exec, ${noctalia} ipc call brightness increase"
+        "$mod, mouse_down, exec, hyprctl -q keyword cursor:zoom_factor $(hyprctl getoption cursor:zoom_factor -j | ${lib.getExe pkgs.jq} '.float * 1.3')"
+        "$mod, mouse_up, exec, hyprctl -q keyword cursor:zoom_factor $(hyprctl getoption cursor:zoom_factor -j | ${lib.getExe pkgs.jq} '(.float * 0.7) | if . < 1 then 1 else . end')"
       ];
       binde = [
-        ", XF86AudioRaiseVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"
-        ", XF86AudioLowerVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-"
-        ", XF86AudioMute, exec, ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        ", XF86AudioRaiseVolume, exec, ${noctalia} ipc call volume increase"
+        ", XF86AudioLowerVolume, exec, ${noctalia} ipc call volume decrease"
+        ", XF86AudioMute, exec, ${noctalia} ipc call volume muteOutput"
       ];
       bindm = [
         "$mod, mouse:272, movewindow"
