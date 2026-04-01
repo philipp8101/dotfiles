@@ -7,6 +7,7 @@
     ./kitty.nix
     ./lf.nix
     ./mpv.nix
+    ./noctalia.nix
     ./rofi.nix
     ./syncthing.nix
     ./tmux.nix
