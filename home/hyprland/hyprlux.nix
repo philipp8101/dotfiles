@@ -4,7 +4,7 @@
     enable = config.wayland.windowManager.hyprland.enable;
 
     systemd = {
-      enable = true;
+      enable = false;
       target = "hyprland-session.target";
     };
 

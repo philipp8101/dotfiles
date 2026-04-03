@@ -6,7 +6,7 @@ r = range 1 (length config.displays);
 in 
 {
   services.hyprpaper = {
-    enable = config.wayland.windowManager.hyprland.enable;
+    enable = false;
     package = inputs.hyprpaper-custom.packages.${system}.default;
     settings = {
       preload-random = ["~/Pictures/wallpaper/${concat (map (i: ", pic${toString i}") r)}"];

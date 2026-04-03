@@ -447,7 +447,7 @@
       };
       idle = {
         customCommands = "[]";
-        enabled = false;
+        enabled = true;
         fadeDuration = 5;
         lockCommand = "";
         lockTimeout = 660;
