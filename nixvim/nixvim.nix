@@ -1,4 +1,4 @@
-{ pkgs, nixvim, system, ... }@inputs:
+{ pkgs, nixvim, system, extraModules ? [], ... }@inputs:
 let
 inherit (pkgs) lib;
 allNixFiles = path:  lib.fileset.toList (
@@ -9,10 +9,10 @@ in
 nixvim.legacyPackages.${system}.makeNixvimWithModule {
   inherit pkgs;
   module = {
-    imports = builtins.concatMap allNixFiles [
+    imports = (builtins.concatMap allNixFiles [
       ./config
       ./modules
-    ];
+    ]) ++ extraModules;
   };
   extraSpecialArgs = inputs;
 }

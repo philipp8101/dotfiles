@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, config, lib, ... }:
 let
   enabled_servers = [
     "gopls"
@@ -12,7 +12,7 @@ in
 {
   plugins.lsp = {
     enable = true;
-    servers = builtins.listToAttrs (builtins.map (s: { name = s; value = { enable = true; }; }) enabled_servers) // {
+    servers = lib.mkIf config.plugins.lsp.enable (builtins.listToAttrs (builtins.map (s: { name = s; value = { enable = true; }; }) enabled_servers) // {
       rust_analyzer = {
         enable = true;
         installCargo = true;
@@ -39,7 +39,7 @@ in
           options."home_manager".expr = ''(builtins.getFlake "${inputs.self}").homeConfigurations.philipp.options'';
         };
       };
-    };
+    });
     keymaps = {
       diagnostic = {
         "]d" = "goto_next";

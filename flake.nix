@@ -121,6 +121,10 @@
           nixvim = (import ./nixvim/nixvim.nix {
             inherit system nixvim self user inputs pkgs;
           });
+          nixvim-lite = (import ./nixvim/nixvim.nix {
+            inherit system nixvim self user inputs pkgs;
+            extraModules = [{ plugins.lsp.enable = pkgs.lib.mkForce false; plugins.openscad.enable = pkgs.lib.mkForce false; }];
+          });
           tmux = pkgs.writeShellScriptBin "tmux" '' ${pkgs.tmux}/bin/tmux -f ${self.homeConfigurations.minimal.activationPackage}/home-files/.config/tmux/tmux.conf '';
           zsh = pkgs.writeShellScriptBin "zsh" ''
             export PATH=$PATH:${pkgs.fzf}/bin ;
