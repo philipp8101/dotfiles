@@ -544,7 +544,7 @@
       };
       plugins = {
         autoUpdate = false;
-        notifyUpdates = true;
+        notifyUpdates = false;
       };
       sessionMenu = {
         countdownDuration = 10000;
@@ -687,6 +687,42 @@
         wallhavenSorting = "relevance";
         wallpaperChangeMode = "random";
       };
+    };
+    plugins = {
+      sources = [
+      {
+        enabled = true;
+        name = "Noctalia Plugins";
+        url = "https://github.com/noctalia-dev/noctalia-plugins";
+      }
+      ];
+      states = {
+        file-search = {
+          enabled = true;
+          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+        };
+        network-manager-vpn = {
+          enabled = true;
+          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+        };
+        privacy-indicator = {
+          enabled = true;
+          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+        };
+        screen-toolkit = {
+          enabled = true;
+          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+        };
+        timer = {
+          enabled = true;
+          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+        };
+        workspace-overview = {
+          enabled = true;
+          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+        };
+      };
+      version = 2;
     };
   };
 }
