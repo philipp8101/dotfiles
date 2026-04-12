@@ -124,9 +124,8 @@ in
         "$mod, mouse:272, movewindow"
         "$mod, mouse:273, resizewindow"
       ];
-      windowrulev2 = [
-        "workspace 8, class:(vesktop)"
-        "workspace 8, class:(discord)"
+      windowrule = [
+        "workspace 8, match:class discord"
       ];
       binds.scroll_event_delay = 50;
       ecosystem.no_update_news = true;

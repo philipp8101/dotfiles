@@ -2,6 +2,7 @@
 let
 cursor = pkgs.callPackage ./Empty-Butterfly-cursor {};
 in {
+  gtk.gtk4.theme = config.gtk.theme;
   gtk = {
     enable = config.gui;
     theme.package = pkgs.adw-gtk3;

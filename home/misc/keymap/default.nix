@@ -4,10 +4,10 @@ let
     path = ./keymap.xkb;
     name = "custom-xkb-layout";
   };
-  compiledLayout = pkgs.runCommand "keyboard-layout" { } "${pkgs.xorg.xkbcomp}/bin/xkbcomp ${layoutPath} $out";
+  compiledLayout = pkgs.runCommand "keyboard-layout" { } "${pkgs.xkbcomp}/bin/xkbcomp ${layoutPath} $out";
 in
 {
   home.shellAliases = {
-    "workman" = "${pkgs.xorg.xkbcomp}/bin/xkbcomp ${compiledLayout} $DISPLAY";
+    "workman" = "${pkgs.xkbcomp}/bin/xkbcomp ${compiledLayout} $DISPLAY";
   };
 }

@@ -19,6 +19,7 @@
       merge.conflictstyle = "diff3";
     };
     lfs.enable = true;
+    signing.format = "openpgp";
   };
   programs.delta.enableGitIntegration = true;
 }
