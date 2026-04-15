@@ -1,4 +1,4 @@
-{ pkgs, user, lib, ... }:
+{ pkgs, user, lib, inputs, ... }:
 {
   boot = {
     loader = {
@@ -101,6 +101,7 @@
   ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.trusted-users = [ "@wheel" ];
+  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
   system.stateVersion = "23.11";
 

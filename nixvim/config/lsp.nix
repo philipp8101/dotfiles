@@ -28,7 +28,10 @@ in
       };
       nil_ls = {
         enable = true;
-        extraOptions.settings.nix.flake.autoEvalInputs = true;
+        extraOptions.settings.nil.nix.flake = {
+          autoArchive = true;
+          autoEvalInputs = true;
+        };
       };
       nixd = {
         enable = true;

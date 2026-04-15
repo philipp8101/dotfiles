@@ -1,12 +1,13 @@
 {
   plugins.conform-nvim = {
     enable = true;
+    autoInstall.enable = true;
     settings = {
       format_on_save = {
         lspFallback = true;
         timeoutMs = 500;
       };
-      formatters_by_bt = {
+      formatters_by_ft = {
         javascript = [ "prettier" ];
         typescript = [ "prettier" ];
         css = [ "prettier" ];
