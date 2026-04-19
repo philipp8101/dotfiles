@@ -5,7 +5,7 @@
     package = pkgs.vimPlugins.harpoon2;
     settings = {
       "compile_commands" = let
-      create_term = ''
+      create_term = ''(function(cmd)
           local command = nil
           local shell = vim.o.shell
           if (type(cmd)=="string") then
@@ -25,18 +25,27 @@
               channel = _channel,
               initcmd = cmd,
             },
-          }'';
+          }
+        end)
+        '';
       in {
         create_list_item = lib.nixvim.mkRaw ''function(config,cmd)
-        ${create_term}
+          return ${create_term}(cmd)
         end'';
         select = lib.nixvim.mkRaw ''function(list_item, list, options)
+          if (not vim.api.nvim_buf_is_valid(list_item.context.buf)) then
+            local cmd = list_item.context.initcmd;
+            list_item = ${create_term}(cmd)
+          end
           if (vim.fn.bufwinnr(list_item.context.buf) == -1) then
             vim.api.nvim_win_set_buf(0,list_item.context.buf);
           end
           if (options == true) then
             vim.api.nvim_chan_send(list_item.context.channel, list_item.value .. "\n")
           end
+          vim.api.nvim_buf_call(list_item.context.buf, function()
+            vim.api.nvim_input("G");
+          end);
         end'';
         display = lib.nixvim.mkRaw ''function(list_item)
           return list_item.value:gsub("\n"," \\n ")
@@ -46,7 +55,7 @@
         end'';
         decode = lib.nixvim.mkRaw ''function(str)
           local cmd = vim.json.decode(str)
-          ${create_term}
+          return ${create_term}(cmd)
         end'';
       };
     };

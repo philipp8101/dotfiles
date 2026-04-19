@@ -1,18 +1,17 @@
 { pkgs, inputs, config, lib, ... }:
-let
-  enabled_servers = [
-    "gopls"
-    "clangd"
-    "pyright"
-    "texlab"
-    "lua_ls"
-    "dartls"
-  ];
-in
 {
   plugins.lsp = {
     enable = true;
-    servers = lib.mkIf config.plugins.lsp.enable (builtins.listToAttrs (builtins.map (s: { name = s; value = { enable = true; }; }) enabled_servers) // {
+    servers = lib.mkIf config.plugins.lsp.enable {
+      gopls.enable = true;
+      pyright.enable = true;
+      texlab.enable = true;
+      lua_ls.enable = true;
+      dartls.enable = true;
+      clangd = {
+        enable = true;
+        filetypes = [ "c" "cpp" "objc" "objcpp" "cuda" "arduino" ];
+      };
       rust_analyzer = {
         enable = true;
         installCargo = true;
@@ -28,9 +27,12 @@ in
       };
       nil_ls = {
         enable = true;
-        extraOptions.settings.nil.nix.flake = {
-          autoArchive = true;
-          autoEvalInputs = true;
+        extraOptions.settings.nil.nix = {
+          maxMemoryMB = 4096;
+          flake = {
+            autoArchive = true;
+            autoEvalInputs = true;
+          };
         };
       };
       nixd = {
@@ -42,7 +44,7 @@ in
           options."home_manager".expr = ''(builtins.getFlake "${inputs.self}").homeConfigurations.philipp.options'';
         };
       };
-    });
+    };
     keymaps = {
       diagnostic = {
         "]d" = "goto_next";
