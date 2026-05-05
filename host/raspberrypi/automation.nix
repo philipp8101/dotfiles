@@ -60,8 +60,17 @@
         };
       }
       {
-        service = "switch.turn_off";
-        entity_id = "switch.wasserventil";
+        repeat = {
+          sequence = {
+            entity_id = "switch.wasserventil";
+            service = "switch.turn_off";
+          };
+          until = {
+            condition = "state";
+            entity_id = "switch.wasserventil";
+            state = "off";
+          };
+        };
       }
     ];
     mode = "single";
