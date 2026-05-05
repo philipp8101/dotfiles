@@ -2,16 +2,14 @@
 {
   services.mopidy = {
     enable = false;
-    configuration = ''
-      	    [jellyfin]
-      	    hostname = http://localhost:8096
-      	    username = jellyfin
-      	    password = 123
-      	    libraries = Music
-      	    max_bitrate = 48000
-      	    [audio]
-      	    output = pulsesink server=127.0.0.1
-      	'';
+    settings.jellyfin = {
+      hostname = "http://localhost:8096";
+      username = "jellyfin";
+      password = "123";
+      libraries = "Music";
+      max_bitrate = "48000";
+    };
+    settings.audio.output = "pulsesink server=127.0.0.1";
     extensionPackages = with pkgs; [
       mopidy-jellyfin
     ];
