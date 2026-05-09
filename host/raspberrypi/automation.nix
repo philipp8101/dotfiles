@@ -54,7 +54,7 @@
       {
         delay = {
           hours = 0;
-          minutes = "{{ states(input_number.bewasserung_min) | float }}";
+          minutes = "{{ states.input_number.bewasserung_min.state | float }}";
           seconds = 0;
           milliseconds = 0;
         };

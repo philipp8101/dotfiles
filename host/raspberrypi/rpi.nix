@@ -1,11 +1,4 @@
 { config, lib, pkgs, inputs, ... }: {
-  hardware = {
-    raspberry-pi."4".apply-overlays-dtmerge.enable = true;
-    deviceTree = {
-      enable = true;
-      filter = "*rpi-4-*.dtb";
-    };
-  };
   system.stateVersion = "26.05";
 
   # workaround for https://github.com/NixOS/nixpkgs/issues/154163
@@ -19,6 +12,8 @@
   disabledModules = [
     "profiles/base.nix"
   ];
+
+  boot.kernelPackages = pkgs.linuxPackages_rpi4;
   # Use the extlinux boot loader. (NixOS wants to enable GRUB by default)
   # boot.loader.grub.enable = false;
 
