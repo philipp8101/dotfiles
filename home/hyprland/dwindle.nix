@@ -4,7 +4,7 @@
     bind = [
       "$mod, D, changegroupactive, previous"
       "$mod SHIFT, D, togglegroup"
-      "$mod, R, togglesplit, # dwindle"
+      "$mod, R, layoutmsg, togglesplit # dwindle"
       "$mod SHIFT, R, moveoutofgroup"
       "$mod, B, fullscreen, 1"
       "$mod, left, movefocus, l"
