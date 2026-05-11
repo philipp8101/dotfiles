@@ -1,7 +1,7 @@
 { pkgs, lib, config, user, ... }:
 {
   services.displayManager.sddm = {
-    enable = lib.mkDefault (config.home-manager.users.${user}.gui or false);
+    enable = true;
     # theme = "Elegant";
     theme = "breeze";
     # settings.Theme.ThemeDir = "${pkgs.kdePackages.plasma-desktop}/share/sddm/themes";

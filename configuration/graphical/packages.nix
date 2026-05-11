@@ -1,4 +1,4 @@
-{ pkgs, self, config, user, ... }:
+{ pkgs, config, ... }:
 {
   environment.systemPackages = with pkgs; [
     wget
@@ -28,7 +28,6 @@
     # https://github.com/aristocratos/btop/issues/426#issuecomment-2104289634
     (btop.override {cudaSupport = true;})
     config.boot.kernelPackages.usbip
-  ] ++ lib.optionals config.home-manager.users.${user}.gui [
     kitty
     dconf
     xwayland

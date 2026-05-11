@@ -1,5 +1,4 @@
 { config, lib, pkgs, inputs, ... }: {
-  system.stateVersion = "26.05";
 
   # workaround for https://github.com/NixOS/nixpkgs/issues/154163
   nixpkgs.overlays = [

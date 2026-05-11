@@ -1,7 +1,7 @@
 { config, ... }:
 {
   programs.kitty = {
-    enable = config.gui;
+    enable = true;
     font = {
       name = "Inconsolata Nerd Font";
       size = 14;

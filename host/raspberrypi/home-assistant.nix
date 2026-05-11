@@ -10,6 +10,7 @@
       "tuya"
       "mobile_app"
       "history"
+      "zha"
     ];
     extraPackages = ps: with ps; [
       getmac

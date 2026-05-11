@@ -1,7 +1,6 @@
-{ config, ... }:
 {
   programs.mpv = {
-    enable = config.gui;
+    enable = true;
     config = {
       save-position-on-quit = true;
     };

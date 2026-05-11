@@ -45,6 +45,10 @@
         trigger = "time";
         at = "input_datetime.bewasserungszeit";
       }
+      {
+        trigger = "state";
+        entity_id = "input_button.jetzt_bewassern";
+      }
     ];
     actions = [
       {
@@ -327,7 +331,7 @@
     triggers = [
       {
         trigger = "state";
-        entity_id = "binary_sensor.bad_bewegungsmelder_occupancy";
+        entity_id = "binary_sensor.bad_bewegungsmelder_presence";
         from = "off";
         to = "on";
       }
@@ -360,7 +364,7 @@
           {
             trigger = "state";
             entity_id = [
-              "binary_sensor.bad_bewegungsmelder_occupancy"
+              "binary_sensor.bad_bewegungsmelder_presence"
             ];
             from = "on";
             to = "off";

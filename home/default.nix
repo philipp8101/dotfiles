@@ -1,12 +1,5 @@
 { config, pkgs, inputs, user, self, system, lib, ... }:
 {
-  options = {
-    gui = lib.mkOption {
-      type = lib.types.bool;
-      default = config.xsession.windowManager.i3.enable || config.wayland.windowManager.hyprland.enable;
-      description = "enable general gui related configurations (e.g. styling, cursor, fonts) and programs (e.g. terminal)";
-    };
-  };
   config = {
     home.username = "${user}";
     home.homeDirectory = lib.mkForce "/home/${user}";

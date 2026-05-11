@@ -1,7 +1,6 @@
 { pkgs, ... }:
 {
-  fonts.fontconfig.enable = true;
-  home.packages = with pkgs; [
+  fonts.packages = with pkgs; [
     inconsolata
     nerd-fonts.inconsolata
   ];

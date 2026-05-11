@@ -1,4 +1,3 @@
-{ config, ... }:
 {
-  services.syncthing.enable = config.gui;
+  services.syncthing.enable = true;
 }

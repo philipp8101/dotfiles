@@ -4,7 +4,7 @@
 with lib.hm.gvariant;
 
 {
-  dconf.enable = config.gui;
+  dconf.enable = true;
   dconf.settings = {
     "org/a11y/accerciser" = {
       hpaned = 637;

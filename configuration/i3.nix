@@ -18,4 +18,5 @@
       ];
     };
   };
+  xserver.xkb.layout = "de";
 }

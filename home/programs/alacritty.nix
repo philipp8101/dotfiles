@@ -1,7 +1,7 @@
 { pkgs, config, ... }:
 {
   programs.alacritty = {
-    enable = config.gui;
+    enable = true;
     settings = {
       colors.bright = {
         black = "0x${config.colorScheme.palette.base04}";
