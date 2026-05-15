@@ -71,6 +71,7 @@
                 ./configuration/gaming.nix
                 ./configuration/hyprland.nix
                 ./configuration/graphical
+                ./configuration/media.nix
                 { home-manager.users.${user}.imports = [ ./host/desktop/home.nix ]; }
               ] ++ self.nixosHomeModules.hyprland;
             surface = [
