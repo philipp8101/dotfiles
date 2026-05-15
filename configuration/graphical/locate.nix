@@ -1,5 +1,7 @@
 { pkgs, ... }:
 {
-  locate.enable = true;
-  locate.package = pkgs.plocate;
+  services.locate = {
+    enable = true;
+    package = pkgs.plocate;
+  };
 }
