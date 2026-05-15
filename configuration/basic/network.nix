@@ -18,4 +18,5 @@
     "networkmanager"
   ];
   services.tailscale.enable = true;
+  networking.nameservers = [ "1.1.1.1" ];
 }
