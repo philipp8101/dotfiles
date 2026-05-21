@@ -1,0 +1,4 @@
+creation_rules:
+  - path_regex: host/desktop/secrets/[^/]+$
+    key_group:
+    age: "age1r9rat6azszlrg0v6784xmxlrrdxld7px8jth3mj6z776ww9uuvmqhfk8ay"
