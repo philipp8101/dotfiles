@@ -6,7 +6,7 @@ portals = [
 ];
 in {
   xdg.portal = {
-    enable = lib.fold (lib.or) false (map (x: x.option) portals);
+    enable = lib.foldr (lib.or) false (map (x: x.option) portals);
     extraPortals = lib.concatMap ({option,portal}: lib.optional option portal) portals;
   };
 }
