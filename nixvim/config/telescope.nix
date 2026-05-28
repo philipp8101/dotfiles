@@ -2,6 +2,7 @@
   plugins.telescope = {
     enable = true;
     extensions.ui-select.enable = true;
+    extensions.live-grep-args.enable = true;
     keymaps = {
       "<leader>sf" = {
         action = "find_files";
