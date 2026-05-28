@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, config, self, ... }:
 {
   environment.systemPackages = with pkgs; [
     wget
@@ -77,5 +77,6 @@
     teamspeak6-client
     element-desktop
     moonlight-qt
+    graphviz
   ];
 }
