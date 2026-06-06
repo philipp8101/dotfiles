@@ -40,7 +40,7 @@
       wireguardPeers = [
         {
           # server
-          PublicKey = "gpeoh2DNYwAogP77HDgvfSuKNObeMv1R9KKhznJ2LFU=";
+          PublicKey = "3P4g8JAogfpujRShrzMDLZwC2PuMwr1lXB/sVR27l2Y=";
           AllowedIPs = [
             "fd31:bf08:57cb::9/120"
             "10.0.1.0/24"
