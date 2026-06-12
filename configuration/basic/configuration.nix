@@ -32,6 +32,7 @@
   };
 
   console.keyMap = "de";
+  services.xserver.xkb.layout = "de";
 
 
   security.rtkit.enable = true;
