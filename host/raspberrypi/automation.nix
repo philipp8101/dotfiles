@@ -300,6 +300,13 @@
         at = "input_datetime.aufstehen";
       }
     ];
+    conditions = [
+      {
+        condition = "sun";
+        before = "sunrise";
+        before_offset = "-30:00";
+      }
+    ];
     actions = [
       {
         action = "light.turn_on";
