@@ -52,8 +52,8 @@
     ];
     actions = [
       {
-        service = "switch.turn_on";
-        entity_id = "switch.wasserventil";
+        action = "switch.turn_on";
+        target.entity_id = "switch.wasserventil";
       }
       {
         delay = {
@@ -66,8 +66,8 @@
       {
         repeat = {
           sequence = {
-            entity_id = "switch.wasserventil";
-            service = "switch.turn_off";
+            action = "switch.turn_off";
+            target.entity_id = "switch.wasserventil";
           };
           until = {
             condition = "state";

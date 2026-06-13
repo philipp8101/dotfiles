@@ -28,6 +28,7 @@
     8123 # homeassistant
     1883 # mqtt
     8099 # zigbee2mqtt
+    8098 # zigbee2mqtt
   ];
   services.zigbee2mqtt = {
     enable = true;
@@ -44,6 +45,29 @@
     #   advanced.pan_id = "bc0e";
     #   advanced.ext_pan_id = "2e:c1:5a:e1:1d:1b:5b:99";
     # };
+  };
+  imports = [ ./zigbee2mqtt-module.nix ];
+  services.zigbee2mqtt2 = {
+    enable = true;
+    settings = {
+      frontend = {
+        enable = true;
+        port = 8098;
+      };
+      mqtt = {
+        base_topic = "zigbee2mqtt2";
+        server = "mqtt://127.0.0.1:1883";
+        user = "philipp";
+        password = "123";
+      };
+      serial = {
+        port = "tcp://192.168.2.100:6638";
+        adapter = "ember";
+        baudrate = 115200;
+        rtscts = false;
+      };
+      advanced.log_level = "debug";
+    };
   };
   services.mosquitto = {
     enable = true;
