@@ -14,4 +14,10 @@
     map ctrl+shift+p>f kitten hints --type path --program @
     '';
   };
+  xdg.terminal-exec = {
+    enable = true;
+    settings.default = [ "kitty.desktop" ];
+  };
+  qt.kde.settings.kdeglobals.General.TerminalApplication = "kitty";
+  qt.kde.settings.kdeglobals.General.TerminalService = "kitty.service";
 }
