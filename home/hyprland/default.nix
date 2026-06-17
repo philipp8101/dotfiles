@@ -5,6 +5,6 @@
     ./hyprlock.nix
     ./hyprpaper.nix
     ./waybar.nix
-    ./dwindle.nix
+    ./scrolling.nix
   ];
 }
