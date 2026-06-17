@@ -57,8 +57,7 @@
     kdePackages.gwenview
     kdePackages.ark
     rar
-    libsForQt5.kservice
-    libsForQt5.qt5.qtgraphicaleffects
+    qt5.qtgraphicaleffects
     thunderbird
     bazecor
     teamspeak6-client

@@ -22,6 +22,7 @@ let
 in
 {
   config.wayland.windowManager.hyprland = {
+    # configType = "lua";
     xwayland.enable = true;
     settings = {
       input = {
@@ -62,13 +63,8 @@ in
           "workspaces, 1, 6, default"
         ];
       };
-      dwindle = {
-        pseudotile = true;
-        preserve_split = true;
-      };
-      master = {
-        orientation = "right";
-      };
+      dwindle.preserve_split = true;
+      master.orientation = "right";
       "$mod" = "SUPER";
       workspace = [
         "1,monitor:${config.primaryDisplay.identifier}"
