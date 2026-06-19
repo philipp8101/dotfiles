@@ -65,10 +65,10 @@
       }
       {
         repeat = {
-          sequence = {
-            action = "switch.turn_off";
-            target.entity_id = "switch.wasserventil";
-          };
+          sequence = [
+            { action = "switch.turn_off"; target.entity_id = "switch.wasserventil"; }
+            { delay = { hours = 0; minutes = 1; seconds = 0; milliseconds = 0; }; }
+          ];
           until = {
             condition = "state";
             entity_id = "switch.wasserventil";
@@ -385,5 +385,24 @@
     ];
     mode = "single";
     max_exceeded = "silent";
+  }
+  {
+id = "1784875511542";
+  alias = "wasser noch an";
+  triggers = [ {
+    trigger = "time";
+    at = "06:20:00";
+  }];
+  conditions = [ {
+    condition = "state";
+    entity_id = "switch.wasserventil";
+    state = [ "on" ];
+  } ];
+  actions = [ {
+    action = "notify.mobile_app_pixel_10_pro_xl";
+    metadata = {};
+    data.message = "Wasser noch an";
+  } ];
+  mode = "single";
   }
 ]
