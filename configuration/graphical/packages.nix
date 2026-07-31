@@ -77,5 +77,6 @@
     element-desktop
     moonlight-qt
     graphviz
+    ffmpeg
   ];
 }
