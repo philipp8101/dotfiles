@@ -57,6 +57,10 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    element-call = {
+      url = "github:pirosuki/element-call/advanced-screen-share-settings";
+      flake = false;
+    };
   };
 
   outputs = { nixpkgs, home-manager, nixos-generators, nixvim, lanzaboote, ... }@inputs:

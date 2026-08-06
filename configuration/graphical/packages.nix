@@ -1,4 +1,4 @@
-{ pkgs, config, self, ... }:
+{ pkgs, config, self, inputs, ... }:
 {
   environment.systemPackages = with pkgs; [
     wget
@@ -74,7 +74,11 @@
     android-tools
     songrec
     teamspeak6-client
-    element-desktop
+    (let
+    x = pkgs.element-web.override {
+      conf = builtins.fromJSON (builtins.readFile ./element-desktop-config.json);
+    };
+    in element-desktop.override { element-web = x; })
     moonlight-qt
     graphviz
     ffmpeg

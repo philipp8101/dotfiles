@@ -31,6 +31,23 @@
         "type": "github"
       }
     },
+    "element-call": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1771673494,
+        "narHash": "sha256-TOV6Cjnvb+0SOwZSaa/VhrIoEv8+61dhFhL0t0D4/0M=",
+        "owner": "pirosuki",
+        "repo": "element-call",
+        "rev": "39e16addd3010f2d22188da39b1ac34e6c8102f0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pirosuki",
+        "ref": "advanced-screen-share-settings",
+        "repo": "element-call",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -597,6 +614,7 @@
     },
     "root": {
       "inputs": {
+        "element-call": "element-call",
         "flake-parts": "flake-parts",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
