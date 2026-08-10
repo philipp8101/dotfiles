@@ -8,6 +8,10 @@
       texlab.enable = true;
       lua_ls.enable = true;
       dartls.enable = true;
+      elmls = {
+        enable = true;
+        packageFallback = true;
+      };
       clangd = {
         enable = true;
         filetypes = [ "c" "cpp" "objc" "objcpp" "cuda" "arduino" ];
