@@ -5,6 +5,7 @@
     ./direnv.nix
     ./dunst.nix
     ./git.nix
+    ./gpg.nix
     ./kitty.nix
     ./lf.nix
     ./mpv.nix
