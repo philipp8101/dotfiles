@@ -13,6 +13,8 @@ in {
     cursorTheme.name = "Empty-Butterfly-White-vr6";
   };
 
+  home.pointerCursor.enable = true;
+
   qt = {
     enable = true;
     platformTheme.name = "kde";
