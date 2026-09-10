@@ -102,6 +102,8 @@
                 }
                 inputs.nixos-hardware.nixosModules.raspberry-pi-4
               ];
+            nas = [
+              ];
           });
           nixosHomeModules = builtins.mapAttrs (_: imports: [
             home-manager.nixosModules.home-manager
