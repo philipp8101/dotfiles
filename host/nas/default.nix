@@ -10,7 +10,7 @@
       ./network.nix
     ];
 
-  boot.initrd.availableKernelModules = [ ];
+  boot.initrd.availableKernelModules = [ "ahci" "nvme" "sdhci_of_dwcmshc" "dw_mmc_rockchip" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
