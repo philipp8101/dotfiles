@@ -1,30 +1,6 @@
 { pkgs, config, self, inputs, ... }:
 {
   environment.systemPackages = with pkgs; [
-    wget
-    traceroute
-    dig
-    file
-    killall
-    whois
-    nix-tree
-    jq
-    smartmontools
-    tmux
-    polkit
-    gcc
-    unzip
-    fzf
-    home-manager
-    ripgrep
-    xsel
-    nix-index
-    htop-vim
-    self.nixvim
-    man-pages
-    nix-output-monitor
-    lsof
-    fd
     # https://github.com/aristocratos/btop/issues/426#issuecomment-2104289634
     (btop.override {cudaSupport = true;})
     config.boot.kernelPackages.usbip

@@ -1,0 +1,30 @@
+{ pkgs, ... }:
+{
+  environment.systemPackages = with pkgs; [
+    wget
+    traceroute
+    dig
+    file
+    killall
+    whois
+    nix-tree
+    jq
+    smartmontools
+    tmux
+    polkit
+    gcc
+    unzip
+    fzf
+    home-manager
+    ripgrep
+    xsel
+    nix-index
+    htop-vim
+    self.nixvim
+    man-pages
+    nix-output-monitor
+    lsof
+    fd
+    usbutils
+  ];
+}
