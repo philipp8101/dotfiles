@@ -41,6 +41,7 @@
     isNormalUser = true;
     description = "${user}";
     # group = "${user}";
+    openssh.authorizedKeys.keyFiles = map (x: ./pubkeys/${x}) (builtins.attrNames (builtins.readDir ./pubkeys));
     extraGroups = [
       "wheel"
       "dialout"
