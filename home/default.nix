@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, user, self, system, lib, ... }:
+{ user, lib, ... }:
 {
   config = {
     home.username = "${user}";
@@ -9,9 +9,6 @@
     programs.home-manager.enable = true;
   };
   imports = [
-    ./hyprland
-    ./i3
-    ./misc
     ./programs
   ];
 }

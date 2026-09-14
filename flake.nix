@@ -102,9 +102,7 @@
                 }
                 inputs.nixos-hardware.nixosModules.raspberry-pi-4
               ];
-            nas = [
-                { home-manager.users.${user}.imports = []; }
-              ];
+            nas = self.nixosHomeModules.headless;
           });
           nixosHomeModules = builtins.mapAttrs (_: imports: [
             home-manager.nixosModules.home-manager
@@ -124,13 +122,10 @@
             extraSpecialArgs = { inherit inputs system user self; };
             inherit modules;
           }) self.homeModules;
-          homeModules = builtins.mapAttrs (_: module: [ ./home module ] ) {
-            hyprland = {
-              wayland.windowManager.hyprland.enable = true;
-            };
-            i3 = {
-              xsession.windowManager.i3.enable = true;
-            };
+          homeModules = builtins.mapAttrs (_: modules: [ ./home ] ++ modules ) {
+            hyprland = [ ./home/hyprland ];
+            i3 = [ ./home/i3 ];
+            headless = [];
           };
           sdcard = nixos-generators.nixosGenerate {
             system = "aarch64-linux";

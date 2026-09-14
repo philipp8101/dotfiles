@@ -1,5 +1,6 @@
 {
   imports = [
+    ../graphical
     ./hyprland.nix
     ./hypridle.nix
     ./hyprlock.nix

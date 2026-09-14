@@ -22,6 +22,7 @@ let
 in
 {
   config.wayland.windowManager.hyprland = {
+    enable = true;
     # configType = "lua";
     xwayland.enable = true;
     settings = {

@@ -1,6 +1,6 @@
 { pkgs, config, ... }:
 let
-cursor = pkgs.callPackage ./Empty-Butterfly-cursor {};
+cursor = pkgs.callPackage ../../assets/Empty-Butterfly-cursor {};
 in {
   gtk.gtk4.theme = config.gtk.theme;
   gtk = {

@@ -1,10 +1,10 @@
-{ inputs, ... }:
+{ inputs, config, ... }:
 {
   imports = [
     inputs.noctalia.homeModules.default
   ];
   programs.noctalia-shell = {
-    enable = true;
+    enable = config.wayland.windowManager.hyprland.enable;
     settings = {
       appLauncher = {
         autoPasteClipboard = false;

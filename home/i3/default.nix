@@ -28,6 +28,7 @@ let
 in
 {
   imports = [
+    ../graphical
     ./picom.nix
     ./polybar.nix
   ];
@@ -35,6 +36,7 @@ in
     ".background-image".source = "${bg.outPath}/modified-wallpaper.svg";
   };
   xsession.windowManager.i3 = {
+    enable = true;
     extraConfig = ''
       show_marks yes
       default_border pixel 3
