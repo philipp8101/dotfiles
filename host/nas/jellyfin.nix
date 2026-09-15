@@ -1,5 +1,7 @@
 {
-  networking.firewall.allowedTCPPorts = [ 80 443 ];
+  services.jellyfin.enable = true;
+  services.jellyfin.group = "render";
+  networking.firewall.allowedTCPPorts = [ 80 443 8096 ];
   services.nginx.enable = true;
   services.nginx.virtualHosts."jellyfin.fredinand.xyz" = {
     useACMEHost = "jellyfin.fredinand.xyz";
