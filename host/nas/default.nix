@@ -8,6 +8,8 @@
       (modulesPath + "/installer/scan/not-detected.nix")
       ./sops.nix
       ./network.nix
+      ./zfs.nix
+      ./nfs-server.nix
     ];
 
   boot.initrd.availableKernelModules = [ "ahci" "nvme" "sdhci_of_dwcmshc" "dw_mmc_rockchip" ];

@@ -7,5 +7,6 @@
     ./hyprpaper.nix
     ./waybar.nix
     ./scrolling.nix
+    ./noctalia.nix
   ];
 }
