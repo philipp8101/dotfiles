@@ -46,6 +46,7 @@
             "10.0.1.0/24"
           ];
           Endpoint = "152.53.245.229:51820";
+          PersistentKeepalive = 25;
 
           # RouteTable can also be set in wireguardPeers
           # RouteTable in wireguardConfig will then be ignored.
