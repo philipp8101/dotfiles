@@ -61,6 +61,10 @@
       url = "github:pirosuki/element-call/advanced-screen-share-settings";
       flake = false;
     };
+    server-config = {
+      url = "git+https://git.fredinand.xyz/philipp8101/server-config";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { nixpkgs, home-manager, nixos-generators, nixvim, lanzaboote, ... }@inputs:
